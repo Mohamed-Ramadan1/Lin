@@ -19,6 +19,7 @@ export const signUp = createAsyncThunk(
     }
   }
 );
+
 //SignUp new user to the application
 export const login = createAsyncThunk(
   "user/login",
@@ -28,6 +29,30 @@ export const login = createAsyncThunk(
         withCredentials: true,
       });
       const data = await res.data;
+      return data;
+    } catch (error) {
+      console.log(error.response.data.message);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+//Logout the current user
+export const logout = createAsyncThunk(
+  "user/logout",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const token = getState().userReducers.token;
+      const res = await axios.post(`${url}/logout`, null, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.data;
+      // console.log(data);
+
       return data;
     } catch (error) {
       console.log(error.response.data.message);
@@ -60,7 +85,6 @@ const userSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
         state.user = action.payload.data.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
@@ -71,7 +95,7 @@ const userSlice = createSlice({
         state.error = action.payload;
       });
 
-    //Sign in signUpBuilder
+    //Sign up  signUpBuilder
     builder
       .addCase(signUp.pending, (state) => {
         state.loading = true;
@@ -82,12 +106,30 @@ const userSlice = createSlice({
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
         state.user = action.payload.data.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
       .addCase(signUp.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        state.error = action.payload;
+        state.isLoggedIn = false;
+      });
+
+    //Logout user builder
+    builder
+      .addCase(logout.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        console.log(action);
+        state.loading = false;
+        state.user = null;
+        state.token = action.payload.token;
+        state.isLoggedIn = false;
+      })
+      .addCase(logout.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
         state.error = action.payload;
