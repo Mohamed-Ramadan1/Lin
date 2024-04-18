@@ -12,11 +12,9 @@ export const signUp = createAsyncThunk(
     try {
       const res = await axios.post(`${authUrl}/signup`, userData);
       const data = await res.data;
-
       return data;
     } catch (error) {
-      console.log(error.response.data.message);
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -32,8 +30,8 @@ export const login = createAsyncThunk(
       const data = await res.data;
       return data;
     } catch (error) {
-      console.log(error.response.data.message);
-      return rejectWithValue(error.response.data.message);
+      console.log(error);
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -53,8 +51,7 @@ export const logout = createAsyncThunk(
       const data = await res.data;
       return data;
     } catch (error) {
-      console.log(error.response.data.message);
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -77,8 +74,7 @@ export const resetPassword = createAsyncThunk(
       const data = await res.data;
       return data;
     } catch (error) {
-      console.log(error.response.data.message);
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -86,16 +82,40 @@ export const resetPassword = createAsyncThunk(
 //Update password of the user.
 export const updateUserPassword = createAsyncThunk(
   "user/updatePassword",
-  async (userData, { rejectWithValue }) => {
+  async (userData, { rejectWithValue, getState }) => {
     try {
+      const token = getState().userReducers.token;
       const res = await axios.post(`${userUrl}/updatePassword`, userData, {
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = await res.data;
       return data;
     } catch (error) {
-      console.log(error.response.data.message);
-      return rejectWithValue(error.response.data.message);
+      console.log(error);
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+export const updateUserInfo = createAsyncThunk(
+  "user/updateUserInfo",
+  async (userData, { rejectWithValue, getState }) => {
+    try {
+      const token = getState().userReducers.token;
+      const res = await axios.post(`${userUrl}/updateInfo`, userData, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.data;
+      return data;
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -131,8 +151,9 @@ const userSlice = createSlice({
       .addCase(signUp.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
-        state.error = action.payload;
+        state.error = action.payload.data.message;
         state.isLoggedIn = false;
+        state.token = null;
       });
 
     //Login
@@ -153,7 +174,9 @@ const userSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
-        state.error = action.payload;
+        state.error = action.payload.data.message;
+        state.isLoggedIn = false;
+        state.token = null;
       });
 
     //Logout user builder
@@ -170,7 +193,7 @@ const userSlice = createSlice({
       .addCase(logout.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
-        state.error = action.payload;
+        state.error = action.payload.data.message;
         state.isLoggedIn = false;
       });
 
@@ -192,8 +215,51 @@ const userSlice = createSlice({
       .addCase(resetPassword.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
-        state.error = action.payload;
+        state.error = action.payload.data.message;
         state.isLoggedIn = false;
+      });
+
+    //update user password  builder
+    builder
+      .addCase(updateUserPassword.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUserPassword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.data.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+      })
+      .addCase(updateUserPassword.rejected, (state, action) => {
+        if (action.payload.status === 401) {
+          state.loading = false;
+          state.user = null;
+          state.error = action.payload;
+          state.isLoggedIn = false;
+          state.token = null;
+        }
+        state.error = action.payload.data.message;
+      });
+
+    //update user info  builder
+    builder
+      .addCase(updateUserInfo.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUserInfo.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.data.user;
+        state.isLoggedIn = true;
+      })
+      .addCase(updateUserInfo.rejected, (state, action) => {
+        if (action.payload.status === 401) {
+          state.loading = false;
+          state.user = null;
+          state.error = action.payload;
+          state.isLoggedIn = false;
+          state.token = null;
+        }
+        state.error = action.payload.data.message;
       });
   },
 });

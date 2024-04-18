@@ -1,5 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { login, logout, signUp, resetPassword } from "./../../store/userSlice";
+import {
+  login,
+  logout,
+  signUp,
+  updateUserPassword,
+  updateUserInfo,
+} from "./../../store/userSlice";
 
 const signUpData = {
   name: "Mohamed-Ramadan",
@@ -9,15 +15,21 @@ const signUpData = {
 };
 
 const loginData = {
-  email: "ahmedMakram@gmail.com",
-  password: "123456789",
+  email: "fuc@gmail.com",
+  password: "1234566789",
 };
 
-const resetPasswrdData = {
-  password: "123456789",
-  passwordConfirm: "123456789",
-  resetToken:
-    "4618b98f86023322314168dd3e0005a39fc5751fd13165b2c269f342fa1b265e",
+// const resetPasswrdData = {
+//   password: "123456789",
+//   passwordConfirm: "123456789",
+//   resetToken:
+//     "4618b98f86023322314168dd3e0005a39fc5751fd13165b2c269f342fa1b265e",
+// };
+
+const upPassData = {
+  passwordCurrent: "123456678",
+  password: "12345678910",
+  passwordConfirm: "12345678910",
 };
 
 const MainLayout = () => {
@@ -33,10 +45,22 @@ const MainLayout = () => {
   const logoutSite = () => {
     dispatch(logout());
   };
-  const resetPasswordSite = () => {
-    dispatch(resetPassword(resetPasswrdData));
+  // const resetPasswordSite = () => {
+  //   dispatch(resetPassword(resetPasswrdData));
+  // };
+
+  const updatePasswordSit = () => {
+    dispatch(updateUserPassword(upPassData));
   };
 
+  const userUdata = {
+    name: "kinga7a",
+    email: "fuc@gmail.com",
+  };
+
+  const updateInfoSite = () => {
+    dispatch(updateUserInfo(userUdata));
+  };
   return (
     <>
       {!isLoggedIn && (
@@ -47,15 +71,21 @@ const MainLayout = () => {
           <button onClick={loginSite} type="button" className="block">
             Login
           </button>
-          <button onClick={resetPasswordSite} type="button" className="block">
+          {/* <button onClick={resetPasswordSite} type="button" className="block">
             ResetPassword
-          </button>
+          </button> */}
         </div>
       )}
       {isLoggedIn && user && (
         <div>
           <button onClick={logoutSite} type="button" className="block">
             Log-Out
+          </button>
+          <button onClick={updatePasswordSit} type="button" className="block">
+            Update your password
+          </button>
+          <button onClick={updateInfoSite} type="button" className="block">
+            update info
           </button>
           <p className="block">{user.name}</p>
         </div>
