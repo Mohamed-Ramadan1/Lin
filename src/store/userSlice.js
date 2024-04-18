@@ -100,6 +100,7 @@ export const updateUserPassword = createAsyncThunk(
   }
 );
 
+//Update user info thunk
 export const updateUserInfo = createAsyncThunk(
   "user/updateUserInfo",
   async (userData, { rejectWithValue, getState }) => {
@@ -113,6 +114,42 @@ export const updateUserInfo = createAsyncThunk(
       });
       const data = await res.data;
       return data;
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+//Delete user account thunk
+export const deleteUserAccount = createAsyncThunk(
+  "user/deleteAccount",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const token = getState().userReducers.token;
+      await axios.delete(`${userUrl}/deleteMe`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+//un Active user account thunk
+export const unActiveUserAccount = createAsyncThunk(
+  "user/unActiveUser",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const token = getState().userReducers.token;
+      await axios.patch(`${userUrl}/unActivateMe`, _, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     } catch (error) {
       console.log(error.response);
       return rejectWithValue(error.response);
@@ -252,6 +289,50 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
+        if (action.payload.status === 401) {
+          state.loading = false;
+          state.user = null;
+          state.error = action.payload;
+          state.isLoggedIn = false;
+          state.token = null;
+        }
+        state.error = action.payload.data.message;
+      });
+
+    //delete account builder
+    builder
+      .addCase(deleteUserAccount.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteUserAccount.fulfilled, (state) => {
+        state.loading = false;
+        state.user = null;
+        state.isLoggedIn = false;
+        state.token = null;
+      })
+      .addCase(deleteUserAccount.rejected, (state, action) => {
+        if (action.payload.status === 401) {
+          state.loading = false;
+          state.user = null;
+          state.error = action.payload;
+          state.isLoggedIn = false;
+          state.token = null;
+        }
+        state.error = action.payload.data.message;
+      });
+
+    //unActiveUserAccount account builder
+    builder
+      .addCase(unActiveUserAccount.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(unActiveUserAccount.fulfilled, (state) => {
+        state.loading = false;
+        state.user = null;
+        state.isLoggedIn = false;
+        state.token = null;
+      })
+      .addCase(unActiveUserAccount.rejected, (state, action) => {
         if (action.payload.status === 401) {
           state.loading = false;
           state.user = null;

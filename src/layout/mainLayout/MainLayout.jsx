@@ -3,8 +3,10 @@ import {
   login,
   logout,
   signUp,
+  deleteUserAccount,
   updateUserPassword,
   updateUserInfo,
+  unActiveUserAccount,
 } from "./../../store/userSlice";
 
 const signUpData = {
@@ -15,7 +17,7 @@ const signUpData = {
 };
 
 const loginData = {
-  email: "fuc@gmail.com",
+  email: "ahmedMakram@gmail.com",
   password: "1234566789",
 };
 
@@ -61,6 +63,12 @@ const MainLayout = () => {
   const updateInfoSite = () => {
     dispatch(updateUserInfo(userUdata));
   };
+  const deletAcc = () => {
+    dispatch(deleteUserAccount());
+  };
+  const unActive = () => {
+    dispatch(unActiveUserAccount());
+  };
   return (
     <>
       {!isLoggedIn && (
@@ -88,6 +96,12 @@ const MainLayout = () => {
             update info
           </button>
           <p className="block">{user.name}</p>
+          <button onClick={deletAcc} type="button" className="block">
+            delete your account
+          </button>
+          <button onClick={unActive} type="button" className="block">
+            un Active your account
+          </button>
         </div>
       )}
     </>
