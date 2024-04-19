@@ -1,10 +1,11 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
+import adminReducers from "./adminSlice";
 import userReducers from "./userSlice";
 import storage from "redux-persist/lib/storage";
-
 const rootReducer = combineReducers({
   userReducers,
+  adminReducers,
 });
 
 const persistConfig = {

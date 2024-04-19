@@ -168,7 +168,15 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    handelUnAuthorizedUser: (state) => {
+      state.user = null;
+      state.token = null;
+      state.isLoggedIn = false;
+      state.loading = false;
+      state.error = "UnAuthorized User";
+    },
+  },
   extraReducers: (builder) => {
     //Sign up  signUpBuilder
     builder
