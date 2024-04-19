@@ -8,7 +8,7 @@ const initialState = {
   isSuccess: false,
   error: null,
   users: [],
-  user: null,
+  userDocument: null,
 };
 
 //Create User
@@ -33,7 +33,7 @@ export const createUser = createAsyncThunk(
   }
 );
 
-//Create User
+//get all User
 export const getAllUsers = createAsyncThunk(
   "admin/getAllUsers",
   async (_, { rejectWithValue, getState, dispatch }) => {
@@ -45,7 +45,6 @@ export const getAllUsers = createAsyncThunk(
         },
       });
       const data = await res.data;
-      console.log(data);
       return data;
     } catch (error) {
       if (error.response.status === 401) {
@@ -56,6 +55,51 @@ export const getAllUsers = createAsyncThunk(
   }
 );
 
+//get User
+export const getUser = createAsyncThunk(
+  "admin/getUser",
+  async (userID, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const token = getState().userReducers.token;
+      const res = await axios.get(`${userUrl}/${userID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.data;
+
+      return data;
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch(userActions.handelUnAuthorizedUser());
+      }
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+//delete User
+export const deleteUser = createAsyncThunk(
+  "admin/deleteUser",
+  async (userID, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const token = getState().userReducers.token;
+      const res = await axios.delete(`${userUrl}/${userID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.data;
+
+      return data;
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch(userActions.handelUnAuthorizedUser());
+      }
+      return rejectWithValue(error.response);
+    }
+  }
+);
 const adminSlice = createSlice({
   name: "admin",
   initialState,
@@ -84,7 +128,6 @@ const adminSlice = createSlice({
         state.loading = true;
         state.isSuccess = false;
         state.error = null;
-        state.users = [];
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.loading = false;
@@ -95,7 +138,41 @@ const adminSlice = createSlice({
         state.error = action.payload.data.message;
         state.loading = false;
         state.isSuccess = false;
-        state.users = [];
+      });
+    //Get user builder
+    builder
+      .addCase(getUser.pending, (state) => {
+        state.loading = true;
+        state.isSuccess = false;
+        state.error = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isSuccess = true;
+        state.userDocument = action.payload.data.doc;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.error = action.payload.data.message;
+        state.loading = false;
+        state.isSuccess = false;
+        state.userDocument = null;
+      });
+
+    //delete user builder
+    builder
+      .addCase(deleteUser.pending, (state) => {
+        state.loading = true;
+        state.isSuccess = false;
+        state.error = null;
+      })
+      .addCase(deleteUser.fulfilled, (state) => {
+        state.loading = false;
+        state.isSuccess = true;
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.error = action.payload.data.message;
+        state.loading = false;
+        state.isSuccess = false;
       });
   },
 });
