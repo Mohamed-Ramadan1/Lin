@@ -5,11 +5,13 @@ import storage from "redux-persist/lib/storage";
 import adminReducers from "./adminSlice";
 import userReducers from "./userSlice";
 import courseReducers from "./courseSlice";
+import courseEnrollmenReducers from "./courseEnrollmentsSlice";
 
 const rootReducer = combineReducers({
   userReducers,
   adminReducers,
   courseReducers,
+  courseEnrollmenReducers,
 });
 
 const persistConfig = {
