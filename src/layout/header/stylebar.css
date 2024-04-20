@@ -1,0 +1,14 @@
+.category::-webkit-scrollbar {
+width: 0;
+}
+
+.category::-webkit-scrollbar-track {
+box-shadow: transparent;
+height: 0;
+background-color: red;
+}
+
+.category::-webkit-scrollbar-thumb {
+background-color: transparent;
+outline: 0px solid transparent;
+}
