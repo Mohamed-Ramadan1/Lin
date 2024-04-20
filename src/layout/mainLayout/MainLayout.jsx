@@ -2,11 +2,7 @@
 import React from 'react'
 
 const MainLayout = () => {
-  return (
-    <div>
-      <div>fic</div>
-    </div>
-  );
+  return <div>back to origin</div>;
 };
 
 export default MainLayout
