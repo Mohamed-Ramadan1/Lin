@@ -1,5 +1,13 @@
-const Footer = () => {
-  return <div></div>;
-};
+import React from 'react'
 
-export default Footer;
+import { ContentOne } from './ContentOne'
+
+export const Footer = () => {
+    return (
+        <div className='footer'>
+
+            <ContentOne />
+        
+        </div>
+    )
+}
