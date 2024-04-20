@@ -1,13 +1,11 @@
 import React from 'react'
 
-
-
-export const MainLayout = () => {
+function MainLayout() {
   return (
     <div>
-
-      
       
     </div>
   )
 }
+
+export default MainLayout
