@@ -1,5 +1,6 @@
+import TopContent from "./TopContent";
 const Footer = () => {
-  return <div></div>;
+  return <TopContent></TopContent>;
 };
 
 export default Footer;

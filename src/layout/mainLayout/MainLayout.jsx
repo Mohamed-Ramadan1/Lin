@@ -1,5 +1,7 @@
+import Footer from "../footer/Footer";
+
 const MainLayout = () => {
-  return <div>back to origin</div>;
+  return <Footer />;
 };
 
 export default MainLayout;
