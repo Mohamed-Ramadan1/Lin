@@ -1,7 +1,9 @@
 
 
+import Footer from "../footer/Footer";
+
 import React from 'react'
-import Footer from '../footer/Footer';
+
 import Header from '../header/Header';
 
 const MainLayout = () => {
@@ -10,10 +12,6 @@ const MainLayout = () => {
     <Footer />
   </div>;
 
-import Footer from "../footer/Footer";
-
-const MainLayout = () => {
-  return <Footer />;
 
 };
 
