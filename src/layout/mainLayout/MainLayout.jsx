@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 function MainLayout() {
@@ -7,5 +8,9 @@ function MainLayout() {
     </div>
   )
 }
+
+const MainLayout = () => {
+  return <div>done</div>;
+};
 
 export default MainLayout

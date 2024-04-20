@@ -6,6 +6,7 @@ import adminReducers from "./adminSlice";
 import userReducers from "./userSlice";
 import courseReducers from "./courseSlice";
 import taskReducers from "./taskSlice";
+import reviewsReducers from "./reviewsSlice";
 import courseEnrollmenReducers from "./courseEnrollmentsSlice";
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   courseReducers,
   courseEnrollmenReducers,
   taskReducers,
+  reviewsReducers,
 });
 
 const persistConfig = {
