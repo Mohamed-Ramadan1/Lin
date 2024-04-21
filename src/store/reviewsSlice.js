@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { userActions } from "./userSlice";
+import { cleareStatus } from "./authHandler";
 const tasksUrl = "http://localhost:3000/api/v1/reviews";
 
 //Create Review
@@ -18,7 +18,7 @@ export const createReview = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -40,7 +40,7 @@ export const getAllReviews = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -62,7 +62,7 @@ export const getReview = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -84,7 +84,7 @@ export const updateReview = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -106,7 +106,7 @@ export const deleteReview = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -127,7 +127,7 @@ export const getAllReviewsOnCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -146,7 +146,16 @@ const initialState = {
 const reviewsSlice = createSlice({
   name: "reviews",
   initialState,
-  reducers: {},
+  reducers: {
+    resetReviewsState: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.error = null;
+      state.reviews = [];
+      state.reviewsOnCourse = [];
+      state.review = {};
+    },
+  },
   extraReducers: (builder) => {
     //create Review builder
     builder

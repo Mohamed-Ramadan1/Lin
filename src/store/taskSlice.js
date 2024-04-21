@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { userActions } from "./userSlice";
+import { cleareStatus } from "./authHandler";
 import axios from "axios";
 
 const tasksUrl = "http://localhost:3000/api/v1/tasks";
@@ -19,7 +19,7 @@ export const createTask = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -41,7 +41,7 @@ export const getAllTasks = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -63,7 +63,7 @@ export const getTask = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -85,7 +85,7 @@ export const updateTask = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -107,7 +107,7 @@ export const deleteTask = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -125,7 +125,15 @@ const initialState = {
 const taskSlice = createSlice({
   name: "task",
   initialState,
-  reducers: {},
+  reducers: {
+    resetTasksState: (state) => {
+      state.loading = false;
+      state.isSuccess = false;
+      state.error = null;
+      state.tasks = [];
+      state.task = {};
+    },
+  },
   extraReducers: (builder) => {
     // Add task builders
     builder

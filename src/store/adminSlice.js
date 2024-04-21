@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { userActions } from "./userSlice";
 import axios from "axios";
+import { cleareStatus } from "./authHandler";
 
 const userUrl = "http://localhost:3000/api/v1/users";
 const initialState = {
@@ -26,7 +26,7 @@ export const createUser = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -48,7 +48,7 @@ export const getAllUsers = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -71,7 +71,7 @@ export const getUser = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -94,7 +94,7 @@ export const deleteUser = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -103,7 +103,15 @@ export const deleteUser = createAsyncThunk(
 const adminSlice = createSlice({
   name: "admin",
   initialState,
-  reducers: {},
+  reducers: {
+    resetAdminState: (state) => {
+      state.loading = false;
+      state.isSuccess = false;
+      state.error = null;
+      state.users = [];
+      state.userDocument = null;
+    },
+  },
   extraReducers: (builder) => {
     //Create User builder
     builder

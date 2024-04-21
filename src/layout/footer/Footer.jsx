@@ -1,7 +1,6 @@
-
-import React from 'react'
-import TopContent from './TopContent'
-import ButtomContent from './ButtomContent'
+import React from "react";
+import TopContent from "./TopContent";
+import ButtomContent from "./ButtomContent";
 
 const Footer = () => {
   return (
@@ -11,6 +10,11 @@ const Footer = () => {
        </>
   )
 }
+=======
+import TopContent from "./TopContent";
+const Footer = () => {
+  return <TopContent></TopContent>;
+};
 
 
-export default Footer
+export default Footer;

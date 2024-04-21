@@ -1,5 +1,6 @@
 
 
+
 import Footer from "../footer/Footer";
 
 import React from 'react'
@@ -12,7 +13,6 @@ const MainLayout = () => {
     <Footer />
   </div>;
 
-
 };
 
-export default MainLayout
+export default MainLayout;

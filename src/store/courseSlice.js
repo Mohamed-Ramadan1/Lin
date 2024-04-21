@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { userActions } from "./userSlice";
+import { cleareStatus } from "./authHandler";
 import axios from "axios";
 
 const courseUrl = "http://localhost:3000/api/v1/courses";
@@ -19,7 +19,7 @@ export const createCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -41,7 +41,7 @@ export const getAllCourses = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -63,7 +63,7 @@ export const getCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -85,7 +85,7 @@ export const updateCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -107,7 +107,7 @@ export const deleteCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -125,7 +125,15 @@ const initialState = {
 const courseSlice = createSlice({
   name: "course",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCourseState: (state) => {
+      state.loading = false;
+      state.isSuccess = false;
+      state.error = null;
+      state.courseDocument = null;
+      state.courses = [];
+    },
+  },
   extraReducers: (builder) => {
     //Create Course builder
     builder
