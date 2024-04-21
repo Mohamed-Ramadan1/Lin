@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { userActions } from "./userSlice";
+import { cleareStatus } from "./authHandler";
 
 const enrollmentsUrl = "http://localhost:3000/api/v1/enrolls";
 
@@ -18,7 +18,7 @@ export const enrollUserToCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -39,7 +39,7 @@ export const getAllEnrollments = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -63,7 +63,7 @@ export const allEnrolledUsersOnCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -82,7 +82,7 @@ export const getEnrollment = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -101,7 +101,7 @@ export const deleteEnrollment = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(userActions.handelUnAuthorizedUser());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -122,7 +122,18 @@ const initialState = {
 const courseEnrollmentsSlice = createSlice({
   name: "courseEnrollments",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCourseEnrollments: (state) => {
+      state.allEnrollments = [];
+      state.courseEnrollments = [];
+      state.allEnrolledUsersOnCourse = [];
+      state.userEnrollments = [];
+      state.enrollmentDocument = {};
+      state.isSuccess = false;
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     //Create new enrollment builder
     builder

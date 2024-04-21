@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import { cleareStatus } from "./authHandler";
+
 //Bas URL
 const authUrl = "http://localhost:3000/api/v1/auth";
 const userUrl = "http://localhost:3000/api/v1/users";
@@ -31,7 +33,6 @@ export const login = createAsyncThunk(
       const data = await res.data;
       return data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response);
     }
   }
@@ -40,7 +41,7 @@ export const login = createAsyncThunk(
 //Logout the current user
 export const logout = createAsyncThunk(
   "user/logout",
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
       const res = await axios.post(`${authUrl}/logout`, null, {
@@ -50,6 +51,7 @@ export const logout = createAsyncThunk(
         },
       });
       const data = await res.data;
+      dispatch(cleareStatus());
       return data;
     } catch (error) {
       return rejectWithValue(error.response);
@@ -60,7 +62,10 @@ export const logout = createAsyncThunk(
 //Forgot password thunk
 export const resetPassword = createAsyncThunk(
   "user/resetPassword",
-  async ({ resetToken, password, passwordConfirm }, { rejectWithValue }) => {
+  async (
+    { resetToken, password, passwordConfirm },
+    { rejectWithValue, dispatch }
+  ) => {
     try {
       const res = await axios.post(
         `${authUrl}/resetPassword/${resetToken}`,
@@ -75,6 +80,9 @@ export const resetPassword = createAsyncThunk(
       const data = await res.data;
       return data;
     } catch (error) {
+      if (error.response.status === 401) {
+        dispatch(logout());
+      }
       return rejectWithValue(error.response);
     }
   }
@@ -83,7 +91,7 @@ export const resetPassword = createAsyncThunk(
 //Update password of the user.
 export const updateUserPassword = createAsyncThunk(
   "user/updatePassword",
-  async (userData, { rejectWithValue, getState }) => {
+  async (userData, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
       const res = await axios.post(`${userUrl}/updatePassword`, userData, {
@@ -95,7 +103,9 @@ export const updateUserPassword = createAsyncThunk(
       const data = await res.data;
       return data;
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 401) {
+        dispatch(cleareStatus());
+      }
       return rejectWithValue(error.response);
     }
   }
@@ -104,7 +114,7 @@ export const updateUserPassword = createAsyncThunk(
 //Update user info thunk
 export const updateUserInfo = createAsyncThunk(
   "user/updateUserInfo",
-  async (userData, { rejectWithValue, getState }) => {
+  async (userData, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
       const res = await axios.post(`${userUrl}/updateInfo`, userData, {
@@ -116,7 +126,9 @@ export const updateUserInfo = createAsyncThunk(
       const data = await res.data;
       return data;
     } catch (error) {
-      console.log(error.response);
+      if (error.response.status === 401) {
+        dispatch(cleareStatus());
+      }
       return rejectWithValue(error.response);
     }
   }
@@ -125,7 +137,7 @@ export const updateUserInfo = createAsyncThunk(
 //Delete user account thunk
 export const deleteUserAccount = createAsyncThunk(
   "user/deleteAccount",
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
       await axios.delete(`${userUrl}/deleteMe`, {
@@ -133,8 +145,11 @@ export const deleteUserAccount = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
+      return dispatch(cleareStatus());
     } catch (error) {
-      console.log(error.response);
+      if (error.response.status === 401) {
+        dispatch(cleareStatus());
+      }
       return rejectWithValue(error.response);
     }
   }
@@ -143,7 +158,7 @@ export const deleteUserAccount = createAsyncThunk(
 //un Active user account thunk
 export const unActiveUserAccount = createAsyncThunk(
   "user/unActiveUser",
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
       await axios.patch(`${userUrl}/unActivateMe`, _, {
@@ -151,8 +166,11 @@ export const unActiveUserAccount = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
+      return dispatch(cleareStatus());
     } catch (error) {
-      console.log(error.response);
+      if (error.response.status === 401) {
+        dispatch(cleareStatus());
+      }
       return rejectWithValue(error.response);
     }
   }
@@ -237,10 +255,7 @@ const userSlice = createSlice({
         state.isLoggedIn = false;
       })
       .addCase(logout.rejected, (state, action) => {
-        state.loading = false;
-        state.user = null;
         state.error = action.payload.data.message;
-        state.isLoggedIn = false;
       });
 
     //ResetPassword  builder
@@ -277,13 +292,6 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(updateUserPassword.rejected, (state, action) => {
-        if (action.payload.status === 401) {
-          state.loading = false;
-          state.user = null;
-          state.error = action.payload;
-          state.isLoggedIn = false;
-          state.token = null;
-        }
         state.error = action.payload.data.message;
       });
 
@@ -298,13 +306,6 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
-        if (action.payload.status === 401) {
-          state.loading = false;
-          state.user = null;
-          state.error = action.payload;
-          state.isLoggedIn = false;
-          state.token = null;
-        }
         state.error = action.payload.data.message;
       });
 
@@ -320,13 +321,6 @@ const userSlice = createSlice({
         state.token = null;
       })
       .addCase(deleteUserAccount.rejected, (state, action) => {
-        if (action.payload.status === 401) {
-          state.loading = false;
-          state.user = null;
-          state.error = action.payload;
-          state.isLoggedIn = false;
-          state.token = null;
-        }
         state.error = action.payload.data.message;
       });
 
@@ -342,13 +336,6 @@ const userSlice = createSlice({
         state.token = null;
       })
       .addCase(unActiveUserAccount.rejected, (state, action) => {
-        if (action.payload.status === 401) {
-          state.loading = false;
-          state.user = null;
-          state.error = action.payload;
-          state.isLoggedIn = false;
-          state.token = null;
-        }
         state.error = action.payload.data.message;
       });
   },
