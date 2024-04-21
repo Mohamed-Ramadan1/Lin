@@ -1,87 +1,83 @@
 /* eslint-disable */
 
 import { registerSchema } from "./../schema/authFormsSchema";
-import { useFormik } from "formik";
-
+import { Form, Formik } from "formik";
+import CustomInput from "../components/forms/CustomInput";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "./../store/userSlice";
-
+import { userActions } from "./../store/userSlice";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isSuccess } = useSelector((state) => state.userReducers);
-  const { values, errors, handleBlur, handleSubmit, handleChange, touched } =
-    useFormik({
-      initialValues: {
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("User created successfully");
+      dispatch(userActions.resetSuccessStates());
+      return navigate("/");
+    }
+  }, [isSuccess]);
+
+  return (
+    <Formik
+      initialValues={{
         name: "",
         email: "",
         password: "",
         passwordConfirm: "",
-      },
-      validationSchema: registerSchema,
-      onSubmit: (values) => {
-        console.log(values);
+      }}
+      validationSchema={registerSchema}
+      onSubmit={(values, actions) => {
         dispatch(signUp(values));
-      },
-    });
+        actions.resetForm();
+      }}
+    >
+      {({ handleSubmit }) => (
+        <Form onSubmit={handleSubmit} className="">
+          <CustomInput
+            type="text"
+            name="name"
+            label="Name"
+            id="name"
+            placeholder="Name"
+          />
+          <CustomInput
+            type="email"
+            name="email"
+            label="email"
+            id="email"
+            placeholder="email"
+          />
 
-  return (
-    <form onSubmit={handleSubmit} className="">
-      <label htmlFor="name">Name</label>
-      <input
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
-        type="text"
-        name="name"
-        onChange={handleChange}
-        value={values.name}
-        onBlur={handleBlur}
-      />
-      {errors.name && touched.name && (
-        <p className="text-red-500">{errors.name}</p>
+          <CustomInput
+            type="password"
+            name="password"
+            label="password"
+            id="password"
+            placeholder="password"
+          />
+          <CustomInput
+            type="password"
+            name="passwordConfirm"
+            label="passwordConfirm"
+            id="passwordConfirm"
+            placeholder="passwordConfirm"
+          />
+
+          <button
+            type="submit"
+            className="bg-gray-200 w-full p-2 rounded-sm mb-2"
+          >
+            Sign Up
+          </button>
+        </Form>
       )}
-
-      <label htmlFor="email">Email</label>
-      <input
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
-        type="email"
-        name="email"
-        onChange={handleChange}
-        value={values.email}
-        onBlur={handleBlur}
-      />
-      {errors.email && touched.email && (
-        <p className="text-red-500">{errors.email}</p>
-      )}
-
-      <label htmlFor="password">Password</label>
-      <input
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
-        type="password"
-        name="password"
-        onChange={handleChange}
-        value={values.password}
-        onBlur={handleBlur}
-      />
-      {errors.password && <p className="text-red-500">{errors.password}</p>}
-
-      <label htmlFor="passwordConfirm">Confirm Password</label>
-      <input
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
-        type="password"
-        name="passwordConfirm" // corrected name attribute
-        onChange={handleChange}
-        value={values.passwordConfirm}
-        onBlur={handleBlur}
-      />
-      {errors.passwordConfirm && ( // corrected passwordConfirm
-        <p className="text-red-500">{errors.passwordConfirm}</p>
-      )}
-
-      <button type="submit" className="bg-gray-200 w-full p-2 rounded-sm mb-2">
-        Sign Up
-      </button>
-    </form>
+    </Formik>
   );
 };
 

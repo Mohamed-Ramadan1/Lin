@@ -197,6 +197,9 @@ const userSlice = createSlice({
       state.isSuccess = false;
       state.error = "UnAuthorized User";
     },
+    resetSuccessStates: (state) => {
+      state.isSuccess = false;
+    },
   },
   extraReducers: (builder) => {
     //Sign up  signUpBuilder
