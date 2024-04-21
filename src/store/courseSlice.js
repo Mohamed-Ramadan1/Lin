@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { cleareState } from "./authHandler";
+import { cleareStatus } from "./authHandler";
 import axios from "axios";
 
 const courseUrl = "http://localhost:3000/api/v1/courses";
@@ -19,7 +19,7 @@ export const createCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(cleareState());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -41,7 +41,7 @@ export const getAllCourses = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(cleareState());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -63,7 +63,7 @@ export const getCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(cleareState());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -85,7 +85,7 @@ export const updateCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(cleareState());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
@@ -107,7 +107,7 @@ export const deleteCourse = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        dispatch(cleareState());
+        dispatch(cleareStatus());
       }
       return rejectWithValue(error.response);
     }
