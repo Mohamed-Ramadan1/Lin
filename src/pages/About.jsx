@@ -1,7 +1,13 @@
 import React from 'react'
 
-export default function About() {
-  return (
-    <div>About</div>
-  )
+import AboutLiN from '../components/ui/aboutComponents/AboutLiN'
+
+const About = () => {
+    return (
+      <div>
+          <AboutLiN />
+      </div>
+    )
 }
+
+export default About

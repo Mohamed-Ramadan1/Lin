@@ -3,6 +3,7 @@ import { MainLayout } from "./layout";
 import { SignUp, Login, ForgotPassword, ResetPassword, Home, About } from "./pages";
 
 const router = createBrowserRouter([
+  
   {
     path: "/",
     element: <MainLayout />,
@@ -53,6 +54,7 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
 ]);
+
 
 const App = () => {
   return <RouterProvider router={router} />;

@@ -69,7 +69,6 @@ export default function MidContent() {
 
                     </div>
 
-
                 </div>
 
             </div>
