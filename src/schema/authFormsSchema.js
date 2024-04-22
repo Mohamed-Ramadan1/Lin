@@ -14,3 +14,15 @@ export const registerSchema = yup.object().shape({
     .required("Confirm password is required")
     .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
+
+export const resetPasswordSchema = yup.object().shape({
+  password: yup.string().required("Password is required"),
+  passwordConfirm: yup
+    .string()
+    .required("Confirm password is required")
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
+});
+
+export const forgotPasswordSchema = yup.object().shape({
+  email: yup.string().email().required("Email is required"),
+});

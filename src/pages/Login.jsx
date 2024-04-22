@@ -33,7 +33,7 @@ const Login = () => {
         actions.resetForm();
       }}
     >
-      {({ handleSubmit }) => (
+      {({ handleSubmit, isSubmitting }) => (
         <Form onSubmit={handleSubmit} className="">
           <CustomInput
             type="email"
@@ -51,6 +51,7 @@ const Login = () => {
           />
 
           <button
+            disabled={isSubmitting}
             type="submit"
             className="bg-gray-200 w-full p-2 rounded-sm mb-2"
           >

@@ -60,6 +60,25 @@ export const logout = createAsyncThunk(
 );
 
 //Forgot password thunk
+export const forgotPassword = createAsyncThunk(
+  "user/forgotPassword",
+  async (userData, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await axios.post(`${authUrl}/forgotPassword`, userData, {
+        withCredentials: true,
+      });
+      const data = await res.data;
+      return data;
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch(logout());
+      }
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+//ResetPassword password thunk
 export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async (
@@ -295,6 +314,26 @@ const userSlice = createSlice({
         state.user = null;
         state.error = action.payload.data.message;
         state.isLoggedIn = false;
+        state.isSuccess = false;
+      });
+
+    //ForgotPassword  builder
+    builder
+      .addCase(forgotPassword.pending, (state) => {
+        state.user = null;
+        state.loading = true;
+        state.error = null;
+        state.isLoggedIn = false;
+        state.token = null;
+        state.isSuccess = false;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isSuccess = true;
+      })
+      .addCase(forgotPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.data.message;
         state.isSuccess = false;
       });
 
