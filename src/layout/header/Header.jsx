@@ -13,7 +13,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsLargeScreen(window.innerWidth > 768); 
+      setIsLargeScreen(window.innerWidth > 970); 
     };
 
     // Initial check for screen size
