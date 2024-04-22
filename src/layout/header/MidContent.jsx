@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 // Img
 import logo from '../../assets/LOGOHeader.png'
@@ -11,6 +12,10 @@ import Bell from '../../components/icons/Bell'
 
 
 export default function MidContent() {
+
+
+    const { user } = useSelector(state => state.userReducers)
+
     return (
         <div className='p-[20px]'>
 
@@ -35,7 +40,11 @@ export default function MidContent() {
                 </div>
 
                 <div className="info-right">
-                    <div className="profile flex flex-row-reverse justify-center items-center gap-[15px]">
+                    
+                    {/* User Sign In  */}
+                    {user && 
+                    
+                        <div className="profile flex flex-row-reverse justify-center items-center gap-[15px]">
 
                         <img src={Avatar} alt="" />
 
@@ -43,6 +52,24 @@ export default function MidContent() {
                         <HeartHeader />
                         <Bell />
                     </div>
+                    
+                    }
+
+                    
+                    {/* Not Sign In User  */}
+                    <div className='flex gap-[20px] items-center'>
+
+                        <div className="flex items-center gap-[20px]">
+                            <a href="" className='max-content px-[30px] py-[13px] font-bold text-[#9747FF] bg-[#F4EBFF]'>Create Account</a>
+                        </div>
+
+                        <div className="flex items-center gap-[20px]">
+                            <a href="" className='max-content px-[30px] py-[13px] font-bold text-[#fff] bg-[#9747FF]'>Sign In</a>
+                        </div>
+
+                    </div>
+
+
                 </div>
 
             </div>

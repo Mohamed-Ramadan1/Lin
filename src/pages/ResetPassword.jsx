@@ -1,3 +1,6 @@
+
+import React from 'react'
+
 import { Formik, Form } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import CustomInput from "../components/forms/CustomInput";
@@ -61,5 +64,3 @@ const ResetPassword = () => {
     </Formik>
   );
 };
-
-export default ResetPassword;

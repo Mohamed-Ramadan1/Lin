@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 
 import { registerSchema } from "./../schema/authFormsSchema";
 import { Form, Formik } from "formik";
@@ -82,3 +82,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+

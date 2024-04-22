@@ -4,11 +4,13 @@ import ButtomContent from "./ButtomContent";
 
 const Footer = () => {
   return (
-    <>
-      <TopContent />
-      <ButtomContent />
-    </>
-  );
-};
+        <>
+        <TopContent />
+       <ButtomContent />
+       </>
+  )
+}
+
+
 
 export default Footer;

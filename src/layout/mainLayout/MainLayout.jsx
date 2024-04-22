@@ -1,14 +1,25 @@
-import React from "react";
+
+
+
 import Footer from "../footer/Footer";
-import Header from "../header/Header";
+
+import React from 'react'
+
+import Header from '../header/Header';
+import { ResetPassword } from "../../pages";
+
 
 const MainLayout = () => {
-  return (
-    <div>
-      <Header />
-      <Footer />
-    </div>
-  );
+    return <div>
+      
+      {/* <Header /> */}
+
+      <ResetPassword />
+
+      {/* <Footer /> */}
+      
+    </div>;
+
 };
 
 export default MainLayout;

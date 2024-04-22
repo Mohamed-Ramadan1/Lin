@@ -12,19 +12,19 @@ import Bell from '../../components/icons/Bell'
 
 export default function HeaderPhone() {
 
-    const [menuListLeft, setMenuListLeft] = useState(-800); // Initial position of menuList
+    const [menuListLeft, setMenuListLeft] = useState(-1000); // Initial position of menuList
 
     const handleConfettiClick = () => {
         setMenuListLeft(0); // Move menuList to the left
     };
 
     const handleExitClick = () => {
-        setMenuListLeft(-800); // Move menuList back to its initial position
+        setMenuListLeft(-1000); // Move menuList back to its initial position
     };
 
     return (
         <div className=''>
-            <div className="container flex justify-between items-center p-[20px]">
+            <div className="container flex justify-between items-center p-[20px] max-w-full w-full">
 
                 <div className="logo">
                     <a href=""><img src={logo} alt="" className='h-[40px] w-[97px]'/></a>
