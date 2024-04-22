@@ -82,15 +82,12 @@ export default function MidContent() {
               </div>
 
                         <div className="flex items-center gap-[20px]">
-                            <a href="" className='max-content px-[30px] py-[13px] font-bold text-[#fff] bg-[#9747FF]'>Sign In</a>
+                            <Link to="/login" className='max-content px-[30px] py-[13px] font-bold text-[#fff] bg-[#9747FF]'>Sign In</Link>
                         </div>
 
                     </div>
 
 
-                </div>
-
-            </div>
           )}
         </div>
       </div>

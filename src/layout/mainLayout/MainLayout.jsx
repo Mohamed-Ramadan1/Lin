@@ -3,12 +3,14 @@ import Footer from "../footer/Footer";
 import React from "react";
 
 import Header from "../header/Header";
-// import { ResetPassword } from "../../pages";
+import { About } from "../../pages";
 
 const MainLayout = () => {
   return (
     <div>
       <Header />
+
+      <About />
 
       <Footer />
     </div>
