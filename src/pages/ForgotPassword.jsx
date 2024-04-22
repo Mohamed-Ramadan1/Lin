@@ -1,5 +1,4 @@
-
-import React from 'react'
+import React from "react";
 
 import { Formik, Form } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,4 +56,4 @@ const ForgotPassword = () => {
   );
 };
 
-
+export default ForgotPassword;
