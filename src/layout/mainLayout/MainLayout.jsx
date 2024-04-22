@@ -6,14 +6,15 @@ import Footer from "../footer/Footer";
 import React from 'react'
 
 import Header from '../header/Header';
-import { Login } from "../../pages";
+import { ResetPassword } from "../../pages";
+
 
 const MainLayout = () => {
     return <div>
       
       {/* <Header /> */}
 
-      <Login />
+      <ResetPassword />
 
       {/* <Footer /> */}
       

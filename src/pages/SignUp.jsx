@@ -1,88 +1,72 @@
-/* eslint-disable */
+import React from 'react'
 
-import { registerSchema } from "./../schema/authFormsSchema";
-import { useFormik } from "formik";
+// Components
+import Input from '../components/ui/Input';
+import Button from '../components/ui/Button';
+import GoogleBtn from '../components/ui/GoogleBtn';
 
-import { useDispatch, useSelector } from "react-redux";
-import { signUp } from "./../store/userSlice";
+// Images
+import LoginImg from '../assets/SignUp.png'
 
-import { toast } from "react-toastify";
 
-const SignUp = () => {
-  const dispatch = useDispatch();
-  const { isSuccess } = useSelector((state) => state.userReducers);
-  const { values, errors, handleBlur, handleSubmit, handleChange, touched } =
-    useFormik({
-      initialValues: {
-        name: "",
-        email: "",
-        password: "",
-        passwordConfirm: "",
-      },
-      validationSchema: registerSchema,
-      onSubmit: (values) => {
-        console.log(values);
-        dispatch(signUp(values));
-      },
-    });
+export default function SignUp() {
+    return (
+      <div className='signUp w-full h-[100vh] max-lg:h-full flex flex-row-reverse justify-between items-center'>
 
-  return (
-    <form onSubmit={handleSubmit} className="">
-      <label htmlFor="name">Name</label>
-      <input
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
-        type="text"
-        name="name"
-        onChange={handleChange}
-        value={values.name}
-        onBlur={handleBlur}
-      />
-      {errors.name && touched.name && (
-        <p className="text-red-500">{errors.name}</p>
-      )}
+        <div className="image w-[50%] max-lg:hidden h-full overflow-hidden">
+            <img src={LoginImg} alt="" className='w-full h-full object-cover'/>
+        </div>
 
-      <label htmlFor="email">Email</label>
-      <input
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
-        type="email"
-        name="email"
-        onChange={handleChange}
-        value={values.email}
-        onBlur={handleBlur}
-      />
-      {errors.email && touched.email && (
-        <p className="text-red-500">{errors.email}</p>
-      )}
+        <div className="contentInfo h-full w-[50%] max-lg:w-full flex flex-col items-center justify-center">
 
-      <label htmlFor="password">Password</label>
-      <input
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
-        type="password"
-        name="password"
-        onChange={handleChange}
-        value={values.password}
-        onBlur={handleBlur}
-      />
-      {errors.password && <p className="text-red-500">{errors.password}</p>}
+        
+          <div className="container w-[60%] max-lg:w-full max-lg:p-[30px] flex flex-col gap-[30px] items-start justify-center">
 
-      <label htmlFor="passwordConfirm">Confirm Password</label>
-      <input
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
-        type="password"
-        name="passwordConfirm" // corrected name attribute
-        onChange={handleChange}
-        value={values.passwordConfirm}
-        onBlur={handleBlur}
-      />
-      {errors.passwordConfirm && ( // corrected passwordConfirm
-        <p className="text-red-500">{errors.passwordConfirm}</p>
-      )}
+          <div className="title w-full flex gap-[15px] flex-col items-start ">
+            
+            <h1 className='text-3xl font-bold text-[#222]'>Sign up and start learning</h1>
+            <p className='text-xl text-[#838383]'>Today is a new day. It's your day. You shape it. Sign in to start managing your projects.</p>
+              
+          </div>
 
-      <button type="submit" className="bg-gray-200 w-full p-2 rounded-sm mb-2">
-        Sign Up
-      </button>
-    </form>
-  );
-};
+          <div className="inputs w-full">
 
-export default SignUp;
+              <form action="" className='flex flex-col gap-[24px]'>
+
+                  <Input type="text" placeholder="Name" label="Full Name" />
+
+                  <Input type="email" placeholder="Example@email.com" label="Email" />
+                
+                  <Input type="password" placeholder="At least 8 characters" label="Password" />
+
+                  <Button textButton="Sign up" />
+
+              </form>
+              
+          </div>
+
+
+            <div className='w-full flex gap-[30px] flex-col items-center justify-center'>
+              
+              <div className='w-full flex items-center justify-center relative'>
+                <span className=' relative p-[10px] z-10 bg-[#fff]'>or</span>
+                <span className='w-full h-[1px] absolute top-[50%] left-[50%]  translate-x-[-50%] bg-[#CFDFE2]'></span>
+              </div>
+
+              <GoogleBtn />
+
+              <div>
+                <h3>Already have an account? <a href="" className='text-[#9747FF]'> Log in  </a></h3>
+              </div>
+
+          </div>
+
+          </div>
+
+
+
+          </div>
+        
+      </div>
+    )
+}

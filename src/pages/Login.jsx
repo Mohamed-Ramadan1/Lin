@@ -1,10 +1,10 @@
 // Components
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
+import GoogleBtn from '../components/ui/GoogleBtn';
 
 // Images
 import LoginImg from '../assets/Login.jpg'
-import GoogleBtn from '../components/ui/GoogleBtn';
 
 
 const Login = () => {
@@ -65,6 +65,7 @@ const Login = () => {
 
 
       </div>
+
       </div>
       )
 };
