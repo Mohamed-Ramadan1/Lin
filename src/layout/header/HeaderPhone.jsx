@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+// Framer Motion 
+import { motion } from 'framer-motion'
+
 // Img
 import logo from '../../assets/LOGOHeader.png'
 import Avatar from '../../assets/Avatar.png'
@@ -23,7 +26,12 @@ export default function HeaderPhone() {
     };
 
     return (
-        <div className=''>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: .5, type: 'tween'}}
+            className=''>
+            
             <div className="container flex justify-between items-center p-[20px] max-w-full w-full">
 
                 <div className="logo">
@@ -100,6 +108,7 @@ export default function HeaderPhone() {
                 </div>
 
             </div>
-        </div>
+            
+        </motion.div>
     )
 }
