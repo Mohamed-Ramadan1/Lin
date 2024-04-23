@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+// Framer Motion 
+import { motion } from 'framer-motion'
+
 // Img
 import logo from '../../assets/LOGOHeader.png'
 import Avatar from '../../assets/Avatar.png'
@@ -23,7 +26,12 @@ export default function HeaderPhone() {
     };
 
     return (
-        <div className=''>
+        <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: .3, type: 'tween'}}
+            className=''>
+            
             <div className="container flex justify-between items-center p-[20px] max-w-full w-full">
 
                 <div className="logo">
@@ -34,25 +42,28 @@ export default function HeaderPhone() {
                     <ConfettiMinimalistic />
                 </div>
 
-                <div
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ type: 'tween' }}
+                    
                     className="fixed menuList overflow-y-scroll w-full h-full transition ease-out top-0 flex gap-7 flex-col items-start bg-[#fff] p-[20px] z-10"
-                    style={{ left: `${menuListLeft}px` }}
-                >
+                    style={{ left: `${menuListLeft}px` }}>
                     
 
                     <div className='w-full flex items-center gap-[10px]'>
                         <div className="inputSearch relative w-full h-[45px]">
                             <div className="iconSearch absolute left-[10px] top-[50%] translate-y-[-50%]">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.875 18.75C15.2242 18.75 18.75 15.2242 18.75 10.875C18.75 6.52576 15.2242 3 10.875 3C6.52576 3 3 6.52576 3 10.875C3 15.2242 6.52576 18.75 10.875 18.75Z" stroke="#1D2026" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M16.4431 16.4438L20.9994 21.0002" stroke="#1D2026" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10.875 18.75C15.2242 18.75 18.75 15.2242 18.75 10.875C18.75 6.52576 15.2242 3 10.875 3C6.52576 3 3 6.52576 3 10.875C3 15.2242 6.52576 18.75 10.875 18.75Z" stroke="#1D2026" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M16.4431 16.4438L20.9994 21.0002" stroke="#1D2026" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             </div>
                             <input type="search" name="" id="" placeholder='What do you want learn...' className='w-full h-full py-[10px] px-[40px] outline-none border-[1px] border-[#E9EAF0] '/>
                         </div> 
 
-                        <div className="exit w-[45px] h-[45px] flex items-center justify-center bg-red-500" onClick={handleExitClick}>
-                            <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff"><path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        <div className="exit cursor-pointer w-[45px] h-[45px] flex items-center justify-center bg-red-500" onClick={handleExitClick}>
+                            <svg width="24px" height="24px" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff"><path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
                         </div>
                     </div>  
 
@@ -97,9 +108,10 @@ export default function HeaderPhone() {
 
 
                   
-                </div>
+                </motion.div>
 
             </div>
-        </div>
+            
+        </motion.div>
     )
 }

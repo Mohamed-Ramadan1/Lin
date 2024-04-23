@@ -6,18 +6,19 @@ const CustomInput = ({ label, id, ...props }) => {
   // console.log("meta", meta);
   // console.log("helpers", helpers);
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
+    <div className="inputField w-full flex flex-col gap-[8px]">
+
+      <label htmlFor={id} className='text-[16px] font-medium text-[#0C1421]'>{label}</label>
       <input
         {...field}
         {...props}
-        className="bg-gray-200 w-full p-2 rounded-sm mb-2"
+        className='w-full h-[48px] p-[16px] outline-none transition ease-in-out focus:border-[#9747FF] focus:bg-[#f3eafd]  bg-[#f9f4ff] rounded-[12px]  border-[1px] border-[#D4D7E3] '
       />
       {meta.error &&
         meta.touched && ( // corrected passwordConfirm
           <p className="text-red-500">{meta.error}</p>
         )}
-    </>
+    </div>
   );
 };
 
