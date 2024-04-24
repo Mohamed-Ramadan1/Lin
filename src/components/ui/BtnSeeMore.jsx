@@ -2,7 +2,7 @@ import React from 'react'
 
 export const BtnSeeMore = () => {
   return (
-    <div className='btnMore flex gap-[5px] items-center px-[20px] py-[10px] justify-center border-[1px] border-[#3D3D3D] transition rounded-[10px] shadow hover:shadow-[#9747FF]'>
+    <a href='' className='btnMore flex gap-[5px] items-center px-[20px] py-[10px] justify-center border-[1px] border-[#3D3D3D] transition rounded-[10px] shadow hover:shadow-[#9747FF] bg-[#222]'>
           <h1 className='text-[#fff] font-bold'>See More</h1>
 
           <div className="icon">
@@ -19,6 +19,6 @@ export const BtnSeeMore = () => {
                 <path d="M17.5 9.74145C17.7095 9.53198 18.0491 9.53198 18.2586 9.74145C18.468 9.95092 18.468 10.2905 18.2586 10.5C18.0491 10.7095 17.7095 10.7095 17.5 10.5C17.2905 10.2905 17.2905 9.95092 17.5 9.74145Z" fill="#9747FF"/>
                 </svg>
           </div>
-    </div>
+    </a>
   )
 }

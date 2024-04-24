@@ -37,6 +37,7 @@ const Founder = [
 const   WereHiring = () => {
     return (
         <div className='wereHiring relative overflow-hidden flex justify-center items-center px-[124px] py-[70px] max-lg:px-[30px] max-sm:py-[30px] max-sm:px-[15px]'>
+            
             <div className="container max-w-[1400px] m-auto flex gap-10 flex-col justify-center items-center">
 
                 <div className="title text-center w-[70%] m-auto flex gap-3 flex-col justify-center items-center max-sm:w-full">

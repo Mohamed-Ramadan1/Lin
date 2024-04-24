@@ -6,15 +6,15 @@ import imgCourse from '../../../assets/imgCardFree.png'
 
 export const CardCoursFree = () => {
   return (
-    <div className='w-full'>
+    <div className='w-fill bg-[#2B2B2B] p-[10px] rounded-[20px]'>
 
-      <div className="container w-full flex flex-col items-start gap-[15px]">
+      <div className="w-[300px] flex flex-col items-start gap-[15px]">
 
-        <div className="image relative rounded-[10px] overflow-hidden">
+        <div className="image w-full relative rounded-[10px] overflow-hidden">
 
           <BtnFav />
 
-          <img src={imgCourse} alt="" className='w-full h-full object-cover'/>
+          <img src={imgCourse} alt="" className=' w-full object-cover select-none'/>
 
         </div>
 

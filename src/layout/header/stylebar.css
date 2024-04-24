@@ -1,5 +1,6 @@
-.category::-webkit-scrollbar {
+.category .container::-webkit-scrollbar {
 width: 0;
+display: none;
 }
 
 .category::-webkit-scrollbar-track {
