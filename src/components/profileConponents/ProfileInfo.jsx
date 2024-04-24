@@ -9,15 +9,15 @@ const ProfileInfo = () => {
         <img src={BannerProfile} alt="BannerProfile" className="" />
       </div>
       {/* Profile info */}
-      <div className="container max-w-[1700px] m-auto gap-5 flex justify-start items-start">
+      <div className="container  m-auto gap-5 flex justify-start items-start relative">
         <img
           src={WhatWeOffer}
           alt="WhatWeOffer"
-          className="w-20 h-20 rounded-[10px] bsolute top-[-50px] left-[50px]"
+          className="w-[113px] h-[113px] rounded-[10px] absolute top-[-50px] left-[50px] z-1"
         />
         <div>
-          <h1 className="text-2xl">Name</h1>
-          <p className="text-lg">Email</p>
+          <h1 className="text-2xl">Mohamed Ramadan</h1>
+          <p className="text-lg">mohamed@gmail.com</p>
         </div>
       </div>
     </div>
