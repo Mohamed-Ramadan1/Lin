@@ -28,8 +28,8 @@ export const Banner = () => {
                   
                     <div className='flex gap-[10px] flex-col justify-start items-start'>
                       
-                        <motion.h1 initial={{opacity: 0, x: -20}} animate={{opacity: 1, x: 0}} transition={{delay: .3}} className='text-5xl font-bold'>Unlock </motion.h1>
-                        <motion.h3 initial={{opacity: 0, x: -20}} animate={{opacity: 1, x: 0}} transition={{delay: .4}} className='text-2xl font-bold'>Your Potential with Online Learning</motion.h3>
+                        <motion.h1 initial={{opacity: 0, x: -20}} whileInView={{opacity: 1, x: 0}} transition={{delay: .3}} className='text-5xl font-bold'>Unlock </motion.h1>
+                        <motion.h3 initial={{opacity: 0, x: -20}} whileInView={{opacity: 1, x: 0}} transition={{delay: .4}} className='text-2xl font-bold'>Your Potential with Online Learning</motion.h3>
                       
                     </div>
 
