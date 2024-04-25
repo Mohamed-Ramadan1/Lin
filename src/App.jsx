@@ -9,6 +9,7 @@ import {
   About,
   Profile,
 } from "./pages";
+import ViewCourses from "./pages/ViewCourses";
 
 const router = createBrowserRouter([
   {
@@ -24,18 +25,19 @@ const router = createBrowserRouter([
         path: "about",
         element: <About />,
       },
-    ],
-  },
-  {
-    path: "/courses",
-    element: <h>Display the all course here</h>,
-    children: [
       {
-        path: "course",
-        element: <h1>Display all info about hte course </h1>,
+        path: "/courses",
+        element: <ViewCourses />,
+        children: [
+          {
+            path: "course",
+            element: <h1>Display all info about hte course </h1>,
+          },
+        ],
       },
     ],
   },
+  
 
   {
     path: "/profile",
