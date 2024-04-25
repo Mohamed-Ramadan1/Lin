@@ -4,13 +4,15 @@ import React from "react";
 
 import Header from "../header/Header";
 import { Outlet } from "react-router-dom";
+import DetailsCourse from "../../pages/DetailsCourse";
 
 const MainLayout = () => {
   return (
     <div>
       <Header />
       
-      <Outlet />
+      <DetailsCourse />
+      {/* <Outlet /> */}
 
       <Footer />
     </div>
