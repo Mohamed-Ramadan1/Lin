@@ -80,6 +80,7 @@ export default function HeaderPhone() {
                             <img src={Avatar} alt="" />
 
                         </div>
+                        
                     </div>
 
                     <div className="links w-full flex flex-col items-start gap-3 pb-[20px] border-b-[1px] border-[#e2e2e2]">
