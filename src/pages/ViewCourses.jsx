@@ -10,7 +10,7 @@ import FilterCourses from '../components/common/ViewCoursesComponents/FilterCour
 const ViewCourses = () => {
     return (
         <div className='viewCoursePage relative flex justify-center items-center px-[124px] py-[70px] max-2xl:px-[30px] max-sm:py-[30px] max-sm:px-[15px]'>
-
+            
             <div className="container max-w-[1400px] m-auto flex flex-col gap-10 flex-col justify-center items-center">
 
                 <div className="title flex flex-col items-start gap-[15px]">
