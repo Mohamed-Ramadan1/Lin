@@ -10,6 +10,7 @@ import {
   Profile,
 } from "./pages";
 import ViewCourses from "./pages/ViewCourses";
+import DetailsCourse from "./pages/DetailsCourse";
 
 const router = createBrowserRouter([
   {
@@ -26,18 +27,25 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/courses",
+        path: "instructor",
+        element: <h1>Try to become instructor</h1>,
+      },
+      {
+        path: "blog",
+        element: <h1>I have the blog right here pro</h1>,
+      },
+      {
+        path: "courses",
         element: <ViewCourses />,
         children: [
           {
-            path: "course",
-            element: <h1>Display all info about hte course </h1>,
+            path: ":courseId",
+            element: <DetailsCourse />,
           },
         ],
       },
     ],
   },
-  
 
   {
     path: "/profile",
