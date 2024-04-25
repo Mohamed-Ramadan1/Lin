@@ -29,6 +29,7 @@ export const CardCoursPay = () => {
             </div>
                     
             <div className="rating flex gap-[15px] justify-center">
+
                 <h3 className='text-[#fff] text-[17px] font-bold'>4.3</h3>            
                         
                 <div className="stars flex items-center gap-[4px]">
@@ -54,14 +55,14 @@ export const CardCoursPay = () => {
                     <span className='text-[#a5a5a5]'>( 90,342 )</span>            
                 </div>
                         
-                    </div>
+            </div>
                     
-                    <div className="price flex gap-[10px] items-end">
-                        <h1 className='text-[25px] font-bold text-[#D5FF40]'>149,99</h1>
-                        <span className='text-base text-[#eee] line-through'>155,99</span>
-                    </div>
-  
-          </div>
+            <div className="price flex gap-[10px] items-end">
+                <h1 className='text-[25px] font-bold text-[#D5FF40]'>149,99</h1>
+                <span className='text-base text-[#eee] line-through'>155,99</span>
+            </div>
+
+            </div>
         </div>
       </div>
     )
