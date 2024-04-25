@@ -62,8 +62,9 @@ export default function MidContent() {
           {/* User Sign In  */}
           {user && (
             <div className="profile flex flex-row-reverse justify-center items-center gap-[15px]">
-              <img src={Avatar} alt="" />
-
+              <Link to="/profile">
+                <img src={Avatar} alt="" />
+              </Link>
               <ShoppingCartSimple />
               <HeartHeader />
               <Bell />
@@ -81,13 +82,15 @@ export default function MidContent() {
                 </Link>
               </div>
 
-                        <div className="flex items-center gap-[20px]">
-                            <Link to="/login" className='max-content px-[30px] py-[13px] font-bold text-[#fff] bg-[#9747FF]'>Sign In</Link>
-                        </div>
-
-                    </div>
-
-
+              <div className="flex items-center gap-[20px]">
+                <Link
+                  to="/login"
+                  className="max-content px-[30px] py-[13px] font-bold text-[#fff] bg-[#9747FF]"
+                >
+                  Sign In
+                </Link>
+              </div>
+            </div>
           )}
         </div>
       </div>

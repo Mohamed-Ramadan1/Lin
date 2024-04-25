@@ -1,23 +1,30 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "./layout";
-import { SignUp, Login, ForgotPassword, ResetPassword, Home, About } from "./pages";
+import {
+  SignUp,
+  Login,
+  ForgotPassword,
+  ResetPassword,
+  Home,
+  About,
+  Profile,
+} from "./pages";
 
 const router = createBrowserRouter([
-  
   {
     path: "/",
     element: <MainLayout />,
     errorElement: <Error />,
     children: [
       {
-        path: 'home',
+        index: true,
         element: <Home />,
       },
       {
-        path: 'about',
+        path: "about",
         element: <About />,
-      }
-    ]
+      },
+    ],
   },
   {
     path: "/courses",
@@ -29,13 +36,16 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
-    path: "/home",
-    element: <Home />,
-  },
-  {
-    path: "/about",
-    element: <About />,
+    path: "/profile",
+    element: <Profile />,
+    children: [
+      {
+        index: true,
+        element: <h1></h1>,
+      },
+    ],
   },
   {
     path: "/signup",
@@ -54,7 +64,6 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
 ]);
-
 
 const App = () => {
   return <RouterProvider router={router} />;
