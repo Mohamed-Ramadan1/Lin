@@ -1,6 +1,11 @@
 // Image Course
+
+import imgCourse from '../../../assets/imgCardFree.png'
+// import { BtnFav } from '../../ui/BtnFav'
+
 import imgCourse from "../../../assets/imgCardFree.png";
 import { BtnFav } from "../../ui/BtnFav";
+
 
 export const CardCoursPay = () => {
   return (
@@ -8,6 +13,16 @@ export const CardCoursPay = () => {
       <div className="w-[300px] flex flex-col items-start gap-[15px] max-sm:w-[270px]">
         <div className="image w-full relative rounded-[10px] overflow-hidden">
           <BtnFav />
+
+
+        <div className="w-[300px] flex flex-col items-start gap-[15px] max-sm:w-[270px]">
+  
+          <div className="image w-full relative rounded-[10px] overflow-hidden">
+  
+            {/* <BtnFav /> */}
+  
+            <img src={imgCourse} alt="" className=' w-full object-cover select-none'/>
+  
 
           <img
             src={imgCourse}
@@ -21,6 +36,7 @@ export const CardCoursPay = () => {
             <h4 className="text-[#858585] text-xs ">
               University of Computer Science
             </h4>
+
           </div>
 
           <div className="flex gap-[10px] flex-col items-start my-[5px]">
