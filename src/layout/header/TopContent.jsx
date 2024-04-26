@@ -3,7 +3,10 @@ import { NavLink } from "react-router-dom";
 export default function TopContent() {
   const activeClass =
     "px-[15px] py-[10px] font-medium text-[#fff] border-t-[2px] border-t-[#D5FF40]";
+
   const unActiveClass = "px-[15px] py-[10px] font-medium text-[#8C94A3]";
+  // className="px-[15px] py-[10px] font-medium text-[#fff] border-t-[2px] border-t-[#D5FF40]"
+
   return (
     <div className="topContent relative p-[15px] bg-[#1D2026]">
       <div className="container max-w-[1700px] m-auto gap-10 flex justify-between items-start">
@@ -12,7 +15,6 @@ export default function TopContent() {
             <li>
               <NavLink
                 to="/"
-                // className="px-[15px] py-[10px] font-medium text-[#fff] border-t-[2px] border-t-[#D5FF40]"
                 className={({ isActive }) =>
                   isActive ? activeClass : unActiveClass
                 }

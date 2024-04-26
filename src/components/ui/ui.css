@@ -1,87 +1,83 @@
 /* Style Hero Section */
 
-.hero .container .content::after{
-    content: '';
-    position: absolute;
-    left: -300px;
-    top: -70px;
-    width: 300px;
-    height: 300px;
-    filter: blur(200px);
-    z-index: -1;
-    background-color: #D5FF40;
+.hero .container .content::after {
+  content: "";
+  position: absolute;
+  left: -300px;
+  top: -70px;
+  width: 300px;
+  height: 300px;
+  filter: blur(200px);
+  z-index: -1;
+  background-color: #d5ff40;
 }
 
-.hero .container .imageHero::after{
-    content: '';
-    position: absolute;
-    right: -300px;
-    top: -70px;
-    width: 300px;
-    height: 300px;
-    filter: blur(200px);
-    z-index: -1;
-    background-color: #9747FF;
+.hero .container .imageHero::after {
+  content: "";
+  position: absolute;
+  right: -300px;
+  top: -70px;
+  width: 300px;
+  height: 300px;
+  filter: blur(200px);
+  z-index: -1;
+  background-color: #9747ff;
 }
 
 /* Style Hero Section Search */
-.SectionSearch{
-    background-size: contain;
-    background-position: center;
-    background-image: url(../../assets/LinesWhite.png);
+.SectionSearch {
+  background-size: contain;
+  background-position: center;
+  background-image: url(../../assets/LinesWhite.png);
 }
-
 
 /* Section Banner */
 .banner::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 400px;
-    z-index: -1;
-    background-color: #222;
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 400px;
+  z-index: -1;
+  background-color: #222;
 }
-
 
 /* Section TopCourses */
-.topCourses .categories span:hover .iconText{
-    transition: .7s ease-in-out ;
-    display: block;
+.topCourses .categories span:hover .iconText {
+  transition: 0.7s ease-in-out;
+  display: block;
 }
 
-
-
 /* Btn Heart */
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  .heart-container {
-    display: block;
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .heart-container svg {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 35px;
-    width: 35px;
-    transition: all 0.3s;
-    fill: #dfdfdf;
-  }
-  
-  .heart-container svg:hover {
-    transform: scale(1.1);
-  }
-  
-  .heart-container input:checked ~ svg {
-    fill: #f04f57;
-  }
-  
+/* .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.heart-container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.heart-container svg {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 35px;
+  width: 35px;
+  transition: all 0.3s;
+  fill: #dfdfdf;
+}
+
+.heart-container svg:hover {
+  transform: scale(1.1);
+}
+
+.heart-container input:checked ~ svg {
+  fill: #f04f57;
+} */
