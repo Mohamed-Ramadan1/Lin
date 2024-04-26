@@ -218,6 +218,7 @@ const userSlice = createSlice({
     },
     resetSuccessStates: (state) => {
       state.isSuccess = false;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
