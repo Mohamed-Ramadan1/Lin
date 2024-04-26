@@ -23,7 +23,7 @@ const ViewCourses = () => {
 
                 <div className="sub-container flex gap-[10px] flex-row w-full">
 
-                    <div className='basis-1/3 rounded-[10px] p-[10px] bg-[#F6F6F6] max-lg:hidden'>
+                    <div className='basis-1/3 h-fit rounded-[10px] p-[10px] bg-[#F6F6F6] max-lg:hidden'>
                         <FilterCourses />
                     </div>
 

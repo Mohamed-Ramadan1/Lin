@@ -17,7 +17,7 @@ const DetailsCourse = () => {
 
                 </div>
 
-                <div className='flex w-full gap-5'>
+                <div className='flex w-full gap-[50px]'>
                     
                     <DetailsCourseContent />
                     

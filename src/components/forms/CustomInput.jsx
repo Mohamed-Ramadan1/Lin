@@ -2,11 +2,9 @@ import { useField } from "formik";
 
 const CustomInput = ({ label, id, ...props }) => {
   const [field, meta] = useField(props);
-  // console.log("field", field);
-  // console.log("meta", meta);
-  // console.log("helpers", helpers);
+
   return (
-    <div className="inputField w-full flex flex-col gap-[8px]">
+    <div className="inputField w-full flex flex-col gap-[8px] ">
 
       <label htmlFor={id} className='text-[16px] font-medium text-[#0C1421]'>{label}</label>
       <input

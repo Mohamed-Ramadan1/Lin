@@ -1,5 +1,5 @@
 import React from 'react'
-import { BtnFav } from '../../ui/BtnFav'
+// import { BtnFav } from '../../ui/BtnFav'
 
 // Image Course
 import imgCourse from '../../../assets/imgCardFree.png'
@@ -12,7 +12,7 @@ export const CardCoursFree = () => {
 
         <div className="image w-full relative rounded-[10px] overflow-hidden">
 
-          <BtnFav />
+          {/* <BtnFav /> */}
 
           <img src={imgCourse} alt="" className=' w-full object-cover select-none'/>
 

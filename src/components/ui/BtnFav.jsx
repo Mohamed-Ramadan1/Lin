@@ -1,7 +1,9 @@
 import React from "react";
 
 // File Css
-import "../ui/ui.css";
+// import "../ui/btnFiv.module.css";
+// import style from '../ui/'
+
 
 export const BtnFav = () => {
   return (
