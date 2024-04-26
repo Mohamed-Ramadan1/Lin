@@ -60,7 +60,7 @@ export default function MidContent() {
 
         <div className="info-right">
           {/* User Sign In  */}
-          {!user && (
+          {user && (
             <div className="profile flex flex-row-reverse justify-center items-center gap-[15px]">
               <Link to="/profile">
                 <img src={Avatar} alt="" />
@@ -71,7 +71,7 @@ export default function MidContent() {
             </div>
           )}
 
-          {user && (
+          {!user && (
             <div className="flex gap-[20px] items-center">
               <div className="flex items-center gap-[20px]">
                 <Link

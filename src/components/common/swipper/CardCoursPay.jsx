@@ -1,7 +1,7 @@
 import React from 'react'
 // Image Course
 import imgCourse from '../../../assets/imgCardFree.png'
-import { BtnFav } from '../../ui/BtnFav'
+// import { BtnFav } from '../../ui/BtnFav'
 
 export const CardCoursPay = () => {
     return (
@@ -11,7 +11,7 @@ export const CardCoursPay = () => {
   
           <div className="image w-full relative rounded-[10px] overflow-hidden">
   
-            <BtnFav />
+            {/* <BtnFav /> */}
   
             <img src={imgCourse} alt="" className=' w-full object-cover select-none'/>
   

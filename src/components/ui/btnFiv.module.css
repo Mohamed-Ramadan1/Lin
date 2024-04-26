@@ -1,0 +1,25 @@
+/* Btn Heart */
+.heart-container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .heart-container svg {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 35px;
+    width: 35px;
+    transition: all 0.3s;
+    fill: #dfdfdf;
+  }
+  
+  .heart-container svg:hover {
+    transform: scale(1.1);
+  }
+  
+  .heart-container input:checked ~ svg {
+    fill: #f04f57;
+  }
