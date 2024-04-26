@@ -1,50 +1,64 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 export default function TopContent() {
+  const activeClass =
+    "px-[15px] py-[10px] font-medium text-[#fff] border-t-[2px] border-t-[#D5FF40]";
+  const unActiveClass = "px-[15px] py-[10px] font-medium text-[#8C94A3]";
   return (
     <div className="topContent relative p-[15px] bg-[#1D2026]">
       <div className="container max-w-[1700px] m-auto gap-10 flex justify-between items-start">
         <div className="links">
           <ul className="flex items-center gap-[20px]">
             <li>
-              <Link
+              <NavLink
                 to="/"
-                className="px-[15px] py-[10px] font-medium text-[#fff] border-t-[2px] border-t-[#D5FF40]"
+                // className="px-[15px] py-[10px] font-medium text-[#fff] border-t-[2px] border-t-[#D5FF40]"
+                className={({ isActive }) =>
+                  isActive ? activeClass : unActiveClass
+                }
               >
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/courses"
-                className="px-[15px] py-[10px] font-medium text-[#8C94A3]"
+                className={({ isActive }) =>
+                  isActive ? activeClass : unActiveClass
+                }
               >
                 Courses
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/about"
-                className="px-[15px] py-[10px] font-medium text-[#8C94A3]"
+                className={({ isActive }) =>
+                  isActive ? activeClass : unActiveClass
+                }
               >
                 About
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <a
-                href=""
-                className="px-[15px] py-[10px] font-medium text-[#8C94A3]"
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  isActive ? activeClass : unActiveClass
+                }
               >
                 Blog
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href=""
-                className="px-[15px] py-[10px] font-medium text-[#8C94A3]"
+              <NavLink
+                to="/instructor"
+                className={({ isActive }) =>
+                  isActive ? activeClass : unActiveClass
+                }
               >
                 Become an Instructor
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
