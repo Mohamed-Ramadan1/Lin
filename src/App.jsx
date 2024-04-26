@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "./layout";
+
 import {
   SignUp,
   Login,
@@ -37,12 +38,10 @@ const router = createBrowserRouter([
       {
         path: "courses",
         element: <ViewCourses />,
-        children: [
-          {
-            path: ":courseId",
-            element: <DetailsCourse />,
-          },
-        ],
+      },
+      {
+        path: "courses/:courseId",
+        element: <DetailsCourse />,
       },
     ],
   },
