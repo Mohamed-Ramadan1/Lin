@@ -119,10 +119,6 @@ export default function HeaderPhone() {
             <NavigationLink path="/" navigationText="Office Productivity" />
             <NavigationLink path="/" navigationText="Marketings" />
             <NavigationLink path="/" navigationText="Health & Fitness" />
-            <NavigationLink
-              path="/instructor"
-              navigationText="Become an Instructor"
-            />
           </HeaderPhoneNavigation>
         </motion.div>
       </div>
