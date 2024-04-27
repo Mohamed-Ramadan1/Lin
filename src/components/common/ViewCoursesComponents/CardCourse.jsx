@@ -1,7 +1,5 @@
 import RatingStars from "./RatingStars";
 
-import webdev from "../../../assets/courseImages/webdev.jpg";
-
 const CardCourse = ({ course }) => {
   let {
     title,
@@ -24,7 +22,7 @@ const CardCourse = ({ course }) => {
       {/* Image Course  */}
       <div className="imgCourse border-[1px] border-[#e2e2e2] max-w-[250px] rounded-[10px] max-md:max-w-[100px] max-md:min-w-[50px] max-md:rounded-none ">
         <img
-          src={webdev}
+          src={photo}
           alt=""
           className="w-full h-full object-cover rounded-[10px] max-md:w-full max-md:rounded-none"
         />
@@ -32,10 +30,6 @@ const CardCourse = ({ course }) => {
 
       {/* Details Course */}
       <div className="content flex flex-col items-start gap-[5px]">
-        <span className="py-[2px] px-[10px] text-[10px] font-medium text-[#9747FF] bg-[#efe2ff] rounded-[100px]">
-          DR : Ahmed
-        </span>
-
         <div className="info w-full flex flex-col items-start gap-[5px]">
           <h2 className="text-2xl font-bold text-[#333] max-md:text-base">
             {title} - {language}
@@ -44,7 +38,14 @@ const CardCourse = ({ course }) => {
             {description}
           </p>
         </div>
-
+        {instructor.map((inst) => (
+          <span
+            key={inst._id}
+            className="py-[2px] px-[10px] text-[12px] font-medium text-[#9747FF] bg-[#efe2ff] rounded-[100px]"
+          >
+            By-{inst.name}
+          </span>
+        ))}
         <div className="rating flex gap-[15px] justify-center items-center max-md:gap-2 ">
           <h3 className="text-[#444444] text-[17px] font-bold max-md:text-[13px]">
             {averageRating}
@@ -60,7 +61,6 @@ const CardCourse = ({ course }) => {
             </span>
           </div>
         </div>
-
         <div className="price flex gap-[10px] items-end">
           <h1 className="text-[25px] font-bold text-[#222]  max-sm:text-[20px]">
             {price.toFixed(2)}

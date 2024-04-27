@@ -7,6 +7,7 @@ import FilterCourses from "../components/common/ViewCoursesComponents/FilterCour
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllCourses } from "./../store/courseSlice";
+import { Link } from "react-router-dom";
 const ViewCourses = () => {
   const dispatch = useDispatch();
   const { courses, error, loading } = useSelector(
@@ -29,7 +30,9 @@ const ViewCourses = () => {
           <div className="basis-full flex flex-col gap-[20px] max-md:gap-[30px]">
             {courses &&
               courses.map((course) => (
-                <CardCourse key={course._id} course={course} />
+                <Link key={course._id} to={`/courses/${course._id}`}>
+                  <CardCourse course={course} />
+                </Link>
               ))}
           </div>
         </div>
