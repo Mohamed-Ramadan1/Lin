@@ -14,9 +14,8 @@ const Profile = () => {
 
       <ProfileNavigationBar />
 
-      <div className="max-w-[1400px] m-auto flex flex-col justify-between items-center max-md:flex-col">
-        <Outlet />
-      </div>
+      <Outlet />
+
       <Footer />
     </div>
   );

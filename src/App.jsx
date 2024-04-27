@@ -52,7 +52,23 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1></h1>,
+        element: <h1>My info</h1>,
+      },
+      {
+        path: "mytasks",
+        element: <h1>My Tasks</h1>,
+      },
+      {
+        path: "favorites",
+        element: <h1>Favorites</h1>,
+      },
+      {
+        path: "chat",
+        element: <h1>Chat With Me</h1>,
+      },
+      {
+        path: "settings",
+        element: <h1>Settings</h1>,
       },
     ],
   },

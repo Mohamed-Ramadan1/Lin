@@ -26,15 +26,6 @@ const ProfileInfo = ({ name }) => {
               <p className="text-lg">mohamed@gmail.com</p>
             </div>
           </div>
-
-          <div className="tabs">Tabs</div>
-
-          <div className="diynamic-Content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat,
-              minus.
-            </p>
-          </div>
         </div>
       </div>
     </div>
