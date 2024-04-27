@@ -25,7 +25,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("User created successfully");
+      toast.success("User logged-in successfully");
       dispatch(userActions.resetSuccessStates());
       return navigate("/");
     }
@@ -112,6 +112,12 @@ const Login = () => {
                 Take around on the website
                 <Link to="/" className="text-[#9747FF] pl-2">
                   Home
+                </Link>
+              </h3>
+              <h3 className="pt-2">
+                Forgot your password?
+                <Link to="/forgotpassword" className="text-[#9747FF] pl-2">
+                  Forgot password
                 </Link>
               </h3>
             </div>

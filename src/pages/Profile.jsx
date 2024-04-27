@@ -11,9 +11,9 @@ const Profile = () => {
       <TopContent />
       <MidContent />
       <ProfileInfo />
-      <div className="w-[1193px] h-[60px] border-b-4 absolute top-[624px] left-[123px] flex">
-        <ProfileNavigationBar />
-      </div>
+
+      <ProfileNavigationBar />
+
       <div className="max-w-[1400px] m-auto flex flex-col justify-between items-center max-md:flex-col">
         <Outlet />
       </div>
