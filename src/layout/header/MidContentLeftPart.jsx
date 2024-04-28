@@ -1,12 +1,13 @@
 import logo from "../../assets/LOGOHeader.png";
+import { Link } from "react-router-dom";
 
 const MidContentLeftPart = () => {
   return (
     <div className="info-left flex gap-[20px] justify-center items-center">
       <div className="logo">
-        <a href="">
+        <Link to="/">
           <img src={logo} alt="" className="h-[40px] w-[97px]" />
-        </a>
+        </Link>
       </div>
 
       <div className="inputSearch relative w-[425px] h-[45px]">
