@@ -25,6 +25,7 @@ const CardCourse = ({ course }) => {
           src={photo}
           alt=""
           className="w-full h-full object-cover rounded-[10px] max-md:w-full max-md:rounded-none"
+          loading="lazy"
         />
       </div>
 

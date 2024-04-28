@@ -19,12 +19,11 @@ export default function BottomContent() {
     <div className="category border-[1px] border-y-[#E9EAF0]">
       <div className="container max-w-[1700px] overflow-x-scroll m-auto gap-10 flex justify-between items-start">
         {category.map((item, index) => (
-          <h2
-            key={index}
-            className="p-[20px] transition ease-out hover:bg-[#f5f5f5]"
-          >
-            <Link to="/courses">{item.text}</Link>
-          </h2>
+          <Link key={index} to="/courses">
+            <h2 className="p-[20px] transition ease-out hover:bg-[#f5f5f5]">
+              {item.text}
+            </h2>
+          </Link>
         ))}
       </div>
     </div>

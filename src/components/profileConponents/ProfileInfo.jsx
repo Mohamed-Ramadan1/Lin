@@ -1,7 +1,7 @@
 import BannerProfile from "./../../assets/BannerProfile.png";
 import { useSelector } from "react-redux";
 
-const ProfileInfo = ({ name }) => {
+const ProfileInfo = () => {
   const { user } = useSelector((state) => state.userReducers);
   return (
     <div>
@@ -23,8 +23,8 @@ const ProfileInfo = ({ name }) => {
               className="w-[113px] h-[113px] rounded-[10px] "
             />
             <div className="translate-y-[50%]">
-              <h1 className="text-2xl font-bold">Mohamed Ramadan</h1>
-              <p className="text-lg">mohamed@gmail.com</p>
+              <h2 className="text-2xl font-bold">{user.name}</h2>
+              <p className="text-lg">{user.email}</p>
             </div>
           </div>
         </div>

@@ -16,8 +16,9 @@ const WhatWeOffer = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "tween" }}
             src={WhatWeOfferImage}
-            alt=""
+            alt="what we offer"
             className="w-full h-full object-cover max-sm:rounded-[20px]"
+            loading="lazy"
           />
         </div>
 

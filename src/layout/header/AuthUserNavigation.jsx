@@ -14,6 +14,7 @@ const AuthUserNavigation = () => {
           src={user.photo}
           alt=""
           className="w-[50px] h-[50px] rounded-[15px]"
+          loading="lazy"
         />
       </Link>
 

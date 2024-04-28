@@ -13,6 +13,8 @@ import {
 import ViewCourses from "./pages/ViewCourses";
 import DetailsCourse from "./pages/DetailsCourse";
 
+//Profile Imports
+import PublicProfile from "./components/profileConponents/PublicProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,7 +54,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>My info</h1>,
+        element: <PublicProfile />,
       },
       {
         path: "mytasks",

@@ -135,13 +135,19 @@ export const updateUserInfo = createAsyncThunk(
   "user/updateUserInfo",
   async (userData, { rejectWithValue, getState, dispatch }) => {
     try {
+      const name = `${userData.firstName} ${userData.lastName}`;
+      console.log(userData);
       const token = getState().userReducers.token;
-      const res = await axios.post(`${userUrl}/updateInfo`, userData, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.post(
+        `${userUrl}/updateInfo`,
+        { ...userData, name },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await res.data;
       return data;
     } catch (error) {
