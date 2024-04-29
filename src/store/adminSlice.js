@@ -2,9 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { cleareStatus } from "./authHandler";
 
-import { localServer, productionServer } from "./store";
-
-const userUrl = `${localServer}/users`;
+const userUrl = "http://localhost:3000/api/v1/users";
 
 const initialState = {
   loading: false,

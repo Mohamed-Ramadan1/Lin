@@ -2,9 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { cleareStatus } from "./authHandler";
 
-import { localServer, productionServer } from "./store";
-
-const enrollmentsUrl = `${localServer}/enrolls`;
+const enrollmentsUrl = `http://localhost:3000/api/v1/enrolls`;
 
 export const enrollUserToCourse = createAsyncThunk(
   "courseEnrollments/enrollUserToCourse",

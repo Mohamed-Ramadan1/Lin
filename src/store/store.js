@@ -31,9 +31,4 @@ export const store = configureStore({
     getDefaultMiddleware({ serializableCheck: false }),
 });
 
-export const localServer = "http://localhost:3000/api/v1";
-
-export const productionServer =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1";
-
 export const persistor = persistStore(store);
