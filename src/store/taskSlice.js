@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { cleareStatus } from "./authHandler";
 import axios from "axios";
 
-const tasksUrl = `http://localhost:3000/api/v1/tasks`;
+// const tasksUrl = `http://localhost:3000/api/v1/tasks`;
+
+const tasksUrl = `https://graduation-project-backend-5vtx.onrender.com/api/v1/tasks`;
 
 //Create Task
 export const createTask = createAsyncThunk(
