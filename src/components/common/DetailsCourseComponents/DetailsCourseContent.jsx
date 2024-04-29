@@ -2,14 +2,20 @@ import React from "react";
 
 import RatingComponent from "../../ui/RatingComponent";
 import WhatWilllearn from "./WhatWilllearn";
+import CourseVideos from './CourseVideos'
+import ListVideos from "./ListVideos";
+import DescriptionCourse from "./DescriptionCourse";
+import RequirementsCourse from "./RequirementsCourse";
+import Instructor from "./Instructor";
 
 const DetailsCourseContent = () => {
     return (
-        <div className="details w-full flex gap-6 flex-col items-start">
+
+        <div className="details w-full flex gap-[40px] flex-col items-start">
             
-            <div className="w-full flex gap-3 flex-col items-start">
+            <div className="w-full flex gap-3 flex-col items-start ">
                 
-                <div className="w-full flex justify-between items-start">
+                <div className="w-full flex justify-between items-start max-md:flex-col-reverse max-md:gap-4">
                 <h2 className="text-3xl font-bold text-[#222]">
                     UI / UX Design - Adobe Xd (Arabic)
                 </h2>
@@ -40,7 +46,18 @@ const DetailsCourseContent = () => {
 
             <WhatWilllearn />
 
+            <CourseVideos />
+
+            <ListVideos />
+
+            <DescriptionCourse />
+
+            <RequirementsCourse />
+
+            <Instructor />
+            
         </div>
+
     );
 };
 

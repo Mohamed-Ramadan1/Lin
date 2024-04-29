@@ -7,7 +7,7 @@ import './ThumbnailCourse.css'
 
 const ThumbnailCourse = () => {
   return (
-      <div className="thumbnail overflow-hidden relative w-full h-[400px] ">
+      <div className="thumbnail overflow-hidden relative w-full h-[400px] max-md:h-[300px]">
         <img
           src={imgDetailsCourse}
           alt=""
@@ -16,7 +16,7 @@ const ThumbnailCourse = () => {
           
          
 
-        <div className="button-content z-10 absolute p-[20px] bottom-0 w-full flex items-end justify-between">
+        <div className="button-content z-10 absolute p-[20px] bottom-0 w-full flex items-end justify-between max-md:flex-col max-md:items-start max-md:gap-3">
           <div className="image-teatcher flex gap-3 justify-center items-center">
             <img
               src={Avatar}

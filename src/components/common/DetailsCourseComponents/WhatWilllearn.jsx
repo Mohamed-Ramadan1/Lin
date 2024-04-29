@@ -38,7 +38,7 @@ const WhatWilllearn = () => {
                 </div>
 
                 <div className="image">
-                    <img src={ImageWillLearn} alt="" />
+                    <img src={ImageWillLearn} alt="" className='h-[220px] w-[220px] object-contain max-md:hidden'/>
                 </div>
             </div>
         </div>

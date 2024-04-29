@@ -5,7 +5,7 @@ import ShoppingCartSimple from "../../icons/ShoppingCartSimple";
 
 const Salary = () => {
   return (
-    <div className="salary p-3 min-w-[290px] max-h-[400px] flex flex-col gap-4 items-start rounded-3xl bg-[#D5FF40]">
+    <div className="salary p-3 min-w-[290px] max-h-[400px] flex flex-col gap-4 items-start rounded-3xl max-md:hidden bg-[#D5FF40]">
       <div className="top-salary w-full relative flex justify-between items-start">
         <div>
           <h2 className="text-3xl font-bold">E£199.99</h2>
