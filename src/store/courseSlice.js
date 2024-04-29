@@ -82,6 +82,7 @@ export const updateCourse = createAsyncThunk(
         },
       });
       const data = await res.data;
+
       return data;
     } catch (error) {
       if (error.response.status === 401) {
@@ -104,6 +105,7 @@ export const deleteCourse = createAsyncThunk(
         },
       });
       const data = await res.data;
+      console.log(data);
       return data;
     } catch (error) {
       if (error.response.status === 401) {
@@ -150,6 +152,7 @@ const courseSlice = createSlice({
       .addCase(createCourse.rejected, (state, action) => {
         state.loading = false;
         state.isSuccess = false;
+
         state.error = action.payload.data.message;
       });
 
@@ -168,6 +171,7 @@ const courseSlice = createSlice({
       })
       .addCase(getAllCourses.rejected, (state, action) => {
         state.loading = false;
+        state.courses = [];
         state.isSuccess = false;
         state.error = action.payload;
       });

@@ -19,7 +19,7 @@ import LoginImg from "../assets/SignUp.png";
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSuccess } = useSelector((state) => state.userReducers);
+  const { isSuccess, error } = useSelector((state) => state.userReducers);
 
   useEffect(() => {
     if (isSuccess) {
@@ -27,7 +27,11 @@ const SignUp = () => {
       dispatch(userActions.resetSuccessStates());
       return navigate("/");
     }
-  }, [isSuccess]);
+    if (error) {
+      toast.error(error);
+      dispatch(userActions.resetSuccessStates());
+    }
+  }, [isSuccess, dispatch, navigate, error]);
 
   return (
     <div className="w-full h-[100vh] max-lg:h-full max-2lg:h-full  flex flex-row-reverse justify-between items-center">
@@ -115,10 +119,15 @@ const SignUp = () => {
 
             <div>
               <h3>
-                Already have an account?{" "}
-                <Link to="/login" className="text-[#9747FF]">
-                  {" "}
-                  Log in{" "}
+                Already have an account?
+                <Link to="/login" className="text-[#9747FF] pl-2">
+                  Log in
+                </Link>
+              </h3>
+              <h3 className="pt-2">
+                Take around on the website
+                <Link to="/" className="text-[#9747FF] pl-2">
+                  Home
                 </Link>
               </h3>
             </div>

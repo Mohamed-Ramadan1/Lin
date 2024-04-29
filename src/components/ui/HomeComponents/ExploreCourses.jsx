@@ -1,14 +1,10 @@
-import React from "react";
-
-// Framer Motion
-import { motion } from 'framer-motion'
-
 // Icon
 import { IconExploreCourses } from "../../icons/IconExploreCourses";
-import { BusinessIcon } from "../../icons/BusinessIcon";
 
 // Image
 import image from "../../../assets/exploreImageJob.png";
+
+import CategoryItem from "./CategoryItem";
 
 export const ExploreCourses = () => {
   return (
@@ -23,10 +19,10 @@ export const ExploreCourses = () => {
           </div>
 
           <div>
-            <h1 className="text-3xl font-bold text-[#D5FF40]">
+            <h2 className="text-3xl font-bold text-[#D5FF40]">
               Explore 3000+ Free
-            </h1>
-            <h1 className="text-2xl font-[400] text-[#fff]">Online Courses</h1>
+            </h2>
+            <h3 className="text-2xl font-[400] text-[#fff]">Online Courses</h3>
           </div>
 
           <p className="text-[#777] max-w-[400px]">
@@ -37,57 +33,52 @@ export const ExploreCourses = () => {
         </div>
 
         <div className="category grid grid-cols-2 gap-4 max-sm:grid-cols-1 max-sm:gap-[30px]">
-          <motion.div initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} transition={{delay: .2}} className="box flex flex-col items-start gap-[15px] max-sm:w-full">
-            <BusinessIcon />
+          <CategoryItem
+            headerText="Business"
+            contentText="Delve into the essential elements of entrepreneurship and business management.
+             Learn how to craft a solid business plan, navigate financial strategies
+              and execute impactful marketing campaigns. Explore the dynamics of market analysis,
+               customer engagement, and sustainable growth 
+               strategies to succeed in the competitive business landscape"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          />
 
-            <div className="content flex flex-col items-start gap-[10px] max-sm:w-full">
-              <h1 className="text-2xl text-[#fff] font-bold">Business</h1>
-              <p className="text-base text-[#777] font-[200] max-w-[300px] max-sm:w-full h-[100px] overflow-hidden ">
-                Explore the fundamentals of starting and managing a business,
-                from developing a business plan to implementing effective
-                marketing strategies
-              </p>
-            </div>
-          </motion.div>
+          <CategoryItem
+            headerText="Technology & IT"
+            contentText="Discover the latest innovations and trends in the world of technology and IT.
+             From mastering coding languages to understanding cybersecurity essentials, 
+             dive into a comprehensive journey that equips you with the skills needed to 
+             thrive in today's digital landscape."
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          />
 
-          <motion.div initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} transition={{delay: .3}} className="box flex flex-col items-start gap-[15px] max-sm:w-full">
-            <BusinessIcon />
+          <CategoryItem
+            headerText="Creative Arts"
+            contentText="Unleash your creativity and passion for the arts.
+             Dive into the world of visual design, music, 
+             filmmaking, and more. Discover techniques for expressing yourself 
+             through various mediums and learn about the history and evolution of art forms. Develop 
+             your skills and artistic vision to pursue a fulfilling career in the vibrant realm of creative arts"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          />
 
-            <div className="content flex flex-col items-start gap-[10px]">
-              <h1 className="text-2xl text-[#fff] font-bold">Technology & IT</h1>
-              <p className="text-base text-[#777] font-[200] max-w-[300px] max-sm:w-full h-[100px] overflow-hidden ">
-                Explore the fundamentals of starting and managing a business,
-                from developing a business plan to implementing effective
-                marketing strategies
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} transition={{delay: .4}} className="box flex flex-col items-start gap-[15px] max-sm:w-full">
-            <BusinessIcon />
-
-            <div className="content flex flex-col items-start gap-[10px]">
-              <h1 className="text-2xl text-[#fff] font-bold">Creative Arts</h1>
-              <p className="text-base text-[#777] font-[200] max-w-[300px] max-sm:w-full h-[100px] overflow-hidden ">
-                Explore the fundamentals of starting and managing a business,
-                from developing a business plan to implementing effective
-                marketing strategies
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} transition={{delay: .5}} className="box flex flex-col items-start gap-[15px] max-sm:w-full">
-            <BusinessIcon />
-
-            <div className="content flex flex-col items-start gap-[10px]">
-              <h1 className="text-2xl text-[#fff] font-bold">Language Learning</h1>
-              <p className="text-base text-[#777] font-[200] max-w-[300px] max-sm:w-full h-[100px] overflow-hidden ">
-                Explore the fundamentals of starting and managing a business,
-                from developing a business plan to implementing effective
-                marketing strategies
-              </p>
-            </div>
-          </motion.div>
+          <CategoryItem
+            headerText="Language Learning"
+            contentText="Embark on a rewarding journey of language acquisition and cultural discovery.
+             Master new languages, expand your linguistic abilities, and enhance your global communication skills.
+              Dive into immersive language courses that cover grammar, vocabulary, pronunciation, 
+              and cultural nuances. 
+            Explore diverse cultures and connect with people around the world through the power of language learning."
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          />
         </div>
       </div>
     </div>

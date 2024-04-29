@@ -2,32 +2,33 @@ import { NavLink } from "react-router-dom";
 
 const navigationLinks = [
   {
-    path: "/accountInfo",
+    path: "/profile",
     name: "Account Info",
   },
   {
-    path: "/mayTasks",
+    path: "/profile/mytasks",
     name: "My Tasks",
   },
   {
-    path: "/favorites",
+    path: "/profile/favorites",
     name: "Favorites",
   },
   {
-    path: "/chat",
+    path: "/profile/chat",
     name: "Chat With Me",
   },
   {
-    path: "/settings",
+    path: "/profile/settings",
     name: "Settings",
   },
 ];
+
 const ProfileNavigationBar = () => {
   return (
-    <ul>
+    <ul className="container w-full max-w-[1400px] m-auto flex gap-10 flex-row justify-start items-start border-b-4 mb-4">
       {navigationLinks.map((link) => (
-        <li key={link.path}>
-          <NavLink href={link.path}>{link.name}</NavLink>
+        <li key={link.path} className="pb-2 ">
+          <NavLink to={`${link.path}`}>{link.name}</NavLink>
         </li>
       ))}
     </ul>

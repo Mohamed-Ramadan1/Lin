@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "./layout";
+
 import {
   SignUp,
   Login,
@@ -12,6 +13,8 @@ import {
 import ViewCourses from "./pages/ViewCourses";
 import DetailsCourse from "./pages/DetailsCourse";
 
+//Profile Imports
+import PublicProfile from "./components/profileConponents/PublicProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,12 +40,10 @@ const router = createBrowserRouter([
       {
         path: "courses",
         element: <ViewCourses />,
-        children: [
-          {
-            path: ":courseId",
-            element: <DetailsCourse />,
-          },
-        ],
+      },
+      {
+        path: "courses/:courseId",
+        element: <DetailsCourse />,
       },
     ],
   },
@@ -53,7 +54,23 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1></h1>,
+        element: <PublicProfile />,
+      },
+      {
+        path: "mytasks",
+        element: <h1>My Tasks</h1>,
+      },
+      {
+        path: "favorites",
+        element: <h1>Favorites</h1>,
+      },
+      {
+        path: "chat",
+        element: <h1>Chat With Me</h1>,
+      },
+      {
+        path: "settings",
+        element: <h1>Settings</h1>,
       },
     ],
   },
