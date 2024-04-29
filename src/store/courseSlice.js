@@ -3,7 +3,7 @@ import { cleareStatus } from "./authHandler";
 import axios from "axios";
 import { localServer, productionServer } from "./store";
 
-const courseUrl = `${productionServer}/courses`;
+const courseUrl = `${localServer}/courses`;
 
 //Create Course
 export const createCourse = createAsyncThunk(

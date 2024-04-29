@@ -4,7 +4,7 @@ import { cleareStatus } from "./authHandler";
 
 import { localServer, productionServer } from "./store";
 
-const userUrl = `${productionServer}/users`;
+const userUrl = `${localServer}/users`;
 
 const initialState = {
   loading: false,

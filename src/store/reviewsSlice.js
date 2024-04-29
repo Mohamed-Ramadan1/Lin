@@ -3,7 +3,7 @@ import axios from "axios";
 import { cleareStatus } from "./authHandler";
 import { localServer, productionServer } from "./store";
 
-const tasksUrl = `${productionServer}/reviews`;
+const tasksUrl = `${localServer}/reviews`;
 
 //Create Review
 export const createReview = createAsyncThunk(

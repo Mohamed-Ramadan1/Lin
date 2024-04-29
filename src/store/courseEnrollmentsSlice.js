@@ -4,7 +4,7 @@ import { cleareStatus } from "./authHandler";
 
 import { localServer, productionServer } from "./store";
 
-const enrollmentsUrl = `${productionServer}/enrolls`;
+const enrollmentsUrl = `${localServer}/enrolls`;
 
 export const enrollUserToCourse = createAsyncThunk(
   "courseEnrollments/enrollUserToCourse",

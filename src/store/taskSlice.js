@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { localServer, productionServer } from "./store";
 
-const tasksUrl = `${productionServer}/tasks`;
+const tasksUrl = `${localServer}/tasks`;
 
 //Create Task
 export const createTask = createAsyncThunk(

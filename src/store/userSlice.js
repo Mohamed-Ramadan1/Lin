@@ -5,8 +5,8 @@ import { cleareStatus } from "./authHandler";
 import { localServer, productionServer } from "./store";
 
 //Bas URL
-const authUrl = `${productionServer}/auth`;
-const userUrl = `${productionServer}/users`;
+const authUrl = `${localServer}/auth`;
+const userUrl = `${localServer}/users`;
 
 //SignUp new user to the application
 export const signUp = createAsyncThunk(
