@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { cleareStatus } from "./authHandler";
 import axios from "axios";
 
-const tasksUrl = "http://localhost:3000/api/v1/tasks";
+import { localServer, productionServer } from "./store";
+
+const tasksUrl = `${productionServer}/tasks`;
 
 //Create Task
 export const createTask = createAsyncThunk(

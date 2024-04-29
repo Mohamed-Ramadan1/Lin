@@ -2,10 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { cleareStatus } from "./authHandler";
+import { localServer, productionServer } from "./store";
 
 //Bas URL
-const authUrl = "http://localhost:3000/api/v1/auth";
-const userUrl = "http://localhost:3000/api/v1/users";
+const authUrl = `${productionServer}/auth`;
+const userUrl = `${productionServer}/users`;
 
 //SignUp new user to the application
 export const signUp = createAsyncThunk(
