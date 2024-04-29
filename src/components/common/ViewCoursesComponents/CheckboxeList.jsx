@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InputCheckBox from '../../ui/InputCheckBox'; 
 
 const CheckboxeList = ({ titleCheckList }) => {
+    
     const [open, setOpen] = useState(false);
 
     const toggleList = () => {
@@ -34,6 +35,8 @@ const CheckboxeList = ({ titleCheckList }) => {
             </div>
         </div>
     );
+
+    
 };
 
 export default CheckboxeList;

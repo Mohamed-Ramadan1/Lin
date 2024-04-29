@@ -19,7 +19,7 @@ const DetailsCourse = () => {
 
                 <div className='flex w-full gap-[50px]'>
                     
-                    <DetailsCourseContent />
+                    <DetailsCourseContent />  
                     
                     <Salary />
 
