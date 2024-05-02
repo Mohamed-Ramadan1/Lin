@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MainLayout } from "./layout";
+import { MainLayout ,AdminLayout } from "./layout";
 
 import {
   SignUp,
@@ -9,6 +9,12 @@ import {
   Home,
   About,
   Profile,
+  Dashboard,
+  FreeCourses,
+  PaiedCourses,
+  Users,
+  Reservations,
+  Settings,
 } from "./pages";
 import ViewCourses from "./pages/ViewCourses";
 import DetailsCourse from "./pages/DetailsCourse";
@@ -89,6 +95,41 @@ const router = createBrowserRouter([
   {
     path: "/resetpassword/:resetToken",
     element: <ResetPassword />,
+  },
+  {
+    path: "/dashboard",
+    element: <AdminLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "freeCourses",
+        element: <FreeCourses/>,
+      },
+      {
+        path: "paiedCourses",
+        element: <PaiedCourses/>,
+      },
+      {
+        path: "users",
+        element: <Users/>,
+      },
+      {
+        path: "reservations",
+        element: <Reservations/>,
+      },
+      {
+        path: "settings",
+        element: <Settings/>,
+      },
+      {
+        path: "logout",
+        element: <h1>Logout</h1>,
+      },
+      
+    ],
   },
 ]);
 

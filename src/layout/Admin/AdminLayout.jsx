@@ -1,0 +1,31 @@
+import { SideBar, DashboardFooter, DashboardNavBar } from "../../components";
+import { Outlet } from "react-router-dom";
+
+function AdminLayout() {
+  return (
+    <>
+      <main>
+        <div className="flex h-screen overflow-hidden bg-gray-100">
+          {/* Sidebar */}
+          <div className="absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 -translate-x-full">
+            <SideBar />
+          </div>
+
+          {/* Main content */}
+          <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+            {/* Navigation bar */}
+            <DashboardNavBar />
+
+            {/* Content */}
+            <Outlet />
+
+            {/* Footer */}
+            <DashboardFooter />
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
+
+export default AdminLayout;

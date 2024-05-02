@@ -8,3 +8,11 @@ export { default as ResetPassword } from "./ResetPassword";
 export { default as Home } from "./Home";
 export { default as About } from "./About";
 export { default as Profile } from "./Profile";
+
+//Dashboard
+export { default as Dashboard } from "./Dashboard";
+export { default as FreeCourses } from "./FreeCourses";
+export { default as PaiedCourses } from "./PaiedCourses";
+export { default as Users } from "./Users";
+export { default as Reservations } from "./Reservations";
+export { default as Settings } from "./Settings";
