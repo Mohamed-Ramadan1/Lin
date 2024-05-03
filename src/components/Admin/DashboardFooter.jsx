@@ -1,22 +1,24 @@
 function DashboardFooter() {
   return (
     <>
-      <footer className="flex items-center justify-between flex-wrap p-3 bg-gray-800 text-white">
+      <footer className="flex items-center justify-between flex-wrap p-3 bg-gray-800 text-white w-[100%]">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row md:justify-between">
             <div className="text-center md:text-left">
-              <p className="text-sm">© 2021 All rights reserved.</p>
+              <p className="text-sm">
+                © 2024 All rights reserved for MOhamed Ramadan.
+              </p>
             </div>
             <div className="text-center md:text-right">
               <p className="text-sm">
-                Made with ❤️ by{" "}
+                Made with ❤️
                 <a
-                  href="
-            https://www.creative-tim.com"
+                  href="https://www.linkedin.com/in/mohamed-ramadan-758555236/"
                   target="_blank"
                   rel="noreferrer"
+                  className="text-blue-500 hover:underline ml-3"
                 >
-                  Creative Tim
+                  Mohamed Ramadan
                 </a>
               </p>
             </div>

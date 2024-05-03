@@ -1,26 +1,26 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "./../../assets/LOGO.png";
+
 function SideBar() {
   return (
     <div className="px-5">
       <div className="flex flex-col h-screen w-72.5 bg-black dark:bg-boxdark">
         <div className="flex flex-col items-center justify-center h-20 w-full border-b border-gray-600">
           <div className="flex gap-5">
-            <img
-              src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
-              alt="avatar"
-              className="w-12 h-12 rounded-full"
-            />
-            <h1 className="text-2xl text-white">
-              Admin Panel <span className="text-blue-700">Link</span>{" "}
-            </h1>
+            <img src={Logo} alt="avatar" className=" h-[22px]rounded-full" />
+            {/* <h1 className="text-2xl text-white">
+              <span className="text-blue-700">Lin</span>{" "}
+            </h1> */}
           </div>
         </div>
-        <div className=" p-3 rounded mt-3">
-          <h2> MENU</h2>
+        <div className=" p-3 rounded mt-3  ">
+          <h2 className="text-white "> MENU</h2>
         </div>
         {/* dashboard home */}
-        <Link className="hover:bg-gray-800 p-3 rounded mt-3 text-white" to={'/dashboard'}>
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
+          to={"/dashboard"}
+        >
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
             <svg
@@ -37,11 +37,14 @@ function SideBar() {
                 d="M4 6h16M4 10h16M4 14h16M4 18h16"
               />
             </svg>
-            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/dashboard">Statics</a>
           </div>
         </Link>
         {/* free courses management link */}
-        <Link className="hover:bg-gray-800 p-3 rounded mt-3 text-white" to={'/dashboard/freeCourses'}>
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
+          to={"/dashboard/freeCourses"}
+        >
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
             {/* courses svg icon */}
@@ -54,7 +57,6 @@ function SideBar() {
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              {" "}
               <circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" />{" "}
               <circle cx="18" cy="19" r="3" />{" "}
               <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />{" "}
@@ -65,7 +67,10 @@ function SideBar() {
           </div>
         </Link>
         {/* paied Courses */}
-        <Link className="hover:bg-gray-800 p-3 rounded mt-3 text-white" to={'/dashboard/paiedCourses'}>
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
+          to={"/dashboard/paiedCourses"}
+        >
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
             {/* courses svg icon */}
@@ -87,7 +92,10 @@ function SideBar() {
           </div>
         </Link>
         {/* manage users link */}
-        <Link className="hover:bg-gray-800 p-3 rounded mt-3 text-white" to={'/dashboard/users'}>
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
+          to={"/dashboard/users"}
+        >
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
             {/* users svg icon */}
@@ -109,7 +117,10 @@ function SideBar() {
           </div>
         </Link>
         {/* reseved courses */}
-        <Link className="hover:bg-gray-800 p-3 rounded mt-3 text-white" to={'/dashboard/reservations'}>
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
+          to={"/dashboard/reservations"}
+        >
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
             {/* courses svg icon */}
@@ -130,7 +141,10 @@ function SideBar() {
           </div>
         </Link>
         {/* settings  */}
-        <Link className="hover:bg-gray-800 p-3 rounded mt-3 text-white" to={'/dashboard/settings'}>
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
+          to={"/dashboard/settings"}
+        >
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
             {/* settings svg icon */}
