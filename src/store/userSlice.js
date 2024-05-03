@@ -209,7 +209,6 @@ export const getMe = createAsyncThunk(
   "user/getMe",
   async (_, { rejectWithValue, getState }) => {
     try {
-      console.log("get me user");
       const token = getState().userReducers.token;
       const res = await axios.get(`${userUrl}/me`, {
         headers: {
@@ -217,7 +216,6 @@ export const getMe = createAsyncThunk(
         },
       });
       const data = await res.data;
-      console.log(data);
       return data;
     } catch (error) {
       if (error.response.status === 401) {
@@ -415,7 +413,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload.data.user;
         state.isLoggedIn = true;
-        state.isSuccess = true;
+        // state.isSuccess = true;
       })
       .addCase(getMe.rejected, (state, action) => {
         state.error = action.payload.data.message;
