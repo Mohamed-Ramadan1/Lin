@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MainLayout ,AdminLayout } from "./layout";
-
+import { MainLayout, AdminLayout } from "./layout";
+import { useSelector, useDispatch } from "react-redux";
+import { getMe } from "./store/userSlice";
 import {
   SignUp,
   Login,
@@ -21,6 +22,7 @@ import DetailsCourse from "./pages/DetailsCourse";
 
 //Profile Imports
 import PublicProfile from "./components/profileConponents/PublicProfile";
+import { useEffect } from "react";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -106,29 +108,28 @@ const router = createBrowserRouter([
       },
       {
         path: "freeCourses",
-        element: <FreeCourses/>,
+        element: <FreeCourses />,
       },
       {
         path: "paiedCourses",
-        element: <PaiedCourses/>,
+        element: <PaiedCourses />,
       },
       {
         path: "users",
-        element: <Users/>,
+        element: <Users />,
       },
       {
         path: "reservations",
-        element: <Reservations/>,
+        element: <Reservations />,
       },
       {
         path: "settings",
-        element: <Settings/>,
+        element: <Settings />,
       },
       {
         path: "logout",
         element: <h1>Logout</h1>,
       },
-      
     ],
   },
 ]);

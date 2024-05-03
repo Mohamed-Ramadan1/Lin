@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const activeClass =
   "px-[15px] py-[10px] font-medium text-[#fff] border-t-[2px] border-t-[#D5FF40]";
@@ -30,6 +31,7 @@ const navigationLinks = [
 ];
 
 const TopContentNavigationLinks = () => {
+  const { user } = useSelector((state) => state.userReducers);
   return (
     <ul className="flex items-center gap-[20px]">
       {navigationLinks.map((link, index) => (
@@ -44,50 +46,20 @@ const TopContentNavigationLinks = () => {
           </NavLink>
         </li>
       ))}
+      {user && user.role === "admin" ? (
+        <li key="admin">
+          <NavLink
+            to={"/dashboard"}
+            className={({ isActive }) =>
+              isActive ? activeClass : unActiveClass
+            }
+          >
+            Admin-Dashboard
+          </NavLink>
+        </li>
+      ) : null}
     </ul>
   );
 };
 
 export default TopContentNavigationLinks;
-{
-  /* <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? activeClass : unActiveClass)}
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/courses"
-          className={({ isActive }) => (isActive ? activeClass : unActiveClass)}
-        >
-          Courses
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/about"
-          className={({ isActive }) => (isActive ? activeClass : unActiveClass)}
-        >
-          About
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/blog"
-          className={({ isActive }) => (isActive ? activeClass : unActiveClass)}
-        >
-          Blog
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/instructor"
-          className={({ isActive }) => (isActive ? activeClass : unActiveClass)}
-        >
-          Become an Instructor
-        </NavLink>
-      </li> */
-}

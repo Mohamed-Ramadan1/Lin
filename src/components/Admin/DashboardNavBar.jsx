@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 function DashboardNavBar() {
   return (
     <>
@@ -26,9 +25,16 @@ function DashboardNavBar() {
         <div className="flex items-center gap-5">
           <Link to="/admin/dashboard">Dashboard</Link>
           <Link to="/admin/courses">Courses</Link>
+          <Link to="/">Home</Link>
+
           <Link to="/admin/users">Users</Link>
           <Link to="/admin/settings">Settings</Link>
-          <Link to="/admin/logout" className="bg-gray-800 text-white rounded-lg p-3">Logout</Link>
+          <Link
+            to="/admin/logout"
+            className="bg-gray-800 text-white rounded-lg p-3"
+          >
+            Logout
+          </Link>
         </div>
       </div>
     </>

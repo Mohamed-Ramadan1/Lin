@@ -204,6 +204,27 @@ export const unActiveUserAccount = createAsyncThunk(
   }
 );
 
+export const getMe = createAsyncThunk(
+  "user/getMe",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const token = getState().userReducers.token;
+      const res = await axios.get(`${userUrl}/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.data;
+      return data;
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch(cleareStatus());
+      }
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
 const initialState = {
   user: null,
   token: null,
@@ -378,6 +399,22 @@ const userSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
+        state.error = action.payload.data.message;
+        state.isSuccess = false;
+      });
+    //Get me user builder
+    builder
+      .addCase(getMe.pending, (state) => {
+        state.loading = true;
+        state.isSuccess = false;
+      })
+      .addCase(getMe.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.data.user;
+        state.isLoggedIn = true;
+        state.isSuccess = true;
+      })
+      .addCase(getMe.rejected, (state, action) => {
         state.error = action.payload.data.message;
         state.isSuccess = false;
       });

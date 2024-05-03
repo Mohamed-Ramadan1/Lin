@@ -1,0 +1,12 @@
+Today Tasks
+
+1-Create getMe thunk and link it with  App file
+
+2-adding the full admin requests and logic and connect it with the dashboard
+
+3- Home page adding dynmic data
+
+4-Update the dashboard links and content of the pages 
+
+6- Planning to the next task
+
