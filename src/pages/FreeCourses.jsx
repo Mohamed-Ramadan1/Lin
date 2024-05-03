@@ -1,6 +1,39 @@
-import React from "react";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import CoursesHeader from "../layout/dashboard/CoursesHeader";
+import CourseContainer from "../layout/dashboard/CourseContainer";
+import CourseElement from "../layout/dashboard/CourseElement";
 function FreeCourses() {
+  const { token } = useSelector((state) => state.userReducers);
+  const [courses, setCourses] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin/freeCourses",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setCourses(res.data.data.courses);
+      } catch (error) {
+        setLoading(false);
+        setError(error);
+      }
+    };
+
+    fetchData();
+    setLoading(false);
+  }, [token]);
+  console.log(courses);
   return (
     <>
       <div className="p-5">
@@ -8,303 +41,17 @@ function FreeCourses() {
           Dashboard / <span className="text-blue-600">free courses</span>{" "}
         </h1>
         {/* table manage table courses table  */}
-        <div class="rounded-lg mt-10 shadow rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-          <h1 className="text-2xl font-semibold">Free Courses</h1>
-          <table className="w-full mt-5">
-            <tr className="border-b">
-              <th className="p-3">#num</th>
-              <th className="p-3">Title</th>
-              <th className="p-3">Author</th>
-              <th className="p-3">created Date</th>
-              <th className="p-3">discription</th>
-              <th className="p-3">price</th>
-              <th className="p-3">rating</th>
-              <th className="p-3">review</th>
-              <th className="p-3">category</th>
-              <th className="p-3">video</th>
-              <th className="p-3">duration</th>
-              <th className="p-3">payment</th>
-
-              <th className="p-3">Actions</th>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">React</td>
-              <td className="p-3">Ahmed</td>
-              <td className="p-3">12/12/2021</td>
-              <td className="p-3">React course</td>
-              <td className="p-3">0</td>
-              <td className="p-3">5</td>
-              <td className="p-3">5</td>
-              <td className="p-3">programming</td>
-              <td className="p-3">video</td>
-              <td className="p-3">2 hours</td>
-              <td className="p-3">free</td>
-
-              <td className="p-3">
-                <button className="bg-blue-500 text-white p-2 rounded">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white p-2 rounded ml-3">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </table>
-        </div>
+        <CourseContainer tableHeader={"Free Courses"}>
+          <CoursesHeader />
+          {courses &&
+            courses.map((course, index) => (
+              <CourseElement
+                key={course._id}
+                course={course}
+                index={index + 1}
+              />
+            ))}
+        </CourseContainer>
       </div>
     </>
   );
