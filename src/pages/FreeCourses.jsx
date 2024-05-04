@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import CoursesHeader from "../layout/dashboard/CoursesHeader";
 import CourseContainer from "../layout/dashboard/CourseContainer";
 import CourseElement from "../layout/dashboard/CourseElement";
+import { Link } from "react-router-dom";
 function FreeCourses() {
   const { token } = useSelector((state) => state.userReducers);
   const [courses, setCourses] = useState(null);
@@ -37,9 +38,10 @@ function FreeCourses() {
   return (
     <>
       <div className="p-5">
-        <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">free courses</span>{" "}
-        </h1>
+        <h1 className="text-2xl font-semibold md-3">
+          Dashboard / <span className="text-blue-600" >free courses</span>{" "}
+        </h1> <br/>
+        <Link className="bg-blue-500 text-white p-2 rounded mt-5" to={"/dashboard/createCourses"}> add new course</Link>
         {/* table manage table courses table  */}
         <CourseContainer tableHeader={"Free Courses"}>
           <CoursesHeader />

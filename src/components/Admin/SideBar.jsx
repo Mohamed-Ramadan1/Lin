@@ -37,7 +37,7 @@ function SideBar() {
                 d="M4 6h16M4 10h16M4 14h16M4 18h16"
               />
             </svg>
-            <a href="/admin/dashboard">Statics</a>
+            <p>Statics</p>
           </div>
         </Link>
         {/* free courses management link */}
@@ -63,13 +63,13 @@ function SideBar() {
               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
             </svg>
 
-            <a href="/admin/courses">Free Courses</a>
+            <p>Free Courses</p>
           </div>
         </Link>
         {/* paied Courses */}
         <Link
           className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
-          to={"/dashboard/paiedCourses"}
+          to={"/dashboard/paidCourses"}
         >
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
@@ -88,7 +88,7 @@ function SideBar() {
               />
             </svg>
 
-            <a href="/admin/paied-courses">Paied Courses</a>
+            <p>Paied Courses</p>
           </div>
         </Link>
         {/* manage users link */}
@@ -113,7 +113,7 @@ function SideBar() {
               />
             </svg>
 
-            <a href="/admin/users">Users</a>
+            <p>Users</p>
           </div>
         </Link>
         {/* reseved courses */}
@@ -137,7 +137,7 @@ function SideBar() {
               <polyline points="12 6 12 12 16 14" />
             </svg>
 
-            <a href="/admin/reserved-courses">Reserved Courses</a>
+            <p href="/admin/reserved-courses">Reserved Courses</p>
           </div>
         </Link>
         {/* settings  */}
@@ -161,7 +161,7 @@ function SideBar() {
               <path d="M12 5v2m0 10v2m-6-6h2m10 0h2m-8.485 8.485l1.414-1.414m-1.414 1.414l-1.414-1.414" />
             </svg>
 
-            <a href="/admin/settings">Settings</a>
+            <p href="/dashboard/settings">Settings</p>
           </div>
         </Link>
       </div>

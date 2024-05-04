@@ -13,6 +13,7 @@ export { default as Profile } from "./Profile";
 export { default as Dashboard } from "./Dashboard";
 export { default as FreeCourses } from "./FreeCourses";
 export { default as PaiedCourses } from "./PaiedCourses";
+export { default as CreateCourses } from "./CreateCourses";
 export { default as Users } from "./Users";
 export { default as Reservations } from "./Reservations";
 export { default as Settings } from "./Settings";

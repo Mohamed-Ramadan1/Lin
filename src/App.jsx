@@ -16,6 +16,7 @@ import {
   Users,
   Reservations,
   Settings,
+  CreateCourses
 } from "./pages";
 import ViewCourses from "./pages/ViewCourses";
 import DetailsCourse from "./pages/DetailsCourse";
@@ -113,7 +114,12 @@ const router = createBrowserRouter([
       {
         path: "paidCourses",
         element: <PaiedCourses />,
+      },{
+        path:"createCourses",
+        element:<CreateCourses/>
       },
+      
+
       {
         path: "users",
         element: <Users />,
