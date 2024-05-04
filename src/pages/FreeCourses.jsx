@@ -49,6 +49,7 @@ function FreeCourses() {
                 key={course._id}
                 course={course}
                 index={index + 1}
+                token={token}
               />
             ))}
         </CourseContainer>
