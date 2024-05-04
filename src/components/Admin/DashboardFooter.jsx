@@ -1,9 +1,8 @@
 function DashboardFooter() {
   return (
     <>
-      <footer className="flex items-center justify-between flex-wrap p-3 bg-gray-800 text-white w-[100%] fixed bottom-0">
-        <div className="container ml-5 mr-5 h-full">
-          {/* Added h-full to container */}
+      <footer className="flex items-center justify-between flex-wrap p-3 bg-gray-800 text-white">
+        <div className="container mx-auto">
           <div className="flex flex-col md:flex-row md:justify-between">
             <div className="text-center md:text-left">
               <p className="text-sm">
