@@ -111,7 +111,7 @@ const router = createBrowserRouter([
         element: <FreeCourses />,
       },
       {
-        path: "paiedCourses",
+        path: "paidCourses",
         element: <PaiedCourses />,
       },
       {

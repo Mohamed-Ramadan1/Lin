@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { cleareStatus } from "./authHandler";
 
-// const userUrl = "http://localhost:3000/api/v1/users";
+// const userUrl = "http://localhost:3000/api/v1/admin";
 
 const userUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/users";
+  "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin";
 
 const initialState = {
   loading: false,
@@ -43,7 +43,7 @@ export const getAllUsers = createAsyncThunk(
   async (_, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
-      const res = await axios.get(`${userUrl}`, {
+      const res = await axios.get(`${userUrl}/getAllUsers`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -65,7 +65,7 @@ export const getUser = createAsyncThunk(
   async (userID, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
-      const res = await axios.get(`${userUrl}/${userID}`, {
+      const res = await axios.get(`${userUrl}/getUser/${userID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -88,7 +88,7 @@ export const deleteUser = createAsyncThunk(
   async (userID, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
-      const res = await axios.delete(`${userUrl}/${userID}`, {
+      const res = await axios.delete(`${userUrl}/deleteUser/${userID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
