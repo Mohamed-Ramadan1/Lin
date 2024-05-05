@@ -41,7 +41,6 @@ const CreateUserAccount = () => {
           }}
           validationSchema={createUsersSchema}
           onSubmit={(values, actions) => {
-            console.log(values);
             dispatch(createUser(values));
             actions.resetForm();
           }}
