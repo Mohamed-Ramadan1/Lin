@@ -1,5 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 const CourseElement = ({
   course: {
@@ -43,6 +42,7 @@ const CourseElement = ({
     }
   };
 
+  
   return (
     <tbody>
       <tr>

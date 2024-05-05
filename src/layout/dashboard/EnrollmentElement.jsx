@@ -11,9 +11,9 @@ const EnrollmentElement = ({ enrollment, index, token }) => {
 
   const { _id, price, createdAt, paid, updatedAt, enrollmentStatus } =
     enrollment;
-  const { title, description, duration } = enrollment.course;
+  const { title, duration } = enrollment.course;
   const { name, email } = enrollment.user;
-
+  console.log(enrollment.course);
   const isPaid = paid ? "Paid" : "Not Paid";
   const createdAtDate = new Date(createdAt).toLocaleDateString();
   const updatedAtDate = new Date(updatedAt).toLocaleDateString();

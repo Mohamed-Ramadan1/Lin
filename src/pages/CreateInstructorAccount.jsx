@@ -2,7 +2,6 @@ import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import { createInstructorsSchema } from "../schema/createAccountsSchemas.js";
 import CustomInput from "../components/forms/CustomInput";
-import CustomDropdownInput from "../components/forms/CustomDropdownInput";
 import { useSelector } from "react-redux";
 import axios from "axios";
 

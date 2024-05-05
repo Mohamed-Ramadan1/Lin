@@ -15,6 +15,7 @@ function Reservations() {
     dispatch(getAllEnrollments());
   }, [dispatch]);
 
+  console.log(allEnrollments);
   return (
     <>
       <div className="p-5">
