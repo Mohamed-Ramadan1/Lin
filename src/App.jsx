@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout, AdminLayout } from "./layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "./store/userSlice";
+
 import {
   SignUp,
   Login,
@@ -16,7 +17,8 @@ import {
   Users,
   Reservations,
   Settings,
-  CreateCourses
+  CreateCourses,
+  Instructors,
 } from "./pages";
 import ViewCourses from "./pages/ViewCourses";
 import DetailsCourse from "./pages/DetailsCourse";
@@ -114,11 +116,11 @@ const router = createBrowserRouter([
       {
         path: "paidCourses",
         element: <PaiedCourses />,
-      },{
-        path:"createCourses",
-        element:<CreateCourses/>
       },
-      
+      {
+        path: "createCourses",
+        element: <CreateCourses />,
+      },
 
       {
         path: "users",
@@ -132,9 +134,10 @@ const router = createBrowserRouter([
         path: "settings",
         element: <Settings />,
       },
+
       {
-        path: "logout",
-        element: <h1>Logout</h1>,
+        path: "instructors",
+        element: <Instructors />,
       },
     ],
   },

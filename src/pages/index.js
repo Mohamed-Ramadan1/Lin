@@ -17,3 +17,4 @@ export { default as CreateCourses } from "./CreateCourses";
 export { default as Users } from "./Users";
 export { default as Reservations } from "./Reservations";
 export { default as Settings } from "./Settings";
+export { default as Instructors } from "./Instructors";
