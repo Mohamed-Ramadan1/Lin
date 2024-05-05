@@ -25,6 +25,8 @@ function DashboardNavBar() {
           <Link to="/dashboard/paidCourses">Paid Courses</Link>
           <Link to="/dashboard/reservations">Enrollments</Link>
           <Link to="/dashboard/users">Users</Link>
+          <Link to="/dashboard/instructors">Instructors</Link>
+
           <Link to="/dashboard/settings">Settings</Link>
           <Link to="/">Home</Link>
           <button
