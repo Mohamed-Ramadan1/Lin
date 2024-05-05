@@ -138,6 +138,10 @@ const courseSlice = createSlice({
       state.courseDocument = null;
       state.courses = [];
     },
+    cleareSuccessState: (state) => {
+      state.isSuccess = false;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     //Create Course builder

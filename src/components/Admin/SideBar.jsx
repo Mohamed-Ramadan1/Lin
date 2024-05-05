@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "./../../assets/LOGO.png";
-
+import { BiBlanket } from "react-icons/bi";
 function SideBar() {
   return (
     <div className="px-5">
@@ -89,6 +89,17 @@ function SideBar() {
             </svg>
 
             <p>Paid Courses</p>
+          </div>
+        </Link>
+        {/* add Courses */}
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
+          to={"/dashboard/addcourse"}
+        >
+          {/* icons and link and arrow*/}
+          <div className="flex gap-5">
+            <BiBlanket className="text-3xl" />
+            <p>Add Course</p>
           </div>
         </Link>
         {/* manage users link */}

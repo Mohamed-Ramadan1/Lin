@@ -139,6 +139,10 @@ const router = createBrowserRouter([
         path: "instructors",
         element: <Instructors />,
       },
+      {
+        path: "addcourse",
+        element: <CreateCourses />,
+      },
     ],
   },
 ]);
