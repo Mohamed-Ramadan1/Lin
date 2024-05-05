@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createCourse } from "../store/courseSlice";
 import { courseActions } from "../store/courseSlice";
+import { coursesSchema } from "../schema/coursesSchema.js";
 
 function CreateCourses() {
   const dispatch = useDispatch();
@@ -31,22 +32,26 @@ function CreateCourses() {
         </h1>
         <Formik
           initialValues={{
-            courseName: "",
-            courseDescription: "",
-            coursePrice: "",
-            courseDuration: "",
-            courseCategory: "",
-            instructorId: "",
-            preRequest: "",
-            learningObjective: "",
-            courseLanguage: "",
-            courseLevel: "",
-            courseVideo: "",
-            courseImage: "",
+            title: "",
+            description: "",
+            price: "",
+            duration: "",
+            category: "",
+            instructor: "",
+            prerequisites: "",
+            learningObjectives: "",
+            language: "",
+            skillLevel: "",
+            paymentModel: "",
+            // videos: "",
+            photo: "",
           }}
-          onSubmit={(values) => {
+          validationSchema={coursesSchema}
+          onSubmit={(values, actions) => {
             console.log(values);
             dispatch(createCourse(values));
+            console.log(actions);
+            actions.resetForm();
           }}
         >
           {({ handleSubmit, isSubmitting }) => (
@@ -146,11 +151,11 @@ function CreateCourses() {
                   ]}
                 />
 
-                <CustomFileInput
+                {/* <CustomFileInput
                   label="Course Video"
                   name="videos"
                   id="courseVideo"
-                />
+                /> */}
                 <CustomFileInput
                   label="Course Image"
                   name="photo"
