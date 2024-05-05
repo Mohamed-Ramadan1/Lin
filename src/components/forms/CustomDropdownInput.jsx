@@ -16,7 +16,7 @@ const CustomDropdownInput = ({ label, id, options, ...props }) => {
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
-            {option.label}
+            {option.label || option}
           </option>
         ))}
       </select>

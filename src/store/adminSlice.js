@@ -21,7 +21,7 @@ export const createUser = createAsyncThunk(
   async (userData, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState().userReducers.token;
-      const res = await axios.post(`${userUrl}`, userData, {
+      const res = await axios.post(`${userUrl}/createUser`, userData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -114,6 +114,10 @@ const adminSlice = createSlice({
       state.error = null;
       state.users = [];
       state.userDocument = null;
+    },
+    clearSuccessState: (state) => {
+      state.isSuccess = false;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {

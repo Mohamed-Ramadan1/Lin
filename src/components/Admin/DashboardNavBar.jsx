@@ -26,6 +26,9 @@ function DashboardNavBar() {
           <Link to="/dashboard/reservations">Enrollments</Link>
           <Link to="/dashboard/users">Users</Link>
           <Link to="/dashboard/instructors">Instructors</Link>
+          <Link to="/dashboard/addcourse">Add Course</Link>
+          <Link to="/dashboard/adduser">Create User</Link>
+          <Link to="/dashboard/addinstructor">Create Instructor</Link>
 
           <Link to="/dashboard/settings">Settings</Link>
           <Link to="/">Home</Link>
@@ -33,7 +36,7 @@ function DashboardNavBar() {
             onClick={handelLogout}
             className="bg-gray-800 text-white rounded-lg p-3"
           >
-            Logout
+            Logouts
           </button>
         </div>
       </div>

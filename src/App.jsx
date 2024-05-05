@@ -19,6 +19,8 @@ import {
   Settings,
   CreateCourses,
   Instructors,
+  CreateInstructorAccount,
+  CreateUserAccount,
 } from "./pages";
 import ViewCourses from "./pages/ViewCourses";
 import DetailsCourse from "./pages/DetailsCourse";
@@ -142,6 +144,14 @@ const router = createBrowserRouter([
       {
         path: "addcourse",
         element: <CreateCourses />,
+      },
+      {
+        path: "adduser",
+        element: <CreateUserAccount />,
+      },
+      {
+        path: "addinstructor",
+        element: <CreateInstructorAccount />,
       },
     ],
   },
