@@ -21,6 +21,14 @@ import {
   Instructors,
   CreateInstructorAccount,
   CreateUserAccount,
+  PaymentGatWay,
+  MyPaiedCourse,
+  Instructor,
+  Blog,
+  AccountInfo,
+  MyTasks,
+  Favorites,
+  ChatWithMe,
 } from "./pages";
 import ViewCourses from "./pages/ViewCourses";
 import DetailsCourse from "./pages/DetailsCourse";
@@ -44,11 +52,11 @@ const router = createBrowserRouter([
       },
       {
         path: "instructor",
-        element: <h1>Try to become instructor</h1>,
+        element: <Instructor />,
       },
       {
         path: "blog",
-        element: <h1>I have the blog right here pro</h1>,
+        element: <Blog />,
       },
       {
         path: "courses",
@@ -57,6 +65,14 @@ const router = createBrowserRouter([
       {
         path: "courses/:courseId",
         element: <DetailsCourse />,
+      },
+      {
+        path: "paymentGatWay",
+        element: <PaymentGatWay />,
+      },
+      {
+        path: "myPaiedCourse/:courseId",
+        element: <MyPaiedCourse />,
       },
     ],
   },
@@ -70,20 +86,20 @@ const router = createBrowserRouter([
         element: <PublicProfile />,
       },
       {
-        path: "mytasks",
-        element: <h1>My Tasks</h1>,
+        path: "accountInfo",
+        element: <AccountInfo/>,
+      },
+      {
+        path: "myTasks",
+        element: <MyTasks/>,
       },
       {
         path: "favorites",
-        element: <h1>Favorites</h1>,
+        element: <Favorites/>,
       },
       {
-        path: "chat",
-        element: <h1>Chat With Me</h1>,
-      },
-      {
-        path: "settings",
-        element: <h1>Settings</h1>,
+        path: "chatWithMe",
+        element: <ChatWithMe/>,
       },
     ],
   },

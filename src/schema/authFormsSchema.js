@@ -26,3 +26,13 @@ export const resetPasswordSchema = yup.object().shape({
 export const forgotPasswordSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
 });
+
+// update password schema
+export const updatePasswordSchema = yup.object().shape({
+  passwordCurrent: yup.string().required("Old Password is required"),
+  password: yup.string().required("New Password is required"),
+  passwordConfirm: yup
+    .string()
+    .required("Confirm password is required")
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
+});

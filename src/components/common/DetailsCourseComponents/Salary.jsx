@@ -2,6 +2,7 @@ import React from "react";
 import { BtnFav } from "../../ui/BtnFav";
 import InputCheckBox from "../../ui/InputCheckBox";
 import ShoppingCartSimple from "../../icons/ShoppingCartSimple";
+import { Link } from "react-router-dom";
 
 const Salary = () => {
   return (
@@ -188,9 +189,12 @@ const Salary = () => {
         </ul>
 
         <div className="flex items-center gap-2">
-          <button className="px-[40px] text-center w-[160px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]">
+          <Link
+            to={"/paymentGatWay"}
+            className="px-[40px] text-center w-[160px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
+          >
             Buy now
-          </button>
+          </Link>
 
           <button className="p-[15px] rounded-xl bg-[#fff] hover:bg-[#ffffffd8]">
             <ShoppingCartSimple />

@@ -6,8 +6,8 @@ const ProfileInfo = () => {
   return (
     <div>
       {/* Background img */}
-      <div className="relative">
-        <img src={BannerProfile} alt="BannerProfile" className="" />
+      <div className="relative bg-[url(https://source.unsplash.com/1600x900/?nature,water)] bg-cover bg-center h-[300px] flex justify-center items-center relative">
+        {/* <img src={BannerProfile} alt="BannerProfile" className="" /> */}
         <h2 className="absolute text-4xl font-bold text-[#fff] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
           Hi, {user ? user.name : ""}👋
         </h2>

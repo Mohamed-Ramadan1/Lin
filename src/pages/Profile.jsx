@@ -11,11 +11,8 @@ const Profile = () => {
       <TopContent />
       <MidContent />
       <ProfileInfo />
-
       <ProfileNavigationBar />
-
       <Outlet />
-
       <Footer />
     </div>
   );

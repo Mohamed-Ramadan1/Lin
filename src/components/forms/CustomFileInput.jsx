@@ -5,7 +5,7 @@ const CustomFileInput = ({ label, id, ...props }) => {
 
   return (
     <div className="inputField w-full flex flex-col gap-[8px] ">
-      <label htmlFor={id} className="text-[16px] font-medium text-[#0C1421]">
+      <label htmlFor={id} className="text-[16px] font-medium text-[#0C1421] m">
         {label}
       </label>
       <input
