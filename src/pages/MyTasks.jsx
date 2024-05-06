@@ -38,7 +38,7 @@ function MyTasks() {
   }, [dispatch, token]);
   return (
     <div className="viewCoursePage relative flex flex-col justify-center items-start px-[124px] py-[70px] max-2xl:px-[30px] max-sm:py-[30px] max-sm:px-[15px]">
-      <TasksInformation tasksStats={tasksStates} />
+      {tasksStates && <TasksInformation tasksStats={tasksStates} />}{" "}
       <div className="container max-w-[1400px] m-auto flex flex-col gap-10  justify-center items-center">
         <div className="sub-container flex flex-col w-full md:flex-row md:gap-[10px]">
           <div className="basis-full flex flex-col gap-[20px] max-md:gap-[30px] mb-3">
