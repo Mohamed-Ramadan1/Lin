@@ -108,6 +108,7 @@ export const deleteTask = createAsyncThunk(
       const data = await res.data;
       return data;
     } catch (error) {
+      console.log(error);
       if (error.response.status === 401) {
         dispatch(cleareStatus());
       }
@@ -134,6 +135,11 @@ const taskSlice = createSlice({
       state.error = null;
       state.tasks = [];
       state.task = {};
+    },
+
+    resetSuccessState: (state) => {
+      state.isSuccess = false;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {

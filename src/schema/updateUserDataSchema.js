@@ -9,3 +9,4 @@ export const updateUserInfo = yup.object().shape({
     .required("Confirm password is required")
     .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
+
