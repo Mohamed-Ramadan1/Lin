@@ -1,84 +1,50 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
+import BlogForm from "../components/blog/BlogForm";
+import BlogItem from "../components/blog/BlogItem";
+
+const baseUrl =
+  "https://graduation-project-backend-5vtx.onrender.com/api/v1/blog";
 function Blog() {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { user, token } = useSelector((state) => state.userReducers);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get(baseUrl, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setBlogs(response.data.data.blogs);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, [token]);
+
   return (
-    <div>
-      {/* add */}
-      <div class="border border-gray-300 p-4 rounded-lg mt-4 md:w-[80%] mx-auto mb-5">
-        <h2 class="text-lg font-medium mb-2">Leave a comment</h2>
-        <form>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-medium mb-2" for="name">
-              Name
-            </label>
-            <input
-              class="appearance-none border-0 outline-0 bg-gray-100 p-3 rounded w-full  text-gray-700 leading-tight focus:outline-none focus:border-gray-500"
-              id="name"
-              type="text"
-              placeholder="Enter your name"
-            />
-          </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-medium mb-2" for="comment">
-              Comment
-            </label>
-            <textarea
-              rows="4"
-              class="appearance-none border-0 outline-0 bg-gray-100 rounded w-full text-gray-700 leading-tight focus:outline-none focus:border-gray-500"
-              id="comment"
-              placeholder="Enter your comment"
-            ></textarea>
-          </div>
-          <div class="flex justify-end">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 p-5 focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Post Comment
-            </button>
-          </div>
-        </form>
-      </div>
-      {/* show */}
-      <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4 my-3">
-        <div class="flex flex-wrap justify-between">
-          <div class="border p-3 bg-gray-100">
-            <h3 class="text-2xl font-bold mt-4 mb-4">My First Blog Post</h3>
-            <p class="text-gray-700 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4 my-3">
-        <div class="flex flex-wrap justify-between">
-          <div class="border p-3 bg-gray-100">
-            <h3 class="text-2xl font-bold mt-4 mb-4">My First Blog Post</h3>
-            <p class="text-gray-700 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4 my-3">
-        <div class="flex flex-wrap justify-between">
-          <div class="border p-3 bg-gray-100">
-            <h3 class="text-2xl font-bold mt-4 mb-4">My First Blog Post</h3>
-            <p class="text-gray-700 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div className="mb-[55px]">
+      <BlogForm />
+
+      {loading && <p className="text-3xl text-bold text-center">Loading...</p>}
+      {error && !blogs && (
+        <p className="text-3xl text-bold text-center">{error}</p>
+      )}
+      {!blogs && !loading && !error && (
+        <p className="text-3xl text-bold text-center">No Blogs Found</p>
+      )}
+
+      {blogs &&
+        blogs.map((blog) => (
+          <BlogItem key={blog.id} blog={blog} userId={user._id} token={token} />
+        ))}
     </div>
   );
 }
