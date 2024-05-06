@@ -24,11 +24,12 @@ function CreateCourses() {
       dispatch(courseActions.cleareSuccessState());
     }
   }, [isSuccess, dispatch, error]);
+
   return (
     <div className="min-h-[100vh]">
       <div className="p-5 ">
         <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">Create Courses</span>{" "}
+          Dashboard / <span className="text-blue-600">Create Courses</span>
         </h1>
         <Formik
           initialValues={{
@@ -48,10 +49,11 @@ function CreateCourses() {
           }}
           validationSchema={coursesSchema}
           onSubmit={(values, actions) => {
-            console.log(values);
-            dispatch(createCourse(values));
-            console.log(actions);
-            actions.resetForm();
+            // console.log(values);
+            // dispatch(createCourse(values));
+            // console.log(actions);
+            // actions.resetForm();
+            console.log("cu");
           }}
         >
           {({ handleSubmit, isSubmitting }) => (
@@ -164,8 +166,8 @@ function CreateCourses() {
               </div>
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="bg-blue-600 text-white rounded-md p-2 mt-5"
+                // disabled={isSubmitting}
+                className="bg-blue-600 text-white rounded-md p-2 mt-5 mb-7"
               >
                 Create Course
               </button>

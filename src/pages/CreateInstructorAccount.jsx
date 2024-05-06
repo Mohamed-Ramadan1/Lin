@@ -16,10 +16,8 @@ const CreateInstructorAccount = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
       toast.success("Instructor Created Successfully");
     } catch (error) {
-      console.log(error.response);
       toast.error("Instructor Creation Failed");
     }
   };
@@ -41,7 +39,6 @@ const CreateInstructorAccount = () => {
           }}
           validationSchema={createInstructorsSchema}
           onSubmit={(values, actions) => {
-            console.log(values);
             createInstructorHandler(values);
             actions.resetForm();
           }}
