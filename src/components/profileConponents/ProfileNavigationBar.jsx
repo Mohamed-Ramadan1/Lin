@@ -14,8 +14,8 @@ const navigationLinks = [
     name: "My Tasks",
   },
   {
-    path: "/profile/favorites",
-    name: "Favorites",
+    path: "/profile/myCourses",
+    name: "myCourses",
   },
   {
     path: "/profile/chatWithMe",

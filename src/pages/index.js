@@ -10,13 +10,6 @@ export { default as About } from "./About";
 export { default as Instructor } from "./Instructor";
 export { default as Blog } from "./Blog";
 
-// //Dashboard
-// export { default as Dashboard } from "./Dashboard";
-// export { default as FreeCourses } from "./FreeCourses";
-// export { default as PaiedCourses } from "./PaiedCourses";
-// export { default as Users } from "./Users";
-// export { default as Reservations } from "./Reservations";
-// export { default as Settings } from "./Settings";
 //Dashboard
 export { default as Dashboard } from "./Dashboard";
 export { default as FreeCourses } from "./FreeCourses";
@@ -33,7 +26,7 @@ export { default as CreateInstructorAccount } from "./CreateInstructorAccount";
 export { default as Profile } from "./Profile";
 export { default as AccountInfo } from "./AccountInfo";
 export { default as MyTasks } from "./MyTasks";
-export { default as Favorites } from "./Favorites";
+export { default as MyEnrolledCourses } from "./MyEnrolledCourses";
 export { default as ChatWithMe } from "./ChatWithMe";
 
 //PaymentGatWay

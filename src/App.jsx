@@ -27,7 +27,7 @@ import {
   Blog,
   AccountInfo,
   MyTasks,
-  Favorites,
+  MyEnrolledCourses,
   ChatWithMe,
 } from "./pages";
 import ViewCourses from "./pages/ViewCourses";
@@ -87,19 +87,19 @@ const router = createBrowserRouter([
       },
       {
         path: "accountInfo",
-        element: <AccountInfo/>,
+        element: <AccountInfo />,
       },
       {
         path: "myTasks",
-        element: <MyTasks/>,
+        element: <MyTasks />,
       },
       {
-        path: "favorites",
-        element: <Favorites/>,
+        path: "myCourses",
+        element: <MyEnrolledCourses />,
       },
       {
         path: "chatWithMe",
-        element: <ChatWithMe/>,
+        element: <ChatWithMe />,
       },
     ],
   },
