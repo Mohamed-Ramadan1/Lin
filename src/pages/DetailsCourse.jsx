@@ -45,7 +45,20 @@ const DetailsCourse = () => {
         </div>
 
         <div className="flex w-full gap-[50px]">
-          <DetailsCourseContent />
+          <DetailsCourseContent
+            title={course.course.title}
+            description={course.course.description}
+            duration={course.course.duration}
+            totalReviews={course.course.totalReviews}
+            averageRating={course.course.averageRating}
+            category={course.course.category}
+            updatedAt={course.course.updatedAt}
+            language={course.course.language}
+            learningObjectives={course.course.learningObjectives}
+            videos={course.course.videos}
+            instructor={course.course.instructor[0]}
+            prerequisites={course.course.prerequisites}
+          />
 
           <Salary
             duration={course.course.duration}

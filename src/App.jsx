@@ -71,7 +71,7 @@ const router = createBrowserRouter([
         element: <DetailsCourse />,
       },
       {
-        path: "paymentGatWay",
+        path: "paymentGatWay/:courseId",
         element: <PaymentGatWay />,
       },
       {

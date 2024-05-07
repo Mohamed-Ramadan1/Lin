@@ -47,13 +47,11 @@ function CreateCourses() {
             // videos: "",
             photo: "",
           }}
-          validationSchema={coursesSchema}
           onSubmit={(values, actions) => {
-            // console.log(values);
-            // dispatch(createCourse(values));
-            // console.log(actions);
-            // actions.resetForm();
-            console.log("cu");
+            console.log(values);
+            dispatch(createCourse(values));
+            console.log(actions);
+            actions.resetForm();
           }}
         >
           {({ handleSubmit, isSubmitting }) => (

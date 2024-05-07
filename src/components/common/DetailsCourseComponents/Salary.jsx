@@ -257,7 +257,7 @@ const Salary = ({ duration, price, paymentModel, courseId }) => {
             </button>
           ) : (
             <Link
-              to={"/paymentGatWay"}
+              to={`/paymentGatWay/${courseId}`}
               className=" text-center w-[160px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
             >
               Buy Now
