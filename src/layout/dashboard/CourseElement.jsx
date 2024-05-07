@@ -42,7 +42,6 @@ const CourseElement = ({
     }
   };
 
-  
   return (
     <tbody>
       <tr>
@@ -59,10 +58,12 @@ const CourseElement = ({
         <td className="p-3 text-center"> {language}</td>
 
         <td className="p-3">
-          <button className="bg-blue-500 text-white p-2 rounded">Edit</button>
+          <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-900">
+            Edit
+          </button>
           <button
             type="submit"
-            className="bg-red-500 text-white p-2 rounded ml-3"
+            className="bg-red-500 text-white p-2 rounded ml-3  hover:bg-red-900"
             onClick={deleteHandler}
           >
             Delete

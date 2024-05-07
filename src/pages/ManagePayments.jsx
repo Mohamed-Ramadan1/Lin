@@ -22,7 +22,6 @@ const ManagePayments = () => {
           },
         });
         setPayments(response.data.data.paymentRecords);
-        console.log(response.data.data.paymentRecords);
         setLoading(false);
       } catch (error) {
         setError(error.response.data.error);
