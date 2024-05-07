@@ -43,17 +43,18 @@ const ManagePayments = () => {
           <PaymentsTableHeader />
           {loading && <p>Loading...</p>}
 
-          {payments
-            .map((payment, index) => (
-              <PaymentRecordELements
-                key={payment._id}
-                payment={payment}
-                token={token}
-                index={index + 1}
-              />
-            ))
-            .reverse()
-            .slice(0, 10)}
+          {payments &&
+            payments
+              .map((payment, index) => (
+                <PaymentRecordELements
+                  key={payment._id}
+                  payment={payment}
+                  token={token}
+                  index={index + 1}
+                />
+              ))
+              .reverse()
+              .slice(0, 10)}
         </PageContainer>
       </div>
     </>

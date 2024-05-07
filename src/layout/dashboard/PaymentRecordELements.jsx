@@ -1,4 +1,4 @@
-const PaymentRecordELements = ({ payment, token, index }) => {
+const PaymentRecordELements = ({ payment, index }) => {
   const {
     _id,
     firstName,
