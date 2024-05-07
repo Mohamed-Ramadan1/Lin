@@ -21,6 +21,9 @@ export { default as Settings } from "./Settings";
 export { default as Instructors } from "./Instructors";
 export { default as CreateUserAccount } from "./CreateUserAccount";
 export { default as CreateInstructorAccount } from "./CreateInstructorAccount";
+export { default as ManageInstructorsRequests } from "./ManageInstructorsRequests";
+export { default as ManageBlogs } from "./ManageBlogs";
+export { default as ManagePayments } from "./ManagePayments";
 
 //user
 export { default as Profile } from "./Profile";

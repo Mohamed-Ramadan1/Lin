@@ -10,8 +10,6 @@ const UserELement = ({ user, index, token }) => {
   const dispatch = useDispatch();
   const { name, email, role, createdAt, _id, isVerified, active } = user;
   const verified = isVerified ? "Verified" : "Not verified";
-  console.log("if active", user.active);
-  console.log("user", user);
 
   const activation = active ? "Active" : "Not active";
   const formatData = new Date(createdAt).toLocaleDateString("en-GB");

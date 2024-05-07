@@ -29,6 +29,9 @@ import {
   MyTasks,
   MyEnrolledCourses,
   ChatWithMe,
+  ManageBlogs,
+  ManageInstructorsRequests,
+  ManagePayments,
 } from "./pages";
 
 import ViewCourses from "./pages/ViewCourses";
@@ -164,6 +167,18 @@ const router = createBrowserRouter([
       {
         path: "addinstructor",
         element: <CreateInstructorAccount />,
+      },
+      {
+        path: "blogs",
+        element: <ManageBlogs />,
+      },
+      {
+        path: "instructorsrequests",
+        element: <ManageInstructorsRequests />,
+      },
+      {
+        path: "paymentsrecords",
+        element: <ManagePayments />,
       },
     ],
   },

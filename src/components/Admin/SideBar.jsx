@@ -5,6 +5,11 @@ import { IoStatsChart } from "react-icons/io5";
 import { FaUserCheck } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi";
 import { MdPaid } from "react-icons/md";
+import { MdPayments } from "react-icons/md";
+import { IoSettings } from "react-icons/io5";
+import { LiaBlogSolid } from "react-icons/lia";
+import { FaCodePullRequest } from "react-icons/fa6";
+
 function SideBar() {
   return (
     <div className="px-5">
@@ -12,14 +17,9 @@ function SideBar() {
         <div className="flex flex-col items-center justify-center h-20 w-full border-b border-gray-600">
           <div className="flex gap-5">
             <img src={Logo} alt="avatar" className=" h-[22px]rounded-full" />
-            {/* <h1 className="text-2xl text-white">
-              <span className="text-blue-700">Lin</span>{" "}
-            </h1> */}
           </div>
         </div>
-        <div className=" p-3 rounded mt-3  ">
-          <h2 className="text-white "> MENU</h2>
-        </div>
+
         {/* dashboard home */}
         <Link
           className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
@@ -157,23 +157,48 @@ function SideBar() {
           className="hover:bg-gray-800 p-3 rounded mt-3 text-white"
           to={"/dashboard/settings"}
         >
-          {/* icons and link and arrow*/}
           <div className="flex gap-5">
             {/* settings svg icon */}
-            <svg
-              class="h-6 w-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="3" />
-              <path d="M12 5v2m0 10v2m-6-6h2m10 0h2m-8.485 8.485l1.414-1.414m-1.414 1.414l-1.414-1.414" />
-            </svg>
+            <IoSettings className="text-3xl" />
 
             <p href="/dashboard/settings">Settings</p>
+          </div>
+        </Link>
+
+        {/* payments  */}
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white "
+          to={"/dashboard/paymentsrecords"}
+        >
+          <div className="flex gap-5">
+            {/* icons and link and arrow*/}
+            <MdPayments className="text-3xl" />
+
+            <p href="/dashboard/settings">Payments</p>
+          </div>
+        </Link>
+
+        {/* blogs  */}
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white "
+          to={"/dashboard/blogs"}
+        >
+          <div className="flex gap-5">
+            {/* icons and link and arrow*/}
+            <LiaBlogSolid className="text-3xl" />
+
+            <p href="/dashboard/settings">Blogs</p>
+          </div>
+        </Link>
+        {/* become INstructor  */}
+        <Link
+          className="hover:bg-gray-800 p-3 rounded mt-3 text-white "
+          to={"/dashboard/instructorsrequests"}
+        >
+          <div className="flex gap-5">
+            {/* icons and link and arrow*/}
+            <FaCodePullRequest className="text-3xl" />
+            <p>Instructors Requests</p>
           </div>
         </Link>
       </div>
