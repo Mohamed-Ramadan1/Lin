@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllCourses } from "./../store/courseSlice";
 import { Link } from "react-router-dom";
+
 const ViewCourses = () => {
   const dispatch = useDispatch();
   const { courses, error, loading } = useSelector(

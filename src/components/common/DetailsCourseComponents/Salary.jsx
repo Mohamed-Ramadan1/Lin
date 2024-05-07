@@ -1,16 +1,67 @@
-import React from "react";
 import { BtnFav } from "../../ui/BtnFav";
-import InputCheckBox from "../../ui/InputCheckBox";
 import ShoppingCartSimple from "../../icons/ShoppingCartSimple";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const Salary = () => {
+const Salary = ({ duration, price, paymentModel, courseId }) => {
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const navigate = useNavigate();
+  const { token, user } = useSelector((state) => state.userReducers);
+  const handelEnrollFreeCourse = async () => {
+    try {
+      const res = await axios.post(
+        "https://graduation-project-backend-5vtx.onrender.com/api/v1/enrolls",
+        {
+          course: courseId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Enrolled successfully");
+      navigate(`/myPaiedCourse/${courseId}`);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    const fetchEnrolledCourse = async () => {
+      try {
+        const res = await axios.get(
+          `https://graduation-project-backend-5vtx.onrender.com/api/v1/enrolls/user/${courseId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // i want to check if there enrolled course or not and based set the value of is enrolled
+        if (res.data.data.enrollments.user._id === user._id) {
+          setIsEnrolled(true);
+        }
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    };
+    fetchEnrolledCourse();
+  }, [courseId, token, user]);
+
   return (
     <div className="salary p-3 min-w-[290px] max-h-[400px] flex flex-col gap-4 items-start rounded-3xl max-md:hidden bg-[#D5FF40]">
       <div className="top-salary w-full relative flex justify-between items-start">
         <div>
-          <h2 className="text-3xl font-bold">E£199.99</h2>
-          <span className="font-medium line-through">E£250.99 </span>
+          {paymentModel === "free" ? (
+            <h2 className="text-3xl font-bold">Free Course</h2>
+          ) : (
+            <h2 className="text-3xl font-bold">E£{price}</h2>
+          )}
         </div>
 
         <div className="relative">
@@ -49,7 +100,7 @@ const Salary = () => {
                 stroke-linejoin="round"
               ></path>
             </svg>
-            5 hours on-demand video
+            {duration} hours on-demand video
           </li>
           <li className="flex items-center text-[15px] gap-3 font-medium text-[#BEBEBE]">
             <svg
@@ -189,12 +240,29 @@ const Salary = () => {
         </ul>
 
         <div className="flex items-center gap-2">
-          <Link
-            to={"/paymentGatWay"}
-            className="px-[40px] text-center w-[160px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
-          >
-            Buy now
-          </Link>
+          {isEnrolled === true ? (
+            <Link
+              to={`/myPaiedCourse/${courseId}`}
+              className=" text-center w-[160px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
+            >
+              Start Now
+            </Link>
+          ) : paymentModel === "free" ? (
+            <button
+              type="button"
+              onClick={handelEnrollFreeCourse}
+              className=" text-center w-[160px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
+            >
+              Enroll Now
+            </button>
+          ) : (
+            <Link
+              to={"/paymentGatWay"}
+              className=" text-center w-[160px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
+            >
+              Buy Now
+            </Link>
+          )}
 
           <button className="p-[15px] rounded-xl bg-[#fff] hover:bg-[#ffffffd8]">
             <ShoppingCartSimple />
