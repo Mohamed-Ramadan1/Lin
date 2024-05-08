@@ -14,7 +14,6 @@ const DetailsCourseContent = ({
   duration,
   totalReviews,
   averageRating,
-  category,
   updatedAt,
   language,
   learningObjectives,
@@ -124,7 +123,7 @@ const DetailsCourseContent = ({
 
       <CourseVideos duration={duration} videos={videos} />
 
-      <ListVideos />
+      <ListVideos videos={videos} />
 
       <DescriptionCourse description={description} />
 

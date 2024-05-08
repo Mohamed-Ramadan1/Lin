@@ -9,7 +9,8 @@ import { MdPayments } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import { LiaBlogSolid } from "react-icons/lia";
 import { FaCodePullRequest } from "react-icons/fa6";
-
+import { FiUsers } from "react-icons/fi";
+import { FiUserPlus } from "react-icons/fi";
 function SideBar() {
   return (
     <div className="px-5">
@@ -87,7 +88,7 @@ function SideBar() {
         >
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
-            <FaUserCheck className="text-3xl" />
+            <FiUserPlus className="text-3xl" />
             <p>Create User Account</p>
           </div>
         </Link>
@@ -123,7 +124,7 @@ function SideBar() {
           {/* icons and link and arrow*/}
           <div className="flex gap-5">
             {/* users svg icon */}
-            <HiUsers className="text-3xl" />
+            <FiUsers className="text-3xl" />
             <p>Instructors</p>
           </div>
         </Link>

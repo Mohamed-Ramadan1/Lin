@@ -44,6 +44,7 @@ const PaymentGatWay = () => {
               toast.success("Payment and enrollment Successfull");
               navigate(`/myPaiedCourse/${courseId}`);
             } catch (error) {
+              console.log(error);
               toast.error("Payment and enrollment  Failed");
             }
             actions.setSubmitting(false);

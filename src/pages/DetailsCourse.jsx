@@ -51,7 +51,6 @@ const DetailsCourse = () => {
             duration={course.course.duration}
             totalReviews={course.course.totalReviews}
             averageRating={course.course.averageRating}
-            category={course.course.category}
             updatedAt={course.course.updatedAt}
             language={course.course.language}
             learningObjectives={course.course.learningObjectives}
@@ -65,6 +64,7 @@ const DetailsCourse = () => {
             price={course.course.price}
             paymentModel={course.course.paymentModel}
             courseId={course.course._id}
+            videos={course.course.videos}
           />
         </div>
       </div>

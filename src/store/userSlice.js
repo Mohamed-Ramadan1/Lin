@@ -417,6 +417,7 @@ const userSlice = createSlice({
       })
       .addCase(getMe.rejected, (state, action) => {
         state.error = action.payload.data.message;
+        console.log(action.payload.data.message);
         state.isSuccess = false;
       });
 

@@ -3,7 +3,6 @@ import React from "react";
 import ImageWillLearn from "../../../assets/ImageWillLearn.png";
 
 const WhatWilllearn = ({ learningObjectives }) => {
-  console.log(learningObjectives);
   return (
     <div className="willLearn p-4 w-full flex gap-4 flex-col items-start bg-[#F9FAFB]">
       <h2 className="text-2xl text-[#222] font-bold">What you'll learn</h2>

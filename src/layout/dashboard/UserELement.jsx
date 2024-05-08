@@ -87,14 +87,14 @@ const UserELement = ({ user, index, token }) => {
             <button
               type="button"
               onClick={handelDeleteAccount}
-              className="bg-red-500 text-white p-1.5 rounded"
+              className="bg-red-500 text-white p-1.5 rounded hover:bg-red-800"
             >
               Delete
             </button>
             <button
               type="button"
               onClick={handelUnActivateAccount}
-              className="bg-blue-500 text-white p-1.5 rounded"
+              className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-800"
               disabled={!active}
             >
               UnActive
@@ -102,7 +102,7 @@ const UserELement = ({ user, index, token }) => {
             <button
               type="button"
               onClick={handelActivateAccount}
-              className="bg-green-500 text-white p-1.5 rounded"
+              className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800 "
               disabled={active}
             >
               Active
@@ -110,7 +110,7 @@ const UserELement = ({ user, index, token }) => {
             <button
               type="button"
               onClick={handelVerifiedEmails}
-              className="bg-green-500 text-white p-1.5 rounded"
+              className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800"
               disabled={isVerified}
             >
               Verify

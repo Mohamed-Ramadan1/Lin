@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const Salary = ({ duration, price, paymentModel, courseId }) => {
+const Salary = ({ duration, price, paymentModel, courseId, videos }) => {
   const [isEnrolled, setIsEnrolled] = useState(false);
   const navigate = useNavigate();
   const { token, user } = useSelector((state) => state.userReducers);
@@ -183,7 +183,7 @@ const Salary = ({ duration, price, paymentModel, courseId }) => {
                 stroke-width="1.5"
               ></path>
             </svg>
-            8 downloadable resources
+            {videos.length} lectures
           </li>
           <li className="flex items-center text-[15px] gap-3 font-medium text-[#BEBEBE]">
             <svg

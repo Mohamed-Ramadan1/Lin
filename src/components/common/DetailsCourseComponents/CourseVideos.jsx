@@ -8,7 +8,7 @@ const CourseVideos = ({ duration, videos }) => {
           <h2 className="text-2xl text-[#222] font-bold">Course content</h2>
           <div className="more-info flex items-center">
             <span className="font-medium text-[#222] px-[10px] py-[1px] border-r-[2px] border-r-[#9747FF]">
-              12 sections
+              {videos.length} sections
             </span>
             <span className="font-medium text-[#222] px-[10px] py-[1px] border-r-[2px] border-r-[#9747FF]">
               {duration} total length

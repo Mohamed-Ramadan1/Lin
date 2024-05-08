@@ -1,16 +1,14 @@
-import React from 'react'
+import Video from "./Video";
 
-import Video from './Video'
+const ListVideos = ({ videos }) => {
+  return (
+    <div className="flex w-full flex-col items-start">
+      {videos &&
+        videos.map((video, index) => (
+          <Video key={video._id} video={video} index={index + 1} />
+        ))}
+    </div>
+  );
+};
 
-const ListVideos = () => {
-    return (
-        <div className='flex w-full flex-col items-start'>
-            <Video />
-            <Video />
-            <Video />
-            <Video />
-        </div>
-    )
-}
-
-export default ListVideos
+export default ListVideos;
