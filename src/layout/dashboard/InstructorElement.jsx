@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-const baseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin";
+const baseUrl = "http://localhost:3000/api/v1/admin";
 
 const InstructorElement = ({ index, instructor, token }) => {
   const {

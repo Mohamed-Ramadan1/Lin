@@ -14,7 +14,7 @@ function MyPaiedCourse() {
     const fetchEnrolledCourse = async () => {
       try {
         const res = await axios.get(
-          `https://graduation-project-backend-5vtx.onrender.com/api/v1/enrolls/user/${courseId}`,
+          `http://localhost:3000/api/v1/enrolls/user/${courseId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

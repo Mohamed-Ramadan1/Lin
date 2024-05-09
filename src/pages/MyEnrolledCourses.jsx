@@ -2,8 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import EnrolledCourseCard from "../components/profileConponents/EnrolledCourseCard";
 import { useSelector } from "react-redux";
-const baseURL =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/users/me/courses";
+const baseURL = "http://localhost:3000/api/v1/users/me/courses";
 
 const MyEnrolledCourses = () => {
   const { token } = useSelector((state) => state.userReducers);

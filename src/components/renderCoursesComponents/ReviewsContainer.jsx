@@ -16,7 +16,7 @@ const ReviewsContainer = () => {
     const fetchReviews = async () => {
       try {
         const res = await axios.get(
-          `https://graduation-project-backend-5vtx.onrender.com/api/v1/reviews/courseReviews/${courseId}`,
+          `http://localhost:3000/api/v1/reviews/courseReviews/${courseId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

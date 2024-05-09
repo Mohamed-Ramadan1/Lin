@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { Formik, Form } from "formik";
 import CustomInput from "../forms/CustomInput";
 import CustomTextArea from "../forms/CustomTextArea";
-import { act } from "react";
 
 const AddRatingForm = () => {
   const { token } = useSelector((state) => state.userReducers);
@@ -20,7 +19,7 @@ const AddRatingForm = () => {
       onSubmit={async (values, actions) => {
         try {
           const res = await axios.post(
-            `https://graduation-project-backend-5vtx.onrender.com/api/v1/reviews`,
+            `http://localhost:3000/api/v1/reviews`,
             {
               rating: values.rating,
               review: values.review,

@@ -5,8 +5,7 @@ import { useSelector } from "react-redux";
 import BlogForm from "../components/blog/BlogForm";
 import BlogItem from "../components/blog/BlogItem";
 
-const baseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/blog";
+const baseUrl = "http://localhost:3000/api/v1/blog";
 function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);

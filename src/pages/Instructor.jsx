@@ -5,8 +5,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Formik, Form } from "formik";
 
-const baseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/instructorApplications";
+const baseUrl = "http://localhost:3000/api/v1/instructorApplications";
 
 const Instructor = () => {
   return (

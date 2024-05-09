@@ -15,7 +15,7 @@ const ManageInstructorsRequests = () => {
     const fetchInstructors = async () => {
       try {
         const response = await axios.get(
-          "https://graduation-project-backend-5vtx.onrender.com/api/v1/instructorApplications",
+          "http://localhost:3000/api/v1/instructorApplications",
           {
             headers: {
               Authorization: `Bearer ${token}`,

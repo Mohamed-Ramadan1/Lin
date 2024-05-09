@@ -12,8 +12,7 @@ const PaymentGatWay = () => {
   const { courseId } = useParams();
   const { token } = useSelector((state) => state.userReducers);
 
-  const basUrl =
-    "https://graduation-project-backend-5vtx.onrender.com/api/v1/paymentRecords";
+  const basUrl = "http://localhost:3000/api/v1/paymentRecords";
 
   return (
     <div className="viewCoursePage relative px-[80px] max-2xl:px-[30px] max-sm:py-[30px] max-sm:px-[15px] py-5">

@@ -5,8 +5,7 @@ import CustomInput from "../components/forms/CustomInput";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-const baseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin";
+const baseUrl = "http://localhost:3000/api/v1/admin";
 const CreateInstructorAccount = () => {
   const { token } = useSelector((state) => state.userReducers);
   const createInstructorHandler = async (values) => {

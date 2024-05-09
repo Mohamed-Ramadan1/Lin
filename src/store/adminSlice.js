@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { cleareStatus } from "./authHandler";
 
-// const userUrl = "http://localhost:3000/api/v1/admin";
+const userUrl = "http://localhost:3000/api/v1/admin";
 
-const userUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin";
+// const userUrl =
+//   "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin";
 
 const initialState = {
   loading: false,

@@ -9,7 +9,7 @@ const ReviewElement = ({ fullReview, currentUser, token }) => {
     confirm("Are you sure you want to delete this review?");
     try {
       await axios.delete(
-        `https://graduation-project-backend-5vtx.onrender.com/api/v1/reviews/${fullReview._id}`,
+        `http://localhost:3000/api/v1/reviews/${fullReview._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

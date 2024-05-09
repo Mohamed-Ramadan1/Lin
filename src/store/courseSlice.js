@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { cleareStatus } from "./authHandler";
 import axios from "axios";
 
-// const courseUrl = "http://localhost:3000/api/v1/courses";
+const courseUrl = "http://localhost:3000/api/v1/courses";
 
-const courseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/courses";
+// const courseUrl =
+//   "https://graduation-project-backend-5vtx.onrender.com/api/v1/courses";
 
 //Create Course
 export const createCourse = createAsyncThunk(

@@ -5,8 +5,7 @@ import axios from "axios";
 import PageContainer from "../layout/dashboard/PageContainer";
 import PaymentsTableHeader from "../layout/dashboard/PaymentsTableHeader";
 import PaymentRecordELements from "../layout/dashboard/PaymentRecordELements";
-const baseURL =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/paymentRecords";
+const baseURL = "http://localhost:3000/api/v1/paymentRecords";
 const ManagePayments = () => {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);

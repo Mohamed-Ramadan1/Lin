@@ -16,7 +16,7 @@ function FreeCourses() {
       try {
         setLoading(true);
         const res = await axios.get(
-          "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin/freeCourses",
+          "http://localhost:3000/api/v1/admin/freeCourses",
           {
             headers: {
               Authorization: `Bearer ${token}`,

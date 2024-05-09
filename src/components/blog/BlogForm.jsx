@@ -7,8 +7,7 @@ import CustomDropdownInput from "../forms/CustomDropdownInput";
 import CustomTextArea from "../forms/CustomTextArea";
 import { blogSchema } from "../../schema/blogSchemas";
 
-const baseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/blog";
+const baseUrl = "http://localhost:3000/api/v1/blog";
 
 const BlogForm = () => {
   const { token } = useSelector((state) => state.userReducers);

@@ -16,7 +16,7 @@ function Dashboard() {
       try {
         setLoading(true);
         const res = await axios.get(
-          "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin/siteStatics",
+          "http://localhost:3000/api/v1/admin/siteStatics",
           {
             headers: {
               Authorization: `Bearer ${token}`,

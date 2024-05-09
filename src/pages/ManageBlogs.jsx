@@ -7,8 +7,7 @@ import PageContainer from "../layout/dashboard/PageContainer";
 import BlogsTableHeader from "../layout/dashboard/BlogsTableHeader";
 import BlogELement from "../layout/dashboard/BlogELement";
 
-const baseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin/getAllBlogs";
+const baseUrl = "http://localhost:3000/api/v1/admin/getAllBlogs";
 
 const ManageBlogs = () => {
   const { token } = useSelector((state) => state.userReducers);

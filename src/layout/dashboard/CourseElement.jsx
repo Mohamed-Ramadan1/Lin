@@ -27,7 +27,7 @@ const CourseElement = ({
     if (confirmDelete) {
       try {
         const res = await axios.delete(
-          `https://graduation-project-backend-5vtx.onrender.com/api/v1/courses/${_id}`,
+          `http://localhost:3000/api/v1/courses/${_id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

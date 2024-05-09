@@ -16,7 +16,7 @@ function PaiedCourses() {
       try {
         setLoading(true);
         const res = await axios.get(
-          "https://graduation-project-backend-5vtx.onrender.com/api/v1/admin/paidCourses",
+          "http://localhost:3000/api/v1/admin/paidCourses",
           {
             headers: {
               Authorization: `Bearer ${token}`,

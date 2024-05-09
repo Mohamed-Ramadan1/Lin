@@ -9,8 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 //get data and formate it each task render
 
-const baseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/tasks/stats";
+const baseUrl = "http://localhost:3000/api/v1/tasks/stats";
 
 function MyTasks() {
   const [tasksStates, setTasksStates] = useState(null);
