@@ -42,7 +42,7 @@ function MyPaiedCourse() {
 
   return (
     <>
-      <RenderBox />
+      <RenderBox courseId={courseId} />
       <ReviewsContainer />
     </>
   );

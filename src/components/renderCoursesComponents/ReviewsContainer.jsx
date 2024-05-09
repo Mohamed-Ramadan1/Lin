@@ -32,7 +32,6 @@ const ReviewsContainer = () => {
     fetchReviews();
   }, [courseId, token]);
 
-  console.log(reviews);
   return (
     <div className="max-w-[100%] md:max-w-[72.5%] reviwe m-5 ">
       <div class="bg-gray-100 p-6">
@@ -46,6 +45,7 @@ const ReviewsContainer = () => {
               fullReview={review}
               currentUser={user}
               token={token}
+              key={review._id}
             />
           ))}
       </div>

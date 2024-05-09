@@ -20,12 +20,12 @@ const BlogItem = ({ blog, userId, token }) => {
       toast.error("Failed to delete blog post");
     }
   };
+  console.log();
 
   return (
     // the next code shrink and be small based on the text i dont need this i want to be allways the same size with the full screen
-    <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4 my-3 w-full">
-      <div class="flex flex-wrap justify-between w-[100vw]">
-        <div class="border p-3 bg-gray-100 ">
+      <div class="px-[0vh] md:px-[19vh] my-5">
+        <div class="border p-3 bg-gray-100 md:rounded-lg rounded-0">
           <h3 class="text-2xl font-bold mt-4 mb-4 text-center italic">
             {title}
           </h3>
@@ -49,7 +49,6 @@ const BlogItem = ({ blog, userId, token }) => {
           )}
         </div>
       </div>
-    </div>
   );
 };
 

@@ -12,7 +12,7 @@ const WhatWilllearn = ({ learningObjectives }) => {
           <ul className="flex gap-3 flex-col items-start">
             {learningObjectives &&
               learningObjectives.map((objective) => (
-                <li className="flex gap-2">
+                <li className="flex gap-2" key={objective}>
                   <svg
                     width="23px"
                     height="23px"

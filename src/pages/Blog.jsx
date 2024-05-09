@@ -19,6 +19,7 @@ function Blog() {
         const response = await axios.get(baseUrl, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        if (response.data.data.blogs.user === 0) return;
         setBlogs(response.data.data.blogs);
         setLoading(false);
       } catch (error) {

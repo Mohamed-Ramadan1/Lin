@@ -18,9 +18,7 @@ const PaymentGatWay = () => {
   return (
     <div className="viewCoursePage relative px-[80px] max-2xl:px-[30px] max-sm:py-[30px] max-sm:px-[15px] py-5">
       <div className="border p-5 ">
-        <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 text-center ">
-          Checkout
-        </h1>
+        <h1 class="text-2xl font-bold xt-white mb-4 text-center ">Checkout</h1>
         <Formik
           initialValues={{
             firstName: "",
