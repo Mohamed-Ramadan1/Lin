@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import { customFetch } from "../utils/customFetch";
+
 import PageContainer from "../layout/dashboard/PageContainer";
 import InstructorRequestsHeader from "../layout/dashboard/InstructorRequestsHeader";
 import InstructorsApplicationElement from "../layout/dashboard/InstructorsApplicationElement";
@@ -8,29 +9,25 @@ import InstructorsApplicationElement from "../layout/dashboard/InstructorsApplic
 const ManageInstructorsRequests = () => {
   const { token } = useSelector((state) => state.userReducers);
   const [instructors, setInstructors] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
+    setIsChanged(false);
     const fetchInstructors = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/v1/instructorApplications",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await customFetch.get("instructorApplications", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         setInstructors(response.data.data.applications);
-        setLoading(false);
       } catch (error) {
-        setLoading(false);
         setError(error.response.data.message);
       }
     };
     fetchInstructors();
-  }, [token]);
+  }, [token, isChanged]);
 
   return (
     <div className="p-5 ">
@@ -47,6 +44,7 @@ const ManageInstructorsRequests = () => {
               instructor={instructor}
               index={index + 1}
               token={token}
+              setIsChanged={setIsChanged}
             />
           ))}
       </PageContainer>

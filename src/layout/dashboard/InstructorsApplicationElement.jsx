@@ -1,8 +1,13 @@
-import axios from "axios";
 import { toast } from "react-toastify";
-const baseUrl =
-  "https://graduation-project-backend-5vtx.onrender.com/api/v1/instructorApplications";
-const InstructorsApplicationElement = ({ instructor, token, index }) => {
+import { customFetch } from "../../utils/customFetch";
+
+
+const InstructorsApplicationElement = ({
+  instructor,
+  token,
+  index,
+  setIsChanged,
+}) => {
   const {
     _id,
     name,
@@ -21,8 +26,8 @@ const InstructorsApplicationElement = ({ instructor, token, index }) => {
     );
     if (!confirm) return;
     try {
-      const response = await axios.patch(
-        `${baseUrl}/${_id}/approve`,
+      await customFetch.patch(
+        `instructorApplications/${_id}/approve`,
         {},
         {
           headers: {
@@ -30,6 +35,7 @@ const InstructorsApplicationElement = ({ instructor, token, index }) => {
           },
         }
       );
+      setIsChanged(true);
       toast.success("Instructor application approved successfully");
     } catch (error) {
       toast.error(error.response.data.message);
@@ -42,8 +48,8 @@ const InstructorsApplicationElement = ({ instructor, token, index }) => {
     );
     if (!confirm) return;
     try {
-      const response = await axios.patch(
-        `${baseUrl}/${_id}/reject`,
+      await customFetch.patch(
+        `instructorApplications/${_id}/reject`,
         {},
         {
           headers: {
@@ -51,6 +57,7 @@ const InstructorsApplicationElement = ({ instructor, token, index }) => {
           },
         }
       );
+      setIsChanged(true);
       toast.success("Instructor application rejected successfully");
     } catch (error) {
       toast.error(error.response.data.message);
@@ -63,11 +70,13 @@ const InstructorsApplicationElement = ({ instructor, token, index }) => {
     );
     if (!confirm) return;
     try {
-      const response = await axios.delete(`${baseUrl}/${_id}`, {
+      await customFetch.delete(`instructorApplications/${_id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      setIsChanged(true);
       toast.success("Instructor application deleted successfully");
     } catch (error) {
       toast.error(error.response.data.message);

@@ -10,7 +10,6 @@ import { ToastContainer } from "react-toastify";
 //Redux imports
 import { store, persistor } from "./store/store.js";
 import { Provider } from "react-redux";
-
 import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -1,68 +1,65 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { customFetch } from "../utils/customFetch";
 
 import PageContainer from "../layout/dashboard/PageContainer";
 import BlogsTableHeader from "../layout/dashboard/BlogsTableHeader";
 import BlogELement from "../layout/dashboard/BlogELement";
 
-const baseUrl = "http://localhost:3000/api/v1/admin/getAllBlogs";
-
 const ManageBlogs = () => {
   const { token } = useSelector((state) => state.userReducers);
   const [blogs, setBlogs] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        const res = await axios.get(baseUrl, {
+        const res = await customFetch.get("admin/getAllBlogs", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
+        if (res.data.data.blogs.length === 0) {
+          setIsChanged(false);
+          return setBlogs(null);
+        }
         setBlogs(res.data.data.blogs);
+        setIsChanged(false);
       } catch (error) {
-        setLoading(false);
         setError(error);
       }
     };
 
     fetchData();
-    setLoading(false);
-  }, [token]);
+  }, [token, isChanged]);
 
+  console.log();
   return (
-    <>
-      <div className="p-5">
-        <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">Blogs</span>{" "}
-        </h1>
-        {/* table manage table courses table  */}
-        <PageContainer tableHeader={"Blogs"}>
-          <BlogsTableHeader />
-          {blogs &&
-            blogs.map((blog, index) => (
-              <BlogELement
-                key={blog._id}
-                blog={blog}
-                index={index + 1}
-                token={token}
-              />
-            ))}
+    <div className="p-5">
+      <h1 className="text-2xl font-semibold">
+        Dashboard / <span className="text-blue-600">Blogs</span>{" "}
+      </h1>
+      <PageContainer tableHeader={"Blogs"}>
+        <BlogsTableHeader />
+        {blogs &&
+          blogs.map((blog, index) => (
+            <BlogELement
+              key={blog._id}
+              blog={blog}
+              index={index + 1}
+              token={token}
+              setIsChanged={setIsChanged}
+            />
+          ))}
 
-          {!blogs && !loading && !loading && (
-            <div className="flex justify-center items-center h-96">
-              <p className="text-2xl font-semibold">No blogs found</p>
-            </div>
-          )}
-        </PageContainer>
-      </div>
-    </>
+        {!blogs && (
+          <div className="flex justify-center items-center h-10">
+            <p className="text-2xl font-semibold">No blogs found</p>
+          </div>
+        )}
+      </PageContainer>
+    </div>
   );
 };
 

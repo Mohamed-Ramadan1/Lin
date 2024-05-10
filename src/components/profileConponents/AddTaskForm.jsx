@@ -1,25 +1,12 @@
 import { Formik, Form } from "formik";
-import CustomInput from "../forms/CustomInput";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createTask } from "../../store/taskSlice";
-import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { taskActions } from "../../store/taskSlice";
 import { addTaskSchema } from "../../schema/userShardSchemas";
-const AddTaskForm = () => {
-  const dispatch = useDispatch();
-  const { isSuccess, error } = useSelector((state) => state.taskReducers);
+import CustomInput from "../forms/CustomInput";
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     toast.success("Task created successfully");
-  //     dispatch(taskActions.resetSuccessState());
-  //   }
-  //   if (error) {
-  //     toast.error(error);
-  //     dispatch(taskActions.resetSuccessState());
-  //   }
-  // }, [error, dispatch]);
+const AddTaskForm = ({ setIsChanged }) => {
+  const dispatch = useDispatch();
 
   return (
     <Formik
@@ -30,6 +17,7 @@ const AddTaskForm = () => {
       validationSchema={addTaskSchema}
       onSubmit={(values, { resetForm }) => {
         dispatch(createTask(values));
+        setIsChanged(true);
         toast.success("Task created successfully");
         resetForm();
       }}

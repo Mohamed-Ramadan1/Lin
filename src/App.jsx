@@ -33,7 +33,6 @@ import {
   ManageInstructorsRequests,
   ManagePayments,
 } from "./pages";
-
 import ViewCourses from "./pages/ViewCourses";
 import DetailsCourse from "./pages/DetailsCourse";
 

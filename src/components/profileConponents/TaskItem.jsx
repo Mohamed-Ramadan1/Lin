@@ -2,7 +2,10 @@ import { useDispatch } from "react-redux";
 import { deleteTask } from "../../store/taskSlice";
 import { toast } from "react-toastify";
 
-const TaskItem = ({ task: { _id, title, description, createdAt, status } }) => {
+const TaskItem = ({
+  task: { _id, title, description, createdAt, status },
+  setIsChanged,
+}) => {
   const dispatch = useDispatch();
 
   const handelDelete = () => {
@@ -11,6 +14,7 @@ const TaskItem = ({ task: { _id, title, description, createdAt, status } }) => {
     );
     if (!isConfirm) return;
     dispatch(deleteTask(_id));
+    setIsChanged(true);
     toast.success("Task deleted successfully");
   };
 

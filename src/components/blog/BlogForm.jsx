@@ -1,27 +1,24 @@
 import { Formik, Form } from "formik";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { blogSchema } from "../../schema/blogSchemas";
+import { customFetch } from "../../utils/customFetch";
 import CustomInput from "../forms/CustomInput";
 import CustomDropdownInput from "../forms/CustomDropdownInput";
 import CustomTextArea from "../forms/CustomTextArea";
-import { blogSchema } from "../../schema/blogSchemas";
 
-const baseUrl = "http://localhost:3000/api/v1/blog";
-
-const BlogForm = () => {
+const BlogForm = ({ setIsChanged }) => {
   const { token } = useSelector((state) => state.userReducers);
   const createNewBlogPost = async (values) => {
     try {
-      await axios.post(baseUrl, values, {
+      await customFetch.post("blogs", values, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
+      setIsChanged(true);
       toast.success("Blog Posted Successfully");
     } catch (error) {
-      console.log(error);
       toast.error("Failed to Post Blog");
     }
   };
