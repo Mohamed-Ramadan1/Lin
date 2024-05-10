@@ -1,5 +1,5 @@
-import axios from "axios";
 import { toast } from "react-toastify";
+import { customFetch } from "../../utils/customFetch";
 const CourseElement = ({
   course: {
     _id,
@@ -14,6 +14,7 @@ const CourseElement = ({
     duration,
     price,
   },
+  setIsChanged,
   index,
   token,
 }) => {
@@ -24,21 +25,18 @@ const CourseElement = ({
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this course?"
     );
-    if (confirmDelete) {
-      try {
-        const res = await axios.delete(
-          `http://localhost:3000/api/v1/courses/${_id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        toast.success("Course Deleted Successfully");
-      } catch (error) {
-        toast.error("Error Deleting Course");
-        console.log(error);
-      }
+    if (!confirmDelete) return;
+    try {
+      await customFetch.delete(`/courses/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setIsChanged(true);
+      toast.success("Course Deleted Successfully");
+    } catch (error) {
+      toast.error("Error Deleting Course");
+      console.log(error);
     }
   };
 

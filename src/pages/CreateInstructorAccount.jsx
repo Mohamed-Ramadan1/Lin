@@ -4,17 +4,19 @@ import { createInstructorsSchema } from "../schema/createAccountsSchemas.js";
 import CustomInput from "../components/forms/CustomInput";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { customFetch } from "../utils/customFetch.js";
 
 const baseUrl = "http://localhost:3000/api/v1/admin";
 const CreateInstructorAccount = () => {
   const { token } = useSelector((state) => state.userReducers);
   const createInstructorHandler = async (values) => {
     try {
-      const res = await axios.post(`${baseUrl}/createInstructor`, values, {
+      await customFetch.post("admin/createInstructor", values, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
       toast.success("Instructor Created Successfully");
     } catch (error) {
       toast.error("Instructor Creation Failed");

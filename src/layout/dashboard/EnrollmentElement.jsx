@@ -1,31 +1,39 @@
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { deleteEnrollment } from "../../store/courseEnrollmentsSlice";
+import { customFetch } from "../../utils/customFetch";
 
-const baseUrl = "http://localhost:3000/api/v1/admin";
-
-const EnrollmentElement = ({ enrollment, index, token }) => {
+const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
   const dispatch = useDispatch();
 
   const { _id, price, createdAt, paid, updatedAt, enrollmentStatus } =
     enrollment;
   const { title, duration } = enrollment.course;
   const { name, email } = enrollment.user;
-  console.log(enrollment.course);
+
   const isPaid = paid ? "Paid" : "Not Paid";
   const createdAtDate = new Date(createdAt).toLocaleDateString();
   const updatedAtDate = new Date(updatedAt).toLocaleDateString();
 
   const handelDeleteEnrollment = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this enrollment?"
+    );
+    if (!isConfirmed) return;
     dispatch(deleteEnrollment(_id));
+    setIsChanged(true);
     toast.success("Enrollment deleted successfully");
   };
 
   const handelApproveEnrollment = async () => {
     try {
-      await axios.patch(
-        `${baseUrl}/approveEnrollment/${_id}`,
+      const isConfirmed = window.confirm(
+        "Are you sure you want to approve this enrollment?"
+      );
+      if (!isConfirmed) return;
+
+      await customFetch.patch(
+        `admin/approveEnrollment/${_id}`,
         {},
         {
           headers: {
@@ -33,6 +41,7 @@ const EnrollmentElement = ({ enrollment, index, token }) => {
           },
         }
       );
+      setIsChanged(true);
       toast.success("Enrollment approved successfully");
     } catch (error) {
       console.log(error);
@@ -41,8 +50,13 @@ const EnrollmentElement = ({ enrollment, index, token }) => {
   };
   const handelCancelledEnrollment = async () => {
     try {
-      await axios.patch(
-        `${baseUrl}/cancelEnrollment/${_id}`,
+      const isConfirmed = window.confirm(
+        "Are you sure you want to cancel this enrollment?"
+      );
+      if (!isConfirmed) return;
+
+      await customFetch.patch(
+        `admin/cancelEnrollment/${_id}`,
         {},
         {
           headers: {
@@ -50,10 +64,11 @@ const EnrollmentElement = ({ enrollment, index, token }) => {
           },
         }
       );
-      toast.success("Enrollment approved successfully");
+      setIsChanged(true);
+      toast.success("Enrollment cancelled successfully");
     } catch (error) {
       console.log(error);
-      toast.error("Error approving enrollment");
+      toast.error("Error cancelling enrollment");
     }
   };
 

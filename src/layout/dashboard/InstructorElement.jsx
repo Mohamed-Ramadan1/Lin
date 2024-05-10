@@ -1,8 +1,7 @@
-import axios from "axios";
 import { toast } from "react-toastify";
-const baseUrl = "http://localhost:3000/api/v1/admin";
+import { customFetch } from "../../utils/customFetch";
 
-const InstructorElement = ({ index, instructor, token }) => {
+const InstructorElement = ({ index, instructor, token, setIsChanged }) => {
   const {
     _id,
     specialization,
@@ -19,17 +18,19 @@ const InstructorElement = ({ index, instructor, token }) => {
     const isConfirm = window.confirm(
       "Are you sure you want to delete this instructor?"
     );
-    if (isConfirm) {
-      try {
-        await axios.delete(`${baseUrl}/deleteInstructor/${_id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        toast.success("Instructor deleted successfully");
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
+    if (!isConfirm) return;
+
+    try {
+      await customFetch.delete(`admin/deleteInstructor/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setIsChanged(true);
+      toast.success("Instructor deleted successfully");
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 
@@ -37,21 +38,22 @@ const InstructorElement = ({ index, instructor, token }) => {
     const isConfirm = window.confirm(
       "Are you sure you want to unactivate this instructor?"
     );
-    if (isConfirm) {
-      try {
-        await axios.patch(
-          `${baseUrl}/deactivateInstructor/${_id}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        toast.success("Instructor unactivated successfully");
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
+    if (!isConfirm) return;
+
+    try {
+      await customFetch.patch(
+        `admin/deactivateInstructor/${_id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setIsChanged(true);
+      toast.success("Instructor unactivated successfully");
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 
@@ -59,21 +61,22 @@ const InstructorElement = ({ index, instructor, token }) => {
     const isConfirm = window.confirm(
       "Are you sure you want to activate this instructor?"
     );
-    if (isConfirm) {
-      try {
-        await axios.patch(
-          `${baseUrl}/activateInstructor/${_id}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        toast.success("Instructor activated successfully");
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
+    if (!isConfirm) return;
+
+    try {
+      await customFetch.patch(
+        `admin/activateInstructor/${_id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setIsChanged(true);
+      toast.success("Instructor activated successfully");
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 
@@ -108,8 +111,7 @@ const InstructorElement = ({ index, instructor, token }) => {
             <button
               type="button"
               onClick={handelActivateInstructor}
-              className="bg-green-500 text-white p-1.5 rounded"
-              //   disabled={active}
+              className="bg-green-500 text-white p-1.5 rounded "
             >
               Active
             </button>

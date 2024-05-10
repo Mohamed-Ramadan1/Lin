@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import CoursesHeader from "../layout/dashboard/CoursesHeader";
 import CourseContainer from "../layout/dashboard/CourseContainer";
 import CourseElement from "../layout/dashboard/CourseElement";
-import { Link } from "react-router-dom";
+import { customFetch } from "../utils/customFetch";
 function FreeCourses() {
   const { token } = useSelector((state) => state.userReducers);
   const [courses, setCourses] = useState(null);
+  const [isChanged, setIsChanged] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -15,14 +15,11 @@ function FreeCourses() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          "http://localhost:3000/api/v1/admin/freeCourses",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await customFetch.get("/admin/freeCourses", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setCourses(res.data.data.courses);
       } catch (error) {
@@ -33,7 +30,7 @@ function FreeCourses() {
 
     fetchData();
     setLoading(false);
-  }, [token]);
+  }, [token, isChanged]);
   return (
     <>
       <div className="p-5">
@@ -52,6 +49,7 @@ function FreeCourses() {
                 course={course}
                 index={index + 1}
                 token={token}
+                setIsChanged={setIsChanged}
               />
             ))}
 

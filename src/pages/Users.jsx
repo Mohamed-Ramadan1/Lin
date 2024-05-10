@@ -2,20 +2,22 @@ import UserContainer from "../layout/dashboard/UserContainer";
 import UserTableHeader from "../layout/dashboard/UserTableHeader";
 import UserELement from "../layout/dashboard/UserELement";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAllUsers } from "./../store/adminSlice";
 
 function Users() {
   const dispatch = useDispatch();
+  const [isChanged, setIsChanged] = useState(false);
   const { token } = useSelector((state) => state.userReducers);
   const { users, isLoading, error } = useSelector(
     (state) => state.adminReducers
   );
 
   useEffect(() => {
+    setIsChanged(false);
     dispatch(getAllUsers());
-  }, [dispatch]);
-
+  }, [dispatch, isChanged]);
+  console.log(isChanged);
   return (
     <>
       <div className="p-5">
@@ -32,6 +34,7 @@ function Users() {
                 key={user._id}
                 user={user}
                 token={token}
+                setIsChanged={setIsChanged}
               />
             ))}
 

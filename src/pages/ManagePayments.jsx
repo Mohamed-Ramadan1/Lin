@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
-import axios from "axios";
+import { customFetch } from "../utils/customFetch";
 import PageContainer from "../layout/dashboard/PageContainer";
 import PaymentsTableHeader from "../layout/dashboard/PaymentsTableHeader";
 import PaymentRecordELements from "../layout/dashboard/PaymentRecordELements";
-const baseURL = "http://localhost:3000/api/v1/paymentRecords";
+
 const ManagePayments = () => {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,11 +14,12 @@ const ManagePayments = () => {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get(baseURL, {
+        const response = await customFetch.get("paymentRecords", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+
         setPayments(response.data.data.paymentRecords);
         setLoading(false);
       } catch (error) {

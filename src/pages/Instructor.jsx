@@ -1,11 +1,8 @@
 import CustomInput from "../components/forms/CustomInput";
 import CustomTextArea from "../components/forms/CustomTextArea";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Formik, Form } from "formik";
-
-const baseUrl = "http://localhost:3000/api/v1/instructorApplications";
+import { customFetch } from "../utils/customFetch";
 
 const Instructor = () => {
   return (
@@ -31,7 +28,8 @@ const Instructor = () => {
                 }}
                 onSubmit={async (values, actions) => {
                   try {
-                    await axios.post(`${baseUrl}`, values);
+                    // await axios.post(`${baseUrl}`, values);
+                    await customFetch.post("instructorApplications", values);
                     toast.success("Application Sent Successfully");
                   } catch (error) {
                     toast.error(error.response.data.message);

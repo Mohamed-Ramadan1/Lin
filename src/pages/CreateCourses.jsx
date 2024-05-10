@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createCourse } from "../store/courseSlice";
 import { courseActions } from "../store/courseSlice";
-import { coursesSchema } from "../schema/coursesSchema.js";
 
 function CreateCourses() {
   const dispatch = useDispatch();

@@ -1,5 +1,3 @@
-import React from "react";
-
 import Avatar from "../../../assets/Avatar.png";
 
 const Instructor = ({ instructor }) => {

@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteUser } from "../../store/adminSlice";
-
+import { customFetch } from "../../utils/customFetch";
 import axios from "axios";
 import { toast } from "react-toastify";
 const baseUrl = "http://localhost:3000/api/v1/admin";
 
-const UserELement = ({ user, index, token }) => {
+const UserELement = ({ user, index, token, setIsChanged }) => {
   const dispatch = useDispatch();
   const { name, email, role, createdAt, _id, isVerified, active } = user;
   const verified = isVerified ? "Verified" : "Not verified";
@@ -14,14 +14,20 @@ const UserELement = ({ user, index, token }) => {
   const formatData = new Date(createdAt).toLocaleDateString("en-GB");
 
   const handelDeleteAccount = async () => {
+    const isConfirmed = window.confirm("Are you sure you want to delete?");
+    if (!isConfirmed) return;
     dispatch(deleteUser(_id));
+    setIsChanged(true);
     toast.success("User deleted successfully");
   };
 
   const handelActivateAccount = async () => {
+    const isConfirmed = window.confirm("Are you sure you want to activate?");
+    if (!isConfirmed) return;
+
     try {
-      await axios.patch(
-        `${baseUrl}/activateUser/${_id}`,
+      await customFetch.patch(
+        `admin/activateUser/${_id}`,
         {},
         {
           headers: {
@@ -29,6 +35,8 @@ const UserELement = ({ user, index, token }) => {
           },
         }
       );
+
+      setIsChanged(true);
       toast.success("User activated successfully");
     } catch (error) {
       toast.error("Error activating user");
@@ -37,8 +45,12 @@ const UserELement = ({ user, index, token }) => {
 
   const handelUnActivateAccount = async () => {
     try {
-      await axios.patch(
-        `${baseUrl}/unActivateUser/${_id}`,
+      const isConfirmed = window.confirm(
+        "Are you sure you want to unActivate?"
+      );
+      if (!isConfirmed) return;
+      await customFetch.patch(
+        `admin/unActivateUser/${_id}`,
         {},
         {
           headers: {
@@ -46,6 +58,7 @@ const UserELement = ({ user, index, token }) => {
           },
         }
       );
+      setIsChanged(true);
       toast.success("User unActivated successfully");
     } catch (error) {
       toast.error("Error unActivated user");
@@ -54,8 +67,10 @@ const UserELement = ({ user, index, token }) => {
 
   const handelVerifiedEmails = async () => {
     try {
-      await axios.patch(
-        `${baseUrl}/verifyUser/${_id}`,
+      const isConfirmed = window.confirm("Are you sure you want to verify?");
+      if (!isConfirmed) return;
+      await customFetch.patch(
+        `admin/verifyUser/${_id}`,
         {},
         {
           headers: {
@@ -63,6 +78,7 @@ const UserELement = ({ user, index, token }) => {
           },
         }
       );
+      setIsChanged(true);
       toast.success("User email verified successfully");
     } catch (error) {
       toast.error("Error verified email ");

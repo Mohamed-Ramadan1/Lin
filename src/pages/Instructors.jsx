@@ -1,22 +1,22 @@
 import UsersContainer from "../layout/dashboard/UserContainer";
 import InstructoreTableHeader from "../layout/dashboard/InstructoreTableHeader";
 import InstructorElement from "../layout/dashboard/InstructorElement";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
-const baseUrl = "http://localhost:3000/api/v1/admin";
+import { customFetch } from "../utils/customFetch";
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
+  const [isChanged, setIsChanged] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const { token } = useSelector((state) => state.userReducers);
 
   useEffect(() => {
+    setIsChanged(false);
     const fetchInstructors = async () => {
       try {
-        const res = await axios.get(`${baseUrl}/getAllInstructors`, {
+        const res = await customFetch.get("admin/getAllInstructors", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -29,7 +29,7 @@ const Instructors = () => {
       }
     };
     fetchInstructors();
-  }, [token]);
+  }, [token, isChanged]);
 
   return (
     <>
@@ -50,6 +50,7 @@ const Instructors = () => {
                 index={index + 1}
                 instructor={instructor}
                 token={token}
+                setIsChanged={setIsChanged}
               />
             ))
           )}

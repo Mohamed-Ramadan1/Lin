@@ -4,27 +4,27 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import StatsContainer from "../layout/dashboard/StatsContainer";
 import StatsBox from "../layout/dashboard/StatsBox";
+import { customFetch } from "../utils/customFetch";
 
 function Dashboard() {
   const { token } = useSelector((state) => state.userReducers);
   const [siteStates, setSiteStates] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          "http://localhost:3000/api/v1/admin/siteStatics",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+
+        const res = await customFetch.get("/admin/siteStatics", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setSiteStates(res.data.data);
+        setLoading(false);
       } catch (error) {
         setLoading(false);
         setError(error);
@@ -32,23 +32,22 @@ function Dashboard() {
     };
 
     fetchData();
-    setLoading(false);
   }, [token]);
-
+  console.log(loading);
   return (
     <>
       <div className="p-5">
         <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">statics </span>{" "}
+          Dashboard / <span className="text-blue-600">statics </span>
         </h1>
 
         {loading && (
-          <>
+          <div>
             <span className="loading loading-dots loading-xs"></span>
             <span className="loading loading-dots loading-sm"></span>
             <span className="loading loading-dots loading-md"></span>
             <span className="loading loading-dots loading-lg"></span>
-          </>
+          </div>
         )}
         {!loading && error && <p>Error: {error.message}</p>}
 
