@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
-import axios from "axios";
 import CustomInput from "../components/forms/CustomInput";
 import { enrollUserToCourse } from "../store/courseEnrollmentsSlice";
+import { customFetch } from "../utils/customFetch";
+
 const PaymentGatWay = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
   const { token } = useSelector((state) => state.userReducers);
-
-  const basUrl = "http://localhost:3000/api/v1/paymentRecords";
 
   return (
     <div className="viewCoursePage relative px-[80px] max-2xl:px-[30px] max-sm:py-[30px] max-sm:px-[15px] py-5">
@@ -29,13 +28,13 @@ const PaymentGatWay = () => {
             paymentAmount: "",
           }}
           onSubmit={async (values, actions) => {
-            console.log(values);
             try {
-              const res = await axios.post(`${basUrl}`, values, {
+              const res = await customFetch.post("paymentRecords", values, {
                 headers: {
                   Authorization: `Bearer ${token}`,
                 },
               });
+
               const data = await res.data;
               dispatch(enrollUserToCourse({ course: courseId }));
               toast.success("Payment and enrollment Successfull");

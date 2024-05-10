@@ -1,20 +1,21 @@
 import { BtnFav } from "../../ui/BtnFav";
 import ShoppingCartSimple from "../../icons/ShoppingCartSimple";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { customFetch } from "../../../utils/customFetch";
 
 const Salary = ({ duration, price, paymentModel, courseId, videos }) => {
   const [isEnrolled, setIsEnrolled] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
   const navigate = useNavigate();
   const { token, user } = useSelector((state) => state.userReducers);
   const handelEnrollFreeCourse = async () => {
     try {
-      const res = await axios.post(
-        "https://graduation-project-backend-5vtx.onrender.com/api/v1/enrolls",
+      await customFetch.post(
+        "enrolls",
         {
           course: courseId,
         },
@@ -24,6 +25,8 @@ const Salary = ({ duration, price, paymentModel, courseId, videos }) => {
           },
         }
       );
+      setIsEnrolled(true);
+      setIsChanged(true);
       toast.success("Enrolled successfully");
       navigate(`/myPaiedCourse/${courseId}`);
     } catch (error) {
@@ -34,15 +37,12 @@ const Salary = ({ duration, price, paymentModel, courseId, videos }) => {
   useEffect(() => {
     const fetchEnrolledCourse = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:3000/api/v1/enrolls/user/${courseId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        // i want to check if there enrolled course or not and based set the value of is enrolled
+        const res = await customFetch.get(`enrolls/user/${courseId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         if (res.data.data.enrollments.user._id === user._id) {
           setIsEnrolled(true);
         }
@@ -51,7 +51,7 @@ const Salary = ({ duration, price, paymentModel, courseId, videos }) => {
       }
     };
     fetchEnrolledCourse();
-  }, [courseId, token, user]);
+  }, [courseId, token, user, isChanged]);
 
   return (
     <div className="salary p-3 min-w-[290px] max-h-[400px] flex flex-col gap-4 items-start rounded-3xl max-md:hidden bg-[#D5FF40]">
