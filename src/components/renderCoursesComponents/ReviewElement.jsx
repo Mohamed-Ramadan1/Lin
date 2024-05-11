@@ -1,21 +1,28 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
-const ReviewElement = ({ fullReview, currentUser, token }) => {
+import { customFetch } from "../../utils/customFetch";
+const ReviewElement = ({ fullReview, currentUser, token, setIsChanged }) => {
   const { review, rating, createdAt, user } = fullReview;
   const formatDate = new Date(createdAt).toLocaleDateString();
 
   const handleDeleteReview = async () => {
     confirm("Are you sure you want to delete this review?");
     try {
-      await axios.delete(
-        `http://localhost:3000/api/v1/reviews/${fullReview._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      // await axios.delete(
+      //   `http://localhost:3000/api/v1/reviews/${fullReview._id}`,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+      await customFetch.delete(`reviews/${fullReview._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setIsChanged(true);
       toast.success("Review deleted successfully");
     } catch (error) {
       toast.error("Error deleting review");

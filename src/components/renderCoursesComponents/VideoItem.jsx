@@ -1,22 +1,24 @@
-import React from "react";
-const VideoItem = ({ course }) => {
+import ReactPlayer from "react-player";
+const VideoItem = ({ course, onClick }) => {
   const { title, url, _id } = course;
 
   return (
-    // this layout is not correct where when the vide is bigger size its statrt to overflow the container
-
-    <div className="flex align-center gap-5 my-2 hover:bg-gray-100 duration-300 ">
+    <div
+      className="flex align-center gap-5 my-2 hover:bg-gray-100 duration-300 "
+      onClick={() => onClick(course)}
+    >
       <div className="w-[200px] h-[100px] bg-gray-300 p-1">
         <div className="w-full h-full ">
-          <iframe
-            className="w-full h-full rounded-[5px]"
-            src={url}
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            autoplay="false"
+          <ReactPlayer
+            url={url}
+            width="100%"
+            height="100%"
+            controls
+            config={{
+              youtube: {
+                playerVars: { showinfo: 1 },
+              },
+            }}
           />
         </div>
       </div>

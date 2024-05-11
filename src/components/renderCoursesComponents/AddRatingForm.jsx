@@ -1,13 +1,13 @@
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Formik, Form } from "formik";
+import { customFetch } from "../../utils/customFetch";
+
 import CustomInput from "../forms/CustomInput";
 import CustomTextArea from "../forms/CustomTextArea";
 
-const AddRatingForm = () => {
+const AddRatingForm = ({ setIsChanged }) => {
   const { token } = useSelector((state) => state.userReducers);
   const { courseId } = useParams();
   return (
@@ -18,8 +18,8 @@ const AddRatingForm = () => {
       }}
       onSubmit={async (values, actions) => {
         try {
-          const res = await axios.post(
-            `http://localhost:3000/api/v1/reviews`,
+          const res = await customFetch.post(
+            "reviews",
             {
               rating: values.rating,
               review: values.review,
@@ -32,6 +32,7 @@ const AddRatingForm = () => {
             }
           );
           if (res.status === 201) {
+            setIsChanged(true);
             toast.success("Review added successfully");
           }
         } catch (error) {

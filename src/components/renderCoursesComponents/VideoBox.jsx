@@ -1,21 +1,19 @@
-const VideoBox = () => {
-  const url =
-    "https://res.cloudinary.com/dfjwny742/video/upload/v1715258237/Learn_HTML_In_Arabic_2021_-__03_-_First_Project_And_First_Page_720P_HD_uldnxx.mp4";
-
+import ReactPlayer from "react-player";
+const VideoBox = (props) => {
   return (
-    <iframe
-      class="w-full h-full rounded-[30px]"
-      src={url}
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen
-    ></iframe>
-
-    // <div className="w-full h-full rounded-[30px]">
-    //   <ReactPlayer url={url} playing={true} controls={true} />
-    // </div>
+    <div className="w-full h-full rounded-[30px]">
+      <ReactPlayer
+        url={props.url}
+        width="100%"
+        height="100%"
+        controls
+        config={{
+          youtube: {
+            playerVars: { showinfo: 1 },
+          },
+        }}
+      />
+    </div>
   );
 };
 
