@@ -1,11 +1,44 @@
 import React, { useState } from "react";
 // import InputCheckBox from '../../ui/InputCheckBox';
-
-const OptionList = ({ titleCheckList }) => {
+import { useEffect } from "react";
+import { customFetch } from "../../../utils/customFetch";
+const OptionList = ({ titleCheckList, setCourses }) => {
   const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    category: "",
+    skillLevel: "",
+    paymentModel: "",
+    language: "",
+  });
 
   const toggleList = () => {
     setOpen(!open);
+  };
+  // This effect runs whenever formData changes (any field)
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      // Only make request if at least one field has a value
+      const searchParams = new URLSearchParams(); // Build query string parameters
+      for (const key in formData) {
+        if (formData[key] !== "") {
+          searchParams.append(key, formData[key]);
+        }
+      }
+      const queryString = searchParams.toString(); // Combine parameters
+
+      if (queryString) {
+        const result = await customFetch.get(`courses?${queryString}`);
+        console.log(result);
+        setCourses(result.data.data.courses); // Assuming response structure
+      }
+    }, 500); // Adjust the delay as needed (in milliseconds)
+
+    // Cleanup function to clear the timeout when the component unmounts
+    return () => clearTimeout(delayDebounceFn);
+  }, [formData]);
+
+  const handleInputChange = (event) => {
+    setFormData({ ...formData, [event.target.id]: event.target.value });
   };
 
   return (
@@ -61,44 +94,76 @@ const OptionList = ({ titleCheckList }) => {
         style={{ maxHeight: open ? "100%" : "0", overflow: "hidden" }}
       >
         <div className="border-bottom">
-          <label for="name" class="block mb-1">
-            Categoryes
+          <label for="category" class="block mb-1">
+            Category
           </label>
-          <input
-            type="text"
-            id="name"
+          <select
+            id="category"
+            value={formData.category}
+            onChange={handleInputChange}
             class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          >
+            <option value="">All</option>
+            <option value="Development">Development</option>
+            <option value="Design">Design</option>
+            <option value="Marketing">Marketing</option>
+            <option value="IT & Software">IT & Software</option>
+            {/*languages  */}
+            <option value="Business">Business</option>
+            <option vlaue="Language">Language</option>
+          </select>
+        </div>
+
+        <div className="border-bottom">
+          <label for="skillLevel" class="block mb-1">
+            Skill Level
+          </label>
+          <select
+            id="skillLevel" // Might not be needed for search
+            value={formData.title} // Assuming data is stored in state (optional)
+            onChange={handleInputChange} // Might not be needed for search
+            class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">All Levels</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+            {/* You can populate options with titles from your data if needed for search */}
+          </select>
         </div>
         <div className="border-bottom">
-          <label for="name" class="block mb-1">
-            Title
+          <label for="paymentModel" class="block mb-1">
+            Payment Model
           </label>
-          <input
-            type="text"
-            id="name"
+          <select
+            id="paymentModel" // Might not be needed for search
+            value={formData.price} // Assuming data is stored in state (optional)
+            onChange={handleInputChange} // Might not be needed for search
             class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          >
+            <option value="">All </option>
+            <option value="free">Free</option>
+            <option value="paid">Paid</option>
+            {/* You can define price ranges or options based on your data if needed for search */}
+          </select>
         </div>
+
         <div className="border-bottom">
-          <label for="name" class="block mb-1">
-            Price
-          </label>
-          <input
-            type="text"
-            id="name"
-            class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div className="border-bottom">
-          <label for="name" class="block mb-1">
+          <label for="language" class="block mb-1">
             Langue
           </label>
-          <input
-            type="text"
-            id="name"
+          <select
+            id="language"
+            value={formData.language}
+            onChange={handleInputChange}
             class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          >
+            <option value="">All Languages</option>
+            <option value="English">English</option>
+            <option value="French">French</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Arabic">Arabic</option>
+          </select>
         </div>
       </div>
     </div>

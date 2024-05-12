@@ -1,13 +1,12 @@
 import React from "react";
-// import InputCheckBox from '../../ui/InputCheckBox'
 import CheckboxeList from "./CheckboxeList";
 import OptionList from "./OptionList";
 
-const FilterCourses = () => {
+const FilterCourses = ({ setCourses }) => {
   return (
     <div className="flex flex-col gap-[10px] transition ease-in">
       <CheckboxeList titleCheckList="Video Ratings" />
-      <OptionList titleCheckList="options" />
+      <OptionList setCourses={setCourses} titleCheckList="options" />
     </div>
   );
 };
