@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-// import { getAllUsers } from "./../store/adminSlice";
-// import UserContainer from "../layout/dashboard/UserContainer";
-// import UserTableHeader from "../layout/dashboard/UserTableHeader";
-// import UserELement from "../layout/dashboard/UserELement";
-
 import { getAllUsers } from "../../store/adminSlice";
-import UserContainer from "../../layout/dashboard/UserContainer";
-import UserTableHeader from "../../layout/dashboard/UserTableHeader";
-import UserELement from "../../layout/dashboard/UserELement";
+
+import {
+  PageIntro,
+  PageContainer,
+  UserElement,
+  UserTableHeader,
+} from "../../components";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -23,19 +22,15 @@ const Users = () => {
     setIsChanged(false);
     dispatch(getAllUsers());
   }, [dispatch, isChanged]);
-  console.log(isChanged);
   return (
     <>
       <div className="p-5">
-        <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">Users</span>
-        </h1>
-
-        <UserContainer>
+        <PageIntro pageName="Users" />
+        <PageContainer tableHeader=" Users">
           <UserTableHeader />
           {users &&
             users.map((user, index) => (
-              <UserELement
+              <UserElement
                 index={index + 1}
                 key={user._id}
                 user={user}
@@ -70,7 +65,7 @@ const Users = () => {
               </td>
             </tr>
           )}
-        </UserContainer>
+        </PageContainer>
       </div>
     </>
   );

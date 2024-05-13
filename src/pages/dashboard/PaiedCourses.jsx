@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-// import { customFetch } from "../utils/customFetch";
-// import CoursesHeader from "../layout/dashboard/CoursesHeader";
-// import CourseContainer from "../layout/dashboard/CourseContainer";
-// import CourseElement from "../layout/dashboard/CourseElement";
-
 import { customFetch } from "../../utils/customFetch";
-import CoursesHeader from "../../layout/dashboard/CoursesHeader";
-import CourseContainer from "../../layout/dashboard/CourseContainer";
-import CourseElement from "../../layout/dashboard/CourseElement";
+import {
+  PageIntro,
+  PageContainer,
+  CourseElement,
+  CoursesHeader,
+} from "../../components";
 
 function PaiedCourses() {
   const { token } = useSelector((state) => state.userReducers);
@@ -42,11 +40,9 @@ function PaiedCourses() {
   return (
     <>
       <div className="p-5">
-        <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">Paid courses</span>{" "}
-        </h1>
+        <PageIntro pageName="Paid Courses" />
         {/* table manage table courses table  */}
-        <CourseContainer tableHeader={"Paid Courses"}>
+        <PageContainer tableHeader={"Paid Courses"}>
           <CoursesHeader />
           {courses &&
             courses.map((course, index) => (
@@ -84,7 +80,7 @@ function PaiedCourses() {
               </td>
             </tr>
           )}
-        </CourseContainer>
+        </PageContainer>
       </div>
     </>
   );

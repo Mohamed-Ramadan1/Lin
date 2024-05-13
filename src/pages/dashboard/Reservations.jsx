@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import EnrollmentContainer from "./../layout/dashboard/EnrollmentsContainer";
-// import EnrollmentElement from "./../layout/dashboard/EnrollmentElement";
-// import EnrollmentHeader from "./../layout/dashboard/EnrollmentHeader";
-// import { getAllEnrollments } from "../store/courseEnrollmentsSlice";
 
-import EnrollmentContainer from "../../layout/dashboard/EnrollmentsContainer";
-import EnrollmentElement from "../../layout/dashboard/EnrollmentElement";
-import EnrollmentHeader from "../../layout/dashboard/EnrollmentHeader";
 import { getAllEnrollments } from "../../store/courseEnrollmentsSlice";
-
+import {
+  PageIntro,
+  PageContainer,
+  EnrollmentElement,
+  EnrollmentHeader,
+} from "../../components";
 function Reservations() {
   const [isChanged, setIsChanged] = useState(false);
   const dispatch = useDispatch();
@@ -26,11 +24,9 @@ function Reservations() {
   console.log(allEnrollments);
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-semibold">
-        Dashboard / <span className="text-blue-600">Enrollments</span>
-      </h1>
+      <PageIntro pageName="Reservations" />
 
-      <EnrollmentContainer>
+      <PageContainer tableHeader="Courses Enrollments">
         <EnrollmentHeader />
 
         {allEnrollments &&
@@ -51,7 +47,7 @@ function Reservations() {
             </td>
           </tr>
         )}
-      </EnrollmentContainer>
+      </PageContainer>
     </div>
   );
 }

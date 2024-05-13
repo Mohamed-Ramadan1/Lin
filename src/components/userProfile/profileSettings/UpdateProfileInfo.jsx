@@ -1,11 +1,8 @@
 import { Formik, Form } from "formik";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
-import CustomInput from "../forms/CustomInput";
-import CustomFileInput from "../forms/CustomFileInput";
-import { updateUserInfo, updateUserPassword } from "../../store/userSlice";
-import { userActions } from "../../store/userSlice";
+import { useDispatch } from "react-redux";
+import CustomInput from "../../forms/CustomInput";
+import CustomFileInput from "../../forms/CustomFileInput";
+import { updateUserInfo } from "../../../store/userSlice";
 const UpdateProfileInfo = () => {
   const dispatch = useDispatch();
   //   const { token, isSuccess } = useSelector((state) => state.userReducers);

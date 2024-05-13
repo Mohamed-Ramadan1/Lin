@@ -1,4 +1,4 @@
-import BannerProfile from "./../../assets/BannerProfile.png";
+// import BannerProfile from "./../../assets/BannerProfile.png";
 import { useSelector } from "react-redux";
 
 const ProfileInfo = () => {

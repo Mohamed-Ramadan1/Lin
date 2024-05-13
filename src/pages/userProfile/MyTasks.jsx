@@ -1,19 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
-// import { getAllTasks } from "../store/taskSlice";
 import { getAllTasks } from "../../store/taskSlice";
 import { useEffect, useState } from "react";
-// import { customFetch } from "../utils/customFetch";
 import { customFetch } from "../../utils/customFetch";
 
-// import TasksInformation from "../components/profileConponents/TasksInformation";
-// import AddTaskForm from "../components/profileConponents/AddTaskForm";
-// import TaskItem from "../components/profileConponents/TaskItem";
-// import DateSection from "../components/profileConponents/DateSection";
-
-import TasksInformation from "../../components/profileConponents/TasksInformation";
-import AddTaskForm from "../../components/profileConponents/AddTaskForm";
-import TaskItem from "../../components/profileConponents/TaskItem";
-import DateSection from "../../components/profileConponents/DateSection";
+import {
+  TaskItem,
+  TasksInformation,
+  DateSection,
+  AddTaskForm,
+} from "../../components";
 
 function MyTasks() {
   const [tasksStates, setTasksStates] = useState(null);

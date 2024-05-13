@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteTask } from "../../store/taskSlice";
+import { deleteTask } from "../../../store/taskSlice";
 import { toast } from "react-toastify";
 
 const TaskItem = ({

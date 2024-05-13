@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import { customFetch } from "../utils/customFetch";
-// import PageContainer from "../layout/dashboard/PageContainer";
-// import InstructorRequestsHeader from "../layout/dashboard/InstructorRequestsHeader";
-// import InstructorsApplicationElement from "../layout/dashboard/InstructorsApplicationElement";
 
 import { customFetch } from "../../utils/customFetch";
-import PageContainer from "../../layout/dashboard/PageContainer";
-import InstructorRequestsHeader from "../../layout/dashboard/InstructorRequestsHeader";
-import InstructorsApplicationElement from "../../layout/dashboard/InstructorsApplicationElement";
+
+import {
+  PageIntro,
+  PageContainer,
+  InstructorRequestsHeader,
+  InstructorsApplicationElement,
+} from "../../components";
 
 const ManageInstructorsRequests = () => {
   const { token } = useSelector((state) => state.userReducers);
@@ -35,9 +35,7 @@ const ManageInstructorsRequests = () => {
 
   return (
     <div className="p-5 ">
-      <h1 className="text-2xl font-semibold">
-        Dashboard /<span className="text-blue-600">Instructor Requests </span>
-      </h1>
+      <PageIntro pageName="Instructors Requests" />
 
       <PageContainer tableHeader={"Instructors requests"}>
         <InstructorRequestsHeader />

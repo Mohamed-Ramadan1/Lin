@@ -1,11 +1,9 @@
-import React from "react";
+import { PageIntro } from "../../components";
 
 function Settings() {
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-semibold">
-        Dashboard / <span className="text-blue-600">home page</span>{" "}
-      </h1>
+      <PageIntro pageName="Settings" />
       <form action="">
         <input
           type="text"

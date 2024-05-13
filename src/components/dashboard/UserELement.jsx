@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 import { deleteUser } from "../../store/adminSlice";
 import { customFetch } from "../../utils/customFetch";
-import axios from "axios";
 import { toast } from "react-toastify";
-const baseUrl = "http://localhost:3000/api/v1/admin";
+import TableBody from "./shard/TableBody";
+import TableBodyCell from "./shard/TableBodyCell";
 
 const UserELement = ({ user, index, token, setIsChanged }) => {
   const dispatch = useDispatch();
@@ -86,54 +86,51 @@ const UserELement = ({ user, index, token, setIsChanged }) => {
   };
 
   return (
-    <tbody>
-      <tr>
-        <td className="p-3 text-center">{index}</td>
-        <td className="p-3 text-center">{_id}</td>
-        <td className="p-3 text-center">{name}</td>
-        <td className="p-3 text-center">{email}</td>
-        <td className="p-3 text-center">{verified}</td>
-        <td className="p-3 text-center">{role}</td>
-        <td className="p-3 text-center">{formatData}</td>
-        <td className="p-3 text-center">{activation}</td>
-
-        <td className="p-3 text-start">
-          <div className="flex gap-5">
-            <button
-              type="button"
-              onClick={handelDeleteAccount}
-              className="bg-red-500 text-white p-1.5 rounded hover:bg-red-800"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              onClick={handelUnActivateAccount}
-              className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-800"
-              disabled={!active}
-            >
-              UnActive
-            </button>
-            <button
-              type="button"
-              onClick={handelActivateAccount}
-              className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800 "
-              disabled={active}
-            >
-              Active
-            </button>
-            <button
-              type="button"
-              onClick={handelVerifiedEmails}
-              className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800"
-              disabled={isVerified}
-            >
-              Verify
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+    <TableBody>
+      <TableBodyCell>{index}</TableBodyCell>
+      <TableBodyCell>{_id}</TableBodyCell>
+      <TableBodyCell>{name}</TableBodyCell>
+      <TableBodyCell>{email}</TableBodyCell>
+      <TableBodyCell>{verified}</TableBodyCell>
+      <TableBodyCell>{role}</TableBodyCell>
+      <TableBodyCell>{formatData}</TableBodyCell>
+      <TableBodyCell>{activation}</TableBodyCell>
+      <TableBodyCell>
+        <div className="flex gap-5">
+          <button
+            type="button"
+            onClick={handelDeleteAccount}
+            className="bg-red-500 text-white p-1.5 rounded hover:bg-red-800"
+          >
+            Delete
+          </button>
+          <button
+            type="button"
+            onClick={handelUnActivateAccount}
+            className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-800"
+            disabled={!active}
+          >
+            UnActive
+          </button>
+          <button
+            type="button"
+            onClick={handelActivateAccount}
+            className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800 "
+            disabled={active}
+          >
+            Active
+          </button>
+          <button
+            type="button"
+            onClick={handelVerifiedEmails}
+            className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800"
+            disabled={isVerified}
+          >
+            Verify
+          </button>
+        </div>
+      </TableBodyCell>
+    </TableBody>
   );
 };
 

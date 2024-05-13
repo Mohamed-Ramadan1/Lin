@@ -3,8 +3,10 @@ import Footer from "../../layout/footer/Footer";
 import TopContent from "../../layout/header/TopContent";
 import MidContent from "../../layout/header/MidContent";
 
-import ProfileInfo from "../../components/profileConponents/ProfileInfo";
-import ProfileNavigationBar from "../../components/profileConponents/ProfileNavigationBar";
+// import ProfileInfo from "../../../components/profileConponents/ProfileInfo";
+// import ProfileNavigationBar from "../../components/profileConponents/ProfileNavigationBar";
+
+import { ProfileInfo, ProfileNavigationBar } from "../../components";
 
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";

@@ -3,18 +3,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-// import { createCourse } from "../store/courseSlice";
-// import { courseActions } from "../store/courseSlice";
-// import CustomInput from "../components/forms/CustomInput";
-// import CustomDropdownInput from "../components/forms/CustomDropdownInput";
-// import CustomFileInput from "../components/forms/CustomFileInput";
-
 import { createCourse } from "../../store/courseSlice";
 import { courseActions } from "../../store/courseSlice";
 import CustomInput from "../../components/forms/CustomInput";
 import CustomDropdownInput from "../../components/forms/CustomDropdownInput";
 import CustomFileInput from "../../components/forms/CustomFileInput";
-
+import { PageIntro } from "../../components";
 function CreateCourses() {
   const dispatch = useDispatch();
   const { isSuccess, error } = useSelector((state) => state.courseReducers);
@@ -34,9 +28,7 @@ function CreateCourses() {
   return (
     <div className="min-h-[100vh]">
       <div className="p-5 ">
-        <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">Create Courses</span>
-        </h1>
+        <PageIntro pageName="Create Courses" />
         <Formik
           initialValues={{
             title: "",
@@ -54,10 +46,9 @@ function CreateCourses() {
             photo: "",
           }}
           onSubmit={(values, actions) => {
-            console.log(values);
             dispatch(createCourse(values));
-            console.log(actions);
             actions.resetForm();
+            actions.setSubmitting(false);
           }}
         >
           {({ handleSubmit, isSubmitting }) => (
@@ -170,7 +161,7 @@ function CreateCourses() {
               </div>
               <button
                 type="submit"
-                // disabled={isSubmitting}
+                disabled={isSubmitting}
                 className="bg-blue-600 text-white rounded-md p-2 mt-5 mb-7"
               >
                 Create Course

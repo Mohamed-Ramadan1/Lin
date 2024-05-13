@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-// import CoursesHeader from "../layout/dashboard/CoursesHeader";
-// import CourseContainer from "../layout/dashboard/CourseContainer";
-// import CourseElement from "../layout/dashboard/CourseElement";
-// import { customFetch } from "../utils/customFetch";
 
-import CoursesHeader from "../../layout/dashboard/CoursesHeader";
-import CourseContainer from "../../layout/dashboard/CourseContainer";
-import CourseElement from "../../layout/dashboard/CourseElement";
 import { customFetch } from "../../utils/customFetch";
+import {
+  PageIntro,
+  PageContainer,
+  CourseElement,
+  CoursesHeader,
+} from "../../components";
 
 function FreeCourses() {
   const { token } = useSelector((state) => state.userReducers);
@@ -40,13 +39,11 @@ function FreeCourses() {
 
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-semibold md-3">
-        Dashboard / <span className="text-blue-600">free courses</span>
-      </h1>
+      <PageIntro pageName="Free Courses" />
       <br />
 
       {/* table manage table courses table  */}
-      <CourseContainer tableHeader={"Free Courses"}>
+      <PageContainer tableHeader={"Free Courses"}>
         <CoursesHeader />
         {courses &&
           courses.map((course, index) => (
@@ -68,7 +65,7 @@ function FreeCourses() {
         {!courses && !loading && !error && (
           <p className="text-3xl text-bold text-center">No Courses Found</p>
         )}
-      </CourseContainer>
+      </PageContainer>
     </div>
   );
 }

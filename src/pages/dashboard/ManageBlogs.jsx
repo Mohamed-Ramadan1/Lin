@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import { customFetch } from "../utils/customFetch";
-// import PageContainer from "../layout/dashboard/PageContainer";
-// import BlogsTableHeader from "../layout/dashboard/BlogsTableHeader";
-// import BlogELement from "../layout/dashboard/BlogELement";
 
 import { customFetch } from "../../utils/customFetch";
-import PageContainer from "../../layout/dashboard/PageContainer";
-import BlogsTableHeader from "../../layout/dashboard/BlogsTableHeader";
-import BlogELement from "../../layout/dashboard/BlogELement";
+
+import {
+  PageIntro,
+  PageContainer,
+  BlogELement,
+  BlogsTableHeader,
+} from "../../components";
 
 const ManageBlogs = () => {
   const { token } = useSelector((state) => state.userReducers);
@@ -41,9 +41,7 @@ const ManageBlogs = () => {
   console.log();
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-semibold">
-        Dashboard / <span className="text-blue-600">Blogs</span>{" "}
-      </h1>
+      <PageIntro pageName="Blogs" />
       <PageContainer tableHeader={"Blogs"}>
         <BlogsTableHeader />
         {blogs &&

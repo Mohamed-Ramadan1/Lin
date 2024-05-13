@@ -1,7 +1,8 @@
 import { toast } from "react-toastify";
 import { customFetch } from "../../utils/customFetch";
 
-
+import TableBody from "./shard/TableBody";
+import TableBodyCell from "./shard/TableBodyCell";
 const InstructorsApplicationElement = ({
   instructor,
   token,
@@ -84,46 +85,44 @@ const InstructorsApplicationElement = ({
   };
 
   return (
-    <tbody>
-      <tr>
-        <td className="p-3 text-center">{index}</td>
-        <td className="p-3 text-center">{name}</td>
-        <td className="p-3 text-center">{email}</td>
-        <td className="p-3 text-center">{phone}</td>
-        <td className="p-3 text-center">{experience}</td>
-        <td className="p-3 text-center">{specialization}</td>
-        <td className="p-3 text-center">{status}</td>
-        <td className="p-3 text-center">{createdAtDate}</td>
+    <TableBody>
+      <TableBodyCell>{index}</TableBodyCell>
+      <TableBodyCell>{name}</TableBodyCell>
+      <TableBodyCell>{email}</TableBodyCell>
+      <TableBodyCell>{phone}</TableBodyCell>
+      <TableBodyCell>{experience}</TableBodyCell>
+      <TableBodyCell>{specialization}</TableBodyCell>
+      <TableBodyCell>{status}</TableBodyCell>
+      <TableBodyCell>{createdAtDate}</TableBodyCell>
 
-        <td className="p-3 text-start">
-          <div className="flex gap-5">
-            <button
-              type="button"
-              onClick={handleDelete}
-              className="bg-red-500 text-white p-1.5 rounded hover:bg-red-800"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              onClick={handleApprove}
-              disabled={status === "approved"}
-              className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800"
-            >
-              Approve
-            </button>
-            <button
-              type="button"
-              onClick={handleReject}
-              disabled={status === "rejected"}
-              className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-800"
-            >
-              Reject
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+      <TableBodyCell>
+        <div className="flex gap-5">
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="bg-red-500 text-white p-1.5 rounded hover:bg-red-800"
+          >
+            Delete
+          </button>
+          <button
+            type="button"
+            onClick={handleApprove}
+            disabled={status === "approved"}
+            className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800"
+          >
+            Approve
+          </button>
+          <button
+            type="button"
+            onClick={handleReject}
+            disabled={status === "rejected"}
+            className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-800"
+          >
+            Reject
+          </button>
+        </div>
+      </TableBodyCell>
+    </TableBody>
   );
 };
 

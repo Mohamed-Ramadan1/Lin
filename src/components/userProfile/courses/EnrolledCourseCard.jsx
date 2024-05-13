@@ -25,18 +25,3 @@ const EnrolledCourseCard = ({ course }) => {
 };
 
 export default EnrolledCourseCard;
-{
-  /* <div class="w-full md:w-1/3 bg-gray-100 rounded-lg overflow-hidden">
-      <img
-        class="w-full h-48 object-cover"
-        src="https://via.placeholder.com/400x250"
-        alt="Course Image"
-      />
-      <div class="p-4">
-        <button class="bg-blue-600 text-white px-4 py-2 rounded-full mb-2">
-          5 courses
-        </button>
-        <h3 class="font-bold text-lg">Code Course</h3>
-      </div>
-    </div> */
-}

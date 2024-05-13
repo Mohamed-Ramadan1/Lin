@@ -1,9 +1,9 @@
 import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
-import { createTask } from "../../store/taskSlice";
 import { toast } from "react-toastify";
-import { addTaskSchema } from "../../schema/userShardSchemas";
-import CustomInput from "../forms/CustomInput";
+import { createTask } from "../../../store/taskSlice";
+import { addTaskSchema } from "../../../schema/userShardSchemas";
+import CustomInput from "../../forms/CustomInput";
 
 const AddTaskForm = ({ setIsChanged }) => {
   const dispatch = useDispatch();

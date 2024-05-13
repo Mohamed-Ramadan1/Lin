@@ -1,5 +1,7 @@
 import { customFetch } from "../../utils/customFetch";
 import { toast } from "react-toastify";
+import TableBody from "./shard/TableBody";
+import TableBodyCell from "./shard/TableBodyCell";
 
 const BlogELement = ({ index, blog, token, setIsChanged }) => {
   const { _id, title, category, createdBy, published } = blog;
@@ -67,44 +69,42 @@ const BlogELement = ({ index, blog, token, setIsChanged }) => {
   };
 
   return (
-    <tbody>
-      <tr>
-        <td className="p-3 text-center">{index}</td>
-        <td className="p-3 text-center">{title}</td>
-        <td className="p-3 text-center">{category}</td>
-        <td className="p-3 text-center">{createdBy.name}</td>
-        <td className="p-3 text-center">{createdBy.email}</td>
-        <td className="p-3 text-center">{isPublished}</td>
+    <TableBody>
+      <TableBodyCell>{index}</TableBodyCell>
+      <TableBodyCell>{title}</TableBodyCell>
+      <TableBodyCell>{category}</TableBodyCell>
+      <TableBodyCell>{createdBy.name}</TableBodyCell>
+      <TableBodyCell>{createdBy.email}</TableBodyCell>
+      <TableBodyCell>{isPublished}</TableBodyCell>
 
-        <td className="p-3 text-center">
-          <div className="flex gap-5 justify-center">
-            <button
-              type="button"
-              onClick={handelDeleteBlog}
-              className="bg-red-500 text-white p-1.5 rounded hover:bg-red-600"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              onClick={handelUnPublishBlog}
-              disabled={!published}
-              className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-600"
-            >
-              unPublish
-            </button>
-            <button
-              type="button"
-              onClick={handelPublishBlog}
-              disabled={published}
-              className="bg-green-500 text-white p-1.5 rounded hover:bg-green-600"
-            >
-              Publish
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+      <TableBodyCell>
+        <div className="flex gap-5 justify-center">
+          <button
+            type="button"
+            onClick={handelDeleteBlog}
+            className="bg-red-500 text-white p-1.5 rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
+          <button
+            type="button"
+            onClick={handelUnPublishBlog}
+            disabled={!published}
+            className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-600"
+          >
+            unPublish
+          </button>
+          <button
+            type="button"
+            onClick={handelPublishBlog}
+            disabled={published}
+            className="bg-green-500 text-white p-1.5 rounded hover:bg-green-600"
+          >
+            Publish
+          </button>
+        </div>
+      </TableBodyCell>
+    </TableBody>
   );
 };
 

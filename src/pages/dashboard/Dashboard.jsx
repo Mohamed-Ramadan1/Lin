@@ -1,13 +1,8 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-// import StatsContainer from "../layout/dashboard/StatsContainer";
-// import StatsBox from "../layout/dashboard/StatsBox";
-// import { customFetch } from "../utils/customFetch";
-
-import StatsContainer from "../../layout/dashboard/StatsContainer";
-import StatsBox from "../../layout/dashboard/StatsBox";
 import { customFetch } from "../../utils/customFetch";
+import { PageIntro, StatsBox, StatsContainer } from "../../components";
 
 function Dashboard() {
   const { token } = useSelector((state) => state.userReducers);
@@ -40,9 +35,7 @@ function Dashboard() {
   return (
     <>
       <div className="p-5">
-        <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">statics </span>
-        </h1>
+        <PageIntro pageName="Stats" />
 
         {loading && (
           <div>

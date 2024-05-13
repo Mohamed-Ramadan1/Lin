@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-// import { customFetch } from "../utils/customFetch";
-// import UsersContainer from "../layout/dashboard/UserContainer";
-// import InstructoreTableHeader from "../layout/dashboard/InstructoreTableHeader";
-// import InstructorElement from "../layout/dashboard/InstructorElement";
 
 import { customFetch } from "../../utils/customFetch";
-import UsersContainer from "../../layout/dashboard/UserContainer";
-import InstructoreTableHeader from "../../layout/dashboard/InstructoreTableHeader";
-import InstructorElement from "../../layout/dashboard/InstructorElement";
+
+import {
+  PageIntro,
+  PageContainer,
+  InstructorElement,
+  InstructorTableHeader,
+} from "../../components";
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
@@ -37,37 +37,31 @@ const Instructors = () => {
   }, [token, isChanged]);
 
   return (
-    <>
-      <div className="p-5">
-        <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">Instructors </span>
-        </h1>
-        <UsersContainer tableHeader="Instructors">
-          <InstructoreTableHeader />
-          {loading ? (
-            <p className="text-center font-bold text-3xl">Loading...</p>
-          ) : error ? (
-            <p>{error}</p>
-          ) : (
-            instructors.map((instructor, index) => (
-              <InstructorElement
-                key={instructor._id}
-                index={index + 1}
-                instructor={instructor}
-                token={token}
-                setIsChanged={setIsChanged}
-              />
-            ))
-          )}
+    <div className="p-5">
+      <PageIntro pageName="Instructors" />
+      <PageContainer tableHeader="Instructors">
+        <InstructorTableHeader />
+        {loading ? (
+          <p className="text-center font-bold text-3xl">Loading...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          instructors.map((instructor, index) => (
+            <InstructorElement
+              key={instructor._id}
+              index={index + 1}
+              instructor={instructor}
+              token={token}
+              setIsChanged={setIsChanged}
+            />
+          ))
+        )}
 
-          {!loading && instructors.length === 0 && (
-            <p className="text-center font-bold text-3xl">
-              No Instructors Found
-            </p>
-          )}
-        </UsersContainer>
-      </div>
-    </>
+        {!loading && instructors.length === 0 && (
+          <p className="text-center font-bold text-3xl">No Instructors Found</p>
+        )}
+      </PageContainer>
+    </div>
   );
 };
 

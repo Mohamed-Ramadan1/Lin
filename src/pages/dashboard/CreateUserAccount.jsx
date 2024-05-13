@@ -4,22 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import adminSlice from "../../store/adminSlice.js";
-// import { createUser } from "../store/adminSlice";
-// import { adminActions } from "../store/adminSlice";
-// import { createUsersSchema } from "../schema/createAccountsSchemas.js";
-// import CustomInput from "../components/forms/CustomInput";
-// import CustomDropdownInput from "../components/forms/CustomDropdownInput";
-
 
 import { createUser } from "../../store/adminSlice";
 import { adminActions } from "../../store/adminSlice";
 import { createUsersSchema } from "../../schema/createAccountsSchemas.js";
 import CustomInput from "../../components/forms/CustomInput";
 import CustomDropdownInput from "../../components/forms/CustomDropdownInput";
+import { PageIntro } from "../../components";
 
 const CreateUserAccount = () => {
   const dispatch = useDispatch();
-
   const { isSuccess, error } = useSelector((state) => state.adminReducers);
 
   useEffect(() => {
@@ -37,9 +31,7 @@ const CreateUserAccount = () => {
   return (
     <div className="min-h-[100vh]">
       <div className="p-5 ">
-        <h1 className="text-2xl font-semibold">
-          Dashboard / <span className="text-blue-600">Create User Account</span>{" "}
-        </h1>
+        <PageIntro pageName="Create User Account" />
         <Formik
           initialValues={{
             name: "",

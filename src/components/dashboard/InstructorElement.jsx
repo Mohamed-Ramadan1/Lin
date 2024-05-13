@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { customFetch } from "../../utils/customFetch";
-
+import TableBody from "./shard/TableBody";
+import TableBodyCell from "./shard/TableBodyCell";
 const InstructorElement = ({ index, instructor, token, setIsChanged }) => {
   const {
     _id,
@@ -81,44 +82,42 @@ const InstructorElement = ({ index, instructor, token, setIsChanged }) => {
   };
 
   return (
-    <tbody>
-      <tr>
-        <td className="p-3 text-center">{index}</td>
-        <td className="p-3 text-center">{name}</td>
-        <td className="p-3 text-center">{email}</td>
-        <td className="p-3 text-center">{specialization}</td>
-        <td className="p-3 text-center">{rating}</td>
-        <td className="p-3 text-center">{formatData}</td>
-        <td className="p-3 text-center">{experience || 0} </td>
-        <td className="p-3 text-center">{status}</td>
-        <td className="p-3 text-center ">
-          <div className="flex gap-5">
-            <button
-              type="button"
-              onClick={handelDeleteInstructor}
-              className="bg-red-500 text-white p-1.5 rounded"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              onClick={handelUnActivateInstructor}
-              className="bg-blue-500 text-white p-1.5 rounded"
-              //   disabled={!active}
-            >
-              UnActive
-            </button>
-            <button
-              type="button"
-              onClick={handelActivateInstructor}
-              className="bg-green-500 text-white p-1.5 rounded "
-            >
-              Active
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+    <TableBody>
+      <TableBodyCell>{index}</TableBodyCell>
+      <TableBodyCell>{name}</TableBodyCell>
+      <TableBodyCell>{email}</TableBodyCell>
+      <TableBodyCell>{specialization}</TableBodyCell>
+      <TableBodyCell>{rating}</TableBodyCell>
+      <TableBodyCell>{formatData}</TableBodyCell>
+      <TableBodyCell>{experience || 0} </TableBodyCell>
+      <TableBodyCell>{status}</TableBodyCell>
+      <TableBodyCell>
+        <div className="flex gap-5">
+          <button
+            type="button"
+            onClick={handelDeleteInstructor}
+            className="bg-red-500 text-white p-1.5 rounded"
+          >
+            Delete
+          </button>
+          <button
+            type="button"
+            onClick={handelUnActivateInstructor}
+            className="bg-blue-500 text-white p-1.5 rounded"
+            //   disabled={!active}
+          >
+            UnActive
+          </button>
+          <button
+            type="button"
+            onClick={handelActivateInstructor}
+            className="bg-green-500 text-white p-1.5 rounded "
+          >
+            Active
+          </button>
+        </div>
+      </TableBodyCell>
+    </TableBody>
   );
 };
 

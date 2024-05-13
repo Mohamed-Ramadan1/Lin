@@ -2,10 +2,11 @@ import { Formik, Form } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import CustomInput from "../forms/CustomInput";
-import { updateUserPassword } from "../../store/userSlice";
-import { userActions } from "../../store/userSlice";
-import { updatePasswordSchema } from "../../schema/authFormsSchema";
+import { updateUserPassword } from "../../../store/userSlice";
+import { userActions } from "../../../store/userSlice";
+import { updatePasswordSchema } from "../../../schema/authFormsSchema";
+import CustomInput from "../../forms/CustomInput";
+
 const UpdateUserPassword = () => {
   const dispatch = useDispatch();
   const { isSuccess, error } = useSelector((state) => state.userReducers);

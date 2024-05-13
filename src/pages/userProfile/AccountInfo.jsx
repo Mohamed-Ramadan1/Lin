@@ -1,8 +1,4 @@
-// import UpdateProfileInfo from "./../components/profileConponents/UpdateProfileInfo";
-// import UpdateUserPassword from "./../components/profileConponents/UpdateUserPassword";
-
-import UpdateProfileInfo from "../../components/profileConponents/UpdateProfileInfo";
-import UpdateUserPassword from "../../components/profileConponents/UpdateUserPassword";
+import { UpdateProfileInfo, UpdateUserPassword } from "../../components";
 
 function AccountInfo() {
   return (

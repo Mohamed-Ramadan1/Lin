@@ -1,12 +1,12 @@
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-// import { customFetch } from "../utils/customFetch.js";
-// import { createInstructorsSchema } from "../schema/createAccountsSchemas.js";
-// import CustomInput from "../components/forms/CustomInput";
+
 import { customFetch } from "../../utils/customFetch.js";
 import { createInstructorsSchema } from "../../schema/createAccountsSchemas.js";
 import CustomInput from "../../components/forms/CustomInput";
+
+import { PageIntro } from "../../components";
 
 const CreateInstructorAccount = () => {
   const { token } = useSelector((state) => state.userReducers);
@@ -27,10 +27,7 @@ const CreateInstructorAccount = () => {
   return (
     <div className="min-h-[100vh]">
       <div className="p-5 ">
-        <h1 className="text-2xl font-semibold">
-          Dashboard /
-          <span className="text-blue-600">Create Instructor Account</span>{" "}
-        </h1>
+        <PageIntro pageName="Create Instructor Account" />
         <Formik
           initialValues={{
             name: "",
