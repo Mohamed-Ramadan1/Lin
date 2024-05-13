@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MainLayout, AdminLayout } from "./layout";
+import { MainLayout, DashboardLayout } from "./layout";
 import { useDispatch } from "react-redux";
 import { getMe } from "./store/userSlice";
 
@@ -124,7 +124,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <AdminLayout />,
+    element: <DashboardLayout />,
     children: [
       {
         index: true,

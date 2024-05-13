@@ -1,8 +1,12 @@
-import { SideBar, DashboardFooter, DashboardNavBar } from "../../components";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-function AdminLayout() {
+
+import DashboardFooter from "./DashboardFooter";
+import DashboardNavBar from "./DashboardNavBar";
+import SideBar from "./SideBar";
+
+const DashboardLayout = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userReducers);
   const isAdmin = user.role === "admin";
@@ -31,6 +35,6 @@ function AdminLayout() {
       </main>
     </>
   );
-}
+};
 
-export default AdminLayout;
+export default DashboardLayout;

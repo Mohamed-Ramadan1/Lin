@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "./../../store/userSlice";
+import { logout } from "../../store/userSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 

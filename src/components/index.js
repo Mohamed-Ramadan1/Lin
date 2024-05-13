@@ -7,9 +7,9 @@ export { default as AddRatingForm } from "./courses/courseReviews/AddRatingForm"
 export { default as ReviewElement } from "./courses/courseReviews/ReviewElement";
 export { default as ReviewsContainer } from "./courses/courseReviews/ReviewsContainer";
 
-export { default as SideBar } from "./Admin/SideBar";
-export { default as DashboardFooter } from "./Admin/DashboardFooter";
-export { default as DashboardNavBar } from "./Admin/DashboardNavBar";
+export { default as SideBar } from "../layout/dashboard/SideBar";
+export { default as DashboardFooter } from "../layout/dashboard/DashboardFooter";
+export { default as DashboardNavBar } from "../layout/dashboard/DashboardNavBar";
 
 // User profile
 //Profile settings
