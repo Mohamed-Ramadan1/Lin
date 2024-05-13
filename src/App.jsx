@@ -32,12 +32,12 @@ import {
   ManageBlogs,
   ManageInstructorsRequests,
   ManagePayments,
+  ViewCourses,
+  DetailsCourse,
+  PublicProfile,
 } from "./pages";
-import ViewCourses from "./pages/ViewCourses";
-import DetailsCourse from "./pages/DetailsCourse";
 
 //Profile Imports
-import PublicProfile from "./components/profileConponents/PublicProfile";
 import { useEffect } from "react";
 const router = createBrowserRouter([
   {

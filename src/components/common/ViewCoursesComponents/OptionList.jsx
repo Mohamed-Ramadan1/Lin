@@ -104,13 +104,13 @@ const OptionList = ({ titleCheckList, setCourses }) => {
             class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All</option>
-            <option value="Development">Development</option>
+            <option value="web">Development</option>
             <option value="Design">Design</option>
             <option value="Marketing">Marketing</option>
             <option value="IT & Software">IT & Software</option>
-            {/*languages  */}
+
             <option value="Business">Business</option>
-            <option vlaue="Language">Language</option>
+            <option vlaue="languages"></option>
           </select>
         </div>
 
@@ -119,16 +119,15 @@ const OptionList = ({ titleCheckList, setCourses }) => {
             Skill Level
           </label>
           <select
-            id="skillLevel" // Might not be needed for search
-            value={formData.title} // Assuming data is stored in state (optional)
-            onChange={handleInputChange} // Might not be needed for search
+            id="skillLevel"
+            value={formData.title}
+            onChange={handleInputChange}
             class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Levels</option>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
             <option value="Advanced">Advanced</option>
-            {/* You can populate options with titles from your data if needed for search */}
           </select>
         </div>
         <div className="border-bottom">
@@ -136,15 +135,14 @@ const OptionList = ({ titleCheckList, setCourses }) => {
             Payment Model
           </label>
           <select
-            id="paymentModel" // Might not be needed for search
-            value={formData.price} // Assuming data is stored in state (optional)
-            onChange={handleInputChange} // Might not be needed for search
+            id="paymentModel"
+            value={formData.price}
+            onChange={handleInputChange}
             class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All </option>
             <option value="free">Free</option>
             <option value="paid">Paid</option>
-            {/* You can define price ranges or options based on your data if needed for search */}
           </select>
         </div>
 
@@ -159,10 +157,10 @@ const OptionList = ({ titleCheckList, setCourses }) => {
             class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Languages</option>
-            <option value="English">English</option>
-            <option value="French">French</option>
-            <option value="Spanish">Spanish</option>
-            <option value="Arabic">Arabic</option>
+            <option value="english">English</option>
+            <option value="france">French</option>
+            <option value="spain">Spanish</option>
+            <option value="arabic">Arabic</option>
           </select>
         </div>
       </div>

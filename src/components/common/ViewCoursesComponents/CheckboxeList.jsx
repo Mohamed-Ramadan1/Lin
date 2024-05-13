@@ -3,12 +3,9 @@ import { useState } from "react";
 
 const CheckboxeList = ({ titleCheckList }) => {
   const [open, setOpen] = useState(false);
-
   const toggleList = () => {
     setOpen(!open);
   };
-
-
 
   return (
     <div className="list flex flex-col gap-[15px]">

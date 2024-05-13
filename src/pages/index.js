@@ -1,39 +1,38 @@
 //Auth
-export { default as Login } from "./Login";
-export { default as SignUp } from "./SignUp";
-export { default as ForgotPassword } from "./ForgotPassword";
-export { default as ResetPassword } from "./ResetPassword";
+export { default as Login } from "./root/Login";
+export { default as SignUp } from "./root/SignUp";
+export { default as ForgotPassword } from "./root/ForgotPassword";
+export { default as ResetPassword } from "./root/ResetPassword";
 
-//Home
-export { default as Home } from "./Home";
-export { default as About } from "./About";
-export { default as Instructor } from "./Instructor";
-export { default as Blog } from "./Blog";
+//MainLayout
+export { default as Home } from "./mainLayout/Home";
+export { default as About } from "./mainLayout/About";
+export { default as Instructor } from "./mainLayout/Instructor";
+export { default as Blog } from "./mainLayout/Blog";
+export { default as PaymentGatWay } from "./mainLayout/PaymentGatWay";
+export { default as MyPaiedCourse } from "./mainLayout/MyPaiedCourse";
+export { default as ViewCourses } from "./mainLayout/ViewCourses";
+export { default as DetailsCourse } from "./mainLayout/DetailsCourse";
 
 //Dashboard
-export { default as Dashboard } from "./Dashboard";
-export { default as FreeCourses } from "./FreeCourses";
-export { default as PaiedCourses } from "./PaiedCourses";
-export { default as CreateCourses } from "./CreateCourses";
-export { default as Users } from "./Users";
-export { default as Reservations } from "./Reservations";
-export { default as Settings } from "./Settings";
-export { default as Instructors } from "./Instructors";
-export { default as CreateUserAccount } from "./CreateUserAccount";
-export { default as CreateInstructorAccount } from "./CreateInstructorAccount";
-export { default as ManageInstructorsRequests } from "./ManageInstructorsRequests";
-export { default as ManageBlogs } from "./ManageBlogs";
-export { default as ManagePayments } from "./ManagePayments";
+export { default as Dashboard } from "./dashboard/Dashboard";
+export { default as FreeCourses } from "./dashboard/FreeCourses";
+export { default as PaiedCourses } from "./dashboard/PaiedCourses";
+export { default as CreateCourses } from "./dashboard/CreateCourses";
+export { default as Users } from "./dashboard/Users";
+export { default as Reservations } from "./dashboard/Reservations";
+export { default as Settings } from "./dashboard/Settings";
+export { default as Instructors } from "./dashboard/Instructors";
+export { default as CreateUserAccount } from "./dashboard/CreateUserAccount";
+export { default as CreateInstructorAccount } from "./dashboard/CreateInstructorAccount";
+export { default as ManageInstructorsRequests } from "./dashboard/ManageInstructorsRequests";
+export { default as ManageBlogs } from "./dashboard/ManageBlogs";
+export { default as ManagePayments } from "./dashboard/ManagePayments";
 
-//user
-export { default as Profile } from "./Profile";
-export { default as AccountInfo } from "./AccountInfo";
-export { default as MyTasks } from "./MyTasks";
-export { default as MyEnrolledCourses } from "./MyEnrolledCourses";
-export { default as ChatWithMe } from "./ChatWithMe";
-
-//PaymentGatWay
-export { default as PaymentGatWay } from "./PaymentGatWay";
-
-// MyPaiedCourse
-export { default as MyPaiedCourse } from "./MyPaiedCourse";
+//userProfile
+export { default as Profile } from "./userProfile/Profile";
+export { default as AccountInfo } from "./userProfile/AccountInfo";
+export { default as MyTasks } from "./userProfile/MyTasks";
+export { default as MyEnrolledCourses } from "./userProfile/MyEnrolledCourses";
+export { default as ChatWithMe } from "./userProfile/ChatWithMe";
+export { default as PublicProfile } from "./userProfile/PublicProfile";
