@@ -54,3 +54,6 @@ export { default as InstructorsApplicationElement } from "./dashboard/Instructor
 
 export { default as StatsBox } from "./dashboard/StatsBox";
 export { default as StatsContainer } from "./dashboard/StatsContainer";
+
+export { default as NavigationLink } from "./dashboard/shard/NavigationLink";
+export { default as NavBarLink } from "./dashboard/shard/NavBarLink";

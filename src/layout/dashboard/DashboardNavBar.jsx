@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import Logo from "./../../assets/LOGO.png";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import { NavBarLink } from "../../components";
 function DashboardNavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,33 +14,72 @@ function DashboardNavBar() {
   };
 
   return (
-    <>
-      <div className="flex items-center justify-between p-5 bg-white border-b border-gray-200">
-        <div className="flex items-center gap-5">
-          <Link to="/dashboard">Statics</Link>
-          <Link to="/dashboard/freeCourses">Free Courses</Link>
-          <Link to="/dashboard/paidCourses">Paid Courses</Link>
-          <Link to="/dashboard/reservations">Enrollments</Link>
-          <Link to="/dashboard/users">Users</Link>
-          <Link to="/dashboard/instructors">Instructors</Link>
-          <Link to="/dashboard/addcourse">Add Course</Link>
-          <Link to="/dashboard/adduser">Create User</Link>
-          <Link to="/dashboard/addinstructor">Create Instructor</Link>
-          <Link to="/dashboard/settings">Settings</Link>
-          <Link to="/dashboard/blogs">Blogs</Link>
-          <Link to="/dashboard/paymentsrecords">Payments Records</Link>
-          <Link to="/dashboard/instructorsrequests">Instructors Requests</Link>
-          <Link to="/">Home</Link>
-
+    <div className="navbar bg-base-300 rounded-box">
+      <div className="flex-1 px-2 lg:flex-none">
+        <div className=" font-bold text-2xl">Lin</div>
+      </div>
+      <div className="flex justify-end flex-1 px-2">
+        <div className="flex items-stretch">
           <button
             onClick={handelLogout}
-            className="bg-gray-800 text-white rounded-lg p-3"
+            className="btn btn-ghost rounded-btn text-2xl"
           >
-            Logouts
+            Logout
           </button>
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost rounded-btn text-2xl"
+            >
+              Navigate
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content z-[1] p-2 shadow bg-black rounded-box w-52 mt-4 "
+            >
+              <NavBarLink
+                path="/dashboard"
+                navText="Statics"
+                className="text-primary"
+              />
+
+              <NavBarLink
+                path="/dashboard/freeCourses"
+                navText="Free Courses"
+              />
+              <NavBarLink
+                path="/dashboard/paidCourses"
+                navText="Paid Courses"
+              />
+              <NavBarLink
+                path="/dashboard/reservations"
+                navText="Enrollments"
+              />
+              <NavBarLink path="/dashboard/users" navText="Users" />
+              <NavBarLink path="/dashboard/instructors" navText="Instructors" />
+              <NavBarLink path="/dashboard/addcourse" navText="Add Course" />
+              <NavBarLink path="/dashboard/adduser" navText="Create User" />
+              <NavBarLink
+                path="/dashboard/addinstructor"
+                navText="Create Instructor"
+              />
+              <NavBarLink path="/dashboard/settings" navText="Settings" />
+              <NavBarLink path="/dashboard/blogs" navText="Blogs" />
+              <NavBarLink
+                path="/dashboard/paymentsrecords"
+                navText="Payments Records"
+              />
+              <NavBarLink
+                path="/dashboard/instructorsrequests"
+                navText="Instructors Requests"
+              />
+              <NavBarLink path="/" navText="Home" />
+            </ul>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
