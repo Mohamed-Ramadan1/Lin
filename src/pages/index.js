@@ -12,7 +12,7 @@ export { default as Blog } from "./mainLayout/Blog";
 export { default as PaymentGatWay } from "./mainLayout/PaymentGatWay";
 export { default as MyPaiedCourse } from "./mainLayout/MyPaiedCourse";
 export { default as ViewCourses } from "./mainLayout/ViewCourses";
-export { default as DetailsCourse } from "./mainLayout/DetailsCourse";
+export { default as CourseDetails } from "./mainLayout/CourseDetails";
 
 //Dashboard
 export { default as Dashboard } from "./dashboard/Dashboard";

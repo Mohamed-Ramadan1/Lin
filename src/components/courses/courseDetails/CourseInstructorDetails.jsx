@@ -1,6 +1,6 @@
 import Avatar from "../../../assets/Avatar.png";
 
-const Instructor = ({ instructor }) => {
+const CourseInstructorDetails = ({ instructor }) => {
   const {
     name,
     email,
@@ -50,4 +50,4 @@ const Instructor = ({ instructor }) => {
   );
 };
 
-export default Instructor;
+export default CourseInstructorDetails;

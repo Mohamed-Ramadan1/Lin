@@ -1,10 +1,3 @@
-import React from "react";
-
-// File Css
-// import "../ui/btnFiv.module.css";
-// import style from '../ui/'
-
-
 export const BtnFav = () => {
   return (
     <div className="heart cursor-pointer">

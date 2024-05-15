@@ -7,7 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { customFetch } from "../../../utils/customFetch";
 
-const Salary = ({ duration, price, paymentModel, courseId, videos }) => {
+const CourseEnrollmentDetails = ({
+  duration,
+  price,
+  paymentModel,
+  courseId,
+  videos,
+}) => {
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
   const navigate = useNavigate();
@@ -273,4 +279,4 @@ const Salary = ({ duration, price, paymentModel, courseId, videos }) => {
   );
 };
 
-export default Salary;
+export default CourseEnrollmentDetails;

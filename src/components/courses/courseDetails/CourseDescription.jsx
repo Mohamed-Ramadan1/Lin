@@ -1,6 +1,5 @@
-import React from "react";
 
-const DescriptionCourse = ({ description }) => {
+const CourseDescription = ({ description }) => {
   return (
     <div className="description">
       <div className="container w-full flex flex-col items-start gap-4">
@@ -14,4 +13,4 @@ const DescriptionCourse = ({ description }) => {
   );
 };
 
-export default DescriptionCourse;
+export default CourseDescription;

@@ -1,6 +1,4 @@
-import React from "react";
-
-const CourseVideos = ({ duration, videos }) => {
+const CourseDetails = ({ duration, videos }) => {
   return (
     <div className="courseVideos">
       <div className="container">
@@ -11,7 +9,7 @@ const CourseVideos = ({ duration, videos }) => {
               {videos.length} sections
             </span>
             <span className="font-medium text-[#222] px-[10px] py-[1px] border-r-[2px] border-r-[#9747FF]">
-              {duration} total length
+              {duration} hours total length
             </span>
             <span className="font-medium text-[#222] px-[10px] py-[1px]">
               {videos.length || 0} lectures
@@ -23,4 +21,4 @@ const CourseVideos = ({ duration, videos }) => {
   );
 };
 
-export default CourseVideos;
+export default CourseDetails;

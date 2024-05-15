@@ -33,7 +33,7 @@ import {
   ManageInstructorsRequests,
   ManagePayments,
   ViewCourses,
-  DetailsCourse,
+  CourseDetails,
   PublicProfile,
 } from "./pages";
 
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
       },
       {
         path: "courses/:courseId",
-        element: <DetailsCourse />,
+        element: <CourseDetails />,
       },
       {
         path: "paymentGatWay/:courseId",

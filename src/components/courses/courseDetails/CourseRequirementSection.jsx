@@ -1,4 +1,4 @@
-const RequirementsCourse = ({ prerequisites }) => {
+const CourseRequirementSection = ({ prerequisites }) => {
   return (
     <div>
       <div className="container w-full flex flex-col items-start gap-4">
@@ -16,4 +16,4 @@ const RequirementsCourse = ({ prerequisites }) => {
   );
 };
 
-export default RequirementsCourse;
+export default CourseRequirementSection;

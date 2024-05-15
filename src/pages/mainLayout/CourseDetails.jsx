@@ -1,10 +1,8 @@
-// import ThumbnailCourse from "../components/common/DetailsCourseComponents/ThumbnailCourse";
-// import DetailsCourseContent from "../components/common/DetailsCourseComponents/DetailsCourseContent";
-// import Salary from "../components/common/DetailsCourseComponents/Salary";
-
-import ThumbnailCourse from "../../components/common/DetailsCourseComponents/ThumbnailCourse";
-import DetailsCourseContent from "../../components/common/DetailsCourseComponents/DetailsCourseContent";
-import Salary from "../../components/common/DetailsCourseComponents/Salary";
+import {
+  CourseContentDetails,
+  CourseThumbnail,
+  CourseEnrollmentDetails,
+} from "../../components";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -37,7 +35,7 @@ const DetailsCourse = () => {
     <div className="detailsCourse relative overflow-hidden flex justify-center items-center px-[124px] py-[70px] max-lg:px-[30px] max-sm:py-[30px] max-sm:px-[15px]">
       <div className="container flex gap-[50px] flex-col items-center justify-center">
         <div className="w-full">
-          <ThumbnailCourse
+          <CourseThumbnail
             photo={course.course.photo}
             students={course.enrollments}
             instructor={course.course.instructor[0]}
@@ -45,7 +43,7 @@ const DetailsCourse = () => {
         </div>
 
         <div className="flex w-full gap-[50px]">
-          <DetailsCourseContent
+          <CourseContentDetails
             title={course.course.title}
             description={course.course.description}
             duration={course.course.duration}
@@ -59,7 +57,7 @@ const DetailsCourse = () => {
             prerequisites={course.course.prerequisites}
           />
 
-          <Salary
+          <CourseEnrollmentDetails
             duration={course.course.duration}
             price={course.course.price}
             paymentModel={course.course.paymentModel}

@@ -1,7 +1,4 @@
-import React from "react";
-
 import Avatar from "../../../assets/Avatar.png";
-import imgDetailsCourse from "../../../assets/imgDetailsCourse.png";
 
 import "./ThumbnailCourse.css";
 

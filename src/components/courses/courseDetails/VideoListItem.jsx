@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Video = ({ video, index }) => {
+const VideoListItem = ({ video, index }) => {
   const [open, setOpen] = useState(false);
   const { title, url, _id } = video;
   const toggleList = () => {
@@ -110,4 +110,4 @@ const Video = ({ video, index }) => {
   );
 };
 
-export default Video;
+export default VideoListItem;

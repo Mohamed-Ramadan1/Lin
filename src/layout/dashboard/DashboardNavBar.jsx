@@ -1,4 +1,3 @@
-import Logo from "./../../assets/LOGO.png";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
 import { toast } from "react-toastify";

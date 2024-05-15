@@ -1,4 +1,4 @@
-const RatingComponent = ({ totalReviews, rating }) => {
+const CourseRatingDetails = ({ totalReviews, rating }) => {
   return (
     <div>
       <div className="rating flex gap-[15px] justify-center items-center max-md:gap-2 ">
@@ -17,4 +17,4 @@ const RatingComponent = ({ totalReviews, rating }) => {
   );
 };
 
-export default RatingComponent;
+export default CourseRatingDetails;

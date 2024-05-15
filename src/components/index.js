@@ -11,6 +11,10 @@ export { default as SideBar } from "../layout/dashboard/SideBar";
 export { default as DashboardFooter } from "../layout/dashboard/DashboardFooter";
 export { default as DashboardNavBar } from "../layout/dashboard/DashboardNavBar";
 
+export { default as CourseThumbnail } from "./courses/courseDetails/CourseThumbnail";
+export { default as CourseContentDetails } from "./courses/courseDetails/CourseContentDetails";
+export { default as CourseEnrollmentDetails } from "./courses/courseDetails/CourseEnrollmentDetails";
+
 // User profile
 //Profile settings
 export { default as ProfileInfo } from "./userProfile/profileSettings/ProfileInfo";
@@ -21,13 +25,11 @@ export { default as AddTaskForm } from "./userProfile/tasks/AddTaskForm";
 export { default as TaskItem } from "./userProfile/tasks/TaskItem";
 export { default as TasksInformation } from "./userProfile/tasks/TasksInformation";
 export { default as DateSection } from "./userProfile/tasks/DateSection";
-//courses
+
 export { default as EnrolledCourseCard } from "./userProfile/courses/EnrolledCourseCard";
-//general
 export { default as ProfileNavigationBar } from "./userProfile/ProfileNavigationBar";
 
 // Dashboard
-
 export { default as PageIntro } from "./dashboard/shard/PageIntro";
 export { default as PageContainer } from "./dashboard/shard/PageContainer";
 
