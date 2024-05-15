@@ -1,17 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-// import { customFetch } from "../utils/customFetch";
-// import CoursesPageIntro from "../components/common/ViewCoursesComponents/CoursesPageIntro";
-// import CardCourse from "../components/common/ViewCoursesComponents/CardCourse";
-// import FilterCourses from "../components/common/ViewCoursesComponents/FilterCourses";
-
 import { customFetch } from "../../utils/customFetch";
-import CoursesPageIntro from "../../components/common/ViewCoursesComponents/CoursesPageIntro";
-import CardCourse from "../../components/common/ViewCoursesComponents/CardCourse";
-import FilterCourses from "../../components/common/ViewCoursesComponents/FilterCourses";
+import { CourseCard, CoursesPageIntro, FilterCourses } from "../../components";
 
-const ViewCourses = () => {
+const Courses = () => {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     const fetchCourses = async () => {
@@ -37,7 +30,7 @@ const ViewCourses = () => {
             {courses &&
               courses.map((course) => (
                 <Link key={course._id} to={`/courses/${course._id}`}>
-                  <CardCourse course={course} />
+                  <CourseCard course={course} />
                 </Link>
               ))}
           </div>
@@ -47,4 +40,4 @@ const ViewCourses = () => {
   );
 };
 
-export default ViewCourses;
+export default Courses;

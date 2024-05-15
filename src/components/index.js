@@ -15,6 +15,10 @@ export { default as CourseThumbnail } from "./courses/courseDetails/CourseThumbn
 export { default as CourseContentDetails } from "./courses/courseDetails/CourseContentDetails";
 export { default as CourseEnrollmentDetails } from "./courses/courseDetails/CourseEnrollmentDetails";
 
+export { default as CoursesPageIntro } from "./courses/coursesOverview/CoursesPageIntro";
+export { default as CourseCard } from "./courses/coursesOverview/CourseCard";
+export { default as FilterCourses } from "./courses/coursesOverview/FilterCourses";
+
 // User profile
 //Profile settings
 export { default as ProfileInfo } from "./userProfile/profileSettings/ProfileInfo";

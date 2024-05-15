@@ -11,7 +11,7 @@ export { default as Instructor } from "./mainLayout/Instructor";
 export { default as Blog } from "./mainLayout/Blog";
 export { default as PaymentGatWay } from "./mainLayout/PaymentGatWay";
 export { default as MyPaiedCourse } from "./mainLayout/MyPaiedCourse";
-export { default as ViewCourses } from "./mainLayout/ViewCourses";
+export { default as Courses } from "./mainLayout/Courses";
 export { default as CourseDetails } from "./mainLayout/CourseDetails";
 
 //Dashboard

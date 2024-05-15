@@ -1,6 +1,6 @@
 import RatingStars from "./RatingStars";
 
-const CardCourse = ({ course }) => {
+const CourseCard = ({ course }) => {
   let {
     title,
     description,
@@ -11,6 +11,7 @@ const CardCourse = ({ course }) => {
     instructor,
     photo,
     language,
+    paymentModel,
   } = course;
 
   averageRating = parseInt(averageRating);
@@ -64,13 +65,12 @@ const CardCourse = ({ course }) => {
         </div>
         <div className="price flex gap-[10px] items-end">
           <h1 className="text-[25px] font-bold text-[#222]  max-sm:text-[20px]">
-            {price.toFixed(2)}
+            {paymentModel === "free" ? "Free Course" : price.toFixed(2)}
           </h1>
-          <span className="text-base text-[#636363] line-through">155,99</span>
         </div>
       </div>
     </div>
   );
 };
 
-export default CardCourse;
+export default CourseCard;

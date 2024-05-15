@@ -32,7 +32,7 @@ import {
   ManageBlogs,
   ManageInstructorsRequests,
   ManagePayments,
-  ViewCourses,
+  Courses,
   CourseDetails,
   PublicProfile,
 } from "./pages";
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
       },
       {
         path: "courses",
-        element: <ViewCourses />,
+        element: <Courses />,
       },
       {
         path: "courses/:courseId",

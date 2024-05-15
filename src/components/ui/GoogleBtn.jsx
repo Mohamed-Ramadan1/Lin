@@ -1,4 +1,3 @@
-import React from 'react'
 
 import google from '../../assets/GoogleIcon.png'
 
