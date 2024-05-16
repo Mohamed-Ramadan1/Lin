@@ -3,7 +3,7 @@ import TableHeaderCell from "./shard/TableHeaderCell";
 const InstructorTableHeader = () => {
   return (
     <TableHeader>
-      <TableHeaderCell>Index</TableHeaderCell>
+      <TableHeaderCell>Instructor-ID</TableHeaderCell>
       <TableHeaderCell>Instructor Name</TableHeaderCell>
       <TableHeaderCell>Instructor Email</TableHeaderCell>
       <TableHeaderCell>Instructor Specialization</TableHeaderCell>

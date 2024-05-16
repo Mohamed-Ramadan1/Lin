@@ -83,7 +83,7 @@ const InstructorElement = ({ index, instructor, token, setIsChanged }) => {
 
   return (
     <TableBody>
-      <TableBodyCell>{index}</TableBodyCell>
+      <TableBodyCell>{_id}</TableBodyCell>
       <TableBodyCell>{name}</TableBodyCell>
       <TableBodyCell>{email}</TableBodyCell>
       <TableBodyCell>{specialization}</TableBodyCell>

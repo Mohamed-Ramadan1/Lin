@@ -44,6 +44,7 @@ const Users = () => {
     };
     fetchUsers();
   }, [token, isChanged, currentPage, itemsPerPage]);
+
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);

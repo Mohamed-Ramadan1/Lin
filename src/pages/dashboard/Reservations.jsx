@@ -1,25 +1,63 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { customFetch } from "../../utils/customFetch";
 
-import { getAllEnrollments } from "../../store/courseEnrollmentsSlice";
 import {
   PageIntro,
   PageContainer,
   EnrollmentElement,
   EnrollmentHeader,
+  Pagination,
 } from "../../components";
-function Reservations() {
+
+const Reservations = () => {
+  const [allEnrollments, setAllEnrollments] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
-  const dispatch = useDispatch();
-  const { allEnrollments } = useSelector(
-    (state) => state.courseEnrollmenReducers
-  );
+  const [isMorePages, setIsMorePages] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(15);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const { token } = useSelector((state) => state.userReducers);
 
   useEffect(() => {
     setIsChanged(false);
-    dispatch(getAllEnrollments());
-  }, [dispatch, isChanged]);
+    const fetchEnrollments = async () => {
+      try {
+        const response = await customFetch.get("enrolls", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            page: currentPage,
+            limit: itemsPerPage,
+          },
+        });
+        console.log(response.data.data.enrollments);
+        if (response.data.data.enrollments) {
+          setAllEnrollments(response.data.data.enrollments);
+          setIsMorePages(true);
+        }
+        if (response.data.data.enrollments.length === 0) setIsMorePages(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchEnrollments();
+  }, [isChanged, token, currentPage, itemsPerPage]);
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+      setIsChanged(true);
+    }
+  };
+
+  const nextPage = () => {
+    if (currentPage) {
+      setCurrentPage((prev) => prev + 1);
+      setIsChanged(true);
+    }
+  };
 
   console.log(allEnrollments);
   return (
@@ -42,14 +80,22 @@ function Reservations() {
 
         {allEnrollments.length === 0 && (
           <tr>
-            <td colSpan="9" className="text-center p-5">
+            <td colSpan="9" className="text-center p-5 text-3xl">
               No enrollments found
             </td>
           </tr>
         )}
       </PageContainer>
+      {allEnrollments && (
+        <Pagination
+          currentPage={currentPage}
+          isMorePages={isMorePages}
+          onPrevPage={prevPage}
+          onNextPage={nextPage}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default Reservations;

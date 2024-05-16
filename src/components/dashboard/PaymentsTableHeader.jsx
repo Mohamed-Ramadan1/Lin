@@ -3,7 +3,7 @@ import TableHeaderCell from "./shard/TableHeaderCell";
 const PaymentsTableHeader = () => {
   return (
     <TableHeader>
-      <TableHeaderCell>#num</TableHeaderCell>
+      <TableHeaderCell>Payment-ID</TableHeaderCell>
       <TableHeaderCell>User Name</TableHeaderCell>
       <TableHeaderCell>Email</TableHeaderCell>
       <TableHeaderCell>payment Verified</TableHeaderCell>

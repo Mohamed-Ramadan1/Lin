@@ -70,7 +70,7 @@ const BlogELement = ({ index, blog, token, setIsChanged }) => {
 
   return (
     <TableBody>
-      <TableBodyCell>{index}</TableBodyCell>
+      <TableBodyCell>{_id}</TableBodyCell>
       <TableBodyCell>{title}</TableBodyCell>
       <TableBodyCell>{category}</TableBodyCell>
       <TableBodyCell>{createdBy.name}</TableBodyCell>

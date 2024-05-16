@@ -75,7 +75,7 @@ const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
 
   return (
     <TableBody>
-      <TableBodyCell>{index}</TableBodyCell>
+      <TableBodyCell>{_id}</TableBodyCell>
       <TableBodyCell>{title}</TableBodyCell>
       <TableBodyCell>{name}</TableBodyCell>
       <TableBodyCell>{email}</TableBodyCell>
@@ -99,6 +99,7 @@ const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
           <button
             type="button"
             onClick={handelCancelledEnrollment}
+            disabled={enrollmentStatus === "cancelled"}
             className="bg-blue-500 text-white p-1.5 rounded"
           >
             Cancel
@@ -106,6 +107,7 @@ const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
           <button
             type="button"
             onClick={handelApproveEnrollment}
+            disabled={enrollmentStatus === "approved"}
             className="bg-green-500 text-white p-1.5 rounded"
           >
             approve

@@ -1,7 +1,7 @@
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
 
-const PaymentRecordELements = ({ payment, index }) => {
+const PaymentRecordELements = ({ payment }) => {
   const {
     _id,
     firstName,
@@ -18,7 +18,7 @@ const PaymentRecordELements = ({ payment, index }) => {
   const isPaymentVerified = paymentVerified ? "Yes" : "No";
   return (
     <TableBody>
-      <TableBodyCell>{index}</TableBodyCell>
+      <TableBodyCell>{_id}</TableBodyCell>
       <TableBodyCell>{name}</TableBodyCell>
       <TableBodyCell>{email}</TableBodyCell>
       <TableBodyCell>{isPaymentVerified}</TableBodyCell>

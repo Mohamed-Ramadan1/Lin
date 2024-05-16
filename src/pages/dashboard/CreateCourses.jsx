@@ -11,28 +11,6 @@ import CustomFileInput from "../../components/forms/CustomFileInput";
 import { PageIntro } from "../../components";
 import { customFetch } from "../../utils/customFetch";
 
-export const action = async ({ request }) => {
-  const formData = await request.formData();
-  const file = formData.get("photo");
-  formData.append("photo", file); // Append file to existing formData
-
-  const data = Object.fromEntries(formData);
-  console.log(data.photo);
-
-  try {
-    await customFetch.post("courses", data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return null;
-  } catch (error) {
-    console.log(error);
-    toast.error(error?.response?.data?.message);
-    return error;
-  }
-};
-
 function CreateCourses() {
   const dispatch = useDispatch();
   const { isSuccess, error } = useSelector((state) => state.courseReducers);

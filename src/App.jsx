@@ -36,8 +36,6 @@ import {
   PublicProfile,
 } from "./pages";
 
-import { action as CreateCourseAction } from "./pages/dashboard/CreateCourses";
-
 //Profile Imports
 import { useEffect } from "react";
 const router = createBrowserRouter([
@@ -159,7 +157,6 @@ const router = createBrowserRouter([
       {
         path: "addcourse",
         element: <CreateCourses />,
-        action: CreateCourseAction,
       },
       {
         path: "adduser",

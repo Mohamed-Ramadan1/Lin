@@ -13,7 +13,7 @@ import {
 function FreeCourses() {
   const { token } = useSelector((state) => state.userReducers);
   const [courses, setCourses] = useState([]);
-  const [isChanged, setIsChanged] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [isMorePages, setIsMorePages] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(15);
@@ -34,28 +34,31 @@ function FreeCourses() {
 
         if (res.data.data.courses) {
           setCourses(res.data.data.courses);
-          setIsMorePages(true);
+          setIsMorePages(res.data.data.courses.length === itemsPerPage);
+        } else {
+          setCourses([]);
+          setIsMorePages(false);
         }
-        if (res.data.data.courses.length === 0) setIsMorePages(false);
+
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, [token, isChanged, currentPage, itemsPerPage]);
+  }, [token, currentPage, itemsPerPage]);
 
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
-      setIsChanged(true);
     }
   };
 
   const nextPage = () => {
     if (isMorePages) {
       setCurrentPage((prev) => prev + 1);
-      setIsChanged(true);
     }
   };
 
@@ -67,18 +70,24 @@ function FreeCourses() {
       {/* table manage table courses table  */}
       <PageContainer tableHeader={"Free Courses"}>
         <CoursesHeader />
-        {courses &&
+        {loading && (
+          <tr>
+            <td colSpan="10" className="text-center p-5 text-3xl">
+              Loading........
+            </td>
+          </tr>
+        )}
+        {!loading &&
+          courses.length > 0 &&
           courses.map((course, index) => (
             <CourseElement
               key={course._id}
               course={course}
-              index={index + 1}
+              index={index + 1 + (currentPage - 1) * itemsPerPage}
               token={token}
-              setIsChanged={setIsChanged}
             />
           ))}
-
-        {courses && courses.length === 0 && (
+        {!loading && courses.length === 0 && (
           <tr>
             <td colSpan="10" className="text-center p-5 text-3xl">
               No Courses Found
@@ -86,14 +95,13 @@ function FreeCourses() {
           </tr>
         )}
       </PageContainer>
-      {courses && (
-        <Pagination
-          currentPage={currentPage}
-          isMorePages={isMorePages}
-          onPrevPage={prevPage}
-          onNextPage={nextPage}
-        />
-      )}
+
+      <Pagination
+        currentPage={currentPage}
+        isMorePages={isMorePages}
+        onPrevPage={prevPage}
+        onNextPage={nextPage}
+      />
     </div>
   );
 }

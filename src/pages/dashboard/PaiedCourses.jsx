@@ -49,16 +49,15 @@ function PaiedCourses() {
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
-      setIsChanged(true);
     }
   };
 
   const nextPage = () => {
     if (currentPage) {
       setCurrentPage((prev) => prev + 1);
-      setIsChanged(true);
     }
   };
+
   return (
     <div className="p-5">
       <PageIntro pageName="Paid Courses" />
