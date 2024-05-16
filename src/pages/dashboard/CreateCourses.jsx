@@ -1,14 +1,38 @@
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import Input from "../../components/forms/Input";
 import { createCourse } from "../../store/courseSlice";
 import { courseActions } from "../../store/courseSlice";
 import CustomInput from "../../components/forms/CustomInput";
 import CustomDropdownInput from "../../components/forms/CustomDropdownInput";
 import CustomFileInput from "../../components/forms/CustomFileInput";
 import { PageIntro } from "../../components";
+import { customFetch } from "../../utils/customFetch";
+
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const file = formData.get("photo");
+  formData.append("photo", file); // Append file to existing formData
+
+  const data = Object.fromEntries(formData);
+  console.log(data.photo);
+
+  try {
+    await customFetch.post("courses", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return null;
+  } catch (error) {
+    console.log(error);
+    toast.error(error?.response?.data?.message);
+    return error;
+  }
+};
+
 function CreateCourses() {
   const dispatch = useDispatch();
   const { isSuccess, error } = useSelector((state) => state.courseReducers);
@@ -29,6 +53,7 @@ function CreateCourses() {
     <div className="min-h-[100vh]">
       <div className="p-5 ">
         <PageIntro pageName="Create Courses" />
+
         <Formik
           initialValues={{
             title: "",
@@ -47,7 +72,8 @@ function CreateCourses() {
           }}
           onSubmit={(values, actions) => {
             dispatch(createCourse(values));
-            actions.resetForm();
+            console.log(values);
+            // actions.resetForm();
             actions.setSubmitting(false);
           }}
         >
@@ -148,16 +174,16 @@ function CreateCourses() {
                   ]}
                 />
 
+                <CustomFileInput label="Course Image" name="photo" id="photo" />
+
                 {/* <CustomFileInput
                   label="Course Video"
                   name="videos"
                   id="courseVideo"
                 /> */}
-                <CustomFileInput
-                  label="Course Image"
-                  name="photo"
-                  id="courseImage"
-                />
+                {/* <CustomFileInput label="Course Image" name="photo" id="photo" />
+
+                 */}
               </div>
               <button
                 type="submit"

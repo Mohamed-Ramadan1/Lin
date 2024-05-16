@@ -5,13 +5,15 @@ import { toast } from "react-toastify";
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
 
-const UserELement = ({ user, index, token, setIsChanged }) => {
+const UserELement = ({ user, token, setIsChanged }) => {
   const dispatch = useDispatch();
-  const { name, email, role, createdAt, _id, isVerified, active } = user;
+  const { name, email, role, createdAt, updatedAt, _id, isVerified, active } =
+    user;
   const verified = isVerified ? "Verified" : "Not verified";
 
   const activation = active ? "Active" : "Not active";
   const formatData = new Date(createdAt).toLocaleDateString("en-GB");
+  const formatUpdateData = new Date(updatedAt).toLocaleDateString("en-GB");
 
   const handelDeleteAccount = async () => {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
@@ -87,13 +89,13 @@ const UserELement = ({ user, index, token, setIsChanged }) => {
 
   return (
     <TableBody>
-      <TableBodyCell>{index}</TableBodyCell>
       <TableBodyCell>{_id}</TableBodyCell>
       <TableBodyCell>{name}</TableBodyCell>
       <TableBodyCell>{email}</TableBodyCell>
       <TableBodyCell>{verified}</TableBodyCell>
       <TableBodyCell>{role}</TableBodyCell>
       <TableBodyCell>{formatData}</TableBodyCell>
+      <TableBodyCell>{formatUpdateData}</TableBodyCell>
       <TableBodyCell>{activation}</TableBodyCell>
       <TableBodyCell>
         <div className="flex gap-5">

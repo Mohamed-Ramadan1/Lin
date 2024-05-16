@@ -29,7 +29,7 @@ const DashboardLayout = () => {
             <Outlet />
 
             {/* Footer */}
-            <DashboardFooter />
+            {/* <DashboardFooter /> */}
           </div>
         </div>
       </main>

@@ -3,7 +3,6 @@ import TableHeaderCell from "./shard/TableHeaderCell";
 const CoursesHeader = () => {
   return (
     <TableHeader>
-      <TableHeaderCell>#num</TableHeaderCell>
       <TableHeaderCell>Title</TableHeaderCell>
       <TableHeaderCell>created Date</TableHeaderCell>
       <TableHeaderCell>Last Update</TableHeaderCell>

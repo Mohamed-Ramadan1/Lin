@@ -63,3 +63,6 @@ export { default as StatsContainer } from "./dashboard/StatsContainer";
 
 export { default as NavigationLink } from "./dashboard/shard/NavigationLink";
 export { default as NavBarLink } from "./dashboard/shard/NavBarLink";
+
+//Global
+export { default as Pagination } from "./common/Pagination";

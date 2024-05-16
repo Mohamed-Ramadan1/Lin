@@ -8,7 +8,7 @@ const UpdateProfileInfo = () => {
   //   const { token, isSuccess } = useSelector((state) => state.userReducers);
   return (
     <Formik
-      initialValues={{ name: "", email: "" }}
+      initialValues={{ photo: "", email: "" }}
       onSubmit={(values, actions) => {
         dispatch(updateUserInfo(values));
         actions.resetForm();

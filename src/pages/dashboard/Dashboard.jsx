@@ -31,7 +31,6 @@ function Dashboard() {
 
     fetchData();
   }, [token]);
-  console.log(loading);
   return (
     <>
       <div className="p-5">

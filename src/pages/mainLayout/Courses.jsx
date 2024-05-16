@@ -9,7 +9,6 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       const response = await customFetch.get("courses");
-      console.log(response);
       if (response.data.data.courses) {
         setCourses(response.data.data.courses);
       }

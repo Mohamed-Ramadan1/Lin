@@ -45,7 +45,6 @@ const CourseElement = ({
 
   return (
     <TableBody>
-      <TableBodyCell>{index}</TableBodyCell>
       <TableBodyCell>{title}</TableBodyCell>
       <TableBodyCell>{formatDate}</TableBodyCell>
       <TableBodyCell>{lastUPdated}</TableBodyCell>

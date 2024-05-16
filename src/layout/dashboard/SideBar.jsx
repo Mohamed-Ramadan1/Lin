@@ -13,7 +13,7 @@ import { SiGoogledisplayandvideo360 } from "react-icons/si";
 
 function SideBar() {
   return (
-    <div className="px-5">
+    <div style={{ overflowY: "auto" }} className="px-5">
       <div className="flex flex-col h-screen w-72.5 bg-black dark:bg-boxdark min-h-[100vh] overflow-hidden">
         <div className="flex flex-col items-center justify-center h-20 w-full border-b border-gray-600">
           <div className="flex gap-5">

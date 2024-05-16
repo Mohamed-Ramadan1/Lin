@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout, DashboardLayout } from "./layout";
 import { useDispatch } from "react-redux";
 import { getMe } from "./store/userSlice";
-
 import {
   SignUp,
   Login,
@@ -36,6 +35,8 @@ import {
   CourseDetails,
   PublicProfile,
 } from "./pages";
+
+import { action as CreateCourseAction } from "./pages/dashboard/CreateCourses";
 
 //Profile Imports
 import { useEffect } from "react";
@@ -158,6 +159,7 @@ const router = createBrowserRouter([
       {
         path: "addcourse",
         element: <CreateCourses />,
+        action: CreateCourseAction,
       },
       {
         path: "adduser",
