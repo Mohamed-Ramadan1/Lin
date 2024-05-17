@@ -33,6 +33,9 @@ export { default as DateSection } from "./userProfile/tasks/DateSection";
 export { default as EnrolledCourseCard } from "./userProfile/courses/EnrolledCourseCard";
 export { default as ProfileNavigationBar } from "./userProfile/ProfileNavigationBar";
 
+export { default as UpdateUserName } from "./userProfile/profileSettings/UpdateUserName";
+export { default as UserProfileOperations } from "./userProfile/profileSettings/UserProfileOperations";
+
 // Dashboard
 export { default as PageIntro } from "./dashboard/shard/PageIntro";
 export { default as PageContainer } from "./dashboard/shard/PageContainer";
