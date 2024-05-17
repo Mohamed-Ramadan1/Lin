@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 import { cleareStatus } from "./authHandler";
 
 //Bas URL
@@ -123,11 +123,14 @@ export const updateUserPassword = createAsyncThunk(
         },
       });
       const data = await res.data;
+      toast.success("Password Updated Successfully");
       return data;
     } catch (error) {
       if (error.response.status === 401) {
+        toast.error("UnAuthorized User");
         dispatch(cleareStatus());
       }
+      toast.error("Error Updating Password");
       return rejectWithValue(error.response);
     }
   }
@@ -138,25 +141,27 @@ export const updateUserInfo = createAsyncThunk(
   "user/updateUserInfo",
   async (userData, { rejectWithValue, getState, dispatch }) => {
     try {
-      const name = `${userData.firstName} ${userData.lastName}`;
+      if (userData.firstName || userData.lastName) {
+        const name = `${userData.firstName} ${userData.lastName}`;
+        userData.name = name;
+      }
       console.log(userData);
       const token = getState().userReducers.token;
-      const res = await axios.post(
-        `${userUrl}/updateInfo`,
-        { ...userData, name },
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post(`${userUrl}/updateInfo`, userData, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await res.data;
+      toast.success("User Info Updated Successfully");
       return data;
     } catch (error) {
       if (error.response.status === 401) {
+        toast.error("UnAuthorized User");
         dispatch(cleareStatus());
       }
+      toast.error("Error Updating User Info");
       return rejectWithValue(error.response);
     }
   }
@@ -417,7 +422,6 @@ const userSlice = createSlice({
       })
       .addCase(getMe.rejected, (state, action) => {
         state.error = action.payload.data.message;
-        console.log(action.payload.data.message);
         state.isSuccess = false;
       });
 

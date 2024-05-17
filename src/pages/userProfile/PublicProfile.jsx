@@ -7,26 +7,19 @@ import CustomInput from "../../components/forms/CustomInput";
 import { userActions } from "../../store/userSlice";
 import { useEffect } from "react";
 const PublicProfile = () => {
-  const { isSuccess, error } = useSelector((state) => state.userReducers);
+  const { token, error } = useSelector((state) => state.userReducers);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("User info updated successfully");
-      dispatch(userActions.resetSuccessStates());
-    }
-    if (error) {
-      toast.error(error);
-      dispatch(userActions.resetSuccessStates());
-    }
-  }, [isSuccess, dispatch, error]);
+
   return (
     <Formik
       initialValues={{
         firstName: "",
         lastName: "",
       }}
-      onSubmit={(values) => {
+      onSubmit={(values, actions) => {
         dispatch(updateUserInfo(values));
+        actions.resetForm();
+        actions.setSubmitting(false);
       }}
     >
       <Form className="container w-full max-w-[1400px] min-h-[30vh] m-auto flex gap-10 flex-col justify-start items-start">

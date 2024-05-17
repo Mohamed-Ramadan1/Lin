@@ -9,18 +9,7 @@ import CustomInput from "../../forms/CustomInput";
 
 const UpdateUserPassword = () => {
   const dispatch = useDispatch();
-  const { isSuccess, error } = useSelector((state) => state.userReducers);
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Password Updated Successfully");
-      dispatch(userActions.resetSuccessStates());
-    }
 
-    if (error) {
-      toast.error(error);
-      dispatch(userActions.resetSuccessStates());
-    }
-  }, [isSuccess, dispatch, error]);
   return (
     <Formik
       initialValues={{
@@ -32,7 +21,7 @@ const UpdateUserPassword = () => {
       onSubmit={(values, actions) => {
         dispatch(updateUserPassword(values));
         actions.resetForm();
-        console.log(values);
+        actions.setSubmitting(false);
       }}
     >
       {({ handleSubmit, isSubmitting }) => (
@@ -65,7 +54,7 @@ const UpdateUserPassword = () => {
 
             <button
               type="submit"
-              // disabled={isSubmitting}
+              disabled={isSubmitting}
               className="p-5 mt-7 bg-blue-600 text-white w-full h-[55px] rounded-[12px]  "
             >
               Update

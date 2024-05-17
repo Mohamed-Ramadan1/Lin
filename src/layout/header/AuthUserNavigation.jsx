@@ -19,6 +19,7 @@ const AuthUserNavigation = () => {
       </Link>
 
       <ShoppingCartSimple />
+
       <HeartHeader />
       <Bell />
     </div>

@@ -1,18 +1,21 @@
 import { Formik, Form } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CustomInput from "../../forms/CustomInput";
 import CustomFileInput from "../../forms/CustomFileInput";
 import { updateUserInfo } from "../../../store/userSlice";
+
+// on submit function to update the user data using the custom fetch
+
 const UpdateProfileInfo = () => {
   const dispatch = useDispatch();
-  //   const { token, isSuccess } = useSelector((state) => state.userReducers);
+
   return (
     <Formik
       initialValues={{ photo: "", email: "" }}
       onSubmit={(values, actions) => {
         dispatch(updateUserInfo(values));
         actions.resetForm();
-        console.log(values);
+        actions.setSubmitting(false);
       }}
     >
       {({ handleSubmit, isSubmitting }) => (
