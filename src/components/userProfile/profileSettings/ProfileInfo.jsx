@@ -1,7 +1,6 @@
 // import BannerProfile from "./../../assets/BannerProfile.png";
 
 const ProfileInfo = ({ user }) => {
-  console.log(user);
   return (
     <div>
       {/* Background img */}

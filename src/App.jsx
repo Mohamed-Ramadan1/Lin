@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout, DashboardLayout } from "./layout";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,9 +37,6 @@ import {
   PublicProfile,
   Error,
 } from "./pages";
-
-//Profile Imports
-import { useEffect } from "react";
 
 const router = createBrowserRouter([
   {

@@ -26,7 +26,7 @@ const TopContent = () => {
               toast.success("Logged out successfully");
               navigate("/");
             }}
-            className="btn flex items-center gap-2 px-4 py-2 text-[#fff] bg-[#9747FF]"
+            className="btn flex items-center gap-2 px-4 py-2 text-[#fff] bg-[#9747FF]  "
           >
             <RiLogoutBoxRLine />
             Logout
