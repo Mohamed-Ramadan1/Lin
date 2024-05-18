@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { cleareStatus } from "../../store/authHandler";
 const TopContent = () => {
   const { user } = useSelector((state) => state.userReducers);
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const TopContent = () => {
             type="button"
             onClick={() => {
               dispatch(logout());
+              dispatch(cleareStatus());
+
               toast.success("Logged out successfully");
               navigate("/");
             }}

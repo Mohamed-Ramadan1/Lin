@@ -1,8 +1,7 @@
 // import BannerProfile from "./../../assets/BannerProfile.png";
-import { useSelector } from "react-redux";
 
-const ProfileInfo = () => {
-  const { user } = useSelector((state) => state.userReducers);
+const ProfileInfo = ({ user }) => {
+  console.log(user);
   return (
     <div>
       {/* Background img */}

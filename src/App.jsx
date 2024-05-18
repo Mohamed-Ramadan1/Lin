@@ -189,8 +189,10 @@ const App = () => {
   const { user, token } = useSelector((state) => state.userReducers);
 
   useEffect(() => {
-    dispatch(getMe());
-  }, [dispatch]);
+    if (user && token) {
+      dispatch(getMe());
+    }
+  }, [dispatch, token]);
 
   return <RouterProvider router={router} />;
 };

@@ -3,7 +3,6 @@ import { customFetch } from "../../utils/customFetch";
 
 const BlogItem = ({ blog, userId, token, setIsChanged }) => {
   const { _id, category, content, createdAt, title, createdBy } = blog;
-
   const myBlog = userId === createdBy._id;
   const formattedDate = new Date(createdAt).toDateString();
 

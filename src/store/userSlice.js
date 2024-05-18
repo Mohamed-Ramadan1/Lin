@@ -150,7 +150,6 @@ export const updateUserInfo = createAsyncThunk(
         const name = `${userData.firstName} ${userData.lastName}`;
         userData.name = name;
       }
-      console.log(userData);
       const token = getState().userReducers.token;
       const res = await axios.post(`${userUrl}/updateInfo`, userData, {
         withCredentials: true,
@@ -219,19 +218,20 @@ export const getMe = createAsyncThunk(
   "user/getMe",
   async (_, { rejectWithValue, getState }) => {
     try {
-      const token = getState().userReducers.token;
+      const token = getState().userReducers.token || null;
       const res = await axios.get(`${userUrl}/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
-      const data = await res.data;
+      const data = res.data;
+
       return data;
     } catch (error) {
       if (error.response.status === 401) {
         dispatch(cleareStatus());
       }
+      console.log(error);
       return rejectWithValue(error.response);
     }
   }
@@ -427,7 +427,10 @@ const userSlice = createSlice({
         // state.isSuccess = true;
       })
       .addCase(getMe.rejected, (state, action) => {
-        state.error = action.payload.data.message;
+        // state.error = action.payload.data.message;
+        state.isLoggedIn = false;
+        state.user = null;
+        state.token = null;
         state.isSuccess = false;
       });
 

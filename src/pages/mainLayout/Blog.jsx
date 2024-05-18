@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-// import { customFetch } from "../utils/customFetch";
-// import BlogForm from "../components/blog/BlogForm";
-// import BlogItem from "../components/blog/BlogItem";
-
 import { customFetch } from "../../utils/customFetch";
 import BlogForm from "../../components/blog/BlogForm";
 import BlogItem from "../../components/blog/BlogItem";
@@ -47,7 +43,7 @@ function Blog() {
         <p className="text-3xl text-bold text-center">No Blogs Found</p>
       )}
 
-      {blogs &&
+      {blogs.length > 0 &&
         blogs.map((blog) => (
           <BlogItem
             key={blog.id}
