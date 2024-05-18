@@ -1,8 +1,9 @@
-//Auth
+//Root
 export { default as Login } from "./root/Login";
 export { default as SignUp } from "./root/SignUp";
 export { default as ForgotPassword } from "./root/ForgotPassword";
 export { default as ResetPassword } from "./root/ResetPassword";
+export { default as Error } from "./root/ErrorPage";
 
 //MainLayout
 export { default as Home } from "./mainLayout/Home";

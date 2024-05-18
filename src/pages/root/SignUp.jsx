@@ -7,22 +7,12 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-// import { signUp } from "./../store/userSlice";
-// import { userActions } from "./../store/userSlice";
-// import { registerSchema } from "./../schema/authFormsSchema";
-// import Button from "../components/ui/Button";
-// import GoogleBtn from "../components/ui/GoogleBtn";
-// import CustomInput from "../components/forms/CustomInput";
-
 import { signUp } from "../../store/userSlice";
 import { userActions } from "../../store/userSlice";
 import { registerSchema } from "../../schema/authFormsSchema";
 import Button from "../../components/ui/Button";
 import GoogleBtn from "../../components/ui/GoogleBtn";
 import CustomInput from "../../components/forms/CustomInput";
-
-// Images
-// import LoginImg from "../assets/SignUp.png";
 
 import LoginImg from "../../assets/SignUp.png";
 
@@ -33,12 +23,10 @@ const SignUp = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("User created successfully");
       dispatch(userActions.resetSuccessStates());
       return navigate("/");
     }
     if (error) {
-      toast.error(error);
       dispatch(userActions.resetSuccessStates());
     }
   }, [isSuccess, dispatch, navigate, error]);

@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-// import { login } from "./../store/userSlice";
-// import CustomInput from "../components/forms/CustomInput";
-// import CustomInput from "../../components/forms/CustomInput";
-// import { loginSchema } from "./../schema/authFormsSchema";
-// import { userActions } from "./../store/userSlice";
+
 import { login } from "../../store/userSlice";
 import CustomInput from "../../components/forms/CustomInput";
 import { loginSchema } from "../../schema/authFormsSchema";
@@ -16,10 +12,6 @@ import GoogleBtn from "../../components/ui/GoogleBtn";
 
 // Framer Motion
 import { motion } from "framer-motion";
-
-// Components
-// import Button from "../components/ui/Button";
-// import GoogleBtn from "../components/ui/GoogleBtn";
 
 import Button from "../../components/ui/Button";
 
@@ -33,13 +25,11 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("User logged-in successfully");
       dispatch(userActions.resetSuccessStates());
       return navigate("/");
     }
 
     if (error) {
-      toast.error(error);
       dispatch(userActions.resetSuccessStates());
     }
   }, [isSuccess, dispatch, navigate, error]);

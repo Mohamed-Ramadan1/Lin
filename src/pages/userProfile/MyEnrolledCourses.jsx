@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { customFetch } from "../../utils/customFetch";
 import { EnrolledCourseCard } from "../../components";
+import { Link } from "react-router-dom";
 
 const MyEnrolledCourses = () => {
   const { token } = useSelector((state) => state.userReducers);
@@ -37,9 +38,16 @@ const MyEnrolledCourses = () => {
         ))}
 
       {/* No courses display centerd text */}
-      {!courses && (
-        <div className="w-full flex justify-center items-center">
-          <h1 className="text-2xl font-bold">No courses enrolled yet</h1>
+      {courses.length === 0 && (
+        <div className="w-full my-10 flex flex-col justify-center items-center">
+          <h1 className="text-2xl font-bold  ">No courses enrolled yet</h1>
+
+          <Link
+            to="/courses"
+            className="text-blue-500 ml-2 mt-2 font-bold text-2xl underline"
+          >
+            Start Explore
+          </Link>
         </div>
       )}
 

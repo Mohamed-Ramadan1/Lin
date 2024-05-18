@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout, DashboardLayout } from "./layout";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "./store/userSlice";
 import {
   SignUp,
@@ -34,10 +34,12 @@ import {
   Courses,
   CourseDetails,
   PublicProfile,
+  Error,
 } from "./pages";
 
 //Profile Imports
 import { useEffect } from "react";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -184,6 +186,7 @@ const router = createBrowserRouter([
 
 const App = () => {
   const dispatch = useDispatch();
+  const { user, token } = useSelector((state) => state.userReducers);
 
   useEffect(() => {
     dispatch(getMe());

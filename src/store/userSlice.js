@@ -18,8 +18,10 @@ export const signUp = createAsyncThunk(
       const res = await axios.post(`${authUrl}/signup`, userData);
       const data = await res.data;
 
+      toast.success("User Created Successfully");
       return data;
     } catch (error) {
+      toast.error(error.response.data.message);
       return rejectWithValue(error.response);
     }
   }
@@ -34,8 +36,11 @@ export const login = createAsyncThunk(
         withCredentials: true,
       });
       const data = await res.data;
+      toast.success("User LoggedIn Successfully");
       return data;
     } catch (error) {
+      toast.error("Invalid Email or Password");
+      toast.error(error.response.data.message);
       return rejectWithValue(error.response);
     }
   }
@@ -220,6 +225,7 @@ export const getMe = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(res);
       const data = await res.data;
       return data;
     } catch (error) {
