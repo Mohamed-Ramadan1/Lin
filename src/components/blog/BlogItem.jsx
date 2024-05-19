@@ -24,7 +24,6 @@ const BlogItem = ({ blog, userId, token, setIsChanged }) => {
       toast.error("Failed to delete blog post");
     }
   };
-  console.log();
 
   return (
     <div class="px-[0vh] md:px-[19vh] my-5">

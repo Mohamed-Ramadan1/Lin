@@ -21,8 +21,6 @@ function MyTasks() {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const dispatch = useDispatch();
-
   const fetchTasksStates = async () => {
     try {
       const response = await customFetch.get("tasks/stats", {

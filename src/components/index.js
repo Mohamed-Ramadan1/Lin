@@ -19,6 +19,10 @@ export { default as CoursesPageIntro } from "./courses/coursesOverview/CoursesPa
 export { default as CourseCard } from "./courses/coursesOverview/CourseCard";
 export { default as FilterCourses } from "./courses/coursesOverview/FilterCourses";
 
+//Blog
+export { default as BlogForm } from "./blog/BlogForm";
+export { default as BlogItem } from "./blog/BlogItem";
+
 // User profile
 //Profile settings
 export { default as ProfileInfo } from "./userProfile/profileSettings/ProfileInfo";

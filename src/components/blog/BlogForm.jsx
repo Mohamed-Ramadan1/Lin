@@ -16,10 +16,12 @@ const BlogForm = ({ setIsChanged }) => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       setIsChanged(true);
       toast.success("Blog Posted Successfully");
     } catch (error) {
       toast.error("Failed to Post Blog");
+      console.log(error);
     }
   };
 
