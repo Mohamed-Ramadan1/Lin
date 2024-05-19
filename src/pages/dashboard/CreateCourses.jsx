@@ -152,7 +152,7 @@ function CreateCourses() {
                   ]}
                 />
 
-                <CustomFileInput label="Course Image" name="photo" id="photo" />
+                <CustomFileInput label="Course Image" name="photo" id="photo"  />
 
                 {/* <CustomFileInput
                   label="Course Video"

@@ -37,6 +37,7 @@ import {
   PublicProfile,
   Error,
 } from "./pages";
+import { action as updateProfileInfoAction } from "./components/userProfile/profileSettings/UpdateProfileInfo";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,7 @@ const router = createBrowserRouter([
       {
         path: "accountInfo",
         element: <AccountInfo />,
+        action: updateProfileInfoAction,
       },
       {
         path: "myTasks",

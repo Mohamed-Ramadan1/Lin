@@ -11,13 +11,13 @@ import { customFetch } from "../../utils/customFetch";
 const DetailsCourse = () => {
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
+  const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        // const res = await axios.get(`${baseUrl}/${courseId}`);
         const res = await customFetch.get(`/courses/${courseId}`);
         setCourse(res.data.data);
         setLoading(false);

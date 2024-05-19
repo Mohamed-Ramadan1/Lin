@@ -19,7 +19,7 @@ const CustomFileInput = ({ label, id, ...props }) => {
       <input
         {...fieldWithoutValue}
         {...props}
-        id={id}
+        accept="image/*"
         className="w-full h-[55px] p-[16px] outline-none transition ease-in-out focus:border-[#9747FF] focus:bg-[#f3eafd]  bg-[#f9f4ff] rounded-[12px]  border-[1px] border-[#D4D7E3] "
         type="file"
         onChange={changeHandler}

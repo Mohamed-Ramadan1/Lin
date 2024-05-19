@@ -4,8 +4,7 @@ import TableBodyCell from "./shard/TableBodyCell";
 const PaymentRecordELements = ({ payment }) => {
   const {
     _id,
-    firstName,
-    lastName,
+    name,
     email,
     paymentVerified,
     paymentAmount,
@@ -13,7 +12,6 @@ const PaymentRecordELements = ({ payment }) => {
     createdAt,
     cardNumber,
   } = payment;
-  const name = `${firstName} ${lastName}`;
   const paymentDate = new Date(createdAt).toLocaleDateString();
   const isPaymentVerified = paymentVerified ? "Yes" : "No";
   return (

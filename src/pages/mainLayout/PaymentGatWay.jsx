@@ -3,29 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
-
-// import CustomInput from "../components/forms/CustomInput";
-// import { enrollUserToCourse } from "../store/courseEnrollmentsSlice";
-// import { customFetch } from "../utils/customFetch";
-
-import CustomInput from "../../components/forms/CustomInput";
+import { useEffect, useState } from "react";
 import { enrollUserToCourse } from "../../store/courseEnrollmentsSlice";
 import { customFetch } from "../../utils/customFetch";
+import CustomInput from "../../components/forms/CustomInput";
 
 const PaymentGatWay = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
-  const { token } = useSelector((state) => state.userReducers);
+  const { token, user } = useSelector((state) => state.userReducers);
+
+  useEffect(() => {
+    if (!user) {
+      return navigate("/login");
+    }
+  }, [user, navigate, courseId, token]);
 
   return (
-    <div className="viewCoursePage relative px-[80px] max-2xl:px-[30px] max-sm:py-[30px] max-sm:px-[15px] py-5">
+    <div className="viewCoursePage relative px-[80px] max-2xl:px-[30px] max-sm:py-[30px] max-sm:px-[15px] py-5 ">
       <div className="border p-5 ">
         <h1 class="text-2xl font-bold xt-white mb-4 text-center ">Checkout</h1>
         <Formik
           initialValues={{
-            firstName: "",
-            lastName: "",
+            name: "",
             email: "",
             cardNumber: "",
             cardCvv: "",
@@ -40,7 +41,6 @@ const PaymentGatWay = () => {
                 },
               });
 
-              const data = await res.data;
               dispatch(enrollUserToCourse({ course: courseId }));
               toast.success("Payment and enrollment Successfull");
               navigate(`/myPaiedCourse/${courseId}`);
@@ -57,45 +57,34 @@ const PaymentGatWay = () => {
               {/* firstName lastName  email cardNumber cardCvv cardExpiryDate payment amount */}
               <div className=" mb-5">
                 <CustomInput
-                  name="firstName"
+                  name="name"
                   type="text"
-                  placeholder="First Name"
-                  label={"First Name"}
+                  placeholder="Name on payment visa card"
+                  label="Name on Card"
                   required
                 />
               </div>
-              <div className="mb-5">
-                <CustomInput
-                  name="lastName"
-                  type="text"
-                  placeholder="Last Name"
-                  label={"Last Name"}
-                  required
-                />
-              </div>
-              <div className="mt-5">
-                <CustomInput
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  label={"Email"}
-                />
+
+              <div className="mt-5 ">
+                <CustomInput name="email" type="email" label="Email" required />
               </div>
               <div className="mt-5">
                 <CustomInput
                   name="cardNumber"
                   type="text"
-                  placeholder="Card Number"
-                  label={"Card Number"}
+                  placeholder="Visa Card Number"
+                  label="Card Number"
+                  required
                 />
               </div>
 
               <div className="mt-5">
                 <CustomInput
                   name="cardExpiryDate"
-                  type="text"
+                  type="date"
                   placeholder="Card Expiry Date"
-                  label={"Card Expiry Date"}
+                  label="Card Expiry Date"
+                  required
                 />
               </div>
 
@@ -103,8 +92,10 @@ const PaymentGatWay = () => {
                 <CustomInput
                   name="cardCvv"
                   type="text"
-                  placeholder="Card Cvv"
-                  label={"Card CVV Number"}
+                  placeholder="Card Cvv 123"
+                  label="Card CVV Number"
+                  required
+                  pattern="[0-9]{3}"
                 />
               </div>
 
@@ -113,7 +104,8 @@ const PaymentGatWay = () => {
                   name="paymentAmount"
                   type="number"
                   placeholder="Amount"
-                  label={"Amount"}
+                  label="Amount"
+                  required
                 />
               </div>
 

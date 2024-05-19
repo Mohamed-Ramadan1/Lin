@@ -11,7 +11,7 @@ const CustomInput = ({ label, id, ...props }) => {
       <input
         {...field}
         {...props}
-        className="w-full h-[48px] p-[16px] outline-none transition ease-in-out focus:border-[#9747FF] focus:bg-[#f3eafd]  bg-[#f9f4ff] rounded-[12px]  border-[1px] border-[#D4D7E3] "
+        className="w-full h-[48px] p-[16px] outline-none transition ease-in-out focus:border-[#9747FF] focus:bg-[#f3eafd]  bg-[#f9f4ff] rounded-[12px]  border-[1px] border-[#D4D7E3] font-bold text-black"
       />
       {meta.error &&
         meta.touched && ( // corrected passwordConfirm
