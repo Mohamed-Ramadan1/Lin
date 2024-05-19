@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import InputCheckBox from '../../ui/InputCheckBox';
+import { useState } from "react";
 import { useEffect } from "react";
 import { customFetch } from "../../../utils/customFetch";
 const OptionList = ({ titleCheckList, setCourses }) => {
@@ -14,26 +13,23 @@ const OptionList = ({ titleCheckList, setCourses }) => {
   const toggleList = () => {
     setOpen(!open);
   };
-  // This effect runs whenever formData changes (any field)
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
-      // Only make request if at least one field has a value
-      const searchParams = new URLSearchParams(); // Build query string parameters
+      const searchParams = new URLSearchParams();
       for (const key in formData) {
         if (formData[key] !== "") {
           searchParams.append(key, formData[key]);
         }
       }
-      const queryString = searchParams.toString(); // Combine parameters
+      const queryString = searchParams.toString();
 
       if (queryString) {
         const result = await customFetch.get(`courses?${queryString}`);
-        console.log(result);
-        setCourses(result.data.data.courses); // Assuming response structure
+        setCourses(result.data.data.courses);
       }
-    }, 500); // Adjust the delay as needed (in milliseconds)
+    }, 500);
 
-    // Cleanup function to clear the timeout when the component unmounts
     return () => clearTimeout(delayDebounceFn);
   }, [formData]);
 

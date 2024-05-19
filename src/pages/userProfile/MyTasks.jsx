@@ -39,7 +39,6 @@ function MyTasks() {
 
   useEffect(() => {
     setIsChanged(false);
-    // dispatch(getAllTasks());
     const fetchTasks = async () => {
       try {
         const response = await customFetch.get("tasks", {
