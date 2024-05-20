@@ -3,7 +3,7 @@ const EnrolledCourseCard = ({ course }) => {
   const { title, photo, price, duration, category, description, _id } = course;
 
   return (
-    <div className="w-full md:w-1/3 bg-gray-100 rounded-lg overflow-hidden">
+    <div className="w-full  bg-gray-100 rounded-lg overflow-hidden mb-5">
       <Link to={`/courses/${_id}`}>
         <img
           className="w-full h-48 object-cover"

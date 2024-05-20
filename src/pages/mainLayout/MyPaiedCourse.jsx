@@ -1,9 +1,6 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import RenderBox from "../components/renderCoursesComponents/RenderBox";
-// import ReviewsContainer from "../components/renderCoursesComponents/ReviewsContainer";
-// import { customFetch } from "../utils/customFetch";
 
 import { customFetch } from "../../utils/customFetch";
 import RenderBox from "../../components/courses/courseContent/RenderBox";

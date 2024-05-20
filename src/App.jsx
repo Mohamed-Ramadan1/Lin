@@ -35,6 +35,7 @@ import {
   Courses,
   CourseDetails,
   PublicProfile,
+  MyBlogs,
   Error,
 } from "./pages";
 import { action as updateProfileInfoAction } from "./components/userProfile/profileSettings/UpdateProfileInfo";
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -104,6 +106,10 @@ const router = createBrowserRouter([
       {
         path: "chatWithMe",
         element: <ChatWithMe />,
+      },
+      {
+        path: "myBlogs",
+        element: <MyBlogs />,
       },
     ],
   },

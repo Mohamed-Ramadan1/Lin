@@ -58,6 +58,19 @@ const TopContentNavigationLinks = () => {
           </NavLink>
         </li>
       ) : null}
+
+      {user && (
+        <li key="profile">
+          <NavLink
+            to={"/profile"}
+            className={({ isActive }) =>
+              isActive ? activeClass : unActiveClass
+            }
+          >
+            My Profile
+          </NavLink>
+        </li>
+      )}
     </ul>
   );
 };

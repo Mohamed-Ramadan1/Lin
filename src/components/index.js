@@ -40,6 +40,8 @@ export { default as ProfileNavigationBar } from "./userProfile/ProfileNavigation
 export { default as UpdateUserName } from "./userProfile/profileSettings/UpdateUserName";
 export { default as UserProfileOperations } from "./userProfile/profileSettings/UserProfileOperations";
 
+export { default as BlogCart } from "./userProfile/blogs/BlogCart";
+
 // Dashboard
 export { default as PageIntro } from "./dashboard/shard/PageIntro";
 export { default as PageContainer } from "./dashboard/shard/PageContainer";

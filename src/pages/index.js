@@ -37,3 +37,4 @@ export { default as MyTasks } from "./userProfile/MyTasks";
 export { default as MyEnrolledCourses } from "./userProfile/MyEnrolledCourses";
 export { default as ChatWithMe } from "./userProfile/ChatWithMe";
 export { default as PublicProfile } from "./userProfile/PublicProfile";
+export { default as MyBlogs } from "./userProfile/MyBlogs";

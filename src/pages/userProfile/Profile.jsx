@@ -25,7 +25,9 @@ const Profile = () => {
           <MidContent />
           <ProfileInfo user={user} />
           <ProfileNavigationBar />
-          <Outlet />
+          <div className="mb-6 mt-6">
+            <Outlet />
+          </div>
           <Footer />
         </>
       )}

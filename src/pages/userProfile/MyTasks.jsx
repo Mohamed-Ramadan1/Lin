@@ -1,5 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
-import { getAllTasks } from "../../store/taskSlice";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { customFetch } from "../../utils/customFetch";
 
@@ -14,9 +13,8 @@ import {
 function MyTasks() {
   const [tasksStates, setTasksStates] = useState(null);
   const [isChanged, setIsChanged] = useState(false);
-  // const { tasks } = useSelector((state) => state.taskReducers);
   const { token } = useSelector((state) => state.userReducers);
-  const [tasks, setTasks] = useState(null);
+  const [tasks, setTasks] = useState([]);
   const [isMorePages, setIsMorePages] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);

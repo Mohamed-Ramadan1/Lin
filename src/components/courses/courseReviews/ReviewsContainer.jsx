@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { customFetch } from "../../../utils/customFetch";
+import { Pagination } from "../../../components/";
 import AddRatingForm from "./AddRatingForm";
 import ReviewElement from "./ReviewElement";
 
 const ReviewsContainer = () => {
   const [isChanged, setIsChanged] = useState(false);
-  const { token, user } = useSelector((state) => state.userReducers);
-  const { courseId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isMorePages, setIsMorePages] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { token, user } = useSelector((state) => state.userReducers);
+  const { courseId } = useParams();
 
   useEffect(() => {
     setIsChanged(false);
@@ -20,18 +24,32 @@ const ReviewsContainer = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          params: {
+            page: currentPage,
+            limit: itemsPerPage,
+            sort: "-createdAt",
+          },
         });
-        setReviews(res.data.data.reviews);
-        setLoading(false);
+
+        if (res.data.data.reviews) {
+          setReviews(res.data.data.reviews);
+          setLoading(false);
+          setIsMorePages(res.data.data.reviews.length === itemsPerPage);
+        } else {
+          setReviews([]);
+          setLoading(false);
+          setIsMorePages(false);
+        }
+        console.log(res.data.data.reviews);
       } catch (error) {
         console.log(error.response.data.message);
       }
     };
     fetchReviews();
-  }, [courseId, token, isChanged]);
+  }, [courseId, token, isChanged, currentPage, itemsPerPage]);
 
   return (
-    <div className="max-w-[100%] md:max-w-[72.5%] reviwe m-5 ">
+    <div className="max-w-[100%] md:max-w-[72.5%]  m-5 ">
       <div class="bg-gray-100 p-6">
         <h2 class="text-lg font-bold mb-4">Comments</h2>
         <div class="flex flex-col space-y-4">
@@ -47,6 +65,20 @@ const ReviewsContainer = () => {
               setIsChanged={setIsChanged}
             />
           ))}
+        {loading && (
+          <p className="text-3xl text-bold text-center">No reviews found</p>
+        )}
+        {reviews.length === 0 && !loading && (
+          <p className="text-3xl text-bold text-center">No reviews found</p>
+        )}
+      </div>
+      <div>
+        <Pagination
+          currentPage={currentPage}
+          isMorePages={isMorePages}
+          onPrevPage={() => setCurrentPage((prev) => prev - 1)}
+          onNextPage={() => setCurrentPage((prev) => prev + 1)}
+        />
       </div>
     </div>
   );
