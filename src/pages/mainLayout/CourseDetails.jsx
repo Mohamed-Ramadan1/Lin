@@ -1,17 +1,17 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { customFetch } from "../../utils/customFetch";
+
 import {
   CourseContentDetails,
   CourseThumbnail,
   CourseEnrollmentDetails,
 } from "../../components";
 
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { customFetch } from "../../utils/customFetch";
-
 const DetailsCourse = () => {
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
-  const [enrollments, setEnrollments] = useState([]);
+  // const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -30,7 +30,6 @@ const DetailsCourse = () => {
   }, [courseId]);
   if (loading) return <h1>Loading...</h1>;
   if (error) return <h1>{error}</h1>;
-
   return (
     <div className="detailsCourse relative overflow-hidden flex justify-center items-center px-[124px] py-[70px] max-lg:px-[30px] max-sm:py-[30px] max-sm:px-[15px]">
       <div className="container flex gap-[50px] flex-col items-center justify-center">
@@ -55,6 +54,8 @@ const DetailsCourse = () => {
             videos={course.course.videos}
             instructor={course.course.instructor[0]}
             prerequisites={course.course.prerequisites}
+            financialAid={course.course.financialAid}
+            paymentModel={course.course.paymentModel}
           />
 
           <CourseEnrollmentDetails
@@ -63,6 +64,7 @@ const DetailsCourse = () => {
             paymentModel={course.course.paymentModel}
             courseId={course.course._id}
             videos={course.course.videos}
+            financialAid={course.course.financialAid}
           />
         </div>
       </div>

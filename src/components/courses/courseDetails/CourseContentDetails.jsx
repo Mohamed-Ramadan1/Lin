@@ -5,6 +5,7 @@ import CourseDescription from "./CourseDescription";
 import CourseRequirementSection from "./CourseRequirementSection";
 import CourseInstructorDetails from "./CourseInstructorDetails";
 import CourseDetails from "./CourseDetails";
+import { MdAttachMoney } from "react-icons/md";
 
 const CourseContentDetails = ({
   title,
@@ -18,6 +19,8 @@ const CourseContentDetails = ({
   videos,
   instructor,
   prerequisites,
+  financialAid,
+  paymentModel,
 }) => {
   const formatUpdatedDate = new Date(updatedAt).toLocaleDateString();
   return (
@@ -117,6 +120,12 @@ const CourseContentDetails = ({
           </svg>
           <span>Lang - {language}</span>
         </div>
+        {financialAid && paymentModel === "paid" && (
+          <div className="flex gap-3 items-center">
+            <MdAttachMoney className="font-bold size-7 text-[#cf86f9]" />
+            <span>Financial aid available</span>
+          </div>
+        )}
       </div>
 
       <CourseLearningObjectives learningObjectives={learningObjectives} />

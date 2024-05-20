@@ -37,6 +37,7 @@ import {
   PublicProfile,
   MyBlogs,
   Error,
+  CourseFinancialAid,
 } from "./pages";
 import { action as updateProfileInfoAction } from "./components/userProfile/profileSettings/UpdateProfileInfo";
 
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "paymentGatWay/:courseId",
         element: <PaymentGatWay />,
+      },
+      {
+        path: "payments/financial-aid/course/:courseId",
+        element: <CourseFinancialAid />,
       },
       {
         path: "myPaiedCourse/:courseId",
@@ -120,18 +125,22 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <Error />,
   },
   {
     path: "/forgotpassword",
     element: <ForgotPassword />,
+    errorElement: <Error />,
   },
   {
     path: "/resetpassword/:resetToken",
     element: <ResetPassword />,
+    errorElement: <Error />,
   },
   {
     path: "/dashboard",
     element: <DashboardLayout />,
+    errorElement: <Error />,
     children: [
       {
         index: true,

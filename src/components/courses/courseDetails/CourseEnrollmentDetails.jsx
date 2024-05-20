@@ -13,6 +13,7 @@ const CourseEnrollmentDetails = ({
   paymentModel,
   courseId,
   videos,
+  financialAid,
 }) => {
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [isChanged, setIsChanged] = useState(false);

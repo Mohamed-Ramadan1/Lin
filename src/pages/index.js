@@ -14,6 +14,7 @@ export { default as PaymentGatWay } from "./mainLayout/PaymentGatWay";
 export { default as MyPaiedCourse } from "./mainLayout/MyPaiedCourse";
 export { default as Courses } from "./mainLayout/Courses";
 export { default as CourseDetails } from "./mainLayout/CourseDetails";
+export { default as CourseFinancialAid } from "./mainLayout/CourseFinancialAid";
 
 //Dashboard
 export { default as Dashboard } from "./dashboard/Dashboard";
