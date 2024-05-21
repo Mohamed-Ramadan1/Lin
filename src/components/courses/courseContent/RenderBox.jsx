@@ -29,7 +29,6 @@ const RenderBox = ({ courseId }) => {
     fetchEnrolledCourse();
   }, [courseId, token, user]);
 
-  console.log(selectedVideo);
   return (
     <div className="flex gap-3 flex-col md:flex-row m-5 ">
       <div className="h-[40vh] w-full md:h-[80vh]">

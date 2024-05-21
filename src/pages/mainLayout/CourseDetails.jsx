@@ -11,18 +11,20 @@ import {
 const DetailsCourse = () => {
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
-  // const [enrollments, setEnrollments] = useState([]);
+  const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await customFetch.get(`/courses/${courseId}`);
-        setCourse(res.data.data);
+        const response = await customFetch.get(`/courses/${courseId}`);
+        setCourse(response.data.data.course);
+        setEnrollments(response.data.data.enrollments);
         setLoading(false);
       } catch (error) {
-        setError(error.response.data.message);
+        // setError(error.response.data.message);
+        console.log(error);
         setLoading(false);
       }
     };
@@ -35,36 +37,36 @@ const DetailsCourse = () => {
       <div className="container flex gap-[50px] flex-col items-center justify-center">
         <div className="w-full">
           <CourseThumbnail
-            photo={course.course.photo}
-            students={course.enrollments}
-            instructor={course.course.instructor[0]}
+            photo={course.photo}
+            students={enrollments || 0}
+            instructor={course.instructor[0]}
           />
         </div>
 
         <div className="flex w-full gap-[50px]">
           <CourseContentDetails
-            title={course.course.title}
-            description={course.course.description}
-            duration={course.course.duration}
-            totalReviews={course.course.totalReviews}
-            averageRating={course.course.averageRating}
-            updatedAt={course.course.updatedAt}
-            language={course.course.language}
-            learningObjectives={course.course.learningObjectives}
-            videos={course.course.videos}
-            instructor={course.course.instructor[0]}
-            prerequisites={course.course.prerequisites}
-            financialAid={course.course.financialAid}
-            paymentModel={course.course.paymentModel}
+            title={course.title}
+            description={course.description}
+            duration={course.duration}
+            totalReviews={course.totalReviews}
+            averageRating={course.averageRating}
+            updatedAt={course.updatedAt}
+            language={course.language}
+            learningObjectives={course.learningObjectives}
+            videos={course.videos}
+            instructor={course.instructor[0]}
+            prerequisites={course.prerequisites}
+            financialAid={course.financialAid}
+            paymentModel={course.paymentModel}
           />
 
           <CourseEnrollmentDetails
-            duration={course.course.duration}
-            price={course.course.price}
-            paymentModel={course.course.paymentModel}
-            courseId={course.course._id}
-            videos={course.course.videos}
-            financialAid={course.course.financialAid}
+            duration={course.duration}
+            price={course.price}
+            paymentModel={course.paymentModel}
+            courseId={course._id}
+            videos={course.videos}
+            financialAid={course.financialAid}
           />
         </div>
       </div>

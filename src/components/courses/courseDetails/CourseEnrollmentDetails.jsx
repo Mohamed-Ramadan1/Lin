@@ -19,6 +19,9 @@ const CourseEnrollmentDetails = ({
   const [isChanged, setIsChanged] = useState(false);
   const navigate = useNavigate();
   const { token, user } = useSelector((state) => state.userReducers);
+  const redirectPath = user
+    ? `/payments/financial-aid/course/${courseId}`
+    : "/login";
   const handelEnrollFreeCourse = async () => {
     try {
       await customFetch.post(
@@ -37,37 +40,54 @@ const CourseEnrollmentDetails = ({
       toast.success("Enrolled successfully");
       navigate(`/myPaiedCourse/${courseId}`);
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.log(error);
+      // toast.error(error.response.data.message);
     }
   };
 
   useEffect(() => {
     const fetchEnrolledCourse = async () => {
       try {
-        const res = await customFetch.get(`enrolls/user/${courseId}`, {
+        const response = await customFetch.get(`enrolls/user/${courseId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (res.data.data.enrollments.user._id === user._id) {
+        if (
+          response.data.data.enrollments &&
+          response.data.data.enrollments.user._id === user._id
+        ) {
           setIsEnrolled(true);
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        // console.log(error.response.data.message);
+        console.log(error);
       }
     };
     fetchEnrolledCourse();
   }, [courseId, token, user, isChanged]);
 
   return (
-    <div className="salary p-3 min-w-[290px] max-h-[400px] flex flex-col gap-4 items-start rounded-3xl max-md:hidden bg-[#D5FF40]">
+    <div className="salary p-3 min-w-[290px] max-h-[425px] flex flex-col gap-4 items-start rounded-3xl max-md:hidden bg-[#D5FF40]">
       <div className="top-salary w-full relative flex justify-between items-start">
         <div>
           {paymentModel === "free" ? (
             <h2 className="text-3xl font-bold">Free Course</h2>
           ) : (
-            <h2 className="text-3xl font-bold">E£{price}</h2>
+            <>
+              <h2 className="text-3xl font-bold">E£{price}</h2>
+              {financialAid && paymentModel === "paid" && (
+                <div className="flex gap-3 items-center">
+                  <Link
+                    to={redirectPath}
+                    className="font-bold underline text-blue-600 hover:text-blue-800"
+                  >
+                    Apply For Financial aid{" "}
+                  </Link>
+                </div>
+              )}
+            </>
           )}
         </div>
 
@@ -246,7 +266,7 @@ const CourseEnrollmentDetails = ({
           </li>
         </ul>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 overflow-auto">
           {isEnrolled === true ? (
             <Link
               to={`/myPaiedCourse/${courseId}`}

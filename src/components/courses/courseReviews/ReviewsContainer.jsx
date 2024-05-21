@@ -40,7 +40,7 @@ const ReviewsContainer = () => {
           setLoading(false);
           setIsMorePages(false);
         }
-        console.log(res.data.data.reviews);
+        // console.log(res.data.data.reviews);
       } catch (error) {
         console.log(error.response.data.message);
       }
