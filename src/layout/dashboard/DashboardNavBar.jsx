@@ -55,6 +55,10 @@ function DashboardNavBar() {
                 navText="Paid Courses"
               />
               <NavBarLink
+                path="/dashboard/financial-aid-requests"
+                navText="Financial Aid Requests"
+              />
+              <NavBarLink
                 path="/dashboard/reservations"
                 navText="Enrollments"
               />

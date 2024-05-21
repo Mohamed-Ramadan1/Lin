@@ -30,6 +30,7 @@ export { default as CreateInstructorAccount } from "./dashboard/CreateInstructor
 export { default as ManageInstructorsRequests } from "./dashboard/ManageInstructorsRequests";
 export { default as ManageBlogs } from "./dashboard/ManageBlogs";
 export { default as ManagePayments } from "./dashboard/ManagePayments";
+export { default as MangeFinancialAidRequests } from "./dashboard/MangeFinancialAidRequests";
 
 //userProfile
 export { default as Profile } from "./userProfile/Profile";

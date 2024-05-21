@@ -67,6 +67,9 @@ export { default as InstructorElement } from "./dashboard/InstructorElement";
 export { default as InstructorRequestsHeader } from "./dashboard/InstructorRequestsHeader";
 export { default as InstructorsApplicationElement } from "./dashboard/InstructorsApplicationElement";
 
+export { default as FinancialAidRequestHeader } from "./dashboard/FinancialAidRequestHeader";
+export { default as FinancialAidRequestElement } from "./dashboard/FinancialAidRequestElement";
+
 export { default as StatsBox } from "./dashboard/StatsBox";
 export { default as StatsContainer } from "./dashboard/StatsContainer";
 

@@ -5,14 +5,14 @@ import { customFetch } from "../../utils/customFetch";
 import {
   PageIntro,
   PageContainer,
-  InstructorRequestsHeader,
-  InstructorsApplicationElement,
+  FinancialAidRequestHeader,
+  FinancialAidRequestElement,
   Pagination,
 } from "../../components";
 
-const ManageInstructorsRequests = () => {
+const MangeFinancialAidRequests = () => {
   const { token } = useSelector((state) => state.userReducers);
-  const [instructors, setInstructors] = useState([]);
+  const [financialAidRequests, setFinancialAidRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isChanged, setIsChanged] = useState(false);
@@ -21,73 +21,67 @@ const ManageInstructorsRequests = () => {
   const [isMorePages, setIsMorePages] = useState(false);
 
   useEffect(() => {
-    const fetchInstructors = async () => {
+    const fetchFinancialAidRequests = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await customFetch.get("instructorApplications", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-          },
-        });
+        const response = await customFetch.get(
+          "admin/getAllFinancialAidRequests",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            params: {
+              page: currentPage,
+              limit: itemsPerPage,
+            },
+          }
+        );
 
-        const fetchedInstructors = response.data.data.applications;
+        const fetchedFinancialAidsApplications =
+          response.data.data.financialAidRequests;
 
-        if (fetchedInstructors.length < itemsPerPage) {
+        if (fetchedFinancialAidsApplications.length < itemsPerPage) {
           setIsMorePages(false);
         } else {
           setIsMorePages(true);
         }
 
-        setInstructors(fetchedInstructors);
+        setFinancialAidRequests(fetchedFinancialAidsApplications);
       } catch (error) {
-        setError(error.message || "Failed to fetch instructor requests");
+        setError(
+          error.message || "Failed to fetch  Financial Aids Applications "
+        );
       } finally {
         setLoading(false);
         setIsChanged(false);
       }
     };
 
-    fetchInstructors();
+    fetchFinancialAidRequests();
   }, [token, isChanged, currentPage, itemsPerPage]);
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (isMorePages) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
 
   return (
     <div className="p-5">
-      <PageIntro pageName="Instructors Requests" />
-      <PageContainer tableHeader="Instructors requests">
-        <InstructorRequestsHeader />
+      <PageIntro pageName="Financial Aids requests" />
+      <PageContainer tableHeader="Financial Aids requests">
+        <FinancialAidRequestHeader />
         {loading ? (
           <tr>
             <td colSpan="10" className="text-center p-5 text-3xl">
-              No Courses Found
+              Loading Financial Aids Requests......
             </td>
           </tr>
         ) : error ? (
           <div className="flex justify-center items-center h-10">
             <p className="text-2xl font-semibold text-red-500">{error}</p>
           </div>
-        ) : instructors.length > 0 ? (
-          instructors.map((instructor, index) => (
-            <InstructorsApplicationElement
-              key={instructor._id}
-              instructor={instructor}
-              index={index + 1 + (currentPage - 1) * itemsPerPage}
+        ) : financialAidRequests.length > 0 ? (
+          financialAidRequests.map((request, index) => (
+            <FinancialAidRequestElement
+              key={request._id}
+              request={request}
+              // index={index + 1 + (currentPage - 1) * itemsPerPage}
               token={token}
               setIsChanged={setIsChanged}
             />
@@ -95,7 +89,7 @@ const ManageInstructorsRequests = () => {
         ) : (
           <div className="flex justify-center items-center h-10">
             <p className="text-2xl font-semibold">
-              No instructor requests found
+              No Financial Aid Requests were requested
             </p>
           </div>
         )}
@@ -103,11 +97,11 @@ const ManageInstructorsRequests = () => {
       <Pagination
         currentPage={currentPage}
         isMorePages={isMorePages}
-        onPrevPage={prevPage}
-        onNextPage={nextPage}
+        onPrevPage={() => setCurrentPage((prev) => prev - 1)}
+        onNextPage={() => setCurrentPage((prev) => prev + 1)}
       />
     </div>
   );
 };
 
-export default ManageInstructorsRequests;
+export default MangeFinancialAidRequests;

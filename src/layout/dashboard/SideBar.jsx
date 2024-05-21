@@ -10,6 +10,7 @@ import { LiaBlogSolid } from "react-icons/lia";
 import { FaCodePullRequest } from "react-icons/fa6";
 import { FiUsers, FiUserPlus } from "react-icons/fi";
 import { SiGoogledisplayandvideo360 } from "react-icons/si";
+import { MdRequestQuote } from "react-icons/md";
 
 function SideBar() {
   return (
@@ -40,6 +41,13 @@ function SideBar() {
           path="/dashboard/paidCourses"
           NavIcon={MdPaid}
           navText="Paid Courses"
+        />
+
+        {/* financial aid request*/}
+        <NavigationLink
+          path="/dashboard/financial-aid-requests"
+          NavIcon={MdRequestQuote}
+          navText="Financial Aid Requests"
         />
 
         {/* Add Courses */}
@@ -84,13 +92,6 @@ function SideBar() {
           navText="Reserved Courses"
         />
 
-        {/* Settings */}
-        <NavigationLink
-          path="/dashboard/settings"
-          NavIcon={IoSettings}
-          navText="Settings"
-        />
-
         {/* Payments */}
         <NavigationLink
           path="/dashboard/paymentsrecords"
@@ -110,6 +111,12 @@ function SideBar() {
           path="/dashboard/instructorsrequests"
           NavIcon={FaCodePullRequest}
           navText="Instructors Requests"
+        />
+        {/* Settings */}
+        <NavigationLink
+          path="/dashboard/settings"
+          NavIcon={IoSettings}
+          navText="Settings"
         />
       </div>
     </div>

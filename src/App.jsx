@@ -38,6 +38,7 @@ import {
   MyBlogs,
   Error,
   CourseFinancialAid,
+  MangeFinancialAidRequests,
 } from "./pages";
 import { action as updateProfileInfoAction } from "./components/userProfile/profileSettings/UpdateProfileInfo";
 
@@ -121,6 +122,7 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+    errorElement: <Error />,
   },
   {
     path: "/login",
@@ -194,6 +196,10 @@ const router = createBrowserRouter([
       {
         path: "paymentsrecords",
         element: <ManagePayments />,
+      },
+      {
+        path: "financial-aid-requests",
+        element: <MangeFinancialAidRequests />,
       },
     ],
   },
