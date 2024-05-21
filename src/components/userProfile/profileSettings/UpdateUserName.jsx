@@ -34,7 +34,7 @@ const UpdateUserName = () => {
           />
         </div>
 
-        <div className="flex  gap-10">
+        <div className="flex gap-10 ">
           <button
             type="submit"
             className="w-[220px] h-[48px] bg-[#9747FF] text-[#fff] rounded-[12px] transition ease-in-out hover:bg-[#6F3FF5]"

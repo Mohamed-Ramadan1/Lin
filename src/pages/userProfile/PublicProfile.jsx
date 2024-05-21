@@ -1,10 +1,9 @@
-import { UpdateUserName, UserProfileOperations } from "../../components";
+import { UpdateUserName } from "../../components";
 
 const PublicProfile = () => {
   return (
     <div className="p-3 ">
       <UpdateUserName />
-      {/* <UserProfileOperations /> */}
     </div>
   );
 };

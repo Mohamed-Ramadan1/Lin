@@ -5,8 +5,7 @@ import { useEffect } from "react";
 
 import { ProfileInfo, ProfileNavigationBar } from "../../components";
 import Footer from "../../layout/footer/Footer";
-import TopContent from "../../layout/header/TopContent";
-import MidContent from "../../layout/header/MidContent";
+import Header from "../../layout/header/Header";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -21,8 +20,7 @@ const Profile = () => {
     <div className="h-[100vh] relative">
       {user && (
         <>
-          <TopContent />
-          <MidContent />
+          <Header />
           <ProfileInfo user={user} />
           <ProfileNavigationBar />
           <div className="mb-6 mt-6">

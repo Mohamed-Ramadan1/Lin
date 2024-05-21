@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import TopContent from "./TopContent";
 import MidContent from "./MidContent";
@@ -12,14 +12,8 @@ export default function Header() {
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth > 970);
     };
-
-    // Initial check for screen size
     handleResize();
-
-    // Event listener for window resize
     window.addEventListener("resize", handleResize);
-
-    // Cleanup on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };

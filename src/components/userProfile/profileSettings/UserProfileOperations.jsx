@@ -61,7 +61,7 @@ const UserProfileOperations = () => {
   //activate account
 
   return (
-    <div className="container w-full max-w-[1400px]  m-auto flex gap-10 flex-row justify-start items-start">
+    <div className="container w-full max-w-[1400px]  m-auto flex gap-10 flex-row justify-start items-start flex-wrap">
       <button
         type="button"
         onClick={unActivateAccount}
