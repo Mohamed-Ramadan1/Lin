@@ -26,7 +26,7 @@ const ManageBlogs = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await customFetch.get("blogs", {
+        const res = await customFetch.get("admin/getAllBlogs", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

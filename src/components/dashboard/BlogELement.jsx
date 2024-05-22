@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
 
-const BlogELement = ({ index, blog, token, setIsChanged }) => {
-  const { _id, title, category, createdBy, published } = blog;
+const BlogELement = ({ blog, token, setIsChanged }) => {
+  const { _id, title, category, createdBy, published, visibility, createdAt } =
+    blog;
   const isPublished = published ? "published" : "unpublished";
+  const formattedDate = new Date(createdAt).toDateString();
 
   const handelDeleteBlog = async () => {
     const confirm = window.confirm(
@@ -76,6 +78,8 @@ const BlogELement = ({ index, blog, token, setIsChanged }) => {
       <TableBodyCell>{createdBy.name}</TableBodyCell>
       <TableBodyCell>{createdBy.email}</TableBodyCell>
       <TableBodyCell>{isPublished}</TableBodyCell>
+      <TableBodyCell>{visibility}</TableBodyCell>
+      <TableBodyCell>{formattedDate}</TableBodyCell>
 
       <TableBodyCell>
         <div className="flex gap-5 justify-center">

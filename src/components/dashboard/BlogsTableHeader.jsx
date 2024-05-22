@@ -10,6 +10,8 @@ const BlogsTableHeader = () => {
       <TableHeaderCell>Arthur Name </TableHeaderCell>
       <TableHeaderCell>Arthur Email</TableHeaderCell>
       <TableHeaderCell>Published</TableHeaderCell>
+      <TableHeaderCell>Visibility</TableHeaderCell>
+      <TableHeaderCell>Created At</TableHeaderCell>
       <TableHeaderCell>Actions</TableHeaderCell>
     </TableHeader>
   );
