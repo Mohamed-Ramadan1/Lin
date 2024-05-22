@@ -4,7 +4,6 @@ import { adminActions } from "./adminSlice";
 import { courseEnrollmentsActions } from "./courseEnrollmentsSlice";
 import { courseActions } from "./courseSlice";
 import { reviewsActions } from "./reviewsSlice";
-import { taskActions } from "./taskSlice";
 import { userActions } from "./userSlice";
 
 export const cleareStatus = createAsyncThunk(
@@ -15,7 +14,6 @@ export const cleareStatus = createAsyncThunk(
       dispatch(courseEnrollmentsActions.resetCourseEnrollments());
       dispatch(courseActions.resetCourseState());
       dispatch(reviewsActions.resetReviewsState());
-      dispatch(taskActions.resetTasksState());
       dispatch(userActions.handelUnAuthorizedUser());
       return true;
     } catch (error) {

@@ -5,7 +5,6 @@ import storage from "redux-persist/lib/storage";
 import adminReducers from "./adminSlice";
 import userReducers from "./userSlice";
 import courseReducers from "./courseSlice";
-import taskReducers from "./taskSlice";
 import reviewsReducers from "./reviewsSlice";
 import courseEnrollmenReducers from "./courseEnrollmentsSlice";
 
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
   adminReducers,
   courseReducers,
   courseEnrollmenReducers,
-  taskReducers,
   reviewsReducers,
 });
 

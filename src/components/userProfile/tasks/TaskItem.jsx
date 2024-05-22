@@ -1,21 +1,34 @@
-import { useDispatch } from "react-redux";
-import { deleteTask } from "../../../store/taskSlice";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { customFetch } from "../../../utils/customFetch";
 
 const TaskItem = ({
   task: { _id, title, description, createdAt, status },
   setIsChanged,
 }) => {
-  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.userReducers);
 
-  const handelDelete = () => {
+  const handelDelete = async () => {
     const isConfirm = window.confirm(
       "Are you sure you want to delete this task?"
     );
     if (!isConfirm) return;
-    dispatch(deleteTask(_id));
-    setIsChanged(true);
-    toast.success("Task deleted successfully");
+    try {
+      const res = await customFetch.delete(`tasks/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(res.data);
+      setIsChanged(true);
+      toast.success("Task deleted successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
+    // dispatch(deleteTask(_id));
+    // setIsChanged(true);
+    // toast.success("Task deleted successfully");
   };
 
   return (
