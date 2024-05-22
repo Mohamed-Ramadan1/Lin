@@ -29,10 +29,15 @@ const RenderBox = ({ courseId }) => {
     fetchEnrolledCourse();
   }, [courseId, token, user]);
 
+  const initialVideo = selectedVideo || courseVideos[0];
   return (
     <div className="flex gap-3 flex-col md:flex-row m-5 ">
-      <div className="h-[40vh] w-full md:h-[80vh]">
-        <VideoBox url={selectedVideo ? selectedVideo.url : fakeUrl} />
+      <div className="h-[40vh] w-full md:h-[80vh] mb-5">
+        {initialVideo ? (
+          <VideoBox selectedVideoInformation={initialVideo} />
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
 
       <div className="basis-1/3 h-[30vh] md:h-[80vh]">
@@ -41,7 +46,7 @@ const RenderBox = ({ courseId }) => {
         </div>
         <div className="overflow-y-auto max-h-[calc(80vh-3rem)]">
           {courseVideos &&
-            courseVideos.map((course, index) => (
+            courseVideos.map((course) => (
               <VideoItem
                 key={course._id}
                 course={course}

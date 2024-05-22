@@ -49,7 +49,7 @@ const ReviewsContainer = () => {
   }, [courseId, token, isChanged, currentPage, itemsPerPage]);
 
   return (
-    <div className="max-w-[100%] md:max-w-[72.5%]  m-5 ">
+    <div className="max-w-[100%] md:max-w-[72.5%]  m-5  ">
       <div class="bg-gray-100 p-6">
         <h2 class="text-lg font-bold mb-4">Comments</h2>
         <div class="flex flex-col space-y-4">

@@ -2,6 +2,7 @@
 export { default as RenderBox } from "./courses/courseContent/RenderBox";
 export { default as VideoBox } from "./courses/courseContent/VideoBox";
 export { default as VideoItem } from "./courses/courseContent/VideoItem";
+export { default as CurrentVideoInformation } from "./courses/courseContent/CurrentVideoInformation";
 
 export { default as AddRatingForm } from "./courses/courseReviews/AddRatingForm";
 export { default as ReviewElement } from "./courses/courseReviews/ReviewElement";
