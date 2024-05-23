@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { customFetch } from "../../utils/customFetch";
 import {
   CourseCard,
@@ -50,9 +49,7 @@ const Courses = () => {
           <div className="basis-full flex flex-col gap-[20px] max-md:gap-[30px]">
             {courses &&
               courses.map((course) => (
-                <Link key={course._id} to={`/courses/${course._id}`}>
-                  <CourseCard course={course} />
-                </Link>
+                <CourseCard course={course} key={course._id} />
               ))}
             {courses.length === 0 && (
               <div className="w-full my-10 flex flex-col justify-center items-center">

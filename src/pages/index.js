@@ -37,7 +37,7 @@ export { default as Profile } from "./userProfile/Profile";
 export { default as AccountInfo } from "./userProfile/AccountInfo";
 export { default as MyTasks } from "./userProfile/MyTasks";
 export { default as MyEnrolledCourses } from "./userProfile/MyEnrolledCourses";
-export { default as ChatWithMe } from "./userProfile/ChatWithMe";
+export { default as Wishlist } from "./userProfile/Wishlist";
 export { default as PublicProfile } from "./userProfile/PublicProfile";
 export { default as MyBlogs } from "./userProfile/MyBlogs";
 export { default as MyNotes } from "./userProfile/MyNotes";

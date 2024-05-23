@@ -46,7 +46,7 @@ const UpdateNoteForm = ({
       {({ handleSubmit, isSubmitting }) => (
         <Form onSubmit={handleSubmit}>
           <div className="text-center font-bold text-2xl italic">
-            <h2>Take note </h2>
+            <h2>Update Note </h2>
           </div>
           <div className="mb-4">
             <CustomInput

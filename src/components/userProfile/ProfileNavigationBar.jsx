@@ -15,7 +15,7 @@ const navigationLinks = [
   },
   {
     path: "/profile/myCourses",
-    name: "myCourses",
+    name: "My Courses",
   },
   {
     path: "/profile/myBlogs",
@@ -26,8 +26,8 @@ const navigationLinks = [
     name: "My Notes",
   },
   {
-    path: "/profile/chatWithMe",
-    name: "Chat With Me",
+    path: "/profile/wishlist",
+    name: "Wishlist",
   },
 ];
 //border-t-[2px] border-t-[#D5FF40]

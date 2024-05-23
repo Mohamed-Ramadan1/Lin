@@ -147,7 +147,7 @@ export const updateUserInfo = createAsyncThunk(
   async (userData, { rejectWithValue, getState, dispatch }) => {
     try {
       if (userData.firstName || userData.lastName) {
-        const name = `${userData.firstName} ${userData.lastName}`;
+        const name = `${userData.firstName || ""} ${userData.lastName || ""}`;
         userData.name = name;
       }
       const token = getState().userReducers.token;

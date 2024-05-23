@@ -28,7 +28,7 @@ import {
   AccountInfo,
   MyTasks,
   MyEnrolledCourses,
-  ChatWithMe,
+  Wishlist,
   ManageBlogs,
   ManageInstructorsRequests,
   ManagePayments,
@@ -111,8 +111,8 @@ const router = createBrowserRouter([
         element: <MyEnrolledCourses />,
       },
       {
-        path: "chatWithMe",
-        element: <ChatWithMe />,
+        path: "wishlist",
+        element: <Wishlist />,
       },
       {
         path: "myBlogs",

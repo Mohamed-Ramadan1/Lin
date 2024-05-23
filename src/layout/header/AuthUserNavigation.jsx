@@ -20,8 +20,9 @@ const AuthUserNavigation = () => {
 
       <ShoppingCartSimple />
 
-      <HeartHeader />
-      <Bell />
+      <Link to="/profile/wishlist">
+        <HeartHeader />
+      </Link>
     </div>
   );
 };
