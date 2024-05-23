@@ -24,6 +24,9 @@ export { default as FilterCourses } from "./courses/coursesOverview/FilterCourse
 export { default as BlogForm } from "./blog/BlogForm";
 export { default as BlogItem } from "./blog/BlogItem";
 
+//Notes
+export { default as NoteCart } from "./userProfile/userNotes/NoteCart";
+
 // User profile
 //Profile settings
 export { default as ProfileInfo } from "./userProfile/profileSettings/ProfileInfo";

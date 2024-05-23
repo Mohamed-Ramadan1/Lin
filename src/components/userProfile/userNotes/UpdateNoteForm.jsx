@@ -3,25 +3,27 @@ import { toast } from "react-toastify";
 import { store } from "../../../store/store";
 import { useParams } from "react-router-dom";
 import { Formik, Form } from "formik";
-import CustomInput from "../../../components/forms/CustomInput";
-import CustomTextArea from "../../../components/forms/CustomTextArea";
+import CustomInput from "../../forms/CustomInput";
+import CustomTextArea from "../../forms/CustomTextArea";
 
-const VideoNoteForm = () => {
-  const { courseId } = useParams();
+const UpdateNoteForm = ({
+  noteTitle,
+  noteDescription,
+  noteId,
+  setIsChanged,
+}) => {
   const { token } = store.getState().userReducers;
   return (
     <Formik
       initialValues={{
-        title: "",
-        description: "",
+        title: noteTitle || "",
+        description: noteDescription || "",
       }}
-      onSubmit={async (values, actions) => {
+      onSubmit={async (values) => {
         try {
-          const response = await customFetch.post(
-            `userCoursesNotes`,
-
+          const response = await customFetch.patch(
+            `userCoursesNotes/${noteId}`,
             {
-              course: courseId,
               title: values.title,
               description: values.description,
             },
@@ -31,9 +33,9 @@ const VideoNoteForm = () => {
               },
             }
           );
-          if (response.status === 201) {
-            actions.resetForm();
-            toast.success("Note added successfully");
+          if (response.status === 200) {
+            setIsChanged(true);
+            toast.success("Note Updated successfully");
           }
         } catch (error) {
           console.log(error);
@@ -78,4 +80,4 @@ const VideoNoteForm = () => {
   );
 };
 
-export default VideoNoteForm;
+export default UpdateNoteForm;

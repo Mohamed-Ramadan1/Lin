@@ -110,8 +110,13 @@ const BlogCart = ({ blog, setIsChanged }) => {
             </p>
           </div>
         </div>
-        <p className="break-words max-h-40 overflow-y-auto">{content}</p>
-        <div className="card-actions justify-end">
+        <div className="h-[200px]">
+          <div className="font-bold italic text-center mt-3 mb-3 text-xl">
+            <p>Content</p>
+          </div>
+          <p className="break-words max-h-40 overflow-y-auto">{content}</p>
+        </div>
+        <div className="card-actions justify-end mt-5">
           <button
             className="btn bg-red-500 mt-2 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
             onClick={handelDeleteBlog}

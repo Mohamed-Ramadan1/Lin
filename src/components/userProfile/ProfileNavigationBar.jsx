@@ -22,6 +22,10 @@ const navigationLinks = [
     name: "My Blogs",
   },
   {
+    path: "/profile/myNotes",
+    name: "My Notes",
+  },
+  {
     path: "/profile/chatWithMe",
     name: "Chat With Me",
   },

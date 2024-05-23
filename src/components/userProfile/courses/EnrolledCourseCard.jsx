@@ -4,7 +4,7 @@ const EnrolledCourseCard = ({ course }) => {
 
   return (
     <div className="w-full  bg-gray-100 rounded-lg overflow-hidden mb-5">
-      <Link to={`/courses/${_id}`}>
+      <Link to={`/myPaiedCourse/${_id}`}>
         <img
           className="w-full h-48 object-cover"
           src={photo}

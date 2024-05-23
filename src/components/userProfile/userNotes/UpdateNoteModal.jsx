@@ -1,13 +1,18 @@
-import VideoNoteForm from "./VideoNoteForm";
-const TakeVideoNoteModal = ({ videoInformation }) => {
+import UpdateNoteForm from "./UpdateNoteForm";
+const UpdateNoteModal = ({
+  noteTitle,
+  noteDescription,
+  noteId,
+  setIsChanged,
+}) => {
   return (
     <div>
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
       <button
-        className="btn  text-2xl italic bg-blue-500 mt-2 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
+        className="btn bg-blue-500 mt-2 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
-        Take Note
+        Update Note
       </button>
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
@@ -17,11 +22,17 @@ const TakeVideoNoteModal = ({ videoInformation }) => {
               ✕
             </button>
           </form>
-          <VideoNoteForm />
+
+          <UpdateNoteForm
+            noteTitle={noteTitle}
+            noteDescription={noteDescription}
+            noteId={noteId}
+            setIsChanged={setIsChanged}
+          />
         </div>
       </dialog>
     </div>
   );
 };
 
-export default TakeVideoNoteModal;
+export default UpdateNoteModal;

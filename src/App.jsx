@@ -39,6 +39,7 @@ import {
   Error,
   CourseFinancialAid,
   MangeFinancialAidRequests,
+  MyNotes,
 } from "./pages";
 import { action as updateProfileInfoAction } from "./components/userProfile/profileSettings/UpdateProfileInfo";
 
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: "myBlogs",
         element: <MyBlogs />,
+      },
+      {
+        path: "myNotes",
+        element: <MyNotes />,
       },
     ],
   },
