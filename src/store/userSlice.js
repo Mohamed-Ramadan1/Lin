@@ -151,13 +151,13 @@ export const updateUserInfo = createAsyncThunk(
         userData.name = name;
       }
       const token = getState().userReducers.token;
-      const res = await axios.post(`${userUrl}/updateInfo`, userData, {
+      const res = await axios.patch(`${userUrl}/updateInfo`, userData, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = await res.data;
+      const data = res.data;
       toast.success("User Info Updated Successfully");
       return data;
     } catch (error) {
