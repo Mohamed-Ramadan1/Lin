@@ -27,6 +27,9 @@ export { default as BlogItem } from "./blog/BlogItem";
 //Notes
 export { default as NoteCart } from "./userProfile/userNotes/NoteCart";
 
+//Wishlist
+export { default as WishlistCard } from "./userProfile/wishlist/WishlistCard";
+
 // User profile
 //Profile settings
 export { default as ProfileInfo } from "./userProfile/profileSettings/ProfileInfo";
