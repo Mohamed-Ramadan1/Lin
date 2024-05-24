@@ -29,6 +29,7 @@ export { default as NoteCart } from "./userProfile/userNotes/NoteCart";
 
 //Wishlist
 export { default as WishlistCard } from "./userProfile/wishlist/WishlistCard";
+export { default as WishlistComponent } from "./userProfile/wishlist/WishlistComponent";
 
 // User profile
 //Profile settings

@@ -1,14 +1,8 @@
-import RatingStars from "./RatingStars";
-import { IoMdHeart } from "react-icons/io";
-import { IoHeartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { customFetch } from "../../../utils/customFetch";
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import WishlistComponent from "../../userProfile/wishlist/WishlistComponent";
+import RatingStars from "./RatingStars";
+
 const CourseCard = ({ course }) => {
-  const { token } = useSelector((state) => state.userReducers);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   let {
     title,
     description,
@@ -24,72 +18,6 @@ const CourseCard = ({ course }) => {
 
   averageRating = parseInt(averageRating);
 
-  const handelAddToWishlist = async () => {
-    try {
-      const res = await customFetch.post(
-        `wishlist`,
-        { course: course._id },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (res.status === 201) {
-        setIsWishlisted(true);
-        toast.success("Course added to wishlist successfully");
-      }
-    } catch (error) {
-      // console.log(error);
-      toast.error(error.response.data.message);
-    }
-  };
-
-  const handelRemoveFromWishlist = async () => {
-    try {
-      const res = await customFetch.delete(
-        `wishlist/remove/${course._id}`,
-
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (res.status === 204) {
-        setIsWishlisted(false);
-        toast.success("Course deleted from wishlist successfully");
-      }
-    } catch (error) {
-      // console.log(error);
-      toast.error(error.response.data.message);
-    }
-  };
-
-  useEffect(() => {
-    const checkIfWishlisted = async () => {
-      try {
-        const response = await customFetch.post(
-          "wishlist/check",
-          {
-            courseId: course._id,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        setIsWishlisted(response.data.data.data);
-      } catch (error) {
-        console.log(error);
-        setIsWishlisted(false);
-      }
-    };
-    checkIfWishlisted();
-  }, [token, course._id]);
-  // console.log(isWishlisted);
   return (
     <div className="cardCourse p-[10px] flex items-start justify-start gap-[10px] hover:bg-[#f5f5f5] max-md:p-[0px] max-md:justify-start max-md:items-start ">
       {/* Image Course  */}
@@ -145,21 +73,8 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
       </Link>
-      <div className="flex flex-1">
-        <div className="flex  w-full justify-end items-end">
-          <div>
-            {isWishlisted ? (
-              <button onClick={handelRemoveFromWishlist}>
-                <IoMdHeart className="font-bold text-3xl text-red-800" />
-              </button>
-            ) : (
-              <button onClick={handelAddToWishlist}>
-                <IoHeartOutline className="font-bold text-3xl" />
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
+
+      <WishlistComponent courseId={course._id} />
     </div>
   );
 };

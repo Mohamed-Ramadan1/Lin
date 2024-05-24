@@ -1,4 +1,3 @@
-import { BtnFav } from "../../ui/BtnFav";
 import ShoppingCartSimple from "../../icons/ShoppingCartSimple";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -6,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { customFetch } from "../../../utils/customFetch";
+import WishlistComponent from "../../userProfile/wishlist/WishlistComponent";
 
 const CourseEnrollmentDetails = ({
   duration,
@@ -92,7 +92,7 @@ const CourseEnrollmentDetails = ({
         </div>
 
         <div className="relative">
-          <BtnFav />
+          <WishlistComponent courseId={courseId} />
         </div>
       </div>
 
