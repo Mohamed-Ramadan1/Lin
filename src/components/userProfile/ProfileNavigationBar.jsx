@@ -30,6 +30,10 @@ const navigationLinks = [
     path: "/profile/wishlist",
     name: "Wishlist",
   },
+  {
+    path: "/profile/financial-aid-requests",
+    name: "My Financial Aid Requests",
+  },
 ];
 //border-t-[2px] border-t-[#D5FF40]
 

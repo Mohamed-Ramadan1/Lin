@@ -50,6 +50,7 @@ export { default as UpdateUserName } from "./userProfile/profileSettings/UpdateU
 export { default as UserProfileOperations } from "./userProfile/profileSettings/UserProfileOperations";
 
 export { default as BlogCart } from "./userProfile/blogs/BlogCart";
+export { default as FinancialAidCard } from "./userProfile/financialAids/FinancialAidCard";
 
 // Dashboard
 export { default as PageIntro } from "./dashboard/shard/PageIntro";

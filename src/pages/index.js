@@ -41,3 +41,4 @@ export { default as Wishlist } from "./userProfile/Wishlist";
 export { default as PublicProfile } from "./userProfile/PublicProfile";
 export { default as MyBlogs } from "./userProfile/MyBlogs";
 export { default as MyNotes } from "./userProfile/MyNotes";
+export { default as MyFinancialAidRequests } from "./userProfile/MyFinancialAidRequests";

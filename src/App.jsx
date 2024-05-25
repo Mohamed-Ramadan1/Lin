@@ -40,6 +40,7 @@ import {
   CourseFinancialAid,
   MangeFinancialAidRequests,
   MyNotes,
+  MyFinancialAidRequests,
 } from "./pages";
 import { action as updateProfileInfoAction } from "./components/userProfile/profileSettings/UpdateProfileInfo";
 
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
       {
         path: "myNotes",
         element: <MyNotes />,
+      },
+      {
+        path: "financial-aid-requests",
+        element: <MyFinancialAidRequests />,
       },
     ],
   },
