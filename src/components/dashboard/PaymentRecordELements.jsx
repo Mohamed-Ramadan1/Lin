@@ -4,7 +4,7 @@ import TableBodyCell from "./shard/TableBodyCell";
 const PaymentRecordELements = ({ payment }) => {
   const {
     _id,
-    name,
+    user,
     email,
     paymentVerified,
     paymentAmount,
@@ -17,8 +17,8 @@ const PaymentRecordELements = ({ payment }) => {
   return (
     <TableBody>
       <TableBodyCell>{_id}</TableBodyCell>
-      <TableBodyCell>{name}</TableBodyCell>
-      <TableBodyCell>{email}</TableBodyCell>
+      <TableBodyCell>{user.name}</TableBodyCell>
+      <TableBodyCell>{user.email}</TableBodyCell>
       <TableBodyCell>{isPaymentVerified}</TableBodyCell>
       <TableBodyCell>{paymentAmount} $</TableBodyCell>
       <TableBodyCell>{paymentStatus}</TableBodyCell>

@@ -31,7 +31,6 @@ const CourseCard = ({ course }) => {
           />
         </Link>
       </div>
-
       {/* Details Course */}
       <Link to={`/courses/${course._id}`}>
         <div className="content flex flex-col items-start gap-[5px]">
@@ -73,7 +72,6 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
       </Link>
-
       <WishlistComponent courseId={course._id} />
     </div>
   );

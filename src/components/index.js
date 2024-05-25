@@ -18,6 +18,7 @@ export { default as CourseEnrollmentDetails } from "./courses/courseDetails/Cour
 
 export { default as CoursesPageIntro } from "./courses/coursesOverview/CoursesPageIntro";
 export { default as CourseCard } from "./courses/coursesOverview/CourseCard";
+
 export { default as FilterCourses } from "./courses/coursesOverview/FilterCourses";
 
 //Blog
@@ -83,6 +84,10 @@ export { default as StatsContainer } from "./dashboard/StatsContainer";
 
 export { default as NavigationLink } from "./dashboard/shard/NavigationLink";
 export { default as NavBarLink } from "./dashboard/shard/NavBarLink";
+
+//Payment
+export { default as OrderDetails } from "./payment/OrderDetails";
+export { default as PaymentForm } from "./payment/PaymentForm";
 
 //Global
 export { default as Pagination } from "./common/Pagination";

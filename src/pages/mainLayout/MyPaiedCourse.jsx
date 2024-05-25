@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-
+import { useParams, Link } from "react-router-dom";
 import { customFetch } from "../../utils/customFetch";
 import RenderBox from "../../components/courses/courseContent/RenderBox";
 import ReviewsContainer from "../../components/courses/courseReviews/ReviewsContainer";
@@ -28,19 +27,25 @@ function MyPaiedCourse() {
     };
     fetchEnrolledCourse();
   }, [courseId, token, user]);
-
-  if (!isEnrolled) {
-    return (
-      <div className="container flex justify-center items-center h-[80vh]">
-        <h1 className="text-4xl">You are not enrolled in this course</h1>
-      </div>
-    );
-  }
-
+  console.log(isEnrolled);
   return (
     <>
-      <RenderBox courseId={courseId} />
-      <ReviewsContainer />
+      {isEnrolled ? (
+        <>
+          <RenderBox courseId={courseId} />
+          <ReviewsContainer />
+        </>
+      ) : (
+        <div className="container flex justify-center items-center h-[80vh] flex-col">
+          <h1 className="text-4xl ">You are not enrolled in this course</h1>
+          <Link
+            to={`/courses/${courseId}`}
+            className="text-2xl text-blue-800 mt-4 underline "
+          >
+            Enroll now
+          </Link>
+        </div>
+      )}
     </>
   );
 }
