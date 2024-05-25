@@ -1,7 +1,7 @@
 const TableHeader = ({ children }) => {
   return (
     <thead>
-      <tr className="border-b">{children}</tr>
+      <tr className="border-b ">{children}</tr>
     </thead>
   );
 };

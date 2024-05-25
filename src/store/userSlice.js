@@ -67,54 +67,6 @@ export const logout = createAsyncThunk(
   }
 );
 
-//Forgot password thunk
-export const forgotPassword = createAsyncThunk(
-  "user/forgotPassword",
-  async (userData, { rejectWithValue, dispatch }) => {
-    try {
-      const res = await axios.post(`${authUrl}/forgotPassword`, userData, {
-        withCredentials: true,
-      });
-      const data = await res.data;
-      return data;
-    } catch (error) {
-      if (error.response.status === 401) {
-        dispatch(logout());
-      }
-      return rejectWithValue(error.response);
-    }
-  }
-);
-
-//ResetPassword password thunk
-export const resetPassword = createAsyncThunk(
-  "user/resetPassword",
-  async (
-    { resetToken, password, passwordConfirm },
-    { rejectWithValue, dispatch }
-  ) => {
-    try {
-      const res = await axios.post(
-        `${authUrl}/resetPassword/${resetToken}`,
-        {
-          password,
-          passwordConfirm,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      const data = await res.data;
-      return data;
-    } catch (error) {
-      if (error.response.status === 401) {
-        dispatch(logout());
-      }
-      return rejectWithValue(error.response);
-    }
-  }
-);
-
 //Update password of the user.
 export const updateUserPassword = createAsyncThunk(
   "user/updatePassword",
@@ -158,6 +110,9 @@ export const updateUserInfo = createAsyncThunk(
         },
       });
       const data = res.data;
+      console.log(data);
+
+      // console.log(res);
       toast.success("User Info Updated Successfully");
       return data;
     } catch (error) {
@@ -332,51 +287,6 @@ const userSlice = createSlice({
       .addCase(logout.rejected, (state, action) => {
         state.error = action.payload.data.message;
         state.loading = false;
-        state.isSuccess = false;
-      });
-
-    //ResetPassword  builder
-    builder
-      .addCase(resetPassword.pending, (state) => {
-        state.user = null;
-        state.loading = true;
-        state.error = null;
-        state.isLoggedIn = false;
-        state.token = null;
-        state.isSuccess = false;
-      })
-      .addCase(resetPassword.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload.data.user;
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
-        state.isSuccess = true;
-      })
-      .addCase(resetPassword.rejected, (state, action) => {
-        state.loading = false;
-        state.user = null;
-        state.error = action.payload.data.message;
-        state.isLoggedIn = false;
-        state.isSuccess = false;
-      });
-
-    //ForgotPassword  builder
-    builder
-      .addCase(forgotPassword.pending, (state) => {
-        state.user = null;
-        state.loading = true;
-        state.error = null;
-        state.isLoggedIn = false;
-        state.token = null;
-        state.isSuccess = false;
-      })
-      .addCase(forgotPassword.fulfilled, (state, action) => {
-        state.loading = false;
-        state.isSuccess = true;
-      })
-      .addCase(forgotPassword.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.data.message;
         state.isSuccess = false;
       });
 

@@ -1,44 +1,21 @@
 import { Formik, Form } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { customFetch } from "../../utils/customFetch";
 
-// import { resetPassword } from "./../store/userSlice";
-// import { resetPasswordSchema } from "./../schema/authFormsSchema";
-// import { userActions } from "../store/userSlice";
-// import CustomInput from "../components/forms/CustomInput";
-
-import { resetPassword } from "../../store/userSlice";
 import { resetPasswordSchema } from "../../schema/authFormsSchema";
-import { userActions } from "../../store/userSlice";
 import CustomInput from "../../components/forms/CustomInput";
 
 // Framer Motion
 import { motion } from "framer-motion";
 
-// Components
-// import Button from "../components/ui/Button";
-
-// // Images
-// import ForgetImg from "../assets/ForgetPassword.png";
-
 import ForgetImg from "../../assets/ForgetPassword.png";
 import Button from "../../components/ui/Button";
 
 const ResetPassword = () => {
-  const dispatch = useDispatch();
   const { resetToken } = useParams();
   const navigate = useNavigate();
-  const { isSuccess } = useSelector((state) => state.userReducers);
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Password reset successfully");
-      dispatch(userActions.resetSuccessStates());
-      return navigate("/login");
-    }
-  }, [isSuccess, dispatch, navigate]);
 
   return (
     <div className="forgotPassword p-[20px] flex flex-col justify-center items-center gap-[50px] max-lg:p-[10px]">
@@ -71,9 +48,28 @@ const ResetPassword = () => {
               passwordConfirm: "",
             }}
             validationSchema={resetPasswordSchema}
-            onSubmit={(values, actions) => {
-              dispatch(resetPassword({ ...values, resetToken }));
+            onSubmit={async (values, actions) => {
+              try {
+                const response = await customFetch.post(
+                  `auth/resetPassword/${resetToken}`,
+                  {
+                    ...values,
+                  }
+                );
+
+                if (response.status === 200) {
+                  toast.success(
+                    "Password reset successfully please login with your new password"
+                  );
+                }
+                navigate("/login");
+              } catch (error) {
+                console.log(error);
+
+                toast.error(error.response.data.message);
+              }
               actions.resetForm();
+              actions.setSubmitting(false);
             }}
           >
             {({ handleSubmit, isSubmitting }) => (
@@ -96,7 +92,10 @@ const ResetPassword = () => {
                   placeholder="passwordConfirm"
                 />
 
-                <Button textButton="SignUp" />
+                <Button
+                  textButton="Reset your password"
+                  isDisabled={isSubmitting}
+                />
               </Form>
             )}
           </Formik>

@@ -87,11 +87,11 @@ const MangeFinancialAidRequests = () => {
             />
           ))
         ) : (
-          <div className="flex justify-center items-center h-10">
-            <p className="text-2xl font-semibold">
+          <tr>
+            <td colSpan="10" className="text-center p-5 text-3xl">
               No Financial Aid Requests were requested
-            </p>
-          </div>
+            </td>
+          </tr>
         )}
       </PageContainer>
       <Pagination

@@ -1,49 +1,16 @@
 import { Formik, Form } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
-// import { forgotPassword } from "./../store/userSlice";
-// import { userActions } from "../store/userSlice";
-// import { forgotPasswordSchema } from "./../schema/authFormsSchema";
-// import CustomInput from "../components/forms/CustomInput";
-
-import { forgotPassword } from "../../store/userSlice";
-import { userActions } from "../../store/userSlice";
-import { forgotPasswordSchema } from "../../schema/authFormsSchema";
-import CustomInput from "../../components/forms/CustomInput";
-
-// Framer Motion
 import { motion } from "framer-motion";
 
-// // Components
-// import Button from "../components/ui/Button";
-
-// // Images
-// import ForgetImg from "../assets/ForgetPassword.png";
+import { forgotPasswordSchema } from "../../schema/authFormsSchema";
+import { customFetch } from "../../utils/customFetch";
+import CustomInput from "../../components/forms/CustomInput";
 
 import ForgetImg from "../../assets/ForgetPassword.png";
 import Button from "../../components/ui/Button";
 
 const ForgotPassword = () => {
-  const dispatch = useDispatch();
-
-  const { isSuccess, error } = useSelector((state) => state.userReducers);
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success(
-        "Virefication email send successfully please check your email."
-      );
-
-      dispatch(userActions.resetSuccessStates());
-    }
-    if (error) {
-      toast.error(error);
-      dispatch(userActions.resetSuccessStates());
-    }
-  }, [isSuccess, dispatch, error]);
-
   return (
     <div className="p-[20px] flex flex-col justify-center items-center gap-[50px] max-lg:p-[10px]">
       <div className="img w-full h-[400px] rounded-[20px] max-lg:h-[200px]">
@@ -74,9 +41,24 @@ const ForgotPassword = () => {
               email: "",
             }}
             validationSchema={forgotPasswordSchema}
-            onSubmit={(values, actions) => {
-              dispatch(forgotPassword(values));
+            onSubmit={async (values, actions) => {
+              try {
+                const response = await customFetch.post("auth/forgotPassword", {
+                  email: values.email,
+                });
+
+                if (response.status === 200) {
+                  toast.success(
+                    "Virefication email send successfully please check your email."
+                  );
+                } else {
+                  toast.error(response.data.message);
+                }
+              } catch (error) {
+                toast.error(error.response.data.message);
+              }
               actions.resetForm();
+              actions.setSubmitting(false);
             }}
           >
             {({ handleSubmit, isSubmitting }) => (
@@ -91,7 +73,10 @@ const ForgotPassword = () => {
                   id="email"
                   placeholder="Enter your email"
                 />
-                <Button textButton="Forgot Password" />
+                <Button
+                  textButton="Forgot Password"
+                  isDisabled={isSubmitting}
+                />
                 <h3 className="text-center text-[#2d2d2d] text-base">
                   Remember Password ?
                   <Link

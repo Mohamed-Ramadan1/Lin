@@ -2,7 +2,8 @@ import { Form } from "react-router-dom";
 import { customFetch } from "./../../../utils/customFetch";
 import { toast } from "react-toastify";
 import { store } from "../../../store/store";
-
+import Button from "../shard/Button.jsx";
+import { getMe } from "../../../store/userSlice";
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const file = formData.get("photo");
@@ -27,6 +28,7 @@ export const action = async ({ request }) => {
     });
 
     toast.success("Profile updated successfully");
+    store.dispatch(getMe());
     return res;
   } catch (error) {
     toast.error(error?.response?.data?.message);
@@ -75,12 +77,7 @@ const UpdateProfileInfo = () => {
           />
         </div>
 
-        <button
-          type="submit"
-          className="p-5 mt-7 bg-blue-600 text-white w-full h-[55px] rounded-[12px]  outline-none"
-        >
-          Update
-        </button>
+        <Button buttonText="Update Info" />
       </div>
     </Form>
   );

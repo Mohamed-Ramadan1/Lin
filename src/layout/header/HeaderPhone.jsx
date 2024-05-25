@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-
+import { FaBars } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 // Framer Motion
 import { motion } from "framer-motion";
 
 // Img
 import logo from "../../assets/LOGOHeader.png";
 import Avatar from "../../assets/Avatar.png";
-import ConfettiMinimalistic from "../../components/icons/ConfettiMinimalistic";
 
 // Icons
 import ShoppingCartSimple from "../../components/icons/ShoppingCartSimple";
@@ -42,7 +42,7 @@ export default function HeaderPhone() {
         </div>
 
         <div className="cursor-pointer" onClick={handleConfettiClick}>
-          <ConfettiMinimalistic />
+          <FaBars className="text-3xl" />
         </div>
 
         <motion.div
@@ -68,23 +68,7 @@ export default function HeaderPhone() {
               className="exit cursor-pointer w-[45px] h-[45px] flex items-center justify-center bg-red-500"
               onClick={handleExitClick}
             >
-              <svg
-                width="24px"
-                height="24px"
-                strokeWidth="1.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                color="#fff"
-              >
-                <path
-                  d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426"
-                  stroke="#fff"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-              </svg>
+              <IoClose className="text-2xl text-white" />
             </div>
           </div>
 
@@ -101,24 +85,74 @@ export default function HeaderPhone() {
           </div>
 
           <HeaderPhoneNavigation headerText="Pages">
-            <NavigationLink path="/" navigationText="Home" />
-            <NavigationLink path="/courses" navigationText="Courses" />
-            <NavigationLink path="/about" navigationText="About" />
-            <NavigationLink path="/blog" navigationText="Blog" />
-            <NavigationLink path="/profile" navigationText="Profile" />
             <NavigationLink
+              path="/"
+              navigationText="Home"
+              onClick={() => setMenuListLeft(-1000)}
+            />
+            <NavigationLink
+              path="/courses"
+              navigationText="Courses"
+              onClick={() => setMenuListLeft(-1000)}
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/about"
+              navigationText="About"
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/blog"
+              navigationText="Blog"
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile"
+              navigationText="Profile"
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
               path="/instructor"
               navigationText="Become an Instructor"
             />
           </HeaderPhoneNavigation>
 
-          <HeaderPhoneNavigation headerText="Category">
-            <NavigationLink path="/" navigationText=" Business" />
-            <NavigationLink path="/" navigationText="Development" />
-            <NavigationLink path="/" navigationText=" IT & Software" />
-            <NavigationLink path="/" navigationText="Office Productivity" />
-            <NavigationLink path="/" navigationText="Marketings" />
-            <NavigationLink path="/" navigationText="Health & Fitness" />
+          <HeaderPhoneNavigation headerText="User Profile">
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile"
+              navigationText=" Profile"
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile/accountInfo"
+              navigationText="Account Info "
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile/myTasks"
+              navigationText="My Tasks"
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile/myCourses"
+              navigationText="My Courses"
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile/myBlogs"
+              navigationText="My Blogs"
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile/myNotes"
+              navigationText="My Notes"
+            />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile/wishlist"
+              navigationText="Wishlist"
+            />
           </HeaderPhoneNavigation>
         </motion.div>
       </div>

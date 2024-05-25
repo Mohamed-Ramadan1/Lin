@@ -1,10 +1,8 @@
 import { Formik, Form } from "formik";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 import { updateUserPassword } from "../../../store/userSlice";
-import { userActions } from "../../../store/userSlice";
 import { updatePasswordSchema } from "../../../schema/authFormsSchema";
+import Button from "../shard/Button";
 import CustomInput from "../../forms/CustomInput";
 
 const UpdateUserPassword = () => {
@@ -52,13 +50,7 @@ const UpdateUserPassword = () => {
               placeholder="Confirm Password"
             />
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="p-5 mt-7 bg-blue-600 text-white w-full h-[55px] rounded-[12px]  "
-            >
-              Update
-            </button>
+            <Button buttonText="Update Password" />
           </div>
         </Form>
       )}

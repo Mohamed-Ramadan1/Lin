@@ -1,9 +1,8 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-
 import { customFetch } from "../../utils/customFetch";
 import { PageIntro, StatsBox, StatsContainer } from "../../components";
-
+import SyncLoader from "react-spinners/SyncLoader";
 function Dashboard() {
   const { token } = useSelector((state) => state.userReducers);
   const [siteStates, setSiteStates] = useState(null);
@@ -37,16 +36,14 @@ function Dashboard() {
         <PageIntro pageName="Stats" />
 
         {loading && (
-          <div>
-            <span className="loading loading-dots loading-xs"></span>
-            <span className="loading loading-dots loading-sm"></span>
-            <span className="loading loading-dots loading-md"></span>
-            <span className="loading loading-dots loading-lg"></span>
+          <div className="flex justify-center content-center">
+            <SyncLoader color="#36d7b7" />
           </div>
         )}
+
         {!loading && error && <p>Error: {error.message}</p>}
 
-        {siteStates && (
+        {siteStates && !loading && (
           <StatsContainer>
             <StatsBox
               statsText="Total Users"
