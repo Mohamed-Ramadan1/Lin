@@ -14,6 +14,7 @@ const CourseCard = ({ course }) => {
     photo,
     language,
     paymentModel,
+    category,
   } = course;
 
   averageRating = parseInt(averageRating);
@@ -38,6 +39,9 @@ const CourseCard = ({ course }) => {
             <h2 className="text-2xl font-bold text-[#333] max-md:text-base">
               {title} - {language}
             </h2>
+            <h3 className="text-sm font-bold text-[#333] max-md:text-base">
+              {category}
+            </h3>
             <p className="text-base font-medium text-[#6e6e6e] max-md:font-light max-md:truncate max-md:max-w-[200px]">
               {description}
             </p>
@@ -67,7 +71,7 @@ const CourseCard = ({ course }) => {
           </div>
           <div className="price flex gap-[10px] items-end">
             <h1 className="text-[25px] font-bold text-[#222]  max-sm:text-[20px]">
-              {paymentModel === "free" ? "Free Course" : price.toFixed(2)}
+              {paymentModel === "free" ? "Free Course" : `${price.toFixed(2)}$`}
             </h1>
           </div>
         </div>

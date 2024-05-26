@@ -75,7 +75,7 @@ const PaymentForm = ({ coursePrice, courseDiscount, courseId }) => {
                 type="month"
                 placeholder="Card Expiry Date"
                 label="Card Expiry Date"
-                requireds
+                required
               />
             </div>
 
