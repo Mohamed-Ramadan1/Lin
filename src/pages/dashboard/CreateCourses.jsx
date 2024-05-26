@@ -1,181 +1,198 @@
-import { Formik, Form, Field } from "formik";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-// import Input from "../../components/forms/Input";
-import { createCourse } from "../../store/courseSlice";
-import { courseActions } from "../../store/courseSlice";
-import CustomInput from "../../components/forms/CustomInput";
-import CustomDropdownInput from "../../components/forms/CustomDropdownInput";
-import CustomFileInput from "../../components/forms/CustomFileInput";
 import { PageIntro } from "../../components";
+import { Form } from "react-router-dom";
+import { store } from "../../store/store";
 import { customFetch } from "../../utils/customFetch";
+import DropDown from "../../components/forms/formComponents/DropDown";
+import FileInput from "../../components/forms/formComponents/FileInput";
+import Input from "../../components/forms/formComponents/Input";
+import Button from "../../components/userProfile/shard/Button";
 
-function CreateCourses() {
-  const dispatch = useDispatch();
-  const { isSuccess, error } = useSelector((state) => state.courseReducers);
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const file = formData.get("photo");
 
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Course Created Successfully");
-      dispatch(courseActions.cleareSuccessState());
-    }
+  if (file && file.size > 500000) {
+    toast.error("Image size too large");
+    return null;
+  }
+  const { token } = store.getState().userReducers;
+  try {
+    const res = await customFetch.post("/courses", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-    if (error) {
-      toast.error(error);
-      dispatch(courseActions.cleareSuccessState());
-    }
-  }, [isSuccess, dispatch, error]);
+    toast.success("Course created Successfully");
+    return res;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+    console.log(error);
+    return null;
+  }
+};
 
+const CreateCourses = () => {
   return (
-    <div className="min-h-[100vh]">
+    <div className="min-h-[100vh] mb-5">
       <div className="p-5 ">
         <PageIntro pageName="Create Courses" />
+        <div>
+          <Form method="post" encType="multipart/form-data">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Input
+                label="Title"
+                name="title"
+                type="text"
+                required
+                placeholder="Enter Title"
+              />
+              <Input
+                label="Description"
+                name="description"
+                type="text"
+                required
+                placeholder="Enter Description"
+              />
+              <Input
+                label="Duration"
+                name="duration"
+                type="text"
+                placeholder="Enter Duration in hours "
+                required
+              />
+              <Input
+                label="Price"
+                name="price"
+                type="text"
+                required
+                placeholder="Enter Price"
+              />
+              <Input
+                label="Discount"
+                name="discount"
+                type="text"
+                required
+                placeholder="Enter Discount"
+              />
 
-        <Formik
-          initialValues={{
-            title: "",
-            description: "",
-            price: "",
-            duration: "",
-            category: "",
-            instructor: "",
-            prerequisites: "",
-            learningObjectives: "",
-            language: "",
-            skillLevel: "",
-            paymentModel: "",
-            // videos: "",
-            photo: "",
-          }}
-          onSubmit={(values, actions) => {
-            dispatch(createCourse(values));
-            console.log(values);
-            // actions.resetForm();
-            actions.setSubmitting(false);
-          }}
-        >
-          {({ handleSubmit, isSubmitting }) => (
-            <Form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
-                <CustomInput
-                  label="Course Name"
-                  name="title"
-                  id="courseName"
-                  placeholder="Enter Course Name"
-                />
-                <CustomInput
-                  label="Course Description"
-                  name="description"
-                  id="courseDescription"
-                  placeholder="Enter Course Description"
-                />
-                <CustomInput
-                  label="Course Price"
-                  name="price"
-                  id="coursePrice"
-                  placeholder="Enter Course Price"
-                />
-                <CustomInput
-                  label="Course Duration"
-                  name="duration"
-                  id="courseDuration"
-                  placeholder="Enter Course Duration"
-                />
-                <CustomDropdownInput
-                  label="Course Category"
-                  name="category"
-                  id="courseCategory"
-                  options={[
-                    { value: "web", label: "Web Development" },
-                    { value: "mobile", label: "Mobile Development" },
-                    { value: "ml", label: "Machine Learning" },
-                    { value: "ai", label: "Artificial Intelligence" },
-                  ]}
-                />
+              <DropDown
+                label="Payment Model"
+                name="paymentModel"
+                type="text"
+                required
+                className="w-full"
+                options={[
+                  { value: "free", label: "Free" },
+                  { value: "paid", label: "Paid" },
+                ]}
+              />
 
-                {/*instructor input id*/}
-                <CustomInput
-                  label="Instructor ID"
-                  name="instructor"
-                  id="instructorId"
-                  placeholder="Enter Instructor ID"
-                />
+              <Input
+                label="Instructor"
+                name="instructor"
+                type="text"
+                required
+                placeholder="Enter Instructor ID"
+              />
+              <DropDown
+                label="Category"
+                name="category"
+                type="text"
+                required
+                className="w-full"
+                options={[
+                  { value: "web development", label: "Web Development" },
+                  { value: "web design", label: "Web Design" },
+                  { value: "graphic design", label: "Graphic Design" },
+                  { value: "mobile development", label: "Mobile Development" },
+                  { value: "app development", label: "App Development" },
+                  { value: "game development", label: "Game Development" },
+                  { value: "ui/ux design", label: "UI/UX Design" },
+                  { value: "data science", label: "Data Science" },
+                  { value: "data analytics", label: "Data Analytics" },
+                  { value: "data visualization", label: "Data Visualization" },
+                  { value: "data engineering", label: "Data Engineering" },
+                  { value: "marketing", label: "Marketing" },
+                  { value: "business", label: "Business" },
+                  { value: "finance", label: "Finance" },
+                  { value: "accounting", label: "Accounting" },
+                  { value: "sales", label: "Sales" },
+                  { value: "human resources", label: "Human Resources" },
+                  { value: "operations", label: "Operations" },
+                  { value: "project management", label: "Project Management" },
+                ]}
+              />
 
-                {/* custom input for the prequest of takeing this course */}
-                <CustomInput
-                  label="Course PreRequest"
-                  name="prerequisites"
-                  id="preRequest"
-                  placeholder="Enter Course PreRequest"
-                />
+              <FileInput
+                label="Photo"
+                name="photo"
+                type="text"
+                placeholder="Enter Photo"
+                required
+                className="w-full"
+              />
 
-                {/* Learning objective of the course */}
-                <CustomInput
-                  label="Learning Objective"
-                  name="learningObjectives"
-                  id="learningObjective"
-                  placeholder="Enter Learning Objective"
-                />
+              <Input
+                label="Learning Objective"
+                name="learningObjective"
+                type="text"
+                placeholder="Enter Learning Objective"
+                required
+                className="w-full"
+              />
 
-                {/* Cusotm dropdown menu for language of the course */}
-                <CustomDropdownInput
-                  label="Course Language"
-                  name="language"
-                  id="courseLanguage"
-                  options={[
-                    { value: "english", label: "English" },
-                    { value: "spanish", label: "Spanish" },
-                    { value: "french", label: "French" },
-                    { value: "german", label: "German" },
-                  ]}
-                />
+              <DropDown
+                label="Skill Level"
+                name="skillLevel"
+                type="text"
+                required
+                className="w-full"
+                options={[
+                  { value: "beginner", label: "Beginner" },
+                  { value: "intermediate", label: "Intermediate" },
+                  { value: "advanced", label: "Advanced" },
+                ]}
+              />
 
-                <CustomDropdownInput
-                  label="Course Level"
-                  name="skillLevel"
-                  id="courseLevel"
-                  options={[
-                    { value: "beginner", label: "Beginner" },
-                    { value: "intermediate", label: "Intermediate" },
-                    { value: "advanced", label: "Advanced" },
-                  ]}
-                />
-                {/*custom drop down for payment model free or paid */}
-                <CustomDropdownInput
-                  label="Payment Model"
-                  name="paymentModel"
-                  id="paymentModel"
-                  options={[
-                    { value: "free", label: "Free" },
-                    { value: "paid", label: "Paid" },
-                  ]}
-                />
-
-                <CustomFileInput label="Course Image" name="photo" id="photo" />
-
-                {/* <CustomFileInput
-                  label="Course Video"
-                  name="videos"
-                  id="courseVideo"
-                /> */}
-                {/* <CustomFileInput label="Course Image" name="photo" id="photo" />
-
-                 */}
-              </div>
-              <button
+              <DropDown
+                label="Language"
+                name="language"
+                type="text"
+                required
+                className="w-full"
+                options={[
+                  { value: "english", label: "English" },
+                  { value: "arabic", label: "Arabic" },
+                  { value: "french", label: "French" },
+                  { value: "german", label: "German" },
+                  { value: "hindi", label: "Hindi" },
+                  { value: "spanish", label: "Spanish" },
+                  { value: "russian", label: "Russian" },
+                ]}
+              />
+              <Input
+                label="Prerequisites"
+                name="prerequisites"
+                type="text"
+                placeholder="Enter Prerequisites"
+                required
+                className="w-full"
+              />
+            </div>
+            <div className="mt-5">
+              <Button
                 type="submit"
-                disabled={isSubmitting}
-                className="bg-blue-600 text-white rounded-md p-2 mt-5 mb-7"
-              >
-                Create Course
-              </button>
-            </Form>
-          )}
-        </Formik>
+                className="w-full"
+                buttonText={"create course"}
+              />
+            </div>
+          </Form>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default CreateCourses;

@@ -16,7 +16,10 @@ import Bell from "../../components/icons/Bell";
 import HeaderPhoneNavigation from "./HeaderPhoneNavigation";
 import NavigationLink from "./NavigationLink";
 import SearchIcon from "./SearchIcon";
+import { store } from "../../store/store";
+
 export default function HeaderPhone() {
+  const user = store.getState().userReducers.user;
   const [menuListLeft, setMenuListLeft] = useState(-1000); // Initial position of menuList
 
   const handleConfettiClick = () => {
@@ -115,6 +118,13 @@ export default function HeaderPhone() {
               path="/instructor"
               navigationText="Become an Instructor"
             />
+            {user && user.role === "admin" && (
+              <NavigationLink
+                onClick={() => setMenuListLeft(-1000)}
+                path="/dashboard"
+                navigationText="Admin Dashboard"
+              />
+            )}
           </HeaderPhoneNavigation>
 
           <HeaderPhoneNavigation headerText="User Profile">

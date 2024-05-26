@@ -10,6 +10,7 @@ const userUrl = `http://localhost:3000/api/v1/users`;
 // const authUrl = `https://graduation-project-backend-5vtx.onrender.com/api/v1/auth`;
 // const userUrl = `https://graduation-project-backend-5vtx.onrender.com/api/v1/users`;
 
+
 //SignUp new user to the application
 export const signUp = createAsyncThunk(
   "user/signup",

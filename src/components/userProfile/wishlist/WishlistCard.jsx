@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 const WishlistCard = ({ wishlistItem, setIsChanged }) => {
   const { token } = useSelector((state) => state.userReducers);
-  const { _id, user, course, createdAt, updatedAt } = wishlistItem;
+  const { _id, course, createdAt, updatedAt } = wishlistItem;
   const { photo, title, category, duration, price, description } = course;
-  const formatCreatedDate = new Date(createdAt).toDateString();
-  const formatUpdatedDate = new Date(updatedAt).toDateString();
+  // const formatCreatedDate = new Date(createdAt).toDateString();
+  // const formatUpdatedDate = new Date(updatedAt).toDateString();
 
   const handelDeleteWishlistItem = async () => {
     try {
@@ -29,7 +29,7 @@ const WishlistCard = ({ wishlistItem, setIsChanged }) => {
     }
   };
   return (
-    <div className="w-full bg-gray-100 rounded-[15px] overflow-hidden mb-5 ">
+    <div className="w-full bg-gray-100 rounded-[15px] overflow-hidden mb-5 ml-5">
       <Link to={`/courses/${course._id}`}>
         <img
           className="w-full h-48 object-cover"

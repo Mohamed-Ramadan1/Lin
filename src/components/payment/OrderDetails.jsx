@@ -4,9 +4,7 @@ const OrderDetails = ({ course }) => {
   return (
     <div className="w-[100%] sm:w-[50%] ml-5 ">
       <div className="mb-6">
-        <h3 className="text-center font-bold text-xl italic">
-          payment details
-        </h3>
+        <h3 className="text-center font-bold text-xl italic">Order details</h3>
       </div>
       <div className="flex justify-between">
         <div className="flex flex-col justify-center">

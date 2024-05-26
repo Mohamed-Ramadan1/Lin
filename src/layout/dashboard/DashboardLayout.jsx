@@ -29,11 +29,12 @@ const DashboardLayout = () => {
           {/* Navigation bar */}
           <DashboardNavBar />
 
-          {/* Content */}
-          <Outlet />
-
-          {/* Footer */}
-          <DashboardFooter />
+          <div className="flex-1 p-4">
+            <Outlet />
+          </div>
+          {/* <div className="mb-10 bottom-0">
+            <DashboardFooter />
+          </div> */}
         </div>
       </div>
     </main>

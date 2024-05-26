@@ -43,6 +43,7 @@ import {
   MyFinancialAidRequests,
 } from "./pages";
 import { action as updateProfileInfoAction } from "./components/userProfile/profileSettings/UpdateProfileInfo";
+import { action as createCourseAction } from "./pages/dashboard/CreateCourses";
 
 const router = createBrowserRouter([
   {
@@ -186,6 +187,7 @@ const router = createBrowserRouter([
       {
         path: "addcourse",
         element: <CreateCourses />,
+        action: createCourseAction,
       },
       {
         path: "adduser",
