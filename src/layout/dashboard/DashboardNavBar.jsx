@@ -58,9 +58,10 @@ function DashboardNavBar() {
                 path="/dashboard/financial-aid-requests"
                 navText="Financial Aid Requests"
               />
+
               <NavBarLink
                 path="/dashboard/reservations"
-                navText="Enrollments"
+                navText="Courses Enrollments"
               />
               <NavBarLink path="/dashboard/users" navText="Users" />
               <NavBarLink path="/dashboard/instructors" navText="Instructors" />

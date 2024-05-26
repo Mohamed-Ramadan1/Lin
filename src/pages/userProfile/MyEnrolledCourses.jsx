@@ -76,7 +76,7 @@ const MyEnrolledCourses = () => {
 
         {loading && <LoadingSpinner />}
 
-        {error && <ErrorMessage errorMessage={error} />}
+        {error && !error && <ErrorMessage errorMessage={error} />}
       </ProfilePageContainer>
       <div className="flex items-center justify-center w-full">
         <div className="flex justify-end w-[50%]">

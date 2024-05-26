@@ -68,7 +68,7 @@ const MyBlogs = () => {
               ))}
           </div>
         )}
-        {blogs.length === 0 && (
+        {blogs.length === 0 && !error && (
           <EmptyItems
             headerText={"No blogs created yet"}
             linkText={"Start blogging"}

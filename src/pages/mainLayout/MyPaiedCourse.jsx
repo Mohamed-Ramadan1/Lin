@@ -18,11 +18,12 @@ function MyPaiedCourse() {
             Authorization: `Bearer ${token}`,
           },
         });
+
         if (res.data.data.enrollments.user._id === user._id) {
           setIsEnrolled(true);
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        console.log(error);
       }
     };
     fetchEnrolledCourse();

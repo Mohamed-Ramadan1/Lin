@@ -13,6 +13,7 @@ const UpdateNoteForm = ({
   setIsChanged,
 }) => {
   const { token } = store.getState().userReducers;
+
   return (
     <Formik
       initialValues={{

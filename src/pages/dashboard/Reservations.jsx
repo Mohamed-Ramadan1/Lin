@@ -32,7 +32,7 @@ const Reservations = () => {
             limit: itemsPerPage,
           },
         });
-        console.log(response.data.data.enrollments);
+
         if (response.data.data.enrollments) {
           setAllEnrollments(response.data.data.enrollments);
           setIsMorePages(true);
@@ -59,10 +59,9 @@ const Reservations = () => {
     }
   };
 
-  console.log(allEnrollments);
   return (
     <div className="p-5">
-      <PageIntro pageName="Reservations" />
+      <PageIntro pageName="Courses Enrollments" />
 
       <PageContainer tableHeader="Courses Enrollments">
         <EnrollmentHeader />

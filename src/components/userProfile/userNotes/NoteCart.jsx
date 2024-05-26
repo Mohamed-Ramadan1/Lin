@@ -26,6 +26,7 @@ const NoteCart = ({ note, setIsChanged }) => {
       toast.error("Failed to delete blog post");
     }
   };
+
   return (
     <div className="card w-full  mb-5 bg-gray-100 text-black ">
       <div className="card-body">
@@ -68,12 +69,12 @@ const NoteCart = ({ note, setIsChanged }) => {
             Delete Note
           </button>
 
-          <UpdateNoteModal
+          {/* <UpdateNoteModal
             noteTitle={title}
             noteDescription={description}
             noteId={_id}
             setIsChanged={setIsChanged}
-          />
+          /> */}
         </div>
       </div>
     </div>

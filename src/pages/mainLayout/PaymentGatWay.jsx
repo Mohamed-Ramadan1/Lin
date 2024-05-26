@@ -1,15 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Formik, Form } from "formik";
-import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { enrollUserToCourse } from "../../store/courseEnrollmentsSlice";
 import { customFetch } from "../../utils/customFetch";
-import CustomInput from "../../components/forms/CustomInput";
 import { OrderDetails, PaymentForm } from "../../components";
+
 const PaymentGatWay = () => {
-  const dispatch = useDispatch();
   const [course, setCourse] = useState(null);
   const navigate = useNavigate();
   const { courseId } = useParams();
@@ -26,7 +22,6 @@ const PaymentGatWay = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(res);
         setCourse(res.data.data.course);
       } catch (error) {
         console.log(error.response.data.message);

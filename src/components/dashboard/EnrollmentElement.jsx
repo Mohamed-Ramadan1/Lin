@@ -1,12 +1,8 @@
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { deleteEnrollment } from "../../store/courseEnrollmentsSlice";
 import { customFetch } from "../../utils/customFetch";
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
 const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
-  const dispatch = useDispatch();
-
   const { _id, price, createdAt, paid, updatedAt, enrollmentStatus } =
     enrollment;
   const { title, duration } = enrollment.course;
@@ -21,7 +17,27 @@ const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
       "Are you sure you want to delete this enrollment?"
     );
     if (!isConfirmed) return;
-    dispatch(deleteEnrollment(_id));
+    try {
+      const isConfirmed = window.confirm(
+        "Are you sure you want to approve this enrollment?"
+      );
+      if (!isConfirmed) return;
+
+      await customFetch.delete(
+        `enrolls/${_id}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setIsChanged(true);
+      toast.success("Enrollment approved successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error("Error approving enrollment");
+    }
     setIsChanged(true);
     toast.success("Enrollment deleted successfully");
   };

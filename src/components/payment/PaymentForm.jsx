@@ -2,12 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
-import { enrollUserToCourse } from "../../store/courseEnrollmentsSlice";
 import { customFetch } from "../../utils/customFetch";
 import CustomInput from "../../components/forms/CustomInput";
 
 const PaymentForm = ({ coursePrice, courseDiscount, courseId }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.userReducers);
   return (
@@ -23,6 +21,7 @@ const PaymentForm = ({ coursePrice, courseDiscount, courseId }) => {
           cardNumber: "",
           cardCvv: "",
           cardExpiryDate: "",
+          course: courseId,
         }}
         onSubmit={async (values, actions) => {
           try {
@@ -39,8 +38,6 @@ const PaymentForm = ({ coursePrice, courseDiscount, courseId }) => {
                 },
               }
             );
-
-            dispatch(enrollUserToCourse({ course: courseId }));
             toast.success("Payment and enrollment Successfull");
             navigate(`/myPaiedCourse/${courseId}`);
             window.location.reload();

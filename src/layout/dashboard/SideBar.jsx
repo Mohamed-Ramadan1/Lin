@@ -89,7 +89,7 @@ function SideBar() {
         <NavigationLink
           path="/dashboard/reservations"
           NavIcon={MdPaid} // Use an appropriate icon here
-          navText="Reserved Courses"
+          navText="Courses Enrollments"
         />
 
         {/* Payments */}

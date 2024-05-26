@@ -163,6 +163,11 @@ export default function HeaderPhone() {
               path="/profile/wishlist"
               navigationText="Wishlist"
             />
+            <NavigationLink
+              onClick={() => setMenuListLeft(-1000)}
+              path="/profile/financial-aid-requests"
+              navigationText="Financial Aid Requests"
+            />
           </HeaderPhoneNavigation>
         </motion.div>
       </div>

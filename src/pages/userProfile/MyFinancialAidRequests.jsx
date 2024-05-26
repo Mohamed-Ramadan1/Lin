@@ -77,7 +77,7 @@ const MyFinancialAidRequests = () => {
             toUrl="/courses"
           />
         )}
-        {loading && <LoadingSpinner />}
+        {loading && !error && <LoadingSpinner />}
 
         {error && <ErrorMessage errorMessage={error} />}
       </ProfilePageContainer>

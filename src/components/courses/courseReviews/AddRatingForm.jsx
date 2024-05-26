@@ -5,9 +5,6 @@ import { Formik, Form } from "formik";
 
 import { customFetch } from "../../../utils/customFetch";
 
-// import CustomInput from "../forms/CustomInput";
-// import CustomTextArea from "../forms/CustomTextArea";
-
 import CustomInput from "../../../components/forms/CustomInput";
 import CustomTextArea from "../../../components/forms/CustomTextArea";
 
