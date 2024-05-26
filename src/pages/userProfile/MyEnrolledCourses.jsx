@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { customFetch } from "../../utils/customFetch";
-import { EnrolledCourseCard, Pagination } from "../../components";
+import {
+  EnrolledCourseCard,
+  Pagination,
+  EmptyItems,
+  ErrorMessage,
+  LoadingSpinner,
+  ProfilePageContainer,
+} from "../../components";
 import { Link } from "react-router-dom";
 
 const MyEnrolledCourses = () => {
@@ -47,7 +54,7 @@ const MyEnrolledCourses = () => {
 
   return (
     <>
-      <div className="container w-full max-w-[1400px]  m-auto flex gap-10  justify-start items-start my-3">
+      <ProfilePageContainer>
         {courses.length > 0 && (
           <div className="grid w-full sm:grid-cols-3  sm:gap-4 md:grid-cols-3 ">
             {courses &&
@@ -58,33 +65,19 @@ const MyEnrolledCourses = () => {
         )}
         {/* No courses display centerd text */}
         {courses.length === 0 && (
-          <div className="w-full my-10 flex flex-col justify-center items-center">
-            <h1 className="text-2xl font-bold  ">No courses enrolled yet</h1>
-
-            <Link
-              to="/courses"
-              className="text-blue-500 ml-2 mt-2 font-bold text-2xl underline"
-            >
-              Start Explore
-            </Link>
-          </div>
+          <EmptyItems
+            headerText={"No courses enrolled yet"}
+            linkText={" Start Explore"}
+            toUrl="/courses"
+          />
         )}
 
         {/* Loading spinner */}
-        {loading && (
-          <div className="w-full flex justify-center items-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
-          </div>
-        )}
 
-        {/* Error message */}
+        {loading && <LoadingSpinner />}
 
-        {error && (
-          <div className="w-full flex justify-center items-center">
-            <h1 className="text-2xl font-bold text-red-500">{error}</h1>
-          </div>
-        )}
-      </div>
+        {error && <ErrorMessage errorMessage={error} />}
+      </ProfilePageContainer>
       <div className="flex items-center justify-center w-full">
         <div className="flex justify-end w-[50%]">
           <Pagination
@@ -100,19 +93,3 @@ const MyEnrolledCourses = () => {
 };
 
 export default MyEnrolledCourses;
-
-{
-  /* <div className="container w-full max-w-[1400px]  m-auto flex gap-10  justify-start items-start my-3">
-{blogs.length > 0 && (
-  <div className="grid w-full sm:grid-cols-3  sm:gap-4 md:grid-cols-3 ">
-    {blogs &&
-      blogs.map((blog) => (
-        <BlogCart
-          blog={blog}
-          key={blog._id}
-          setIsChanged={setIsChanged}
-        />
-      ))}
-  </div>
-)} */
-}

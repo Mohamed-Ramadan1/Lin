@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { customFetch } from "../../utils/customFetch";
 import { Link } from "react-router-dom";
-import { Pagination, WishlistCard } from "../../components";
+import {
+  Pagination,
+  WishlistCard,
+  EmptyItems,
+  ErrorMessage,
+  LoadingSpinner,
+  ProfilePageContainer,
+} from "../../components";
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -50,7 +57,7 @@ const Wishlist = () => {
   }, [token, itemsPerPage, currentPage, isChanged]);
   return (
     <>
-      <div className="container w-full max-w-[1400px]  m-auto flex gap-10  justify-start items-start my-3">
+      <ProfilePageContainer>
         {wishlistItems.length > 0 && (
           <div className="grid w-full sm:grid-cols-3  sm:gap-4 md:grid-cols-3  ">
             {wishlistItems &&
@@ -64,20 +71,11 @@ const Wishlist = () => {
           </div>
         )}
         {wishlistItems.length === 0 && (
-          <div className="w-full">
-            <div className="w-full my-10 flex flex-col justify-center items-center">
-              <h1 className="text-2xl font-bold text-center">
-                No items added yet
-              </h1>
-
-              <Link
-                to="/courses"
-                className="text-blue-500 ml-2 mt-2 font-bold text-2xl underline"
-              >
-                Start Navigate to Courses
-              </Link>
-            </div>
-          </div>
+          <EmptyItems
+            headerText={"No items added yet"}
+            linkText={"Start Navigate to Courses"}
+            toUrl="/courses"
+          />
         )}
 
         {loading && (
@@ -86,12 +84,8 @@ const Wishlist = () => {
           </div>
         )}
 
-        {error && (
-          <div className="w-full flex justify-center items-center">
-            <h1 className="text-2xl font-bold text-red-500">{error}</h1>
-          </div>
-        )}
-      </div>
+        {error && <ErrorMessage errorMessage={error} />}
+      </ProfilePageContainer>
       <div className="flex items-center justify-center w-full">
         <div className="flex justify-end w-[50%]">
           <Pagination

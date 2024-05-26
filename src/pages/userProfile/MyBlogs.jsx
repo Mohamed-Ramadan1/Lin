@@ -70,7 +70,7 @@ const MyBlogs = () => {
         )}
         {blogs.length === 0 && (
           <EmptyItems
-            headerText={"    No blogs created yet"}
+            headerText={"No blogs created yet"}
             linkText={"Start blogging"}
             toUrl="/blog"
           />
