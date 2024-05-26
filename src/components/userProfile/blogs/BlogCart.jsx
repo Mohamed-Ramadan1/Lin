@@ -21,7 +21,6 @@ const BlogCart = ({ blog, setIsChanged }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response);
       if (response.status === 204) {
         toast.success("Blog deleted successfully");
         setIsChanged(true);

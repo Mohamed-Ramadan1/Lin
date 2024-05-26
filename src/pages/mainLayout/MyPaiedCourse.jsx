@@ -27,7 +27,6 @@ function MyPaiedCourse() {
     };
     fetchEnrolledCourse();
   }, [courseId, token, user]);
-  console.log(isEnrolled);
   return (
     <>
       {isEnrolled ? (

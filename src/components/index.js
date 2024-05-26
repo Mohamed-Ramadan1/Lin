@@ -52,6 +52,12 @@ export { default as UserProfileOperations } from "./userProfile/profileSettings/
 export { default as BlogCart } from "./userProfile/blogs/BlogCart";
 export { default as FinancialAidCard } from "./userProfile/financialAids/FinancialAidCard";
 
+//shard
+export { default as EmptyItems } from "./userProfile/shard/EmptyItems";
+export { default as ErrorMessage } from "./userProfile/shard/ErrorMessage";
+export { default as LoadingSpinner } from "./userProfile/shard/LoadingSpinner";
+export { default as ProfilePageContainer } from "./userProfile/shard/ProfilePageContainer";
+
 // Dashboard
 export { default as PageIntro } from "./dashboard/shard/PageIntro";
 export { default as PageContainer } from "./dashboard/shard/PageContainer";

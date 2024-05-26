@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { customFetch } from "../../../utils/customFetch";
+import FilterOptionItem from "./FilterOptionItem";
+import FilterOptionsBox from "./FilterOptionsBox";
+
+import {
+  categoryOptions,
+  levelOptions,
+  languageOptions,
+} from "./optionsArrays";
 const OptionList = ({ titleCheckList, setCourses }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -89,76 +97,56 @@ const OptionList = ({ titleCheckList, setCourses }) => {
         className="list flex flex-col justify-start gap-[15px] transition ease-in-out"
         style={{ maxHeight: open ? "100%" : "0", overflow: "hidden" }}
       >
-        <div className="border-bottom">
-          <label for="category" class="block mb-1">
-            Category
-          </label>
-          <select
-            id="category"
-            value={formData.category}
-            onChange={handleInputChange}
-            class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All</option>
-            <option value="web">Development</option>
-            <option value="Design">Design</option>
-            <option value="Marketing">Marketing</option>
-            <option value="IT & Software">IT & Software</option>
+        {/* Category filter box */}
+        <FilterOptionsBox
+          label="Category"
+          id="category"
+          value={formData.category}
+          onChange={handleInputChange}
+        >
+          {categoryOptions.map((category) => (
+            <FilterOptionItem
+              key={category}
+              value={category}
+              OptionText={category}
+            />
+          ))}
+        </FilterOptionsBox>
 
-            <option value="Business">Business</option>
-            <option vlaue="languages"></option>
-          </select>
-        </div>
+        {/* skill level */}
+        <FilterOptionsBox
+          label="Skill Level"
+          id="skillLevel"
+          value={formData.skillLevel}
+          onChange={handleInputChange}
+        >
+          {levelOptions.map((level) => (
+            <FilterOptionItem key={level} value={level} OptionText={level} />
+          ))}
+        </FilterOptionsBox>
 
-        <div className="border-bottom">
-          <label for="skillLevel" class="block mb-1">
-            Skill Level
-          </label>
-          <select
-            id="skillLevel"
-            value={formData.title}
-            onChange={handleInputChange}
-            class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All Levels</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
-        </div>
-        <div className="border-bottom">
-          <label for="paymentModel" class="block mb-1">
-            Payment Model
-          </label>
-          <select
-            id="paymentModel"
-            value={formData.price}
-            onChange={handleInputChange}
-            class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All </option>
-            <option value="free">Free</option>
-            <option value="paid">Paid</option>
-          </select>
-        </div>
-
-        <div className="border-bottom">
-          <label for="language" class="block mb-1">
-            Langue
-          </label>
-          <select
-            id="language"
-            value={formData.language}
-            onChange={handleInputChange}
-            class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All Languages</option>
-            <option value="english">English</option>
-            <option value="france">French</option>
-            <option value="spain">Spanish</option>
-            <option value="arabic">Arabic</option>
-          </select>
-        </div>
+        {/*languages options */}
+        <FilterOptionsBox
+          label="Language"
+          id="language"
+          value={formData.language}
+          onChange={handleInputChange}
+        >
+          {languageOptions.map((lang) => (
+            <FilterOptionItem key={lang} value={lang} OptionText={lang} />
+          ))}
+        </FilterOptionsBox>
+        {/* payment options  */}
+        <FilterOptionsBox
+          label="Payment Model"
+          id="paymentModel"
+          value={formData.paymentModel}
+          onChange={handleInputChange}
+        >
+          {["free", "paid"].map((el) => (
+            <FilterOptionItem key={el} value={el} OptionText={el} />
+          ))}
+        </FilterOptionsBox>
       </div>
     </div>
   );

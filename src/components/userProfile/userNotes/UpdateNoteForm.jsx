@@ -19,7 +19,7 @@ const UpdateNoteForm = ({
         title: noteTitle || "",
         description: noteDescription || "",
       }}
-      onSubmit={async (values) => {
+      onSubmit={async (values, actions) => {
         try {
           const response = await customFetch.patch(
             `userCoursesNotes/${noteId}`,
