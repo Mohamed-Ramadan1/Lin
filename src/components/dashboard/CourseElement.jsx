@@ -49,23 +49,25 @@ const CourseElement = ({
       <TableBodyCell>{formatDate}</TableBodyCell>
       <TableBodyCell>{lastUPdated}</TableBodyCell>
       <TableBodyCell>{totalReviews}</TableBodyCell>
-      <TableBodyCell>{averageRating.toFixed(2)}</TableBodyCell>
+      <TableBodyCell>{averageRating.toFixed(1)}</TableBodyCell>
       <TableBodyCell>{price} $</TableBodyCell>
       <TableBodyCell>{category}</TableBodyCell>
       <TableBodyCell>{duration} h</TableBodyCell>
       <TableBodyCell>{paymentModel}</TableBodyCell>
       <TableBodyCell> {language}</TableBodyCell>
       <TableBodyCell>
-        <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-900">
-          Edit
-        </button>
-        <button
-          type="submit"
-          className="bg-red-500 text-white p-2 rounded ml-3  hover:bg-red-900"
-          onClick={deleteHandler}
-        >
-          Delete
-        </button>
+        <div className="flex">
+          <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-900 ">
+            Edit
+          </button>
+          <button
+            type="submit"
+            className="bg-red-500 text-white p-2 rounded ml-3  hover:bg-red-900"
+            onClick={deleteHandler}
+          >
+            Delete
+          </button>
+        </div>
       </TableBodyCell>
     </TableBody>
   );

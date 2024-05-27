@@ -80,16 +80,3 @@ const DetailsCourse = () => {
 
 export default DetailsCourse;
 
-// title={course.title}
-// description={course.description}
-// duration={course.duration}
-// totalReviews={course.totalReviews}
-// averageRating={course.averageRating}
-// updatedAt={course.updatedAt}
-// language={course.language}
-// learningObjectives={course.learningObjectives}
-// videos={course.videos}
-// instructor={course.instructor[0]}
-// prerequisites={course.prerequisites}
-// financialAid={course.financialAid}
-// paymentModel={course.paymentModel}

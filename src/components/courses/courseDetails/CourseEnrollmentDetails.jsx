@@ -291,9 +291,9 @@ const CourseEnrollmentDetails = ({
             </Link>
           )}
 
-          <button className="p-[15px] rounded-xl bg-[#fff] hover:bg-[#ffffffd8]">
+          {/* <button className="p-[15px] rounded-xl bg-[#fff] hover:bg-[#ffffffd8]">
             <ShoppingCartSimple />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
