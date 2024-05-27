@@ -79,7 +79,10 @@ export default function HeaderPhone() {
           <div className="w-full">
             <div className="profile w-full flex flex-row-reverse justify-between items-center gap-[15px]">
               <div className="flex gap-3 items-center justify-center">
-                <Link to={"/profile/wishlist"}>
+                <Link
+                  to={"/profile/wishlist"}
+                  onClick={() => setMenuListLeft(-1000)}
+                >
                   <HeartHeader />
                 </Link>
               </div>
