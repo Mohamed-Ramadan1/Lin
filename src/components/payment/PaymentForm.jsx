@@ -39,7 +39,7 @@ const PaymentForm = ({ coursePrice, courseDiscount, courseId }) => {
               }
             );
             toast.success("Payment and enrollment Successfull");
-            navigate(`/myPaiedCourse/${courseId}`);
+            navigate(`/courses/${courseId}`);
             window.location.reload();
           } catch (error) {
             console.log(error);
