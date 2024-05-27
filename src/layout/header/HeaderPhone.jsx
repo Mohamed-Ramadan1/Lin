@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 // Img
 import logo from "../../assets/LOGOHeader.png";
 import Avatar from "../../assets/Avatar.png";
+import { Link } from "react-router-dom";
 
 // Icons
 import ShoppingCartSimple from "../../components/icons/ShoppingCartSimple";
@@ -78,9 +79,9 @@ export default function HeaderPhone() {
           <div className="w-full">
             <div className="profile w-full flex flex-row-reverse justify-between items-center gap-[15px]">
               <div className="flex gap-3 items-center justify-center">
-                <ShoppingCartSimple />
-                <HeartHeader />
-                <Bell />
+                <Link to={"/profile/wishlist"}>
+                  <HeartHeader />
+                </Link>
               </div>
 
               <img src={Avatar} alt="" />
