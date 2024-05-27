@@ -1,9 +1,12 @@
+// import { Banner } from "../../ui/HomeComponents/Banner";
+import BannerProfile from "../../../assets/BannerProfile.png";
 const ProfileInfo = ({ user }) => {
+  // className="bg-[url(https://source.unsplash.com/1600x900/?nature,water)] bg-cover bg-center h-[200px] sm:h-[300px] flex justify-center items-center relative"
   return (
     <div className="">
       {/* Background img */}
-      <div className="bg-[url(https://source.unsplash.com/1600x900/?nature,water)] bg-cover bg-center h-[200px] sm:h-[300px] flex justify-center items-center relative">
-        {/* <img src={BannerProfile} alt="BannerProfile" className="" /> */}
+      <div>
+        <img src={BannerProfile} alt="BannerProfile" className="" />
         <h2 className="absolute text-2xl sm:text-4xl font-bold text-[#fff] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
           Hi, {user ? user.name : ""}👋
         </h2>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../ui/ui.css";
-
+import { store } from "../../../store/store";
 // Framer Motion
 import { motion } from "framer-motion";
 
@@ -9,6 +9,7 @@ import imgHero from "../../../assets/image-hero.png";
 import starPlur from "../../../assets/plurStar.png";
 
 export const Hero = () => {
+  const user = store.getState().userReducers.user;
   return (
     <div className="hero relative overflow-hidden flex justify-center items-center px-[124px] py-[70px] max-lg:px-[30px] max-sm:py-[30px] max-sm:px-[15px]">
       <div className="container max-w-[1400px] m-auto flex justify-between items-center max-md:flex-col">
@@ -51,12 +52,12 @@ export const Hero = () => {
               courses.
             </p>
           </div>
-
-          <div className="max-w-[150px] rounded-[10px] border-[#222] hover:bg-[#222] hover:text-[#fff] transition ease-linear  text-center px-[30px] py-[10px] border-[1px] border-[#2222]">
-            <Link to="/signup">join Free</Link>
-          </div>
+          {user === null && (
+            <div className="max-w-[150px] rounded-[10px] border-[#222] hover:bg-[#222] hover:text-[#fff] transition ease-linear  text-center px-[30px] py-[10px] border-[1px] border-[#2222]">
+              <Link to="/signup">join Free</Link>
+            </div>
+          )}
         </div>
-
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
