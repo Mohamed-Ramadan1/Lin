@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import WishlistComponent from "../../userProfile/wishlist/WishlistComponent";
 import RatingStars from "./RatingStars";
-
+import { store } from "../../../store/store";
 const CourseCard = ({ course }) => {
   let {
     title,
@@ -18,7 +18,7 @@ const CourseCard = ({ course }) => {
   } = course;
 
   averageRating = parseInt(averageRating);
-
+  const user = store.getState().userReducers.user;
   return (
     <div className="cardCourse p-[10px] flex items-start justify-start gap-[10px] hover:bg-[#f5f5f5] max-md:p-[0px] max-md:justify-start max-md:items-start ">
       {/* Image Course  */}
@@ -76,7 +76,7 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
       </Link>
-      <WishlistComponent courseId={course._id} />
+      {user && <WishlistComponent courseId={course._id} />}
     </div>
   );
 };
