@@ -14,8 +14,13 @@ const DetailsCourse = () => {
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth > 970);
+    };
+
     const fetchCourse = async () => {
       try {
         const response = await customFetch.get(`/courses/${courseId}`);
@@ -29,8 +34,19 @@ const DetailsCourse = () => {
       }
     };
     fetchCourse();
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [courseId]);
-  if (loading) return <h1>Loading...</h1>;
+  if (loading)
+    return (
+      <h1 className="container flex gap-[50px] flex-col items-center justify-center text-3xl">
+        Loading...
+      </h1>
+    );
   if (error) return <h1>{error}</h1>;
   return (
     <div className="detailsCourse relative overflow-hidden flex justify-center items-center px-[124px] py-[70px] max-lg:px-[30px] max-sm:py-[30px] max-sm:px-[15px]">
@@ -44,30 +60,18 @@ const DetailsCourse = () => {
         </div>
 
         <div className="flex w-full gap-[50px] ">
-          <CourseContentDetails
-            title={course.title}
-            description={course.description}
-            duration={course.duration}
-            totalReviews={course.totalReviews}
-            averageRating={course.averageRating}
-            updatedAt={course.updatedAt}
-            language={course.language}
-            learningObjectives={course.learningObjectives}
-            videos={course.videos}
-            instructor={course.instructor[0]}
-            prerequisites={course.prerequisites}
-            financialAid={course.financialAid}
-            paymentModel={course.paymentModel}
-          />
+          <CourseContentDetails course={course} />
 
-          <CourseEnrollmentDetails
-            duration={course.duration}
-            price={course.price}
-            paymentModel={course.paymentModel}
-            courseId={course._id}
-            videos={course.videos}
-            financialAid={course.financialAid}
-          />
+          {isLargeScreen && (
+            <CourseEnrollmentDetails
+              duration={course.duration}
+              price={course.price}
+              paymentModel={course.paymentModel}
+              courseId={course._id}
+              videos={course.videos}
+              financialAid={course.financialAid}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -75,3 +79,17 @@ const DetailsCourse = () => {
 };
 
 export default DetailsCourse;
+
+// title={course.title}
+// description={course.description}
+// duration={course.duration}
+// totalReviews={course.totalReviews}
+// averageRating={course.averageRating}
+// updatedAt={course.updatedAt}
+// language={course.language}
+// learningObjectives={course.learningObjectives}
+// videos={course.videos}
+// instructor={course.instructor[0]}
+// prerequisites={course.prerequisites}
+// financialAid={course.financialAid}
+// paymentModel={course.paymentModel}

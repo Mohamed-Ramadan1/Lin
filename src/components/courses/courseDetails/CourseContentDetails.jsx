@@ -6,23 +6,38 @@ import CourseRequirementSection from "./CourseRequirementSection";
 import CourseInstructorDetails from "./CourseInstructorDetails";
 import CourseDetails from "./CourseDetails";
 import { MdAttachMoney } from "react-icons/md";
-
-const CourseContentDetails = ({
-  title,
-  description,
-  duration,
-  totalReviews,
-  averageRating,
-  updatedAt,
-  language,
-  learningObjectives,
-  videos,
-  instructor,
-  prerequisites,
-  financialAid,
-  paymentModel,
-}) => {
+import { useEffect, useState } from "react";
+import PaymentDetailsModal from "./PaymentDetailsModal";
+const CourseContentDetails = ({ course }) => {
+  const {
+    title,
+    description,
+    duration,
+    totalReviews,
+    averageRating,
+    updatedAt,
+    language,
+    learningObjectives,
+    videos,
+    prerequisites,
+    financialAid,
+    paymentModel,
+  } = course;
+  const instructor = course.instructor[0];
   const formatUpdatedDate = new Date(updatedAt).toLocaleDateString();
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth > 970);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="details w-full flex gap-[40px] flex-col items-start">
       <div className="w-full flex gap-3 flex-col items-start ">
@@ -38,6 +53,11 @@ const CourseContentDetails = ({
         <p className="text-1xl font-medium max-w-[900px] text-[#353535]">
           {description}
         </p>
+        {!isLargeScreen && (
+          <div>
+            <PaymentDetailsModal course={course} />
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col gap-3">
