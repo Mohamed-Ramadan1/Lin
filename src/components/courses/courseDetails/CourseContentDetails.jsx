@@ -30,9 +30,9 @@ const CourseContentDetails = ({
           <h2 className="text-3xl font-bold text-[#222]">
             {title} ({language})
           </h2>
-          <span className="px-[25px] py-[10px] font-semibold text-[#fff] rounded-full bg-gradient-to-r from-[#FFD600] to-[#9747FF]">
+          {/* <span className="px-[25px] py-[10px] font-semibold text-[#fff] rounded-full bg-gradient-to-r from-[#FFD600] to-[#9747FF]">
             82% off
-          </span>
+          </span> */}
         </div>
 
         <p className="text-1xl font-medium max-w-[900px] text-[#353535]">

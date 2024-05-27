@@ -67,9 +67,9 @@ const CourseEnrollmentDetails = ({
     };
     fetchEnrolledCourse();
   }, [courseId, token, user, isChanged]);
-
+  //max-md:flex-col
   return (
-    <div className="salary p-3 min-w-[290px] max-h-[425px] flex flex-col gap-4 items-start rounded-3xl max-md:hidden bg-[#D5FF40]">
+    <div className="salary p-3 min-w-[290px] max-h-[425px] flex flex-col gap-4 items-start rounded-3xl max-md:flex-col bg-[#D5FF40]">
       <div className="top-salary w-full relative flex justify-between items-start">
         <div>
           {paymentModel === "free" ? (

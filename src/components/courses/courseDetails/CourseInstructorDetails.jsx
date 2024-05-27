@@ -27,17 +27,17 @@ const CourseInstructorDetails = ({ instructor }) => {
           </div>
         </div>
 
-        <div className="nore-info">
-          <div className="more-info flex items-center">
-            <span className="font-medium text-[#222] bg-[#ecdeff] px-[15px] py-[10px] border-r-[2px] border-r-[#9747FF]">
+        <div className="nore-info ">
+          <div className="more-info flex flex-col sm:flex-row items-center">
+            <span className="font-medium text-[#222] bg-[#ecdeff] px-[15px] py-[10px] border-r-[2px] border-r-[#9747FF] mb-2  min-w-[182px]">
               {rating} Instructor Rating
             </span>
-            <span className="font-medium text-[#222] bg-[#ecdeff] px-[15px] py-[10px] ">
-              {experience} years of experience
+            <span className="font-medium text-[#222] bg-[#ecdeff] px-[15px] py-[10px] border-r-[2px] border-r-[#9747FF] mb-2 min-w-[182px] ">
+              {experience} years experience
             </span>
 
-            <span className="font-medium text-[#222] bg-[#ecdeff] px-[15px] py-[10px] ">
-              {courses || 0} Courses
+            <span className="font-medium text-[#222] bg-[#ecdeff] px-[15px] py-[10px] border-r-[2px] border-r-[#9747FF] mb-2 min-w-[182px]">
+              {3} Courses
             </span>
           </div>
         </div>
