@@ -92,6 +92,20 @@ export default function HeaderPhone() {
           </div>
 
           <HeaderPhoneNavigation headerText="Pages">
+            {!user && (
+              <NavigationLink
+                onClick={() => setMenuListLeft(-1000)}
+                path="/signup"
+                navigationText="Sign Up"
+              />
+            )}
+            {!user && (
+              <NavigationLink
+                onClick={() => setMenuListLeft(-1000)}
+                path="/login"
+                navigationText="Login"
+              />
+            )}
             <NavigationLink
               path="/"
               navigationText="Home"
