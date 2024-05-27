@@ -20,14 +20,14 @@ const CourseCard = ({ course }) => {
   averageRating = parseInt(averageRating);
   const user = store.getState().userReducers.user;
   return (
-    <div className="cardCourse p-[10px] flex items-start justify-start gap-[10px] hover:bg-[#f5f5f5] max-md:p-[0px] max-md:justify-start max-md:items-start ">
+    <div className="cardCourse p-[10px] flex flex-col items-start justify-start gap-[10px] hover:bg-[#f5f5f5] max-md:p-[0px] max-md:justify-start max-md:items-start sm:flex-row">
       {/* Image Course  */}
       <div className="imgCourse border-[1px] border-[#e2e2e2] max-w-[250px] rounded-[10px] max-md:max-w-[100px] max-md:min-w-[50px] max-md:rounded-none ">
         <Link to={`/courses/${course._id}`}>
           <img
             src={photo}
             alt="course-cover image"
-            className="w-full h-full object-cover rounded-[10px] max-md:w-full max-md:rounded-none"
+            className="w-full h-full object-cover rounded-[10px] max-md:w-full max-md:rounded-none "
             loading="lazy"
           />
         </Link>

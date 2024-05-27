@@ -7,9 +7,9 @@ const ProfileInfo = ({ user }) => {
       {/* Background img */}
       <div>
         <img src={BannerProfile} alt="BannerProfile" className="" />
-        <h2 className="absolute text-2xl sm:text-4xl font-bold text-[#fff] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
+        {/* <h2 className="absolute text-2xl sm:text-4xl font-bold text-[#fff] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
           Hi, {user ? user.name : ""}👋
-        </h2>
+        </h2> */}
       </div>
 
       <div className="container w-full max-w-[1400px] m-auto flex gap-5 sm:gap-10 flex-col justify-center items-center sm:items-start">

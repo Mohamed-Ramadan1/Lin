@@ -74,7 +74,7 @@ const WishlistComponent = ({ courseId }) => {
     checkIfWishlisted();
   }, [token, courseId]);
   return (
-    <div className="flex flex-1">
+    <div className="flex flex-1 ">
       <div className="flex  w-full justify-end items-end">
         <div>
           {isWishlisted ? (
