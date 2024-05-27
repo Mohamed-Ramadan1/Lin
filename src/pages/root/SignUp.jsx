@@ -113,7 +113,7 @@ const SignUp = () => {
               <span className="w-full h-[1px] absolute top-[50%] left-[50%]  translate-x-[-50%] bg-[#CFDFE2]"></span>
             </div>
 
-            {/* <GoogleBtn /> */}
+            <GoogleBtn />
 
             <div>
               <h3>

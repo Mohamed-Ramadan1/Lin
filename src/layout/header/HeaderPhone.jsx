@@ -10,15 +10,14 @@ import Avatar from "../../assets/Avatar.png";
 import { Link } from "react-router-dom";
 
 // Icons
-import ShoppingCartSimple from "../../components/icons/ShoppingCartSimple";
+
 import HeartHeader from "../../components/icons/HeartHeader";
-import Bell from "../../components/icons/Bell";
 
 import HeaderPhoneNavigation from "./HeaderPhoneNavigation";
 import NavigationLink from "./NavigationLink";
 import SearchIcon from "./SearchIcon";
 import { store } from "../../store/store";
-
+import { logout } from "../../store/userSlice";
 export default function HeaderPhone() {
   const user = store.getState().userReducers.user;
   const [menuListLeft, setMenuListLeft] = useState(-1000); // Initial position of menuList
@@ -57,6 +56,24 @@ export default function HeaderPhone() {
           style={{ left: `${menuListLeft}px` }}
         >
           <div className="w-full flex items-center gap-[10px]">
+            {user && (
+              <div className="w-[200px]">
+                <div className="profile w-full flex flex-row-reverse justify-between items-center gap-[15px]">
+                  <div className="flex gap-3 items-center justify-center">
+                    <Link
+                      to={"/profile/wishlist"}
+                      onClick={() => setMenuListLeft(-1000)}
+                    >
+                      <div className="mt-2 ml-3 w-[40px]">
+                        <HeartHeader />
+                      </div>
+                    </Link>
+                  </div>
+
+                  <img src={user?.photo} alt="" className="w-[80px] h-[80px]" />
+                </div>
+              </div>
+            )}
             <div className="inputSearch relative w-full h-[45px]">
               <SearchIcon />
               <input
@@ -73,21 +90,6 @@ export default function HeaderPhone() {
               onClick={handleExitClick}
             >
               <IoClose className="text-2xl text-white" />
-            </div>
-          </div>
-
-          <div className="w-full">
-            <div className="profile w-full flex flex-row-reverse justify-between items-center gap-[15px]">
-              <div className="flex gap-3 items-center justify-center">
-                <Link
-                  to={"/profile/wishlist"}
-                  onClick={() => setMenuListLeft(-1000)}
-                >
-                  <HeartHeader />
-                </Link>
-              </div>
-
-              <img src={Avatar} alt="" />
             </div>
           </div>
 
@@ -141,6 +143,15 @@ export default function HeaderPhone() {
                 onClick={() => setMenuListLeft(-1000)}
                 path="/dashboard"
                 navigationText="Admin Dashboard"
+              />
+            )}
+            {user && (
+              <NavigationLink
+                onClick={() => {
+                  setMenuListLeft(-1000);
+                  store.dispatch(logout());
+                }}
+                navigationText="Logout"
               />
             )}
           </HeaderPhoneNavigation>
