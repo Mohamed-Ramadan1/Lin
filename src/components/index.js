@@ -91,6 +91,9 @@ export { default as StatsContainer } from "./dashboard/StatsContainer";
 
 export { default as NavigationLink } from "./dashboard/shard/NavigationLink";
 export { default as NavBarLink } from "./dashboard/shard/NavBarLink";
+export { default as LoadingWhile } from "./dashboard/shard/LoadingWhile";
+export { default as Error } from "./dashboard/shard/Error";
+export { default as NotFoundData } from "./dashboard/shard/NotFoundData";
 
 //Payment
 export { default as OrderDetails } from "./payment/OrderDetails";

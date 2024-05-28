@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
 
 import {
   PageIntro,
@@ -8,55 +7,35 @@ import {
   CourseElement,
   CoursesHeader,
   Pagination,
+  LoadingWhile,
+  Error,
+  NotFoundData,
 } from "../../components";
+import useFetchData from "../../hooks/useFetchData";
 
 function PaiedCourses() {
   const { token } = useSelector((state) => state.userReducers);
-  const [courses, setCourses] = useState(null);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
   const [isChanged, setIsChanged] = useState(false);
 
-  const [isMorePages, setIsMorePages] = useState(false);
-  const [itemsPerPage, setItemsPerPage] = useState(15);
-  const [currentPage, setCurrentPage] = useState(1);
-
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "/admin/paidCourses",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "courses",
+    }
+  );
   useEffect(() => {
-    const fetchData = async () => {
-      setIsChanged(false);
-      try {
-        const response = await customFetch.get("/admin/paidCourses", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-          },
-        });
-
-        if (response.data.data.courses) {
-          setCourses(response.data.data.courses);
-          setIsMorePages(true);
-        }
-        if (response.data.data.courses.length === 0) setIsMorePages(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchData();
-  }, [token, isChanged, currentPage, itemsPerPage]);
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (currentPage) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
+  }, [token, currentPage, itemsPerPage, isChanged]);
 
   return (
     <div className="p-5">
@@ -64,8 +43,8 @@ function PaiedCourses() {
       {/* table manage table courses table  */}
       <PageContainer tableHeader={"Paid Courses"}>
         <CoursesHeader />
-        {courses &&
-          courses.map((course, index) => (
+        {data &&
+          data.map((course, index) => (
             <CourseElement
               key={course._id}
               course={course}
@@ -74,21 +53,20 @@ function PaiedCourses() {
               setIsChanged={setIsChanged}
             />
           ))}
-        {/* handel no courses case */}
-        {courses && courses.length === 0 && (
-          <tr>
-            <td colSpan="10" className="text-center p-5 text-3xl">
-              No Courses Found
-            </td>
-          </tr>
+        {loading && <LoadingWhile />}
+
+        {!loading && data.length === 0 && (
+          <NotFoundData message={"No Courses Found "} />
         )}
+
+        {error && !loading && <Error errorMessage={error} />}
       </PageContainer>
-      {courses && (
+      {data && (
         <Pagination
           currentPage={currentPage}
           isMorePages={isMorePages}
-          onPrevPage={prevPage}
-          onNextPage={nextPage}
+          onPrevPage={() => setCurrentPage((prev) => prev - 1)}
+          onNextPage={() => setCurrentPage((prev) => prev + 1)}
         />
       )}
     </div>

@@ -3,98 +3,85 @@ import { useState, useEffect } from "react";
 import { customFetch } from "../../utils/customFetch";
 import { PageIntro, StatsBox, StatsContainer } from "../../components";
 import SyncLoader from "react-spinners/SyncLoader";
+import { LoadingSpinner } from "../../components";
+
+import useFetchData from "../../hooks/useFetchData";
 function Dashboard() {
   const { token } = useSelector((state) => state.userReducers);
-  const [siteStates, setSiteStates] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  const { data, loading, error, fetchData } = useFetchData(
+    "admin/siteStatics",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+
+      requestedData: "statics",
+    }
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-
-        const res = await customFetch.get("/admin/siteStatics", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setSiteStates(res.data.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        setError(error);
-      }
-    };
-
     fetchData();
   }, [token]);
+  console.log(data);
   return (
     <>
       <div className="p-5">
         <PageIntro pageName="Stats" />
 
-        {loading && (
-          <div className="flex justify-center content-center">
-            <SyncLoader color="#36d7b7" />
-          </div>
-        )}
+        {loading && !error && <LoadingSpinner />}
 
         {!loading && error && <p>Error: {error.message}</p>}
 
-        {siteStates && !loading && (
+        {data && !loading && (
           <StatsContainer>
-            <StatsBox
-              statsText="Total Users"
-              statsValue={siteStates && siteStates.users}
-            />
+            <StatsBox statsText="Total Users" statsValue={data && data.users} />
             <StatsBox
               statsText="Total Instructors"
-              statsValue={siteStates && siteStates.instructors}
+              statsValue={data && data.instructors}
             />
             <StatsBox
               statsText="Total Enrollments"
-              statsValue={siteStates && siteStates.enrollments}
+              statsValue={data && data.enrollments}
             />
             <StatsBox
               statsText="Total Courses"
-              statsValue={siteStates && siteStates.courses}
+              statsValue={data && data.courses}
             />
             <StatsBox
               statsText="Free Courses"
-              statsValue={siteStates && siteStates.freeCourses}
+              statsValue={data && data.freeCourses}
             />
             <StatsBox
               statsText="Paid Courses"
-              statsValue={siteStates && siteStates.paidCourses}
+              statsValue={data && data.paidCourses}
             />
             <StatsBox
               statsText="Admins accounts"
-              statsValue={siteStates && siteStates.admins}
+              statsValue={data && data.admins}
             />
             <StatsBox
               statsText="Students Accounts"
-              statsValue={siteStates && siteStates.students}
+              statsValue={data && data.students}
             />
             <StatsBox
               statsText="Verified Accounts"
-              statsValue={siteStates && siteStates.verifiedAccounts}
+              statsValue={data && data.verifiedAccounts}
             />
 
             <StatsBox
               statsText="Un Verified Accounts"
-              statsValue={siteStates && siteStates.unverifiedAccounts}
+              statsValue={data && data.unverifiedAccounts}
             />
 
             <StatsBox
               statsText="Active Accounts"
-              statsValue={siteStates && siteStates.activeAccounts}
+              statsValue={data && data.activeAccounts}
             />
 
             <StatsBox
               statsText="Un Active Accounts"
-              statsValue={siteStates && siteStates.inactiveAccounts}
+              statsValue={data && data.inactiveAccounts}
             />
 
             <StatsBox statsText="Total Categories" statsValue={5} />
