@@ -68,7 +68,7 @@ const CourseFinancialAid = () => {
                 name="education"
                 type="text"
                 label="Education Level"
-                options={["igh school", "bachelor", "master", "phd", "other"]}
+                options={["high school", "bachelor", "master", "phd", "other"]}
                 required
               />
             </div>
