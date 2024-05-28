@@ -7,7 +7,9 @@ const useFetchData = (endpoint, options = {}) => {
     params = {},
     headers = {},
     initialData = [],
+    requestedData = "",
   } = options;
+
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,9 +19,10 @@ const useFetchData = (endpoint, options = {}) => {
     try {
       setLoading(true);
       const response = await customFetch[method](endpoint, { headers, params });
-      if (response.data.data) {
-        setData(response.data.data.usersNotes);
-        setIsMorePages(response.data.data.usersNotes.length === params.limit);
+      const responseData = response.data.data[requestedData];
+      if (responseData) {
+        setData(responseData);
+        setIsMorePages(responseData.length === params.limit);
       } else {
         setData([]);
         setIsMorePages(false);

@@ -4,11 +4,11 @@ import { toast } from "react-toastify";
 import { cleareStatus } from "./authHandler";
 
 //Bas URL
-// const authUrl = `http://localhost:3000/api/v1/auth`;
-// const userUrl = `http://localhost:3000/api/v1/users`;
+const authUrl = `http://localhost:3000/api/v1/auth`;
+const userUrl = `http://localhost:3000/api/v1/users`;
 
-const authUrl = `https://e-learning-backend-application.onrender.com/api/v1/auth`;
-const userUrl = `https://e-learning-backend-application.onrender.com/api/v1/users`;
+// const authUrl = `https://e-learning-backend-application.onrender.com/api/v1/auth`;
+// const userUrl = `https://e-learning-backend-application.onrender.com/api/v1/users`;
 
 //SignUp new user to the application
 export const signUp = createAsyncThunk(
