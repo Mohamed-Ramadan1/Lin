@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
-import { Link } from "react-router-dom";
+import useFetchData from "../../hooks/useFetchData";
+
 import {
   Pagination,
   FinancialAidCard,
@@ -12,56 +12,37 @@ import {
 } from "../../components";
 
 const MyFinancialAidRequests = () => {
-  const [financialAidRequests, setFinancialAidRequests] = useState([]);
-  const [isChanged, setIsChanged] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { token } = useSelector((state) => state.userReducers);
-
-  const [isMorePages, setIsMorePages] = useState(false);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isChanged, setIsChanged] = useState(false);
+
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "financialAidRequests",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "financialAidRequests",
+    }
+  );
 
   useEffect(() => {
     setIsChanged(false);
-    const fetchWishlistItems = async () => {
-      try {
-        setLoading(true);
-        const response = await customFetch.get("financialAidRequests", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-            sort: "-createdAt",
-          },
-        });
-        if (response.data.data.financialAidRequests) {
-          setFinancialAidRequests(response.data.data.financialAidRequests);
-          setIsMorePages(
-            response.data.data.financialAidRequests.length === itemsPerPage
-          );
-        } else {
-          setFinancialAidRequests([]);
-          setIsMorePages(false);
-          setLoading(false);
-        }
-      } catch (error) {
-        setLoading(false);
-        setError(error.response.data.message);
-      }
-    };
-    fetchWishlistItems();
-    setLoading(false);
+    fetchData();
   }, [token, itemsPerPage, currentPage, isChanged]);
   return (
     <>
       <ProfilePageContainer>
-        {financialAidRequests.length > 0 && (
+        {data.length > 0 && !loading && (
           <div className="grid w-full sm:grid-cols-3  sm:gap-4 md:grid-cols-3  ">
-            {financialAidRequests &&
-              financialAidRequests.map((request) => (
+            {data &&
+              data.map((request) => (
                 <FinancialAidCard
                   request={request}
                   key={request._id}
@@ -70,7 +51,7 @@ const MyFinancialAidRequests = () => {
               ))}
           </div>
         )}
-        {financialAidRequests.length === 0 && (
+        {data.length === 0 && !loading && (
           <EmptyItems
             headerText={"  No Application Requested Yet"}
             linkText={" Start Navigate to Courses"}

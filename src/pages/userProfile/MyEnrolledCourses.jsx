@@ -38,7 +38,7 @@ const MyEnrolledCourses = () => {
   return (
     <>
       <ProfilePageContainer>
-        {data.length > 0 && (
+        {data.length > 0 && !loading && (
           <div className="grid w-full sm:grid-cols-3  sm:gap-4 md:grid-cols-3 ">
             {data &&
               data.map((course) => (

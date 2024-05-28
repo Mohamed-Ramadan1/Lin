@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
-import { Link } from "react-router-dom";
+import useFetchData from "../../hooks/useFetchData";
+
 import {
   Pagination,
   BlogCart,
@@ -12,54 +12,38 @@ import {
 } from "../../components";
 
 const MyBlogs = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [isChanged, setIsChanged] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { token } = useSelector((state) => state.userReducers);
-
-  const [isMorePages, setIsMorePages] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "blogs/myBlogs",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "blogs",
+    }
+  );
+
   useEffect(() => {
     setIsChanged(false);
-    const fetchMyCourses = async () => {
-      try {
-        setLoading(true);
-        const response = await customFetch.get("blogs/myBlogs", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-          },
-        });
-        if (response.data.data.blogs) {
-          setBlogs(response.data.data.blogs);
-          setIsMorePages(response.data.data.blogs.length === itemsPerPage);
-        } else {
-          setBlogs([]);
-          setIsMorePages(false);
-          setLoading(false);
-        }
-      } catch (error) {
-        setLoading(false);
-        setError(error.response.data.message);
-      }
-    };
-    fetchMyCourses();
-    setLoading(false);
+    fetchData();
   }, [token, itemsPerPage, currentPage, isChanged]);
 
   return (
     <>
       <ProfilePageContainer>
-        {blogs.length > 0 && (
+        {data.length > 0 && !loading && (
           <div className="grid w-full sm:grid-cols-3  sm:gap-4 md:grid-cols-3 ">
-            {blogs &&
-              blogs.map((blog) => (
+            {data &&
+              data.map((blog) => (
                 <BlogCart
                   blog={blog}
                   key={blog._id}
@@ -68,7 +52,7 @@ const MyBlogs = () => {
               ))}
           </div>
         )}
-        {blogs.length === 0 && !error && (
+        {data.length === 0 && !loading && (
           <EmptyItems
             headerText={"No blogs created yet"}
             linkText={"Start blogging"}

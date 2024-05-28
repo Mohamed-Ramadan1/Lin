@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { customFetch } from "../../utils/customFetch";
+import useFetchData from "../../hooks/useFetchData";
 
 import {
   TaskItem,
@@ -12,13 +13,25 @@ import {
 
 function MyTasks() {
   const [tasksStates, setTasksStates] = useState(null);
-  const [isChanged, setIsChanged] = useState(false);
   const { token } = useSelector((state) => state.userReducers);
-  const [tasks, setTasks] = useState([]);
-  const [isMorePages, setIsMorePages] = useState(false);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [isChanged, setIsChanged] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "tasks",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "tasks",
+    }
+  );
   const fetchTasksStates = async () => {
     try {
       const response = await customFetch.get("tasks/stats", {
@@ -35,32 +48,8 @@ function MyTasks() {
 
   useEffect(() => {
     setIsChanged(false);
-    const fetchTasks = async () => {
-      try {
-        const response = await customFetch.get("tasks", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-            sort: "-createdAt",
-          },
-        });
-        if (response.data.data.tasks) {
-          setTasks(response.data.data.tasks);
-          setIsMorePages(response.data.data.tasks.length === itemsPerPage);
-        } else {
-          setTasks([]);
-          setIsMorePages(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
+    fetchData();
     fetchTasksStates();
-    fetchTasks();
   }, [token, isChanged, currentPage, itemsPerPage]);
 
   return (
@@ -76,8 +65,8 @@ function MyTasks() {
             {/* create task form*/}
 
             <AddTaskForm setIsChanged={setIsChanged} />
-            {tasks &&
-              tasks.map((task) => (
+            {data &&
+              data.map((task) => (
                 <TaskItem
                   key={task._id}
                   task={task}
