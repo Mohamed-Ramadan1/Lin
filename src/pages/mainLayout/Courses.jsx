@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useFetchData from "../../hooks/useFetchData";
 import {
   CourseCard,
   CoursesPageIntro,
@@ -8,6 +7,7 @@ import {
   ErrorMessage,
   LoadingSpinner,
 } from "../../components";
+import useFetchData from "../../hooks/useFetchData";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);

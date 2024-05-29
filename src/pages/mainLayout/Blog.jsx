@@ -1,64 +1,52 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { customFetch } from "../../utils/customFetch";
-
-import { BlogItem, BlogForm, Pagination } from "../../components";
+import {
+  BlogItem,
+  BlogForm,
+  Pagination,
+  ErrorMessage,
+  LoadingSpinner,
+} from "../../components";
+import useFetchData from "../../hooks/useFetchData";
 
 function Blog() {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [isChanged, setIsChanged] = useState(false);
-  const [isMorePages, setIsMorePages] = useState(false);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const { user, token } = useSelector((state) => state.userReducers);
 
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "blogs",
+    {
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "blogs",
+    }
+  );
+  console.log(data);
   useEffect(() => {
     setIsChanged(false);
-    const fetchBlogs = async () => {
-      try {
-        const response = await customFetch.get("blogs", {
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-            sort: "-createdAt",
-          },
-        });
-
-        if (response.data.data.blogs) {
-          setBlogs(response.data.data.blogs);
-          setIsMorePages(response.data.data.blogs.length === itemsPerPage);
-        } else {
-          setTasks([]);
-          setIsMorePages(false);
-          setLoading(false);
-        }
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setBlogs([]);
-        setLoading(false);
-      }
-    };
-    fetchBlogs();
+    fetchData();
   }, [token, isChanged, currentPage, itemsPerPage]);
-
+  console.log(data);
   return (
     <div className="mb-[55px]">
       {user && <BlogForm setIsChanged={setIsChanged} />}
 
-      {loading && <p className="text-3xl text-bold text-center">Loading...</p>}
-      {error && !blogs && (
-        <p className="text-3xl text-bold text-center">{error}</p>
-      )}
-      {!blogs && !loading && !error && (
+      {loading && <LoadingSpinner />}
+      {error && <ErrorMessage errorMessage={error} />}
+
+      {!data && !loading && !error && (
         <p className="text-3xl text-bold text-center">No Blogs Found</p>
       )}
 
-      {blogs.length > 0 &&
-        blogs.map((blog) => (
+      {data.length > 0 &&
+        !loading &&
+        data.map((blog) => (
           <BlogItem
             key={blog.id}
             blog={blog}

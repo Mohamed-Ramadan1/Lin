@@ -6,6 +6,7 @@ import {
   CourseContentDetails,
   CourseThumbnail,
   CourseEnrollmentDetails,
+  LoadingSpinner,
 } from "../../components";
 
 const DetailsCourse = () => {
@@ -41,12 +42,7 @@ const DetailsCourse = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [courseId]);
-  if (loading)
-    return (
-      <h1 className="container flex gap-[50px] flex-col items-center justify-center text-3xl">
-        Loading...
-      </h1>
-    );
+  if (loading) return <LoadingSpinner />;
   if (error) return <h1>{error}</h1>;
   return (
     <div className="detailsCourse relative overflow-hidden flex justify-center items-center px-[124px] py-[70px] max-lg:px-[30px] max-sm:py-[30px] max-sm:px-[15px]">
@@ -79,4 +75,3 @@ const DetailsCourse = () => {
 };
 
 export default DetailsCourse;
-
