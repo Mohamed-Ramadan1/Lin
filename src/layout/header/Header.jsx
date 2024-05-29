@@ -1,23 +1,10 @@
-import { useEffect, useState } from "react";
-
 import TopContent from "./TopContent";
 import MidContent from "./MidContent";
 import BottomContent from "./BottomContent";
 import HeaderPhone from "./HeaderPhone";
-
+import useScreenSize from "../../hooks/useScreenSize";
 export default function Header() {
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth > 970);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { isLargeScreen } = useScreenSize();
 
   return (
     <div>

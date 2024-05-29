@@ -4,14 +4,16 @@ import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import { NavBarLink } from "../../components";
 import { navLinks } from "./navLinksData";
+import useScreenSize from "../../hooks/useScreenSize";
 function DashboardNavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isLargeScreen } = useScreenSize();
 
   const handelLogout = () => {
     dispatch(logout());
     toast.success("Logged Out Successfully");
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   return (
@@ -21,15 +23,20 @@ function DashboardNavBar() {
       </div>
       <div className="flex justify-end flex-1 px-2">
         <div className="flex items-stretch">
-          <Link to="/" className="btn btn-ghost rounded-btn text-2xl">
-            Home
-          </Link>
-          <button
-            onClick={handelLogout}
-            className="btn btn-ghost rounded-btn text-2xl"
-          >
-            Logout
-          </button>
+          {isLargeScreen && (
+            <>
+              <Link to="/" className="btn btn-ghost rounded-btn text-2xl">
+                Home
+              </Link>
+              <button
+                onClick={handelLogout}
+                className="btn btn-ghost rounded-btn text-2xl"
+              >
+                Logout
+              </button>
+            </>
+          )}
+
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}

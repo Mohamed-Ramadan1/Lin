@@ -8,20 +8,16 @@ import {
   CourseEnrollmentDetails,
   LoadingSpinner,
 } from "../../components";
-
+import useScreenSize from "../../hooks/useScreenSize";
 const DetailsCourse = () => {
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const { isLargeScreen } = useScreenSize();
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth > 970);
-    };
-
     const fetchCourse = async () => {
       try {
         const response = await customFetch.get(`/courses/${courseId}`);
@@ -35,12 +31,6 @@ const DetailsCourse = () => {
       }
     };
     fetchCourse();
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, [courseId]);
   if (loading) return <LoadingSpinner />;
   if (error) return <h1>{error}</h1>;

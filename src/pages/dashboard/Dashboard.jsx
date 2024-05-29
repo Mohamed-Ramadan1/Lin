@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { customFetch } from "../../utils/customFetch";
 import { PageIntro, StatsBox, StatsContainer } from "../../components";
-import SyncLoader from "react-spinners/SyncLoader";
 import { LoadingSpinner } from "../../components";
+import SyncLoader from "react-spinners/SyncLoader";
 
 import useFetchData from "../../hooks/useFetchData";
 function Dashboard() {
@@ -84,7 +84,10 @@ function Dashboard() {
               statsValue={data && data.inactiveAccounts}
             />
 
-            <StatsBox statsText="Total Categories" statsValue={5} />
+            <StatsBox
+              statsText="Total financial aid requests"
+              statsValue={data.financialAidRequests}
+            />
             <StatsBox statsText="Main Languages" statsValue={3} />
           </StatsContainer>
         )}

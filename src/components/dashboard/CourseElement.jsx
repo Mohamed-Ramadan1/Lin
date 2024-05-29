@@ -57,9 +57,6 @@ const CourseElement = ({
       <TableBodyCell> {language}</TableBodyCell>
       <TableBodyCell>
         <div className="flex">
-          <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-900 ">
-            Edit
-          </button>
           <button
             type="submit"
             className="bg-red-500 text-white p-2 rounded ml-3  hover:bg-red-900"

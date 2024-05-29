@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 // Framer Motion
@@ -6,18 +6,18 @@ import { motion } from "framer-motion";
 
 // Img
 import logo from "../../assets/LOGOHeader.png";
-import Avatar from "../../assets/Avatar.png";
 import { Link } from "react-router-dom";
 
 // Icons
 
 import HeartHeader from "../../components/icons/HeartHeader";
-
 import HeaderPhoneNavigation from "./HeaderPhoneNavigation";
 import NavigationLink from "./NavigationLink";
 import SearchIcon from "./SearchIcon";
 import { store } from "../../store/store";
 import { logout } from "../../store/userSlice";
+import { userProfileLinks, pagesLinks } from "./phoneNavigationLinks";
+
 export default function HeaderPhone() {
   const user = store.getState().userReducers.user;
   const [menuListLeft, setMenuListLeft] = useState(-1000); // Initial position of menuList
@@ -108,36 +108,14 @@ export default function HeaderPhone() {
                 navigationText="Login"
               />
             )}
-            <NavigationLink
-              path="/"
-              navigationText="Home"
-              onClick={() => setMenuListLeft(-1000)}
-            />
-            <NavigationLink
-              path="/courses"
-              navigationText="Courses"
-              onClick={() => setMenuListLeft(-1000)}
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/about"
-              navigationText="About"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/blog"
-              navigationText="Blog"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile"
-              navigationText="Profile"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/instructor"
-              navigationText="Become an Instructor"
-            />
+            {pagesLinks.map((link) => (
+              <NavigationLink
+                path={link.path}
+                navigationText={link.navigationText}
+                onClick={() => setMenuListLeft(-1000)}
+              />
+            ))}
+
             {user && user.role === "admin" && (
               <NavigationLink
                 onClick={() => setMenuListLeft(-1000)}
@@ -157,46 +135,13 @@ export default function HeaderPhone() {
           </HeaderPhoneNavigation>
 
           <HeaderPhoneNavigation headerText="User Profile">
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile"
-              navigationText=" Profile"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile/accountInfo"
-              navigationText="Account Info "
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile/myTasks"
-              navigationText="My Tasks"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile/myCourses"
-              navigationText="My Courses"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile/myBlogs"
-              navigationText="My Blogs"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile/myNotes"
-              navigationText="My Notes"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile/wishlist"
-              navigationText="Wishlist"
-            />
-            <NavigationLink
-              onClick={() => setMenuListLeft(-1000)}
-              path="/profile/financial-aid-requests"
-              navigationText="Financial Aid Requests"
-            />
+            {userProfileLinks.map((link) => (
+              <NavigationLink
+                onClick={() => setMenuListLeft(-1000)}
+                path={link.path}
+                navigationText={link.navigationText}
+              />
+            ))}
           </HeaderPhoneNavigation>
         </motion.div>
       </div>
