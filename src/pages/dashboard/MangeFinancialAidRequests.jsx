@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
 
 import {
   PageIntro,
@@ -8,57 +7,33 @@ import {
   FinancialAidRequestHeader,
   FinancialAidRequestElement,
   Pagination,
+  LoadingWhile,
+  Error,
+  NotFoundData,
 } from "../../components";
+import useFetchData from "../../hooks/useFetchData";
 
 const MangeFinancialAidRequests = () => {
   const { token } = useSelector((state) => state.userReducers);
-  const [financialAidRequests, setFinancialAidRequests] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isChanged, setIsChanged] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(15);
-  const [isMorePages, setIsMorePages] = useState(false);
-
+  const [isChanged, setIsChanged] = useState(false);
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "admin/getAllFinancialAidRequests",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "financialAidRequests",
+    }
+  );
   useEffect(() => {
-    const fetchFinancialAidRequests = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await customFetch.get(
-          "admin/getAllFinancialAidRequests",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            params: {
-              page: currentPage,
-              limit: itemsPerPage,
-            },
-          }
-        );
-
-        const fetchedFinancialAidsApplications =
-          response.data.data.financialAidRequests;
-
-        if (fetchedFinancialAidsApplications.length < itemsPerPage) {
-          setIsMorePages(false);
-        } else {
-          setIsMorePages(true);
-        }
-
-        setFinancialAidRequests(fetchedFinancialAidsApplications);
-      } catch (error) {
-        setError(
-          error.message || "Failed to fetch  Financial Aids Applications "
-        );
-      } finally {
-        setLoading(false);
-        setIsChanged(false);
-      }
-    };
-
-    fetchFinancialAidRequests();
+    fetchData();
   }, [token, isChanged, currentPage, itemsPerPage]);
 
   return (
@@ -66,33 +41,23 @@ const MangeFinancialAidRequests = () => {
       <PageIntro pageName="Financial Aids requests" />
       <PageContainer tableHeader="Financial Aids requests">
         <FinancialAidRequestHeader />
-        {loading ? (
-          <tr>
-            <td colSpan="10" className="text-center p-5 text-3xl">
-              Loading Financial Aids Requests......
-            </td>
-          </tr>
-        ) : error ? (
-          <div className="flex justify-center items-center h-10">
-            <p className="text-2xl font-semibold text-red-500">{error}</p>
-          </div>
-        ) : financialAidRequests.length > 0 ? (
-          financialAidRequests.map((request, index) => (
+        {loading && <LoadingWhile />}
+
+        {!loading &&
+          data &&
+          data.map((request) => (
             <FinancialAidRequestElement
               key={request._id}
               request={request}
-              // index={index + 1 + (currentPage - 1) * itemsPerPage}
               token={token}
               setIsChanged={setIsChanged}
             />
-          ))
-        ) : (
-          <tr>
-            <td colSpan="10" className="text-center p-5 text-3xl">
-              No Financial Aid Requests were requested
-            </td>
-          </tr>
+          ))}
+
+        {!loading && data.length === 0 && (
+          <NotFoundData message={"No Financial aid requests  Found "} />
         )}
+        {error && !loading && <Error errorMessage={error} />}
       </PageContainer>
       <Pagination
         currentPage={currentPage}

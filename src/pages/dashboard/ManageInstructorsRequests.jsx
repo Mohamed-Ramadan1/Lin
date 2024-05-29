@@ -8,82 +8,46 @@ import {
   InstructorRequestsHeader,
   InstructorsApplicationElement,
   Pagination,
+  LoadingWhile,
+  Error,
+  NotFoundData,
 } from "../../components";
+import useFetchData from "../../hooks/useFetchData";
 
 const ManageInstructorsRequests = () => {
   const { token } = useSelector((state) => state.userReducers);
-  const [instructors, setInstructors] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isChanged, setIsChanged] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(15);
-  const [isMorePages, setIsMorePages] = useState(false);
-
+  const [isChanged, setIsChanged] = useState(false);
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "/instructorApplications",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "applications",
+    }
+  );
   useEffect(() => {
-    const fetchInstructors = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await customFetch.get("instructorApplications", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-          },
-        });
-
-        const fetchedInstructors = response.data.data.applications;
-
-        if (fetchedInstructors.length < itemsPerPage) {
-          setIsMorePages(false);
-        } else {
-          setIsMorePages(true);
-        }
-
-        setInstructors(fetchedInstructors);
-      } catch (error) {
-        setError(error.message || "Failed to fetch instructor requests");
-      } finally {
-        setLoading(false);
-        setIsChanged(false);
-      }
-    };
-
-    fetchInstructors();
-  }, [token, isChanged, currentPage, itemsPerPage]);
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (isMorePages) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
+    setIsChanged(false);
+    fetchData();
+  }, [token, currentPage, itemsPerPage, isChanged]);
 
   return (
     <div className="p-5">
       <PageIntro pageName="Instructors Requests" />
       <PageContainer tableHeader="Instructors requests">
         <InstructorRequestsHeader />
-        {loading ? (
-          <tr>
-            <td colSpan="10" className="text-center p-5 text-3xl">
-              No Courses Found
-            </td>
-          </tr>
-        ) : error ? (
-          <div className="flex justify-center items-center h-10">
-            <p className="text-2xl font-semibold text-red-500">{error}</p>
-          </div>
-        ) : instructors.length > 0 ? (
-          instructors.map((instructor, index) => (
+        {loading && <LoadingWhile />}
+
+        {!loading &&
+          data.length > 0 &&
+          data.map((instructor, index) => (
             <InstructorsApplicationElement
               key={instructor._id}
               instructor={instructor}
@@ -91,20 +55,17 @@ const ManageInstructorsRequests = () => {
               token={token}
               setIsChanged={setIsChanged}
             />
-          ))
-        ) : (
-          <tr>
-            <td colSpan="10" className="text-center p-5 text-3xl">
-              No instructor requests found
-            </td>
-          </tr>
+          ))}
+        {!loading && data.length === 0 && (
+          <NotFoundData message={"No instructors requests Found "} />
         )}
+        {error && !loading && <Error errorMessage={error} />}
       </PageContainer>
       <Pagination
         currentPage={currentPage}
         isMorePages={isMorePages}
-        onPrevPage={prevPage}
-        onNextPage={nextPage}
+        onPrevPage={() => setCurrentPage((prev) => prev - 1)}
+        onNextPage={() => setCurrentPage((prev) => prev + 1)}
       />
     </div>
   );

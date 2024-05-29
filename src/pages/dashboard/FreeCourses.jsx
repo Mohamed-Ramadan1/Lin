@@ -33,6 +33,7 @@ function FreeCourses() {
     }
   );
   useEffect(() => {
+    setIsChanged(false);
     fetchData();
   }, [token, currentPage, itemsPerPage, isChanged]);
 

@@ -8,78 +8,45 @@ import {
   PaymentRecordELements,
   PaymentsTableHeader,
   Pagination,
+  LoadingWhile,
+  Error,
+  NotFoundData,
 } from "../../components";
+import useFetchData from "../../hooks/useFetchData";
 
 const ManagePayments = () => {
-  const [payments, setPayments] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { token } = useSelector((state) => state.userReducers);
-
-  const [isMorePages, setIsMorePages] = useState(false);
-  const [itemsPerPage, setItemsPerPage] = useState(15);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "/paymentRecords",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "paymentRecords",
+    }
+  );
 
   useEffect(() => {
-    const fetchPayments = async () => {
-      try {
-        const response = await customFetch.get("paymentRecords", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-          },
-        });
-
-        if (response.data.data.paymentRecords) {
-          setPayments(response.data.data.paymentRecords);
-          setIsMorePages(
-            response.data.data.paymentRecords.length === itemsPerPage
-          );
-        } else {
-          setPayments([]);
-          setIsMorePages(false);
-        }
-
-        setLoading(false);
-      } catch (error) {
-        setError(error.response.data.error);
-        setLoading(false);
-      }
-    };
-
-    fetchPayments();
+    fetchData();
   }, [token, currentPage, itemsPerPage]);
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (isMorePages) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
 
   return (
     <div className="p-5">
       <PageIntro pageName="Payments" />
       <PageContainer tableHeader={"Payments"}>
         <PaymentsTableHeader />
-        {loading && (
-          <tr>
-            <td colSpan="10" className="text-center p-5 text-3xl">
-              Loading........
-            </td>
-          </tr>
-        )}
+        {loading && <LoadingWhile />}
 
         {!loading &&
-          payments.length > 0 &&
-          payments.map((payment, index) => (
+          data.length > 0 &&
+          data.map((payment, index) => (
             <PaymentRecordELements
               key={payment._id}
               payment={payment}
@@ -87,22 +54,17 @@ const ManagePayments = () => {
             />
           ))}
 
-        {!loading && payments.length === 0 && (
-          <tr>
-            <td colSpan="10" className="text-center p-5 text-3xl">
-              No Payments Found
-            </td>
-          </tr>
+        {!loading && data.length === 0 && (
+          <NotFoundData message={"No payment records Found "} />
         )}
+        {error && !loading && <Error errorMessage={error} />}
       </PageContainer>
-      {payments.length > 0 && (
-        <Pagination
-          currentPage={currentPage}
-          isMorePages={isMorePages}
-          onPrevPage={prevPage}
-          onNextPage={nextPage}
-        />
-      )}
+      <Pagination
+        currentPage={currentPage}
+        isMorePages={isMorePages}
+        onPrevPage={() => setCurrentPage((prev) => prev - 1)}
+        onNextPage={() => setCurrentPage((prev) => prev + 1)}
+      />
     </div>
   );
 };

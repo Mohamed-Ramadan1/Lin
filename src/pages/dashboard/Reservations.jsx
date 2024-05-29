@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
 
 import {
   PageIntro,
@@ -8,56 +7,36 @@ import {
   EnrollmentElement,
   EnrollmentHeader,
   Pagination,
+  LoadingWhile,
+  Error,
+  NotFoundData,
 } from "../../components";
+import useFetchData from "../../hooks/useFetchData";
 
 const Reservations = () => {
-  const [allEnrollments, setAllEnrollments] = useState([]);
-  const [isChanged, setIsChanged] = useState(false);
-  const [isMorePages, setIsMorePages] = useState(false);
-  const [itemsPerPage, setItemsPerPage] = useState(15);
-  const [currentPage, setCurrentPage] = useState(1);
-
   const { token } = useSelector((state) => state.userReducers);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isChanged, setIsChanged] = useState(false);
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "/enrolls",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "enrollments",
+    }
+  );
 
   useEffect(() => {
     setIsChanged(false);
-    const fetchEnrollments = async () => {
-      try {
-        const response = await customFetch.get("enrolls", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-          },
-        });
-
-        if (response.data.data.enrollments) {
-          setAllEnrollments(response.data.data.enrollments);
-          setIsMorePages(true);
-        }
-        if (response.data.data.enrollments.length === 0) setIsMorePages(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchEnrollments();
+    fetchData();
   }, [isChanged, token, currentPage, itemsPerPage]);
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-      setIsChanged(true);
-    }
-  };
-
-  const nextPage = () => {
-    if (currentPage) {
-      setCurrentPage((prev) => prev + 1);
-      setIsChanged(true);
-    }
-  };
 
   return (
     <div className="p-5">
@@ -66,8 +45,11 @@ const Reservations = () => {
       <PageContainer tableHeader="Courses Enrollments">
         <EnrollmentHeader />
 
-        {allEnrollments &&
-          allEnrollments.map((enrollment, index) => (
+        {loading && <LoadingWhile />}
+
+        {!loading &&
+          data.length > 0 &&
+          data.map((enrollment, index) => (
             <EnrollmentElement
               key={enrollment._id}
               enrollment={enrollment}
@@ -77,22 +59,17 @@ const Reservations = () => {
             />
           ))}
 
-        {allEnrollments.length === 0 && (
-          <tr>
-            <td colSpan="9" className="text-center p-5 text-3xl">
-              No enrollments found
-            </td>
-          </tr>
+        {!loading && data.length === 0 && (
+          <NotFoundData message={"No payment records Found "} />
         )}
+        {error && !loading && <Error errorMessage={error} />}
       </PageContainer>
-      {allEnrollments && (
-        <Pagination
-          currentPage={currentPage}
-          isMorePages={isMorePages}
-          onPrevPage={prevPage}
-          onNextPage={nextPage}
-        />
-      )}
+      <Pagination
+        currentPage={currentPage}
+        isMorePages={isMorePages}
+        onPrevPage={() => setCurrentPage((prev) => prev - 1)}
+        onNextPage={() => setCurrentPage((prev) => prev + 1)}
+      />
     </div>
   );
 };

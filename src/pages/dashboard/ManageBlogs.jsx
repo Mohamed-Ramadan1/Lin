@@ -8,81 +8,44 @@ import {
   BlogsTableHeader,
   Pagination,
   BlogELement,
+  LoadingWhile,
+  Error,
+  NotFoundData,
 } from "../../components";
+import useFetchData from "../../hooks/useFetchData";
 
 const ManageBlogs = () => {
   const { token } = useSelector((state) => state.userReducers);
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isChanged, setIsChanged] = useState(false);
-
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
-  const [isMorePages, setIsMorePages] = useState(false);
-
+  const [isChanged, setIsChanged] = useState(false);
+  const { data, loading, error, isMorePages, fetchData } = useFetchData(
+    "/admin/getAllBlogs",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page: currentPage,
+        limit: itemsPerPage,
+        sort: "-createdAt",
+      },
+      requestedData: "blogs",
+    }
+  );
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const res = await customFetch.get("admin/getAllBlogs", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: itemsPerPage,
-          },
-        });
-
-        const fetchedBlogs = res.data.data.blogs;
-
-        if (fetchedBlogs.length === 0) {
-          setBlogs([]);
-        } else {
-          setBlogs(fetchedBlogs);
-          setIsMorePages(fetchedBlogs.length === itemsPerPage);
-        }
-      } catch (error) {
-        setError(error.message || "Failed to fetch blogs");
-      } finally {
-        setLoading(false);
-        setIsChanged(false);
-      }
-    };
-
     fetchData();
   }, [token, isChanged, currentPage, itemsPerPage]);
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (isMorePages) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
 
   return (
     <div className="p-5">
       <PageIntro pageName="Blogs" />
       <PageContainer tableHeader="Blogs">
         <BlogsTableHeader />
-
-        {loading ? (
-          <div className="flex justify-center items-center h-10">
-            <p className="text-2xl font-semibold">Loading...</p>
-          </div>
-        ) : error ? (
-          <div className="flex justify-center items-center h-10">
-            <p className="text-2xl font-semibold text-red-500">{error}</p>
-          </div>
-        ) : blogs.length > 0 ? (
-          blogs.map((blog, index) => (
+        {loading && <LoadingWhile />}
+        {!loading &&
+          data.length > 0 &&
+          data.map((blog, index) => (
             <BlogELement
               key={blog._id}
               blog={blog}
@@ -90,20 +53,18 @@ const ManageBlogs = () => {
               token={token}
               setIsChanged={setIsChanged}
             />
-          ))
-        ) : (
-          <tr>
-            <td colSpan="10" className="text-center p-5 text-3xl">
-              No blogs found
-            </td>
-          </tr>
+          ))}
+
+        {!loading && data.length === 0 && (
+          <NotFoundData message={"No Blogs Found "} />
         )}
+        {error && !loading && <Error errorMessage={error} />}
       </PageContainer>
       <Pagination
         currentPage={currentPage}
         isMorePages={isMorePages}
-        onPrevPage={prevPage}
-        onNextPage={nextPage}
+        onPrevPage={() => setCurrentPage((prev) => prev - 1)}
+        onNextPage={() => setCurrentPage((prev) => prev + 1)}
       />
     </div>
   );
