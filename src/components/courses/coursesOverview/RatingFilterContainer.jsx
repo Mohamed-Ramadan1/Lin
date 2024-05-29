@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RatingStarButton from "./RatingStarButton";
 import RatingFilterBox from "./RatingFilterBox";
 import { customFetch } from "../../../utils/customFetch";
 import { toast } from "react-toastify";
 
-const RatingFilterContainer = ({ titleCheckList, setCourses }) => {
+const RatingFilterContainer = ({
+  titleCheckList,
+  setCourses,
+  clearFilters,
+}) => {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -16,6 +20,7 @@ const RatingFilterContainer = ({ titleCheckList, setCourses }) => {
         params: {
           "averageRating[gte]": value,
           "averageRating[lt]": value + 1,
+          limit: 5,
         },
       });
       setCourses(response.data.data.courses);
@@ -35,6 +40,11 @@ const RatingFilterContainer = ({ titleCheckList, setCourses }) => {
     }
   };
 
+  useEffect(() => {
+    if (clearFilters) {
+      setSelectedValue(null);
+    }
+  }, [clearFilters]);
   return (
     <div className="list flex flex-col gap-[15px]">
       <div

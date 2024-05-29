@@ -3,9 +3,11 @@ import { logout } from "../../store/userSlice";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import { NavBarLink } from "../../components";
+import { navLinks } from "./navLinksData";
 function DashboardNavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handelLogout = () => {
     dispatch(logout());
     toast.success("Logged Out Successfully");
@@ -40,48 +42,20 @@ function DashboardNavBar() {
               tabIndex={0}
               className="menu dropdown-content z-[1] p-2 shadow bg-black rounded-box w-52 mt-4 "
             >
-              <NavBarLink
-                path="/dashboard"
-                navText="Statics"
-                className="text-primary"
-              />
-
-              <NavBarLink
-                path="/dashboard/freeCourses"
-                navText="Free Courses"
-              />
-              <NavBarLink
-                path="/dashboard/paidCourses"
-                navText="Paid Courses"
-              />
-              <NavBarLink
-                path="/dashboard/financial-aid-requests"
-                navText="Financial Aid Requests"
-              />
-
-              <NavBarLink
-                path="/dashboard/reservations"
-                navText="Courses Enrollments"
-              />
-              <NavBarLink path="/dashboard/users" navText="Users" />
-              <NavBarLink path="/dashboard/instructors" navText="Instructors" />
-              <NavBarLink path="/dashboard/addcourse" navText="Add Course" />
-              <NavBarLink path="/dashboard/adduser" navText="Create User" />
-              <NavBarLink
-                path="/dashboard/addinstructor"
-                navText="Create Instructor"
-              />
-              <NavBarLink path="/dashboard/settings" navText="Settings" />
-              <NavBarLink path="/dashboard/blogs" navText="Blogs" />
-              <NavBarLink
-                path="/dashboard/paymentsrecords"
-                navText="Payments Records"
-              />
-              <NavBarLink
-                path="/dashboard/instructorsrequests"
-                navText="Instructors Requests"
-              />
-              <NavBarLink path="/" navText="Home" />
+              {navLinks.map((link) => (
+                <NavBarLink
+                  key={link.path}
+                  path={link.path}
+                  navText={link.navText}
+                  className="text-primary"
+                />
+              ))}
+              <button
+                onClick={handelLogout}
+                className="p-3 rounded mt-3 text-white flex gap-5 items-center content-center hover:bg-gray-800"
+              >
+                Logout
+              </button>
             </ul>
           </div>
         </div>

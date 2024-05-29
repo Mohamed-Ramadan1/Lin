@@ -9,7 +9,7 @@ import {
   levelOptions,
   languageOptions,
 } from "./optionsArrays";
-const OptionList = ({ titleCheckList, setCourses }) => {
+const OptionList = ({ titleCheckList, setCourses, clearFilters }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     category: "",
@@ -40,6 +40,17 @@ const OptionList = ({ titleCheckList, setCourses }) => {
 
     return () => clearTimeout(delayDebounceFn);
   }, [formData]);
+
+  useEffect(() => {
+    if (clearFilters) {
+      setFormData({
+        category: "",
+        skillLevel: "",
+        paymentModel: "",
+        language: "",
+      });
+    }
+  }, [clearFilters]);
 
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.id]: event.target.value });

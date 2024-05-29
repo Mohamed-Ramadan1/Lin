@@ -10,22 +10,14 @@ export const categoryOptions = [
   "data analytics",
   "data visualization",
   "data engineering",
-  "data science",
-  "data analysis",
-  "data analytics",
-  "data visualization",
-  "data engineering",
   "marketing",
   "business",
   "finance",
   "accounting",
-  "marketing",
   "sales",
   "human resources",
   "operations",
   "project management",
-  "finance",
-  "accounting",
 ];
 
 export const languageOptions = [
