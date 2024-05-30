@@ -4,5 +4,5 @@ const productionUrl =
   "https://e-learning-backend-application.onrender.com/api/v1";
 
 export const customFetch = axios.create({
-  baseURL: devURL,
+  baseURL: productionUrl,
 });
