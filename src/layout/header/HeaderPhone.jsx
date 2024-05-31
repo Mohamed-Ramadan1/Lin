@@ -37,7 +37,7 @@ export default function HeaderPhone() {
       transition={{ delay: 0.3, type: "tween" }}
       className=""
     >
-      <div className="container flex justify-between items-center p-[20px] max-w-full w-full">
+      <div className="container flex justify-between items-center p-[20px] max-w-full w-full ">
         <div className="logo">
           <a href="">
             <img src={logo} alt="" className="h-[40px] w-[97px]" />
@@ -55,7 +55,7 @@ export default function HeaderPhone() {
           className="fixed menuList overflow-y-scroll w-full h-full transition ease-out top-0 flex gap-7 flex-col items-start bg-[#fff] p-[20px] z-10"
           style={{ left: `${menuListLeft}px` }}
         >
-          <div className="w-full flex items-center gap-[10px]">
+          <div className="w-full flex items-center gap-[10px] ">
             {user && (
               <div className="w-[200px]">
                 <div className="profile w-full flex flex-row-reverse justify-between items-center gap-[15px]">
@@ -134,15 +134,17 @@ export default function HeaderPhone() {
             )}
           </HeaderPhoneNavigation>
 
-          <HeaderPhoneNavigation headerText="User Profile">
-            {userProfileLinks.map((link) => (
-              <NavigationLink
-                onClick={() => setMenuListLeft(-1000)}
-                path={link.path}
-                navigationText={link.navigationText}
-              />
-            ))}
-          </HeaderPhoneNavigation>
+          {user && (
+            <HeaderPhoneNavigation headerText="User Profile">
+              {userProfileLinks.map((link) => (
+                <NavigationLink
+                  onClick={() => setMenuListLeft(-1000)}
+                  path={link.path}
+                  navigationText={link.navigationText}
+                />
+              ))}
+            </HeaderPhoneNavigation>
+          )}
         </motion.div>
       </div>
     </motion.div>

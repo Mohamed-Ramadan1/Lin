@@ -4,7 +4,6 @@ import TableHeaderCell from "./shard/TableHeaderCell";
 const BlogsTableHeader = () => {
   return (
     <TableHeader>
-      <TableHeaderCell>Blog-ID</TableHeaderCell>
       <TableHeaderCell>Title</TableHeaderCell>
       <TableHeaderCell>Category</TableHeaderCell>
       <TableHeaderCell>Arthur Name </TableHeaderCell>

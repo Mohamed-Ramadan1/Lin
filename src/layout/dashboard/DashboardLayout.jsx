@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import DashboardFooter from "./DashboardFooter";
 import DashboardNavBar from "./DashboardNavBar";
 import SideBar from "./SideBar";
@@ -29,9 +28,9 @@ const DashboardLayout = () => {
           {/* Navigation bar */}
           <DashboardNavBar />
 
-          <div className="flex-1 p-4">
+          <main className="flex-1 p-4">
             <Outlet />
-          </div>
+          </main>
           {/* <div className="mb-10 bottom-0">
             <DashboardFooter />
           </div> */}

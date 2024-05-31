@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import InfoBox from "./InfoBox";
 
 const TopContent = () => {
-  const { user } = useSelector((state) => state.userReducers);
   return (
     <div className="content-top relative overflow-hidden flex justify-center items-center px-[124px] py-[70px] max-lg:px-[30px] max-sm:py-[30px] max-sm:px-[15px] bg-[#222]">
       <div className="container max-w-[1400px] m-auto gap-10 flex justify-between items-start max-md:flex-col">

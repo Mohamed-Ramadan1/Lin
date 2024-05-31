@@ -77,11 +77,11 @@ const ForgotPassword = () => {
                   textButton="Forgot Password"
                   isDisabled={isSubmitting}
                 />
-                <h3 className="text-center text-[#2d2d2d] text-base">
+                <h3 className="text-center text-[#2d2d2d] text-base ">
                   Remember Password ?
                   <Link
                     to="/login"
-                    className="text-[#2d2d2d] font-semibold hover:text-[#f00]"
+                    className="text-[#9747FF] font-semibold ml-1"
                   >
                     Login
                   </Link>
@@ -91,7 +91,7 @@ const ForgotPassword = () => {
                   Don't have an account ?
                   <Link
                     to="/signup"
-                    className="text-[#2d2d2d] font-semibold hover:text-[#f00]"
+                    className="text-[#9747FF] font-semibold ml-1"
                   >
                     Signup
                   </Link>

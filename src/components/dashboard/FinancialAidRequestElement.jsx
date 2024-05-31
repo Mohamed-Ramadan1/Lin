@@ -83,7 +83,6 @@ const FinancialAidRequestElement = ({ request, token, setIsChanged }) => {
 
   return (
     <TableBody>
-      <TableBodyCell>{_id}</TableBodyCell>
       <TableBodyCell>{user.name}</TableBodyCell>
       <TableBodyCell>{user.email}</TableBodyCell>
       <TableBodyCell>{age}</TableBodyCell>

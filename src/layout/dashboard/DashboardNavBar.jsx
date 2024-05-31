@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { NavBarLink } from "../../components";
 import { navLinks } from "./navLinksData";
 import useScreenSize from "../../hooks/useScreenSize";
+import { GiHamburgerMenu } from "react-icons/gi";
 function DashboardNavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ function DashboardNavBar() {
               role="button"
               className="btn btn-ghost rounded-btn text-2xl"
             >
-              Navigate
+              <GiHamburgerMenu className="text-3xl" />
             </div>
             <ul
               tabIndex={0}

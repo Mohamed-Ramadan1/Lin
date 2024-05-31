@@ -4,7 +4,6 @@ import TableHeaderCell from "./shard/TableHeaderCell";
 const FinancialAidRequestHeader = () => {
   return (
     <TableHeader>
-      <TableHeaderCell>Request-ID</TableHeaderCell>
       <TableHeaderCell>Name</TableHeaderCell>
       <TableHeaderCell>Email</TableHeaderCell>
       <TableHeaderCell>Age</TableHeaderCell>

@@ -86,7 +86,6 @@ const InstructorsApplicationElement = ({
 
   return (
     <TableBody>
-      <TableBodyCell>{_id}</TableBodyCell>
       <TableBodyCell>{name}</TableBodyCell>
       <TableBodyCell>{email}</TableBodyCell>
       <TableBodyCell>{phone}</TableBodyCell>

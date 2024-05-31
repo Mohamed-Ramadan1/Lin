@@ -1,4 +1,3 @@
-import React from "react";
 import TopContent from "./TopContent";
 import ButtomContent from "./ButtomContent";
 

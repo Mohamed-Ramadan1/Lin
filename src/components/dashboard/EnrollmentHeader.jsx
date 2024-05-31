@@ -3,7 +3,6 @@ import TableHeaderCell from "./shard/TableHeaderCell";
 const EnrollmentHeader = () => {
   return (
     <TableHeader>
-      <TableHeaderCell>Enrollment-ID</TableHeaderCell>
       <TableHeaderCell>Course Title</TableHeaderCell>
       <TableHeaderCell>User Name</TableHeaderCell>
       <TableHeaderCell>User Email</TableHeaderCell>
@@ -11,6 +10,8 @@ const EnrollmentHeader = () => {
       <TableHeaderCell>crated At</TableHeaderCell>
       <TableHeaderCell>Duration</TableHeaderCell>
       <TableHeaderCell>Price</TableHeaderCell>
+      <TableHeaderCell>Financial-Aid</TableHeaderCell>
+
       <TableHeaderCell>Updated At</TableHeaderCell>
       <TableHeaderCell>Enrollment Status</TableHeaderCell>
       <TableHeaderCell>Options</TableHeaderCell>

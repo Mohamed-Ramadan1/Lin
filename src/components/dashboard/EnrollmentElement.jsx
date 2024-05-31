@@ -3,12 +3,20 @@ import { customFetch } from "../../utils/customFetch";
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
 const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
-  const { _id, price, createdAt, paid, updatedAt, enrollmentStatus } =
-    enrollment;
+  const {
+    _id,
+    price,
+    createdAt,
+    paid,
+    updatedAt,
+    enrollmentStatus,
+    financialAid,
+  } = enrollment;
   const { title, duration } = enrollment.course;
   const { name, email } = enrollment.user;
 
   const isPaid = paid ? "Paid" : "Not Paid";
+  const isFinancialAid = financialAid ? "Yes" : "No";
   const createdAtDate = new Date(createdAt).toLocaleDateString();
   const updatedAtDate = new Date(updatedAt).toLocaleDateString();
 
@@ -91,14 +99,14 @@ const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
 
   return (
     <TableBody>
-      <TableBodyCell>{_id}</TableBodyCell>
       <TableBodyCell>{title}</TableBodyCell>
       <TableBodyCell>{name}</TableBodyCell>
       <TableBodyCell>{email}</TableBodyCell>
       <TableBodyCell>{isPaid}</TableBodyCell>
       <TableBodyCell>{createdAtDate}</TableBodyCell>
       <TableBodyCell>{duration} h</TableBodyCell>
-      <TableBodyCell>{price} $</TableBodyCell>
+      <TableBodyCell>{price || 0} $</TableBodyCell>
+      <TableBodyCell>{isFinancialAid}</TableBodyCell>
       <TableBodyCell>{updatedAtDate}</TableBodyCell>
       <TableBodyCell>{enrollmentStatus}</TableBodyCell>
 
