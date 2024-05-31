@@ -34,6 +34,7 @@ const ManageBlogs = () => {
     }
   );
   useEffect(() => {
+    setIsChanged(false);
     fetchData();
   }, [token, isChanged, currentPage, itemsPerPage]);
 

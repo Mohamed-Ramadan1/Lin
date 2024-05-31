@@ -1,8 +1,11 @@
-import { toast } from "react-toastify";
-import { customFetch } from "../../utils/customFetch";
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
-const InstructorElement = ({ index, instructor, token, setIsChanged }) => {
+import ActionButton from "./shard/ActionButton";
+import {
+  handelOperationRequest,
+  deleteOperationRequests,
+} from "./shard/dashboardOperations";
+const InstructorElement = ({ instructor, setIsChanged }) => {
   const {
     _id,
     specialization,
@@ -13,73 +16,8 @@ const InstructorElement = ({ index, instructor, token, setIsChanged }) => {
     createdAt,
     status,
   } = instructor;
+
   const formatData = new Date(createdAt).toLocaleDateString();
-
-  const handelDeleteInstructor = async () => {
-    const isConfirm = window.confirm(
-      "Are you sure you want to delete this instructor?"
-    );
-    if (!isConfirm) return;
-
-    try {
-      await customFetch.delete(`admin/deleteInstructor/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setIsChanged(true);
-      toast.success("Instructor deleted successfully");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
-
-  const handelUnActivateInstructor = async () => {
-    const isConfirm = window.confirm(
-      "Are you sure you want to unactivate this instructor?"
-    );
-    if (!isConfirm) return;
-
-    try {
-      await customFetch.patch(
-        `admin/deactivateInstructor/${_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsChanged(true);
-      toast.success("Instructor unactivated successfully");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
-
-  const handelActivateInstructor = async () => {
-    const isConfirm = window.confirm(
-      "Are you sure you want to activate this instructor?"
-    );
-    if (!isConfirm) return;
-
-    try {
-      await customFetch.patch(
-        `admin/activateInstructor/${_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsChanged(true);
-      toast.success("Instructor activated successfully");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
 
   return (
     <TableBody>
@@ -93,28 +31,50 @@ const InstructorElement = ({ index, instructor, token, setIsChanged }) => {
       <TableBodyCell>{status}</TableBodyCell>
       <TableBodyCell>
         <div className="flex gap-5">
-          <button
-            type="button"
-            onClick={handelDeleteInstructor}
-            className="bg-red-500 text-white p-1.5 rounded"
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={handelUnActivateInstructor}
-            className="bg-blue-500 text-white p-1.5 rounded"
-            //   disabled={!active}
-          >
-            UnActive
-          </button>
-          <button
-            type="button"
-            onClick={handelActivateInstructor}
-            className="bg-green-500 text-white p-1.5 rounded "
-          >
-            Active
-          </button>
+          <ActionButton
+            onClick={() => {
+              deleteOperationRequests(
+                "Are you sure you want to delete?",
+                `admin/deleteInstructor/${_id}`,
+                "Instructor deleted successfully",
+                "Error deleting instructor",
+                setIsChanged
+              );
+            }}
+            text="Delete"
+            action={"danger"}
+            disabled={false}
+          />
+
+          <ActionButton
+            onClick={() => {
+              handelOperationRequest(
+                "Are you sure you want to unactivate this instructor?",
+                `admin/deactivateInstructor/${_id}`,
+                "Instructor unactivated successfully",
+                "Error unactivating instructor",
+                setIsChanged
+              );
+            }}
+            text="UnActive"
+            action={"mainBlue"}
+            disabled={status === "inactive"}
+          />
+
+          <ActionButton
+            onClick={() => {
+              handelOperationRequest(
+                "Are you sure you want to activate this instructor?",
+                `admin/activateInstructor/${_id}`,
+                "Instructor activated successfully",
+                "Error activating instructor",
+                setIsChanged
+              );
+            }}
+            text="Active"
+            action={"mainGreen"}
+            disabled={status === "active"}
+          />
         </div>
       </TableBodyCell>
     </TableBody>

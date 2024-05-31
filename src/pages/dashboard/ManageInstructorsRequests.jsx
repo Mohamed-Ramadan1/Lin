@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
-
 import {
   PageIntro,
   PageContainer,
@@ -51,8 +49,6 @@ const ManageInstructorsRequests = () => {
             <InstructorsApplicationElement
               key={instructor._id}
               instructor={instructor}
-              index={index + 1 + (currentPage - 1) * itemsPerPage}
-              token={token}
               setIsChanged={setIsChanged}
             />
           ))}

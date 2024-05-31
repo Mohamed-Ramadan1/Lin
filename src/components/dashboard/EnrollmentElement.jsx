@@ -1,8 +1,11 @@
-import { toast } from "react-toastify";
-import { customFetch } from "../../utils/customFetch";
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
-const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
+import ActionButton from "./shard/ActionButton";
+import {
+  handelOperationRequest,
+  deleteOperationRequests,
+} from "./shard/dashboardOperations";
+const EnrollmentElement = ({ enrollment, setIsChanged }) => {
   const {
     _id,
     price,
@@ -20,83 +23,6 @@ const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
   const createdAtDate = new Date(createdAt).toLocaleDateString();
   const updatedAtDate = new Date(updatedAt).toLocaleDateString();
 
-  const handelDeleteEnrollment = async () => {
-    const isConfirmed = window.confirm(
-      "Are you sure you want to delete this enrollment?"
-    );
-    if (!isConfirmed) return;
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to approve this enrollment?"
-      );
-      if (!isConfirmed) return;
-
-      await customFetch.delete(
-        `enrolls/${_id}`,
-
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsChanged(true);
-      toast.success("Enrollment approved successfully");
-    } catch (error) {
-      console.log(error);
-      toast.error("Error approving enrollment");
-    }
-    setIsChanged(true);
-    toast.success("Enrollment deleted successfully");
-  };
-
-  const handelApproveEnrollment = async () => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to approve this enrollment?"
-      );
-      if (!isConfirmed) return;
-
-      await customFetch.patch(
-        `admin/approveEnrollment/${_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsChanged(true);
-      toast.success("Enrollment approved successfully");
-    } catch (error) {
-      console.log(error);
-      toast.error("Error approving enrollment");
-    }
-  };
-  const handelCancelledEnrollment = async () => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to cancel this enrollment?"
-      );
-      if (!isConfirmed) return;
-
-      await customFetch.patch(
-        `admin/cancelEnrollment/${_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsChanged(true);
-      toast.success("Enrollment cancelled successfully");
-    } catch (error) {
-      console.log(error);
-      toast.error("Error cancelling enrollment");
-    }
-  };
-
   return (
     <TableBody>
       <TableBodyCell>{title}</TableBodyCell>
@@ -110,32 +36,52 @@ const EnrollmentElement = ({ enrollment, index, token, setIsChanged }) => {
       <TableBodyCell>{updatedAtDate}</TableBodyCell>
       <TableBodyCell>{enrollmentStatus}</TableBodyCell>
 
-      {/* pop up menue for delete update active buttons */}
       <TableBodyCell>
         <div className="flex gap-5 text-center">
-          <button
-            type="button"
-            onClick={handelDeleteEnrollment}
-            className="bg-red-500 text-white p-1.5 rounded"
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={handelCancelledEnrollment}
+          <ActionButton
+            onClick={() => {
+              deleteOperationRequests(
+                "Are you sure you want to delete?",
+                `enrolls/${_id}`,
+                "Enrollment deleted successfully",
+                "Error deleting enrollment",
+                setIsChanged
+              );
+            }}
+            text="Delete"
+            action={"danger"}
+            disabled={false}
+          />
+
+          <ActionButton
+            onClick={() => {
+              handelOperationRequest(
+                "Are you sure you want to cancel?",
+                `admin/cancelEnrollment/${_id}`,
+                "Enrollment cancelled successfully",
+                "Error cancelling enrollment",
+                setIsChanged
+              );
+            }}
+            text="Cancel"
+            action={"mainBlue"}
             disabled={enrollmentStatus === "cancelled"}
-            className="bg-blue-500 text-white p-1.5 rounded"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            onClick={handelApproveEnrollment}
+          />
+
+          <ActionButton
+            onClick={() => {
+              handelOperationRequest(
+                "Are you sure you want to approve?",
+                `admin/approveEnrollment/${_id}`,
+                "Enrollment approved successfully",
+                "Error approving enrollment",
+                setIsChanged
+              );
+            }}
+            text="Approve"
+            action={"mainGreen"}
             disabled={enrollmentStatus === "approved"}
-            className="bg-green-500 text-white p-1.5 rounded"
-          >
-            approve
-          </button>
+          />
         </div>
       </TableBodyCell>
     </TableBody>

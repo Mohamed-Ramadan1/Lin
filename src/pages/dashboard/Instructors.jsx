@@ -50,9 +50,7 @@ const Instructors = () => {
           data.map((instructor, index) => (
             <InstructorElement
               key={instructor._id}
-              index={index + 1 + (currentPage - 1) * itemsPerPage}
               instructor={instructor}
-              token={token}
               setIsChanged={setIsChanged}
             />
           ))}

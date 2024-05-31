@@ -33,6 +33,7 @@ const MangeFinancialAidRequests = () => {
     }
   );
   useEffect(() => {
+    setIsChanged(false);
     fetchData();
   }, [token, isChanged, currentPage, itemsPerPage]);
 

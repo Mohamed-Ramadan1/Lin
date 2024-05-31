@@ -53,8 +53,6 @@ function FreeCourses() {
             <CourseElement
               key={course._id}
               course={course}
-              index={index + 1 + (currentPage - 1) * itemsPerPage}
-              token={token}
               setIsChanged={setIsChanged}
             />
           ))}

@@ -53,14 +53,12 @@ const Reservations = () => {
             <EnrollmentElement
               key={enrollment._id}
               enrollment={enrollment}
-              index={index + 1}
-              token={token}
               setIsChanged={setIsChanged}
             />
           ))}
 
         {!loading && data.length === 0 && (
-          <NotFoundData message={"No payment records Found "} />
+          <NotFoundData message={"No Enrollments  Found "} />
         )}
         {error && !loading && <Error errorMessage={error} />}
       </PageContainer>

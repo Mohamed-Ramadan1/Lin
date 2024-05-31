@@ -34,6 +34,7 @@ function PaiedCourses() {
     }
   );
   useEffect(() => {
+    setIsChanged(false);
     fetchData();
   }, [token, currentPage, itemsPerPage, isChanged]);
 
@@ -48,8 +49,6 @@ function PaiedCourses() {
             <CourseElement
               key={course._id}
               course={course}
-              index={index + 1}
-              token={token}
               setIsChanged={setIsChanged}
             />
           ))}

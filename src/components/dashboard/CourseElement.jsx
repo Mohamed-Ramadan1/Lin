@@ -1,8 +1,8 @@
-import { toast } from "react-toastify";
-import { customFetch } from "../../utils/customFetch";
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
 
+import ActionButton from "./shard/ActionButton";
+import { deleteOperationRequests } from "./shard/dashboardOperations";
 const CourseElement = ({
   course: {
     _id,
@@ -18,30 +18,9 @@ const CourseElement = ({
     price,
   },
   setIsChanged,
-  index,
-  token,
 }) => {
   const formatDate = new Date(createdAt).toLocaleDateString();
   const lastUPdated = new Date(updatedAt).toLocaleDateString();
-
-  const deleteHandler = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this course?"
-    );
-    if (!confirmDelete) return;
-    try {
-      await customFetch.delete(`/courses/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setIsChanged(true);
-      toast.success("Course Deleted Successfully");
-    } catch (error) {
-      toast.error("Error Deleting Course");
-      console.log(error);
-    }
-  };
 
   return (
     <TableBody>
@@ -57,13 +36,20 @@ const CourseElement = ({
       <TableBodyCell> {language}</TableBodyCell>
       <TableBodyCell>
         <div className="flex">
-          <button
-            type="submit"
-            className="bg-red-500 text-white p-2 rounded ml-3  hover:bg-red-900"
-            onClick={deleteHandler}
-          >
-            Delete
-          </button>
+          <ActionButton
+            onClick={() => {
+              deleteOperationRequests(
+                "Are you sure you want to delete?",
+                `courses/${_id}`,
+                "Course deleted successfully",
+                "Error deleting course",
+                setIsChanged
+              );
+            }}
+            text="Delete"
+            action={"danger"}
+            disabled={false}
+          />
         </div>
       </TableBodyCell>
     </TableBody>

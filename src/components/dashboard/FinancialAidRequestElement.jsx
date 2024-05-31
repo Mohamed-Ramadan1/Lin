@@ -1,8 +1,10 @@
-import { toast } from "react-toastify";
-import { customFetch } from "../../utils/customFetch";
-
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
+import ActionButton from "./shard/ActionButton";
+import {
+  handelOperationRequest,
+  deleteOperationRequests,
+} from "./shard/dashboardOperations";
 
 const FinancialAidRequestElement = ({ request, token, setIsChanged }) => {
   const {
@@ -18,69 +20,6 @@ const FinancialAidRequestElement = ({ request, token, setIsChanged }) => {
   } = request;
   const formatCreatedAtDate = new Date(createdAt).toLocaleDateString();
 
-  const handleApprove = async () => {
-    const confirm = window.confirm(
-      "Are you sure you want to approve this financial aid request?"
-    );
-    if (!confirm) return;
-    try {
-      await customFetch.patch(
-        `admin/approveFinancialAidRequest/${_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsChanged(true);
-      toast.success("Financial application approved successfully");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
-
-  const handleReject = async () => {
-    const confirm = window.confirm(
-      "Are you sure you want to reject this financial aid request?"
-    );
-    if (!confirm) return;
-    try {
-      await customFetch.patch(
-        `admin/rejectFinancialAidRequest/${_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsChanged(true);
-      toast.success("Financial Aid application rejected successfully");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
-
-  const handleDelete = async () => {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this financial aid Request?"
-    );
-    if (!confirm) return;
-    try {
-      await customFetch.delete(`admin/deleteFinancialAidRequest/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setIsChanged(true);
-      toast.success("Financial Aid application deleted successfully");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
-
   return (
     <TableBody>
       <TableBodyCell>{user.name}</TableBodyCell>
@@ -94,29 +33,50 @@ const FinancialAidRequestElement = ({ request, token, setIsChanged }) => {
 
       <TableBodyCell>
         <div className="flex gap-5">
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="bg-red-500 text-white p-1.5 rounded hover:bg-red-800"
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={handleApprove}
-            disabled={applicationStatus === "approved"}
-            className="bg-green-500 text-white p-1.5 rounded hover:bg-green-800"
-          >
-            Approve
-          </button>
-          <button
-            type="button"
-            onClick={handleReject}
+          <ActionButton
+            onClick={() => {
+              deleteOperationRequests(
+                "Are you sure you want to delete?",
+                `admin/deleteFinancialAidRequest/${_id}`,
+                "Financial Aid request deleted successfully",
+                "Error deleting financial aid request",
+                setIsChanged
+              );
+            }}
+            text="Delete"
+            action={"danger"}
+            disabled={false}
+          />
+
+          <ActionButton
+            onClick={() => {
+              handelOperationRequest(
+                "Are you sure you want to reject this financial aid request?",
+                `admin/rejectFinancialAidRequest/${_id}`,
+                "Financial Aid application rejected successfully",
+                "Error rejecting financial aid request",
+                setIsChanged
+              );
+            }}
+            text="Reject"
+            action={"mainBlue"}
             disabled={applicationStatus === "rejected"}
-            className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-800"
-          >
-            Reject
-          </button>
+          />
+
+          <ActionButton
+            onClick={() => {
+              handelOperationRequest(
+                "Are you sure you want to approve this financial aid request?",
+                `admin/approveFinancialAidRequest/${_id}`,
+                "Financial application approved successfully",
+                "Error approving financial aid request",
+                setIsChanged
+              );
+            }}
+            text="Approve"
+            action={"mainGreen"}
+            disabled={applicationStatus === "approved"}
+          />
         </div>
       </TableBodyCell>
     </TableBody>

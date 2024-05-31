@@ -1,74 +1,15 @@
-import { customFetch } from "../../utils/customFetch";
-import { toast } from "react-toastify";
 import TableBody from "./shard/TableBody";
 import TableBodyCell from "./shard/TableBodyCell";
-
-const BlogELement = ({ blog, token, setIsChanged }) => {
+import ActionButton from "./shard/ActionButton";
+import {
+  handelOperationRequest,
+  deleteOperationRequests,
+} from "./shard/dashboardOperations";
+const BlogELement = ({ blog, setIsChanged }) => {
   const { _id, title, category, createdBy, published, visibility, createdAt } =
     blog;
-  const isPublished = published ? "published" : "unpublished";
+  const isPublished = published ? "published" : "Not published";
   const formattedDate = new Date(createdAt).toDateString();
-
-  const handelDeleteBlog = async () => {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this blog?"
-    );
-    if (!confirm) return;
-    try {
-      await customFetch.delete(`admin/deleteBlog/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setIsChanged(true);
-      toast.success("Blog deleted successfully");
-    } catch (error) {
-      toast.error("Error deleting blog");
-    }
-  };
-  const handelPublishBlog = async () => {
-    const confirm = window.confirm(
-      "Are you sure you want to publish this blog?"
-    );
-    if (!confirm) return;
-    try {
-      await customFetch.patch(
-        `admin/publishBlog/${_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsChanged(true);
-      toast.success("Blog published successfully");
-    } catch (error) {
-      toast.error("Error publishing blog");
-    }
-  };
-
-  const handelUnPublishBlog = async () => {
-    const confirm = window.confirm(
-      "Are you sure you want to unpublish this blog?"
-    );
-    if (!confirm) return;
-    try {
-      await customFetch.patch(
-        `admin/unPublishBlog/${_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      toast.success("Blog unpublished successfully");
-      setIsChanged(true);
-    } catch (error) {
-      toast.error("Error unpublishing blog");
-    }
-  };
 
   return (
     <TableBody>
@@ -82,29 +23,50 @@ const BlogELement = ({ blog, token, setIsChanged }) => {
 
       <TableBodyCell>
         <div className="flex gap-5 justify-center">
-          <button
-            type="button"
-            onClick={handelDeleteBlog}
-            className="bg-red-500 text-white p-1.5 rounded hover:bg-red-600"
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={handelUnPublishBlog}
+          <ActionButton
+            onClick={() => {
+              deleteOperationRequests(
+                "Are you sure you want to delete?",
+                `admin/deleteBlog/${_id}`,
+                "Blog deleted successfully",
+                "Error deleting blog",
+                setIsChanged
+              );
+            }}
+            text="Delete"
+            action={"danger"}
+            disabled={false}
+          />
+
+          <ActionButton
+            onClick={() => {
+              handelOperationRequest(
+                "Are you sure you want to publish?",
+                `admin/unPublishBlog/${_id}`,
+                "Blog un-published successfully",
+                "Error un-publishing blog",
+                setIsChanged
+              );
+            }}
+            text="Un-Publish"
+            action={"mainBlue"}
             disabled={!published}
-            className="bg-blue-500 text-white p-1.5 rounded hover:bg-blue-600"
-          >
-            unPublish
-          </button>
-          <button
-            type="button"
-            onClick={handelPublishBlog}
+          />
+
+          <ActionButton
+            onClick={() => {
+              handelOperationRequest(
+                "Are you sure you want to un-publish?",
+                `admin/publishBlog/${_id}`,
+                "Blog published successfully",
+                "Error publishing blog",
+                setIsChanged
+              );
+            }}
+            text="Publish"
+            action={"mainGreen"}
             disabled={published}
-            className="bg-green-500 text-white p-1.5 rounded hover:bg-green-600"
-          >
-            Publish
-          </button>
+          />
         </div>
       </TableBodyCell>
     </TableBody>
