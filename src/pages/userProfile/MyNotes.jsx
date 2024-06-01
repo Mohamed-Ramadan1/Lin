@@ -10,7 +10,6 @@ import {
   LoadingSpinner,
   ProfilePageContainer,
 } from "../../components";
-
 const MyNotes = () => {
   const { token } = useSelector((state) => state.userReducers);
   const [isChanged, setIsChanged] = useState(false);

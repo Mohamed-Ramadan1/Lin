@@ -20,7 +20,7 @@ const Instructor = () => {
             email: "",
             phone: "",
             experience: "",
-            spechialization: "",
+            specialization: "",
             description: "",
           }}
           onSubmit={async (values, actions) => {
@@ -28,10 +28,11 @@ const Instructor = () => {
               // await axios.post(`${baseUrl}`, values);
               await customFetch.post("instructorApplications", values);
               toast.success("Application Sent Successfully");
+              actions.resetForm();
             } catch (error) {
               toast.error(error.response.data.message);
             }
-            actions.resetForm();
+            actions.setSubmitting(false);
           }}
         >
           {({ handleSubmit, isSubmitting }) => (
@@ -78,8 +79,8 @@ const Instructor = () => {
                 <CustomInput
                   name="specialization"
                   type="text"
-                  placeholder="Spechialization"
-                  label="Spechialization"
+                  placeholder="Specialization"
+                  label="Specialization"
                   required
                 />
               </div>
@@ -92,9 +93,12 @@ const Instructor = () => {
                 />
               </div>
 
-              <div class="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
-                <button type="submit" class="w-full p-4">
-                  Submit
+              <div class="w-full rounded-lg mt-4 text-white  font-semibold">
+                <button
+                  type="submit"
+                  class="w-full p-4 outline-none text-2xl rounded-[12px] bg-blue-500  hover:bg-blue-800"
+                >
+                  Submit-Application
                 </button>
               </div>
             </Form>

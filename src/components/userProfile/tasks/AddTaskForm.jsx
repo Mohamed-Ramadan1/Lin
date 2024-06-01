@@ -1,13 +1,10 @@
 import { Formik, Form } from "formik";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+
 import { addTaskSchema } from "../../../schema/userShardSchemas";
 import CustomInput from "../../forms/CustomInput";
-import { customFetch } from "../../../utils/customFetch";
+import { sendPostRequest } from "../../common/sendRequests";
 
 const AddTaskForm = ({ setIsChanged }) => {
-  const { token } = useSelector((state) => state.userReducers);
-
   return (
     <Formik
       initialValues={{
@@ -16,19 +13,14 @@ const AddTaskForm = ({ setIsChanged }) => {
       }}
       validationSchema={addTaskSchema}
       onSubmit={async (values, actions) => {
-        try {
-          await customFetch.post("tasks", values, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setIsChanged(true);
-          toast.success("Task created successfully");
-          actions.resetForm();
-        } catch (error) {
-          console.log(error);
-          toast.error(error.response.data.message);
-        }
+        sendPostRequest(
+          "tasks",
+          values,
+          "Task created successfully",
+          "Fail To Create Task",
+          setIsChanged,
+          actions
+        );
 
         actions.setSubmitting(false);
       }}

@@ -1,33 +1,10 @@
-import { customFetch } from "../../../utils/customFetch";
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { sendDeleteRequest } from "../../common/sendRequests";
 const WishlistCard = ({ wishlistItem, setIsChanged }) => {
-  const { token } = useSelector((state) => state.userReducers);
-  const { _id, course, createdAt, updatedAt } = wishlistItem;
+  const { _id, course } = wishlistItem;
   const { photo, title, category, duration, price, description } = course;
-  // const formatCreatedDate = new Date(createdAt).toDateString();
-  // const formatUpdatedDate = new Date(updatedAt).toDateString();
 
-  const handelDeleteWishlistItem = async () => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to delete this note?"
-      );
-      if (!isConfirmed) return;
-      await customFetch.delete(`wishlist/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setIsChanged(true);
-      toast.success(" Course removed from wishlist  successfully");
-    } catch (error) {
-      toast.error("Failed to remove course from wishlist");
-    }
-  };
   return (
     <div className="w-full bg-gray-100 rounded-[15px] overflow-hidden mb-5 ml-5">
       <Link to={`/courses/${course._id}`}>
@@ -59,7 +36,15 @@ const WishlistCard = ({ wishlistItem, setIsChanged }) => {
       <div className="mx-3 my-4 flex justify-end">
         <button
           type="button"
-          onClick={handelDeleteWishlistItem}
+          onClick={() => {
+            sendDeleteRequest(
+              "Are you sure you want to remove this course from wishlist?",
+              `wishlist/${_id}`,
+              "Course removed from wishlist  successfully",
+              "Failed to remove course from wishlist",
+              setIsChanged
+            );
+          }}
           className="bg-red-500 text-white  hover:bg-red-800 px-4 py-2 rounded-full min-w-[90px]"
         >
           Remove from wishlist

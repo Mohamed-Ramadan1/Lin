@@ -1,30 +1,13 @@
 import { Formik, Form } from "formik";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+
 import { blogSchema } from "../../schema/blogSchemas";
-import { customFetch } from "../../utils/customFetch";
+
 import CustomInput from "../forms/CustomInput";
 import CustomDropdownInput from "../forms/CustomDropdownInput";
 import CustomTextArea from "../forms/CustomTextArea";
+import { sendPostRequest } from "../common/sendRequests";
 
 const BlogForm = ({ setIsChanged }) => {
-  const { token } = useSelector((state) => state.userReducers);
-  const createNewBlogPost = async (values) => {
-    try {
-      await customFetch.post("blogs", values, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setIsChanged(true);
-      toast.success("Blog Posted Successfully");
-    } catch (error) {
-      toast.error("Failed to Post Blog");
-      console.log(error);
-    }
-  };
-
   return (
     <div class="border border-gray-300 p-4 rounded-lg mt-4 md:w-[80%] mx-auto mb-5">
       <h2 class="text-3xl mb-2 font-bold italic   text-center">Add Post</h2>
@@ -36,8 +19,15 @@ const BlogForm = ({ setIsChanged }) => {
         }}
         validationSchema={blogSchema}
         onSubmit={(values, actions) => {
-          createNewBlogPost(values);
-          actions.resetForm();
+          sendPostRequest(
+            "blogs",
+            values,
+            "Blog Posted Successfully",
+            "Failed to Post Blog",
+            setIsChanged,
+            actions
+          );
+          actions.setSubmitting(false);
         }}
       >
         {({ handleSubmit, isSubmitting }) => (
@@ -69,10 +59,10 @@ const BlogForm = ({ setIsChanged }) => {
                 ]}
               />
             </div>
-            <div class="flex justify-end mt-5 ">
+            <div class="flex justify-end mt-5 w-full">
               <button
                 disabled={isSubmitting}
-                class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 p-5 focus:outline-none focus:shadow-outline rounded-[12px]"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 p-10 focus:outline-none focus:shadow-outline rounded-[12px] w-full"
                 type="submit"
               >
                 Blog Now

@@ -1,31 +1,9 @@
-import { customFetch } from "../../../utils/customFetch";
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 import UpdateNoteModal from "./UpdateNoteModal";
+import { sendDeleteRequest } from "../../common/sendRequests";
 const NoteCart = ({ note, setIsChanged }) => {
-  const { token } = useSelector((state) => state.userReducers);
   const { _id, title, description, user, course, createdAt, updatedAt } = note;
   const formatCreatedDate = new Date(createdAt).toDateString();
   const formatUpdatedDate = new Date(updatedAt).toDateString();
-
-  const handelDeleteNote = async () => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to delete this note?"
-      );
-      if (!isConfirmed) return;
-      await customFetch.delete(`userCoursesNotes/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setIsChanged(true);
-      toast.success(" note deleted successfully");
-    } catch (error) {
-      toast.error("Failed to delete blog post");
-    }
-  };
 
   return (
     <div className="card w-full  mb-5 bg-gray-100 text-black ">
@@ -64,7 +42,15 @@ const NoteCart = ({ note, setIsChanged }) => {
         <div className="card-actions flex justify-end mt-5">
           <button
             className="btn bg-red-500 mt-2 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
-            onClick={handelDeleteNote}
+            onClick={() => {
+              sendDeleteRequest(
+                "Are you sure you want to delete this note?",
+                `userCoursesNotes/${_id}`,
+                "note deleted successfully",
+                "Failed to delete blog post",
+                setIsChanged
+              );
+            }}
           >
             Delete Note
           </button>

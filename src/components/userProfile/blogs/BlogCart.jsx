@@ -1,83 +1,10 @@
-import { customFetch } from "../../../utils/customFetch";
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-
+import ActionBUtton from "./ActionButton";
+import { sendDeleteRequest, sendPatchRequest } from "../../common/sendRequests";
 const BlogCart = ({ blog, setIsChanged }) => {
-  const { token } = useSelector((state) => state.userReducers);
   const { _id, title, content, category, createdAt, published, visibility } =
     blog;
   const formattedDate = new Date(createdAt).toDateString();
   const isPublished = published ? "published" : "Not published";
-
-  const handelDeleteBlog = async () => {
-    const isConfirm = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
-    if (!isConfirm) return;
-
-    try {
-      const response = await customFetch.delete(`blogs/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status === 204) {
-        toast.success("Blog deleted successfully");
-        setIsChanged(true);
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
-  const handelMakeItPublic = async () => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to make  this post private no one else you will be able to see the post?"
-      );
-      if (!isConfirmed) return;
-      await customFetch.patch(
-        `blogs/${_id}`,
-        {
-          visibility: "public",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setIsChanged(true);
-      toast.success(" post visibility converted to private  successfully");
-    } catch (error) {
-      toast.error("Failed to delete blog post");
-    }
-  };
-
-  const handelMakeItPrivate = async () => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to make  this post private no one else you will be able to see the post?"
-      );
-      if (!isConfirmed) return;
-      await customFetch.patch(
-        `blogs/${_id}`,
-        {
-          visibility: "private",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setIsChanged(true);
-      toast.success(" post visibility converted to private  successfully");
-    } catch (error) {
-      toast.error("Failed to delete blog post");
-    }
-  };
 
   return (
     <div className="card w-full  mb-5 bg-gray-100 text-black">
@@ -116,27 +43,54 @@ const BlogCart = ({ blog, setIsChanged }) => {
           <p className="break-words max-h-40 overflow-y-auto">{content}</p>
         </div>
         <div className="card-actions justify-end mt-5">
-          <button
-            className="btn bg-red-500 mt-2 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
-            onClick={handelDeleteBlog}
-          >
-            Delete Blog
-          </button>
+          <ActionBUtton
+            btnType="danger"
+            onClick={() => {
+              sendDeleteRequest(
+                "Are you sure you want to delete this post?",
+                `blogs/${_id}`,
+                "Blog deleted successfully",
+                "Failed to delete blog post",
+                setIsChanged
+              );
+            }}
+            btnText="Delete Blog"
+          />
           {visibility === "private" && (
-            <button
-              onClick={handelMakeItPublic}
-              className="btn bg-blue-500 mt-2 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
-            >
-              Make It Public
-            </button>
+            <ActionBUtton
+              btnType="mainBlue"
+              onClick={() => {
+                sendPatchRequest(
+                  `blogs/${_id}`,
+                  {
+                    visibility: "public",
+                  },
+                  "Are you sure you want to make  this post private no one else you will be able to see the post?",
+                  " post visibility converted to Public  successfully",
+                  "Failed to make  blog post public",
+                  setIsChanged
+                );
+              }}
+              btnText="Make It Public"
+            />
           )}
           {visibility === "public" && (
-            <button
-              onClick={handelMakeItPrivate}
-              className="btn bg-blue-500 mt-2 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
-            >
-              Make It Private
-            </button>
+            <ActionBUtton
+              btnType="mainBlue"
+              onClick={() => {
+                sendPatchRequest(
+                  `blogs/${_id}`,
+                  {
+                    visibility: "private",
+                  },
+                  "Are you sure you want to make  this post private no one else you will be able to see the post?",
+                  " post visibility converted to private  successfully",
+                  "Failed to Make  blog post private",
+                  setIsChanged
+                );
+              }}
+              btnText="Make It Private"
+            />
           )}
         </div>
       </div>

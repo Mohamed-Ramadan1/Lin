@@ -1,28 +1,13 @@
 import { Formik, Form } from "formik";
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 
-import { customFetch } from "../../utils/customFetch.js";
 import { createInstructorsSchema } from "../../schema/createAccountsSchemas.js";
 import CustomInput from "../../components/forms/CustomInput";
 
 import { PageIntro } from "../../components";
-
+import { sendPostRequest } from "../../components/common/sendRequests.js";
+import { useState } from "react";
 const CreateInstructorAccount = () => {
-  const { token } = useSelector((state) => state.userReducers);
-  const createInstructorHandler = async (values) => {
-    try {
-      await customFetch.post("admin/createInstructor", values, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      toast.success("Instructor Created Successfully");
-    } catch (error) {
-      toast.error("Instructor Creation Failed");
-    }
-  };
+  const [isChanged, setIsChanged] = useState(false);
 
   return (
     <div className="min-h-[100vh]">
@@ -38,8 +23,15 @@ const CreateInstructorAccount = () => {
           }}
           validationSchema={createInstructorsSchema}
           onSubmit={(values, actions) => {
-            createInstructorHandler(values);
-            actions.resetForm();
+            sendPostRequest(
+              "admin/createInstructor",
+              values,
+              "Instructor Account Created Successfully",
+              "Instructor Account Created  Failed",
+              setIsChanged,
+              actions
+            );
+            actions.setSubmitting(false);
           }}
         >
           {({ handleSubmit, isSubmitting }) => (

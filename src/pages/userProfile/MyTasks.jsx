@@ -32,6 +32,7 @@ function MyTasks() {
       requestedData: "tasks",
     }
   );
+  
   const fetchTasksStates = async () => {
     try {
       const response = await customFetch.get("tasks/stats", {

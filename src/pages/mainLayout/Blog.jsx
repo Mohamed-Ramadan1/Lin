@@ -51,7 +51,6 @@ function Blog() {
             key={blog.id}
             blog={blog}
             userId={user ? user._id : ""}
-            token={token}
             setIsChanged={setIsChanged}
           />
         ))}

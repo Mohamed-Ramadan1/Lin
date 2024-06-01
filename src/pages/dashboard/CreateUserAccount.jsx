@@ -1,32 +1,12 @@
-import { useEffect } from "react";
 import { Formik, Form } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-
-import adminSlice from "../../store/adminSlice.js";
-
-import { createUser } from "../../store/adminSlice";
-import { adminActions } from "../../store/adminSlice";
 import { createUsersSchema } from "../../schema/createAccountsSchemas.js";
 import CustomInput from "../../components/forms/CustomInput";
 import CustomDropdownInput from "../../components/forms/CustomDropdownInput";
 import { PageIntro } from "../../components";
-
+import { sendPostRequest } from "../../components/common/sendRequests";
+import { useState } from "react";
 const CreateUserAccount = () => {
-  const dispatch = useDispatch();
-  const { isSuccess, error } = useSelector((state) => state.adminReducers);
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("User Created Successfully");
-      dispatch(adminActions.clearSuccessState());
-    }
-
-    if (error) {
-      toast.error(error);
-      dispatch(adminActions.clearSuccessState());
-    }
-  }, [isSuccess, dispatch, error]);
+  const [isChanged, setIsChanged] = useState(false);
 
   return (
     <div className="min-h-[100vh]">
@@ -42,8 +22,15 @@ const CreateUserAccount = () => {
           }}
           validationSchema={createUsersSchema}
           onSubmit={(values, actions) => {
-            dispatch(createUser(values));
-            actions.resetForm();
+            sendPostRequest(
+              "admin/createUser",
+              values,
+              "User Account Created Successfully",
+              "Error Creating User Account",
+              setIsChanged,
+              actions
+            );
+            actions.setSubmitting(false);
           }}
         >
           {({ handleSubmit, isSubmitting }) => (
