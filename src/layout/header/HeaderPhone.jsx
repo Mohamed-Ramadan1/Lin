@@ -55,35 +55,26 @@ export default function HeaderPhone() {
           className="fixed menuList overflow-y-scroll w-full h-full transition ease-out top-0 flex gap-7 flex-col items-start bg-[#fff] p-[20px] z-10"
           style={{ left: `${menuListLeft}px` }}
         >
-          <div className="w-full flex items-center gap-[10px] ">
+          <div className="w-full flex items-center gap-[10px] justify-between ">
             {user && (
               <div className="w-[200px]">
                 <div className="profile w-full flex flex-row-reverse justify-between items-center gap-[15px]">
+                  <div> </div>
                   <div className="flex gap-3 items-center justify-center">
                     <Link
-                      to={"/profile/wishlist"}
+                      to={"/profile"}
                       onClick={() => setMenuListLeft(-1000)}
                     >
-                      <div className="mt-2 ml-3 w-[40px]">
-                        <HeartHeader />
-                      </div>
+                      <img
+                        src={user?.photo}
+                        alt=""
+                        className="w-[80px] h-[80px] rounded-[12px] ml-5"
+                      />
                     </Link>
                   </div>
-
-                  <img src={user?.photo} alt="" className="w-[80px] h-[80px]" />
                 </div>
               </div>
             )}
-            <div className="inputSearch relative w-full h-[45px]">
-              <SearchIcon />
-              <input
-                type="search"
-                name=""
-                id=""
-                placeholder="What do you want learn..."
-                className="w-full h-full py-[10px] px-[40px] outline-none border-[1px] border-[#E9EAF0] "
-              />
-            </div>
 
             <div
               className="exit cursor-pointer w-[45px] h-[45px] flex items-center justify-center bg-red-500"

@@ -19,7 +19,7 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanged, setIsChanged] = useState(false);
   const { data, loading, error, isMorePages, fetchData } = useFetchData(
-    "/admin/getAllUsers",
+    "/users",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -44,6 +44,7 @@ const Users = () => {
         <UserTableHeader />
         {loading && <LoadingWhile />}
         {!loading &&
+          !error &&
           data &&
           data.map((user, index) => (
             <UserElement

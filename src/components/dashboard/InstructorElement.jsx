@@ -35,7 +35,7 @@ const InstructorElement = ({ instructor, setIsChanged }) => {
             onClick={() => {
               deleteOperationRequests(
                 "Are you sure you want to delete?",
-                `admin/deleteInstructor/${_id}`,
+                `/instructors/${_id}`,
                 "Instructor deleted successfully",
                 "Error deleting instructor",
                 setIsChanged
@@ -49,9 +49,9 @@ const InstructorElement = ({ instructor, setIsChanged }) => {
           <ActionButton
             onClick={() => {
               handelOperationRequest(
-                "Are you sure you want to unactivate this instructor?",
-                `admin/deactivateInstructor/${_id}`,
-                "Instructor unactivated successfully",
+                "Are you sure you want to un-activate this instructor?",
+                `/instructors/${_id}/inactive`,
+                "Instructor un-activated successfully",
                 "Error unactivating instructor",
                 setIsChanged
               );
@@ -65,7 +65,7 @@ const InstructorElement = ({ instructor, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to activate this instructor?",
-                `admin/activateInstructor/${_id}`,
+                `/instructors/${_id}/active`,
                 "Instructor activated successfully",
                 "Error activating instructor",
                 setIsChanged

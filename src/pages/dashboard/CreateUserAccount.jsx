@@ -23,7 +23,7 @@ const CreateUserAccount = () => {
           validationSchema={createUsersSchema}
           onSubmit={(values, actions) => {
             sendPostRequest(
-              "admin/createUser",
+              "users",
               values,
               "User Account Created Successfully",
               "Error Creating User Account",

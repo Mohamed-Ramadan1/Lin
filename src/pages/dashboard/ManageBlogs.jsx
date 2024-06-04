@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
 
 import {
   PageIntro,
@@ -20,7 +19,7 @@ const ManageBlogs = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanged, setIsChanged] = useState(false);
   const { data, loading, error, isMorePages, fetchData } = useFetchData(
-    "/admin/getAllBlogs",
+    "/blogs/allBlogsPosts",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -45,6 +44,7 @@ const ManageBlogs = () => {
         <BlogsTableHeader />
         {loading && <LoadingWhile />}
         {!loading &&
+          !error &&
           data.length > 0 &&
           data.map((blog, index) => (
             <BlogELement

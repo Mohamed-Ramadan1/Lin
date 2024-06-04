@@ -25,6 +25,7 @@ export const action = async ({ request }) => {
     });
 
     toast.success("Course created Successfully");
+
     return res;
   } catch (error) {
     toast.error(error?.response?.data?.message);

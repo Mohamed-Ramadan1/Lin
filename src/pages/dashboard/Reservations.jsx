@@ -48,6 +48,7 @@ const Reservations = () => {
         {loading && <LoadingWhile />}
 
         {!loading &&
+          !error &&
           data.length > 0 &&
           data.map((enrollment, index) => (
             <EnrollmentElement

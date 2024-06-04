@@ -30,7 +30,7 @@ const UserELement = ({ user, setIsChanged }) => {
             onClick={() => {
               deleteOperationRequests(
                 "Are you sure you want to delete?",
-                `admin/deleteUser/${_id}`,
+                `/users/${_id}`,
                 "User deleted successfully",
                 "Error deleting user",
                 setIsChanged
@@ -45,7 +45,7 @@ const UserELement = ({ user, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to unActivate?",
-                `admin/unActivateUser/${_id}`,
+                `/users/${_id}/inactive`,
                 "User unActivated successfully",
                 "Error unActivated user",
                 setIsChanged
@@ -59,7 +59,7 @@ const UserELement = ({ user, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to activate?",
-                `admin/activateUser/${_id}`,
+                `/users/${_id}/active`,
                 "User activated successfully",
                 "Error activating user",
                 setIsChanged
@@ -74,7 +74,7 @@ const UserELement = ({ user, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to verify?",
-                `admin/verifyUser/${_id}`,
+                `/users/${_id}/verify`,
                 "User email verified successfully",
                 "Error verified email ",
                 setIsChanged

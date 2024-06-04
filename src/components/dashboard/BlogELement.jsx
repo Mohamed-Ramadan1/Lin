@@ -27,7 +27,7 @@ const BlogELement = ({ blog, setIsChanged }) => {
             onClick={() => {
               deleteOperationRequests(
                 "Are you sure you want to delete?",
-                `admin/deleteBlog/${_id}`,
+                `blogs/blogsPosts/${_id}`,
                 "Blog deleted successfully",
                 "Error deleting blog",
                 setIsChanged
@@ -42,7 +42,7 @@ const BlogELement = ({ blog, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to publish?",
-                `admin/unPublishBlog/${_id}`,
+                `/blogs/${_id}/notPublished`,
                 "Blog un-published successfully",
                 "Error un-publishing blog",
                 setIsChanged
@@ -57,7 +57,7 @@ const BlogELement = ({ blog, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to un-publish?",
-                `admin/publishBlog/${_id}`,
+                `/blogs/${_id}/published`,
                 "Blog published successfully",
                 "Error publishing blog",
                 setIsChanged

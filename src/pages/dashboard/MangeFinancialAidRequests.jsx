@@ -19,7 +19,7 @@ const MangeFinancialAidRequests = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanged, setIsChanged] = useState(false);
   const { data, loading, error, isMorePages, fetchData } = useFetchData(
-    "admin/getAllFinancialAidRequests",
+    "/financialAidRequests/allRequests",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -45,6 +45,7 @@ const MangeFinancialAidRequests = () => {
         {loading && <LoadingWhile />}
 
         {!loading &&
+          !error &&
           data &&
           data.map((request) => (
             <FinancialAidRequestElement

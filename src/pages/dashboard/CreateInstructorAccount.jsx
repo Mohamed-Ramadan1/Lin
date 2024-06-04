@@ -24,7 +24,7 @@ const CreateInstructorAccount = () => {
           validationSchema={createInstructorsSchema}
           onSubmit={(values, actions) => {
             sendPostRequest(
-              "admin/createInstructor",
+              "instructors",
               values,
               "Instructor Account Created Successfully",
               "Instructor Account Created  Failed",

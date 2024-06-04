@@ -44,6 +44,7 @@ const ManageInstructorsRequests = () => {
         {loading && <LoadingWhile />}
 
         {!loading &&
+          !error &&
           data.length > 0 &&
           data.map((instructor, index) => (
             <InstructorsApplicationElement

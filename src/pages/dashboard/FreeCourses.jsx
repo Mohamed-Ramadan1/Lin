@@ -19,7 +19,7 @@ function FreeCourses() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanged, setIsChanged] = useState(false);
   const { data, loading, error, isMorePages, fetchData } = useFetchData(
-    "/admin/freeCourses",
+    "/courses/free",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -48,6 +48,7 @@ function FreeCourses() {
         {loading && <LoadingWhile />}
 
         {!loading &&
+          !error &&
           data.length > 0 &&
           data.map((course, index) => (
             <CourseElement

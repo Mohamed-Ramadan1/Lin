@@ -20,7 +20,7 @@ function PaiedCourses() {
   const [isChanged, setIsChanged] = useState(false);
 
   const { data, loading, error, isMorePages, fetchData } = useFetchData(
-    "/admin/paidCourses",
+    "/courses/paid",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -44,8 +44,10 @@ function PaiedCourses() {
       {/* table manage table courses table  */}
       <PageContainer tableHeader={"Paid Courses"}>
         <CoursesHeader />
-        {data &&
-          data.map((course, index) => (
+        {!loading &&
+          !error &&
+          data &&
+          data.map((course) => (
             <CourseElement
               key={course._id}
               course={course}

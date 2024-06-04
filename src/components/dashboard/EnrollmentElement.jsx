@@ -57,7 +57,7 @@ const EnrollmentElement = ({ enrollment, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to cancel?",
-                `admin/cancelEnrollment/${_id}`,
+                `/enrolls/${_id}/cancel`,
                 "Enrollment cancelled successfully",
                 "Error cancelling enrollment",
                 setIsChanged
@@ -72,7 +72,7 @@ const EnrollmentElement = ({ enrollment, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to approve?",
-                `admin/approveEnrollment/${_id}`,
+                `/enrolls/${_id}/approve`,
                 "Enrollment approved successfully",
                 "Error approving enrollment",
                 setIsChanged

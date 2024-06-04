@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
 
 import {
   PageIntro,
@@ -45,6 +44,7 @@ const ManagePayments = () => {
         {loading && <LoadingWhile />}
 
         {!loading &&
+          !error &&
           data.length > 0 &&
           data.map((payment, index) => (
             <PaymentRecordELements

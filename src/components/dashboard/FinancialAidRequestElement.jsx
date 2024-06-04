@@ -37,7 +37,7 @@ const FinancialAidRequestElement = ({ request, token, setIsChanged }) => {
             onClick={() => {
               deleteOperationRequests(
                 "Are you sure you want to delete?",
-                `admin/deleteFinancialAidRequest/${_id}`,
+                `financialAidRequests/deleteRequest/${_id}`,
                 "Financial Aid request deleted successfully",
                 "Error deleting financial aid request",
                 setIsChanged
@@ -52,7 +52,7 @@ const FinancialAidRequestElement = ({ request, token, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to reject this financial aid request?",
-                `admin/rejectFinancialAidRequest/${_id}`,
+                `/financialAidRequests/${_id}/reject`,
                 "Financial Aid application rejected successfully",
                 "Error rejecting financial aid request",
                 setIsChanged
@@ -67,7 +67,7 @@ const FinancialAidRequestElement = ({ request, token, setIsChanged }) => {
             onClick={() => {
               handelOperationRequest(
                 "Are you sure you want to approve this financial aid request?",
-                `admin/approveFinancialAidRequest/${_id}`,
+                `/financialAidRequests/${_id}/approve`,
                 "Financial application approved successfully",
                 "Error approving financial aid request",
                 setIsChanged

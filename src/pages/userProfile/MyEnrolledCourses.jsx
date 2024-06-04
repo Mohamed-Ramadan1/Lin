@@ -34,7 +34,6 @@ const MyEnrolledCourses = () => {
     fetchData();
   }, [currentPage, itemsPerPage, token]);
 
-  console.log(data);
   return (
     <>
       <ProfilePageContainer>

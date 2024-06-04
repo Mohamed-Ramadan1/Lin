@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { customFetch } from "../../utils/customFetch";
 
 import {
   PageIntro,
@@ -20,7 +19,7 @@ const Instructors = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanged, setIsChanged] = useState(false);
   const { data, loading, error, isMorePages, fetchData } = useFetchData(
-    "/admin/getAllInstructors",
+    "/instructors",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -46,8 +45,9 @@ const Instructors = () => {
         {loading && <LoadingWhile />}
 
         {!loading &&
+          !error &&
           data.length > 0 &&
-          data.map((instructor, index) => (
+          data.map((instructor) => (
             <InstructorElement
               key={instructor._id}
               instructor={instructor}
