@@ -23,23 +23,27 @@ const ReviewElement = ({ fullReview, currentUser, token, setIsChanged }) => {
   return (
     <div class="bg-white p-4 rounded-lg shadow-md mt-5">
       <div>
-        <h3 class="text-lg font-bold">{user[0].name}</h3>
-        <p class="text-gray-700 text-sm mb-2">Posted on {formatDate}</p>
+        <div className="flex justify-between">
+          <h3 class="text-lg font-bold">{user[0].name}</h3>
+          <p class="text-gray-700 text-l mb-2">Posted on {formatDate}</p>
+        </div>
         <p class="text-gray-700 text-l f">
-          Rating:{" "}
+          Rating:
           <span className="text-blue-800 font-bold text-xl">{rating}</span>
         </p>
 
         <p class="text-gray-700">{review}</p>
       </div>
       {currentUser._id === user[0]._id && (
-        <button
-          onClick={handleDeleteReview}
-          type="button"
-          className="bg-red-500 mt-5  text-white p-1.5 rounded hover:bg-red-800"
-        >
-          Delete
-        </button>
+        <div className="flex justify-end ">
+          <button
+            onClick={handleDeleteReview}
+            type="button"
+            className="bg-red-500 mt-5  text-white p-1.5 rounded hover:bg-red-800 w-20 text-center"
+          >
+            Delete
+          </button>
+        </div>
       )}
     </div>
   );

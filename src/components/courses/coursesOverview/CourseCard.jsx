@@ -14,6 +14,7 @@ const CourseCard = ({ course }) => {
     photo,
     language,
     paymentModel,
+    financialAid,
     category,
   } = course;
 
@@ -41,6 +42,9 @@ const CourseCard = ({ course }) => {
             </h2>
             <h3 className="text-sm font-bold text-[#333] max-md:text-base">
               {category}
+            </h3>
+            <h3 className="text-sm font-bold text-blue-500 max-md:text-base">
+              {financialAid && "Financial Aid Available"}
             </h3>
             <p className="text-base font-medium text-[#6e6e6e] max-md:font-light max-md:truncate max-md:max-w-[200px]">
               {description}

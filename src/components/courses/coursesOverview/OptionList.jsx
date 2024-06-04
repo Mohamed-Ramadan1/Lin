@@ -123,7 +123,6 @@ const OptionList = ({ titleCheckList, setCourses, clearFilters }) => {
             />
           ))}
         </FilterOptionsBox>
-
         {/* skill level */}
         <FilterOptionsBox
           label="Skill Level"
@@ -135,7 +134,6 @@ const OptionList = ({ titleCheckList, setCourses, clearFilters }) => {
             <FilterOptionItem key={level} value={level} OptionText={level} />
           ))}
         </FilterOptionsBox>
-
         {/*languages options */}
         <FilterOptionsBox
           label="Language"
@@ -158,6 +156,21 @@ const OptionList = ({ titleCheckList, setCourses, clearFilters }) => {
             <FilterOptionItem key={el} value={el} OptionText={el} />
           ))}
         </FilterOptionsBox>
+
+        {/* <FilterOptionsBox
+          label="Financial Aid "
+          id="financialAid"
+          value={formData.financialAid}
+          onChange={handleInputChange}
+        >
+          {["available", "not-available"].map((el) => (
+            <FilterOptionItem
+              key={el}
+              value={el === "available" ? true : false}
+              OptionText={el}
+            />
+          ))}
+        </FilterOptionsBox> */}
       </div>
     </div>
   );

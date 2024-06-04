@@ -5,7 +5,7 @@ import { customFetch } from "../../../utils/customFetch";
 import { Pagination } from "../../../components/";
 import AddRatingForm from "./AddRatingForm";
 import ReviewElement from "./ReviewElement";
-
+import { LoadingSpinner } from "../../../components";
 const ReviewsContainer = () => {
   const [isChanged, setIsChanged] = useState(false);
   const [reviews, setReviews] = useState([]);
@@ -40,7 +40,6 @@ const ReviewsContainer = () => {
           setLoading(false);
           setIsMorePages(false);
         }
-        // console.log(res.data.data.reviews);
       } catch (error) {
         console.log(error.response.data.message);
       }
@@ -65,9 +64,7 @@ const ReviewsContainer = () => {
               setIsChanged={setIsChanged}
             />
           ))}
-        {loading && (
-          <p className="text-3xl text-bold text-center">No reviews found</p>
-        )}
+        {loading && <LoadingSpinner />}
         {reviews.length === 0 && !loading && (
           <p className="text-3xl text-bold text-center">No reviews found</p>
         )}

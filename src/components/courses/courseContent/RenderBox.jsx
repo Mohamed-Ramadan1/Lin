@@ -5,6 +5,8 @@ import { customFetch } from "../../../utils/customFetch";
 import VideoBox from "./VideoBox";
 import VideoItem from "./VideoItem";
 
+import { LoadingSpinner } from "../../../components";
+
 const fakeUrl =
   "https://res.cloudinary.com/dfjwny742/video/upload/v1715258237/Learn_HTML_In_Arabic_2021_-__03_-_First_Project_And_First_Page_720P_HD_uldnxx.mp4";
 
@@ -14,7 +16,7 @@ const RenderBox = ({ courseId }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   const handleVideoClick = (course) => {
-    setSelectedVideo(course); // Update selected video state on click
+    setSelectedVideo(course);
   };
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const RenderBox = ({ courseId }) => {
         {initialVideo ? (
           <VideoBox selectedVideoInformation={initialVideo} />
         ) : (
-          <div>Loading...</div>
+          <LoadingSpinner />
         )}
       </div>
 

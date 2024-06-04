@@ -1,9 +1,7 @@
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { customFetch } from "../../utils/customFetch";
+import { useEffect } from "react";
 import { PageIntro, StatsBox, StatsContainer } from "../../components";
 import { LoadingSpinner } from "../../components";
-import SyncLoader from "react-spinners/SyncLoader";
 
 import useFetchData from "../../hooks/useFetchData";
 function Dashboard() {
@@ -23,7 +21,6 @@ function Dashboard() {
   useEffect(() => {
     fetchData();
   }, [token]);
-  console.log(data);
   return (
     <>
       <div className="p-5">

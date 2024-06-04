@@ -4,7 +4,7 @@ const TakeVideoNoteModal = ({ videoInformation }) => {
     <div>
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
       <button
-        className="btn  text-2xl italic bg-blue-500 mt-2 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
+        className="btn  text-xl italic bg-blue-500 mt-2 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-[10px] focus:outline-none focus:shadow-outline"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         Take Note
