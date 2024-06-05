@@ -67,3 +67,6 @@ View system statistics to gain insights into the platform’s performance and ma
    npm run dev
 
 ## Project Overview
+
+![image](./App-preview-images/1.png)
+![image](./App-preview-images/2.png)
