@@ -1,6 +1,6 @@
 import WishlistComponent from "../../userProfile/wishlist/WishlistComponent";
 import { Link } from "react-router-dom";
-
+import { store } from "../../../store/store";
 const PaymentDetailsInfo = ({
   paymentModel,
   redirectPath,
@@ -8,6 +8,7 @@ const PaymentDetailsInfo = ({
   courseId,
   financialAid,
 }) => {
+  const user = store.getState().userReducers.user;
   return (
     <div className="top-salary w-full relative flex justify-between items-start">
       <div>
@@ -31,7 +32,7 @@ const PaymentDetailsInfo = ({
       </div>
 
       <div className="relative">
-        <WishlistComponent courseId={courseId} />
+        {user && <WishlistComponent courseId={courseId} />}
       </div>
     </div>
   );

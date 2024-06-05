@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { customFetch } from "../../../utils/customFetch";
 import IncludesContainer from "./IncludesContainer";
 import useFetchData from "../../../hooks/useFetchData";
@@ -86,13 +87,22 @@ const CourseEnrollmentDetails = ({
               text="Start Now"
             />
           ) : paymentModel === "free" ? (
-            <button
-              type="button"
-              onClick={handelEnrollFreeCourse}
-              className=" text-center w-[200px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
-            >
-              Enroll Now
-            </button>
+            user ? (
+              <button
+                type="button"
+                onClick={handelEnrollFreeCourse}
+                className=" text-center w-[200px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
+              >
+                Enroll Now
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className=" text-center w-[200px] py-[15px] rounded-xl font-bold bg-[#D5FF40] hover:bg-[#d6ff40d7]"
+              >
+                Enroll Now
+              </Link>
+            )
           ) : (
             <NavigationEnrollmentButton
               path={`/paymentGatWay/${courseId}`}
